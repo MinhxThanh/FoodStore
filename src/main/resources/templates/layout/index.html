@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="dynamic(main)">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>[[${pageTitle}]]</title>
+    <link rel="icon" type="image/x-icon" href="/assets/images/logo.png"/>
+<!--    bootstrap-->
+    <link rel="stylesheet" href="/assets/styles/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/styles/bootstrap-datepicker.css">
+
+<!--    font Awesome icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!--    ionicons-->
+    <link rel="stylesheet" href="/assets/styles/ionicons.min.css">
+<!--    font google-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lovers+Quarrel" rel="stylesheet">
+<!--    angularJS-->
+    <script src="/assets/js/angular.min.js"></script>
+    <script src="/assets/js/angular-animate.min.js"></script>
+<!--    styles-->
+    <link rel="stylesheet" href="/assets/styles/owl.carousel.min.css">
+    <link rel="stylesheet" href="/assets/styles/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/assets/styles/magnific-popup.css">
+    <link rel="stylesheet" href="/assets/styles/flaticon.css">
+    <link rel="stylesheet" href="/assets/styles/icomoon.css">
+    <link rel="stylesheet" href="/assets/styles/style.css">
+    <link rel="stylesheet" href="/assets/styles/scroll.css">
+<!--    animation aos-->
+    <link rel="stylesheet" href="/assets/styles/aos.css">
+    <link rel="stylesheet" href="/assets/styles/animate.css">
+<!--    jquery-->
+    <link rel="stylesheet" href="/assets/styles/jquery.timepicker.css">
+</head>
+<body>
+<!--    menu-->
+    <div th:replace="~{/layout/_menu::navbar}"></div>
+
+<!--    main-->
+    <div th:replace="${main}"></div>
+
+<!--    footer-->
+    <div th:replace="~{/layout/_footer::footer}"></div>
+
+<!-- scroll to top -->
+<a href="#" class="scrollToTop" id="scrollToTop">
+    <i class="fa-solid fa-chevron-up"></i>
+</a>
+
+<!-- loader -->
+<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/jquery-migrate-3.0.1.min.js"></script>
+<script src="/assets/js/popper.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/jquery.easing.1.3.js"></script>
+<script src="/assets/js/jquery.waypoints.min.js"></script>
+<script src="/assets/js/jquery.stellar.min.js"></script>
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/jquery.magnific-popup.min.js"></script>
+<script src="/assets/js/aos.js"></script>
+<script src="/assets/js/jquery.animateNumber.min.js"></script>
+<script src="/assets/js/bootstrap-datepicker.js"></script>
+<script src="/assets/js/jquery.timepicker.min.js"></script>
+<script src="/assets/js/scrollax.min.js"></script>
+<script src="/assets/js/main.js"></script>
+<script src="/assets/js/scroll.js"></script>
+</body>
+</html>
