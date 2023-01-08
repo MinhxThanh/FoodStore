@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index::dynamic(~{::#main})}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <div id="main">
+      <div class="py-5" style="margin-bottom: 100px;">
+          <div class="col-lg-5 col-sm-11 p-5 m-auto shadow" style="background: rgba(255, 255, 255, 0.708); border-radius: 30px;">
+              <h2 class="text-center my-4 text-uppercase">Sign In</h2>
+<!--              message-->
+              <div class="alert alert-success" role="alert" th:if="${message}">
+                  <i>[[${message}]]</i>
+              </div>
+              <div class="alert alert-danger" role="alert" th:if="${error}">
+                  <i>[[${error}]]</i>
+              </div>
+              <form  th:action="@{/security/login}" method="post" class="container col-10" name="formLogin">
+                  <div class="mb-3">
+                      <input name="username" ng-model="username" ng-required="true" class="form-control p-2 px-3 rounded-pill" type="text" placeholder="Enter your Username or Email" style="background: none !important;">
+                      <span class="error text-danger" ng-show="formLogin.username.$error.required">
+                            Please enter Username or Email!
+                      </span>
+                  </div>
+                  <div class="mb-3">
+                      <input name="password" ng-model="password" ng-required="true" class="form-control p-2 px-3 rounded-pill" type="password" placeholder="Enter your Password" style="background: none !important;">
+                      <span class="error text-danger" ng-show="formLogin.password.$error.required">
+                            Please enter password!
+                      </span>
+                  </div>
+                  <div class="mb-3" style="background: none;">
+                      <input name="remember_me" class="form-check-input" type="checkbox" value="" id="passwordCheck">
+                      <label class="form-check-label" for="passwordCheck">
+                          Check me out?
+                      </label>
+                  </div>
+                  <div class="text-center">
+                      <button ng-disabled="formLogin.$invalid" type="submit" class="btn btn-outline-primary w-100 py-2 rounded-pill fw-bold text-uppercase">
+                          Sign In
+                      </button>
+                      <a href="/security/register" class="mt-2 mb-4 text-muted">Don't have account? Register here!</a>
+                      <a class="d-block" href="/security/forgotPassword">Forgot Your Password?</a>
+                      <a th:href="@{/oauth2/authorization/google}" class="btn btn-outline-danger text-uppercase fw-bold w-100 mt-4 rounded-pill py-2" type="submit">
+                          <i class="fab fa-google me-2"></i> Sign in with Google
+                      </a>
+                      <a th:href="@{/oauth2/authorization/facebook}" class="btn btn-outline-success text-uppercase fw-bold w-100 py-2 rounded-pill mt-2" type="submit">
+                          <i class="fab fa-facebook-f me-2"></i> Sign in with Facebook
+                      </a>
+                  </div>
+              </form>
+          </div>
+      </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+</body>
+</html>
