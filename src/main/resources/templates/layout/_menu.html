@@ -24,8 +24,8 @@
                 <li class="nav-item" th:class="${#strings.equals(pageTitle, 'Stories')} ? 'active nav-item' : 'nav-item'">
                     <a th:class="nav-link" th:href="@{/stories}">Stories</a>
                     </li>
-                <li class="nav-item" th:class="${#strings.equals(pageTitle, 'Contact')} ? 'active nav-item' : 'nav-item'">
-                    <a th:class="nav-link" th:href="@{/contact}">Contact</a>
+                <li class="nav-item" th:class="${#strings.equals(pageTitle, 'Sign In')} ? 'active nav-item' : 'nav-item'">
+                    <a th:class="nav-link" th:href="@{/security/login/form}">Sign In</a>
                 </li>
             </ul>
         </div>
