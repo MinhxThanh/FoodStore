@@ -10,22 +10,30 @@
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
                 <li th:class="${#strings.equals(pageTitle, 'Home')} ? 'active nav-item' : 'nav-item'">
-                    <a th:class="nav-link" th:href="@{/home/index}">Home</a>
+                    <a th:class="nav-link" th:href="@{/home/index}">[[#{menu.home}]]</a>
                 </li>
                 <li class="nav-item" th:class="${#strings.equals(pageTitle, 'About')} ? 'active nav-item'  : 'nav-item'">
-                    <a th:class="nav-link" th:href="@{/about}">About</a>
+                    <a th:class="nav-link" th:href="@{/about}">[[#{menu.about}]]</a>
                 </li>
                 <li class="nav-item active" th:class="${#strings.equals(pageTitle, 'Menu')} ? 'active nav-item' : 'nav-item'">
-                    <a th:class="nav-link" th:href="@{/menu}">Menu</a>
+                    <a th:class="nav-link" th:href="@{/menu}">[[#{menu.menu}]]</a>
                 </li>
                 <li class="nav-item" th:class="${#strings.equals(pageTitle, 'Reservation')} ? 'active nav-item' : 'nav-item'">
-                    <a th:class="nav-link" th:href="@{/reservation}">Reservation</a>
+                    <a th:class="nav-link" th:href="@{/reservation}">[[#{menu.reservation}]]</a>
                 </li>
                 <li class="nav-item" th:class="${#strings.equals(pageTitle, 'Stories')} ? 'active nav-item' : 'nav-item'">
-                    <a th:class="nav-link" th:href="@{/stories}">Stories</a>
+                    <a th:class="nav-link" th:href="@{/stories}">[[#{menu.stories}]]</a>
                     </li>
+                <li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle pl-0 " href="#" id="dropdown01"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">[[#{menu.language}]]</a>
+					<div class="dropdown-menu" aria-labelledby="dropdown01">
+						<a class="dropdown-item" href="?lang=en">English</a>
+						<a class="dropdown-item" href="?lang=vi">Tiếng Việt</a>
+					</div>
+				</li>    
                 <li class="nav-item" th:class="${#strings.equals(pageTitle, 'Sign In')} ? 'active nav-item' : 'nav-item'">
-                    <a th:class="nav-link" th:href="@{/security/login/form}">Sign In</a>
+                    <a th:class="nav-link" th:href="@{/security/login/form}">[[#{menu.signin}]]</a>
                 </li>
             </ul>
         </div>
