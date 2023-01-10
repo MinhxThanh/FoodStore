@@ -19,6 +19,7 @@
 <!--    angularJS-->
     <script src="/assets/js/angular.min.js"></script>
     <script src="/assets/js/angular-animate.min.js"></script>
+    <script src="/assets/js/foodStore-app.js"></script>
 <!--    styles-->
     <link rel="stylesheet" href="/assets/styles/owl.carousel.min.css">
     <link rel="stylesheet" href="/assets/styles/owl.theme.default.min.css">
@@ -33,7 +34,7 @@
 <!--    jquery-->
     <link rel="stylesheet" href="/assets/styles/jquery.timepicker.css">
 </head>
-<body>
+<body ng-app="foodStore-app" ng-controller="foodStore-controller">
 <!--    menu-->
     <div th:replace="~{/layout/_menu::navbar}"></div>
 

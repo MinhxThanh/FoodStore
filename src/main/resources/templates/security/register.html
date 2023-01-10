@@ -11,8 +11,8 @@
 
 <body>
 <div class="container">
-    <div class="row" id="main">
-        <div class="py-5" style="margin-bottom: 100px; margin-top: 150px;">
+    <div id="main">
+        <div class="py-5" style="margin-bottom: 100px;">
             <div class="col-lg-5 col-sm-11 p-5 m-auto shadow"
                  style="background: rgba(255, 255, 255, 0.708); border-radius: 30px;">
                 <h2 class="text-center my-4 text-uppercase">Register</h2>
@@ -23,7 +23,7 @@
                 <div class="alert alert-danger" role="alert" th:if="${error}">
                     <i>[[${error}]]</i>
                 </div>
-                <form th:action="@{/security/register}" method="post" th:object="${register}" name="formRegister"
+                <form th:action="@{/security/register}" method="post" th:object="${registerCustomer}" name="formRegister"
                       class="container col-10">
                     <div class="mb-3">
                         <input th:field="*{email}" name="email" ng-model="email" ng-pattern="/^\S+@\S+\.\S+$/"
@@ -47,29 +47,16 @@
                             Enter username has length more than 5!
                         </span>
                     </div>
-                    <div class="mb-3 row">
-                        <div class="col-lg-5 col-sm-12">
-                            <input th:field="*{firstName}" name="username" ng-model="firstName" ng-required="true"
-                                   ng-minlength="2" class="form-control p-2 px-3 rounded-pill" type="text"
-                                   placeholder="First Name" style="background: none !important;">
-                            <span class="error text-danger" ng-show="formRegister.firstName.$error.required">
-                                Please enter your first name!
-                            </span>
-                            <span class="error text-danger" ng-show="formRegister.firstName.$error.minlength">
-                                Enter first name has length more than 2!
-                            </span>
-                        </div>
-                        <div class="col-lg-5 col-sm-12">
-                            <input th:field="*{lastName}" name="lastName" ng-model="lastName" ng-required="true"
-                                   ng-minlength="2" class="form-control p-2 px-3 rounded-pill" type="text"
-                                   placeholder="Last Name" style="background: none !important;">
-                            <span class="error text-danger" ng-show="formRegister.lastName.$error.required">
-                                Please enter your last name!
-                            </span>
-                            <span class="error text-danger" ng-show="formRegister.lastName.$error.minlength">
-                                Enter last name has length more than 2!
-                            </span>
-                        </div>
+                    <div class="mb-3">
+                        <input th:field="*{fullname}" name="fullname" ng-model="fullname" ng-required="true"
+                               ng-minlength="2" class="form-control p-2 px-3 rounded-pill" type="text"
+                               placeholder="Full Name" style="background: none !important;">
+                        <span class="error text-danger" ng-show="formRegister.fullname.$error.required">
+                            Please enter your full name!
+                        </span>
+                        <span class="error text-danger" ng-show="formRegister.fullname.$error.minlength">
+                            Enter full name has length more than 2!
+                        </span>
                     </div>
                     <div class="mb-3">
                         <input th:field="*{password}" name="password" ng-model="password" ng-minlength="5"
@@ -95,7 +82,7 @@
                             Passwords don't match!
                         </span>
                     </div>
-                    <div class="mb-3" style="background: none;">
+                    <div class="mb-3 px-4" style="background: none;">
                         <input class="form-check-input" name="check" ng-model="check" ng-required="true" type="checkbox"
                                value="1" id="passwordCheck">
                         <label class="form-check-label" for="passwordCheck">
