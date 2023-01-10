@@ -1,4 +1,4 @@
-package edu.home;
+package edu.home.store;
 
 import java.util.Locale;
 
