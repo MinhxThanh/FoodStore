@@ -36,27 +36,29 @@
                             Please enter email correctly!
                         </span>
                     </div>
-                    <div class="mb-3">
-                        <input th:field="*{username}" name="username" ng-model="username" ng-required="true"
-                               ng-minlength="5" class="form-control p-2 px-3 rounded-pill" type="text"
-                               placeholder="Username" style="background: none !important;">
-                        <span class="error text-danger" ng-show="formRegister.username.$error.required">
-                            Please enter username!
-                        </span>
-                        <span class="error text-danger" ng-show="formRegister.username.$error.minlength">
-                            Enter username has length more than 5!
-                        </span>
-                    </div>
-                    <div class="mb-3">
-                        <input th:field="*{fullname}" name="fullname" ng-model="fullname" ng-required="true"
-                               ng-minlength="2" class="form-control p-2 px-3 rounded-pill" type="text"
-                               placeholder="Full Name" style="background: none !important;">
-                        <span class="error text-danger" ng-show="formRegister.fullname.$error.required">
-                            Please enter your full name!
-                        </span>
-                        <span class="error text-danger" ng-show="formRegister.fullname.$error.minlength">
-                            Enter full name has length more than 2!
-                        </span>
+                    <div class="mb-3 row">
+                        <div class="col-lg-6 col-sm-12">
+                            <input th:field="*{firstName}" name="username" ng-model="firstName" ng-required="true"
+                                   ng-minlength="2" class="form-control p-2 px-3 rounded-pill" type="text"
+                                   placeholder="First Name" style="background: none !important;">
+                            <span class="error text-danger" ng-show="formRegister.firstName.$error.required">
+                                Please enter your first name!
+                            </span>
+                            <span class="error text-danger" ng-show="formRegister.firstName.$error.minlength">
+                                Enter first name has length more than 2!
+                            </span>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <input th:field="*{lastName}" name="lastName" ng-model="lastName" ng-required="true"
+                                   ng-minlength="2" class="form-control p-2 px-3 rounded-pill" type="text"
+                                   placeholder="Last Name" style="background: none !important;">
+                            <span class="error text-danger" ng-show="formRegister.lastName.$error.required">
+                                Please enter your last name!
+                            </span>
+                            <span class="error text-danger" ng-show="formRegister.lastName.$error.minlength">
+                                Enter last name has length more than 2!
+                            </span>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <input th:field="*{password}" name="password" ng-model="password" ng-minlength="5"
@@ -96,12 +98,9 @@
                             Register
                         </button>
                         <a href="#" class="mt-2 mb-4 text-muted">Have account? Sign In Here!</a>
-                        <button class="btn btn-outline-danger text-uppercase fw-bold w-100 mt-4 rounded-pill py-2">
+                        <a th:href="@{/oauth2/authorization/google}" class="btn btn-outline-danger text-uppercase fw-bold w-100 mt-4 rounded-pill py-2" type="submit">
                             <i class="fab fa-google me-2"></i> Sign in with Google
-                        </button>
-                        <button class="btn btn-outline-success text-uppercase fw-bold w-100 py-2 rounded-pill mt-2">
-                            <i class="fab fa-facebook-f me-2"></i> Sign in with Facebook
-                        </button>
+                        </a>
                     </div>
                 </form>
             </div>

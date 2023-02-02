@@ -12,22 +12,22 @@ public class InfoCustomer {
     @Autowired
     private CustomerService customerService;
 
-    public Customer createCustomer(String email, String username, String password, String fullname) {
+    public Customer createCustomer(String email, String password, String lastName, String firstName, String avatar) {
 
         Customer customer = new Customer();
 
         customer.setEmail(email);
-        customer.setUsername(username);
         customer.setPassword(password);
-        customer.setFullname(fullname);
-        customer.setAvatar("/");
-        customer.setBirthday(new Date());
-        customer.setCode("null");
-        customer.setCreateDate(new Date());
+        customer.setLastName(lastName);
+        customer.setFirstName(firstName);
+        customer.setFullname(lastName + " " + firstName);
+        customer.setAvatar(avatar);
         customer.setGender(true);
-        customer.setDisplay(true);
+        customer.setBirthday(new Date());
         customer.setRememberToken("null");
         customer.setStatus(1);
+        customer.setCreateDate(new Date());
+        customer.setDisplay(true);
 
         customerService.create(customer);
         return customer;

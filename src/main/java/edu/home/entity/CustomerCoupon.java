@@ -1,9 +1,11 @@
 package edu.home.entity;
 
-import javax.persistence.*;
+import lombok.Data;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 
 
 /**
@@ -12,23 +14,23 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="customer_coupons")
-@NamedQuery(name="CustomerCoupon.findAll", query="SELECT c FROM CustomerCoupon c")
+@Data
 public class CustomerCoupon implements Serializable {
-	private static final long serialVersionUID = 1L;
-
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	@Column(name="create_date")
-	private Timestamp createDate;
+	@Temporal(TemporalType.DATE)
+	private Date createDate;
 
 	private long status;
 
-	//bi-directional many-to-one association to Coupon
+	//bidirectional many-to-one association to Coupon
 	@ManyToOne
 	private Coupon coupon;
 
-	//bi-directional many-to-one association to Customer
+	//bidirectional many-to-one association to Customer
 	@ManyToOne
 	private Customer customer;
 }

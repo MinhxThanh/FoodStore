@@ -1,23 +1,25 @@
 package edu.home.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import javax.persistence.*;
+import lombok.Data;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
 
 /**
- * The persistent class for the coupon database table.
+ * The persistent class for the coupons database table.
  * 
  */
 @Entity
 @Table(name="coupons")
+@Data
 public class Coupon implements Serializable {
-
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	private double amount;
@@ -54,7 +56,7 @@ public class Coupon implements Serializable {
 	@Column(name="user_limit")
 	private long userLimit;
 
-	//bidirectional many-to-one association to User
+	//bi-directional many-to-one association to User
 	@ManyToOne
 	@JoinColumn(name="create_by")
 	private User user;

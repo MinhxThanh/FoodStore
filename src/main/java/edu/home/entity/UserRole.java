@@ -1,8 +1,9 @@
 package edu.home.entity;
 
-import javax.persistence.*;
+import lombok.Data;
 
 import java.io.Serializable;
+import javax.persistence.*;
 
 
 /**
@@ -11,15 +12,17 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name="user_roles")
+@Data
 public class UserRole implements Serializable {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	//bi-directional many-to-one association to Role
+	//bidirectional many-to-one association to Role
 	@ManyToOne
 	private Role role;
 
-	//bi-directional many-to-one association to User
+	//bidirectional many-to-one association to User
 	@ManyToOne
 	private User user;
 }

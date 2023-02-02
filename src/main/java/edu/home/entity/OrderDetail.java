@@ -1,8 +1,9 @@
 package edu.home.entity;
 
-import javax.persistence.*;
+import lombok.Data;
 
 import java.io.Serializable;
+import javax.persistence.*;
 
 
 /**
@@ -11,11 +12,10 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name="order_details")
-@NamedQuery(name="OrderDetail.findAll", query="SELECT o FROM OrderDetail o")
+@Data
 public class OrderDetail implements Serializable {
-	private static final long serialVersionUID = 1L;
-
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	@Column(name="coupon_code")
@@ -27,22 +27,17 @@ public class OrderDetail implements Serializable {
 	@Column(name="is_display")
 	private boolean isDisplay;
 
-	@Column(name="is_fixed")
-	private boolean isFixed;
-
-	private String memo;
-
 	private double price;
 
 	private long quantity;
 
 	private long status;
 
-	//bi-directional many-to-one association to Food
+	//bidirectional many-to-one association to Food
 	@ManyToOne
 	private Food food;
 
-	//bi-directional many-to-one association to Order
+	//bidirectional many-to-one association to Order
 	@ManyToOne
 	private Order order;
 }

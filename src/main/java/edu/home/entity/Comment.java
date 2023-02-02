@@ -1,40 +1,45 @@
 package edu.home.entity;
 
-import javax.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
+import javax.persistence.*;
+
 
 
 /**
- * The persistent class for the comments database table.
+ * The persistent class for the comment database table.
  * 
  */
 @Entity
 @Table(name="comments")
-@NamedQuery(name="Comment.findAll", query="SELECT c FROM Comment c")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Comment implements Serializable {
-	private static final long serialVersionUID = 1L;
-
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	private String content;
 
 	@Column(name="create_date")
-	private Timestamp createDate;
+	@Temporal(TemporalType.DATE)
+	private Date createDate;
 
 	@Column(name="is_display")
 	private boolean isDisplay;
 
-	private long status;
-
 	private String title;
 
 	@Column(name="update_date")
-	private Timestamp updateDate;
+	@Temporal(TemporalType.DATE)
+	private Date updateDate;
 
-	//bi-directional many-to-one association to Review
+	//bidirectional many-to-one association to Review
 	@ManyToOne
 	private Review review;
 }

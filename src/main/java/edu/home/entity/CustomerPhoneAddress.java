@@ -1,8 +1,9 @@
 package edu.home.entity;
 
-import javax.persistence.*;
+import lombok.Data;
 
 import java.io.Serializable;
+import javax.persistence.*;
 
 
 /**
@@ -11,23 +12,23 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name="customer_phone_address")
-@NamedQuery(name="CustomerPhoneAddress.findAll", query="SELECT c FROM CustomerPhoneAddress c")
+@Data
 public class CustomerPhoneAddress implements Serializable {
-	private static final long serialVersionUID = 1L;
-
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@Column(name="is_address")
-	private boolean isAddress;
+	private String address;
+
+	@Column(name="city_province")
+	private String cityProvince;
 
 	@Column(name="is_default")
 	private boolean isDefault;
 
-	@Column(name="phone_or_address")
-	private String phoneOrAddress;
+	private String phone;
 
-	//bi-directional many-to-one association to Customer
+	//bidirectional many-to-one association to Customer
 	@ManyToOne
 	private Customer customer;
 }

@@ -1,27 +1,30 @@
 package edu.home.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import javax.persistence.*;
+import lombok.Data;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 
 /**
- * The persistent class for the reviews database table.
+ * The persistent class for the review database table.
  * 
  */
 @Entity
 @Table(name="reviews")
-@NamedQuery(name="Review.findAll", query="SELECT r FROM Review r")
+@Data
 public class Review implements Serializable {
-
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	@Column(name="create_date")
-	private Timestamp createDate;
+	@Temporal(TemporalType.DATE)
+	private Date createDate;
 
 	@Column(name="is_display")
 	private boolean isDisplay;
@@ -31,23 +34,20 @@ public class Review implements Serializable {
 
 	private long rating;
 
-	private long status;
-
 	@Column(name="update_date")
-	private Timestamp updateDate;
+	@Temporal(TemporalType.DATE)
+	private Date updateDate;
 
-	private long views;
-
-	//bi-directional many-to-one association to Comment
+	//bidirectional many-to-one association to Comment
 	@JsonIgnore
 	@OneToMany(mappedBy="review")
 	private List<Comment> comments;
 
-	//bi-directional many-to-one association to Customer
+	//bidirectional many-to-one association to Customer
 	@ManyToOne
 	private Customer customer;
 
-	//bi-directional many-to-one association to Food
+	//bidirectional many-to-one association to Food
 	@ManyToOne
 	private Food food;
 }

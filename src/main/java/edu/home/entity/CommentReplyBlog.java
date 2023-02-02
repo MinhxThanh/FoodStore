@@ -1,9 +1,10 @@
 package edu.home.entity;
 
-import javax.persistence.*;
+import lombok.Data;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
+import javax.persistence.*;
 
 
 /**
@@ -12,14 +13,17 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="comment_reply_blog")
+@Data
 public class CommentReplyBlog implements Serializable {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	private String content;
 
 	@Column(name="create_date")
-	private Timestamp createDate;
+	@Temporal(TemporalType.DATE)
+	private Date createDate;
 
 	@Column(name="is_display")
 	private boolean isDisplay;
@@ -29,18 +33,19 @@ public class CommentReplyBlog implements Serializable {
 	private String title;
 
 	@Column(name="update_date")
-	private Timestamp updateDate;
+	@Temporal(TemporalType.DATE)
+	private Date updateDate;
 
-	//bi-directional many-to-one association to Blog
+	//bidirectional many-to-one association to Blog
 	@ManyToOne
 	private Blog blog;
 
-	//bi-directional many-to-one association to CommentsBlog
+	//bidirectional many-to-one association to CommentsBlog
 	@ManyToOne
 	@JoinColumn(name="comments_blog_id")
 	private CommentsBlog commentsBlog;
 
-	//bi-directional many-to-one association to Customer
+	//bidirectional many-to-one association to Customer
 	@ManyToOne
 	private Customer customer;
 }

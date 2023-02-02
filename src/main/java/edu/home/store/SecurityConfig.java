@@ -61,6 +61,14 @@ public class SecurityConfig {
                 .logoutSuccessUrl("/security/logout/success")
                 .deleteCookies("JSESSIONID", "remember-me").invalidateHttpSession(true);
 
+//        OAuth2
+        http.oauth2Login()
+                .loginPage("/security/login/form")
+                .defaultSuccessUrl("/security/oauth2Login/success", true)
+                .failureUrl("/security/login/error")
+                .authorizationEndpoint()
+                .baseUri("/oauth2/authorization");
+
         return http.build();
     }
 

@@ -1,8 +1,11 @@
 package edu.home.entity;
 
-import javax.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import javax.persistence.*;
 
 
 /**
@@ -11,9 +14,12 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name="category_foods")
+@Data
+@AllArgsConstructor @NoArgsConstructor
 public class CategoryFood implements Serializable {
 	@Id
-	private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 
 	//bi-directional many-to-one association to Category
 	@ManyToOne

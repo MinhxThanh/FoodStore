@@ -9,32 +9,32 @@ import java.util.List;
 
 
 /**
- * The persistent class for the payment methods database table.
+ * The persistent class for the shipmethods database table.
  * 
  */
 @Entity
-@Table(name="paymentmethods")
+@Table(name="shipmethods")
 @Data
-public class Paymentmethod implements Serializable {
-
+public class Shipmethod implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	private String code;
-
 	private String description;
-
-	@Column(name="image_name")
-	private String imageName;
 
 	@Column(name="is_display")
 	private boolean isDisplay;
 
 	private String name;
 
+	private double price;
+
 	//bidirectional many-to-one association to Order
 	@JsonIgnore
-	@OneToMany(mappedBy="paymentmethod")
+	@OneToMany(mappedBy="shipmethod")
 	private List<Order> orders;
+
+	//bidirectional many-to-one association to User
+	@ManyToOne
+	private User user;
 }

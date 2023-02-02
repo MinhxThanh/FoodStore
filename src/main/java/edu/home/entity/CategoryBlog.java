@@ -1,8 +1,11 @@
 package edu.home.entity;
 
-import javax.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import javax.persistence.*;
 
 
 /**
@@ -11,19 +14,17 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name="category_blog")
-@NamedQuery(name="CategoryBlog.findAll", query="SELECT c FROM CategoryBlog c")
+@Data
 public class CategoryBlog implements Serializable {
-	private static final long serialVersionUID = 1L;
-
 	@Id
-	private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 
-	//bi-directional many-to-one association to Category
+	//bidirectional many-to-one association to Blog
+	@ManyToOne
+	private Blog blog;
+
+	//bidirectional many-to-one association to Category
 	@ManyToOne
 	private Category category;
-
-	//bi-directional many-to-one association to Food
-	@ManyToOne
-	@JoinColumn(name="blog_id")
-	private Food food;
 }

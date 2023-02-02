@@ -13,8 +13,8 @@ import javax.persistence.Id;
 public class RegisterCustomer {
     @Id
     private String email;
-    private String username;
     private String password;
     private String passwordConfirm;
-    private String fullname;
+    private String firstName;
+    private String lastName;
 }

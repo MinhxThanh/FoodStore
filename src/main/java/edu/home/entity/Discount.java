@@ -1,31 +1,38 @@
 package edu.home.entity;
 
-import javax.persistence.*;
+import lombok.Data;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 
 
 /**
- * The persistent class for the discounts database table.
+ * The persistent class for the discount database table.
  * 
  */
 @Entity
 @Table(name="discounts")
-@NamedQuery(name="Discount.findAll", query="SELECT d FROM Discount d")
+@Data
 public class Discount implements Serializable {
-	private static final long serialVersionUID = 1L;
-
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	private double amount;
+	@Column(name="amount_limit")
+	private double amountLimit;
+
+	@Column(name="amount_used")
+	private double amountUsed;
 
 	@Column(name="create_date")
-	private Timestamp createDate;
+	@Temporal(TemporalType.DATE)
+	private Date createDate;
 
 	@Column(name="end_date")
-	private Timestamp endDate;
+	@Temporal(TemporalType.DATE)
+	private Date endDate;
 
 	@Column(name="is_display")
 	private boolean isDisplay;
@@ -36,9 +43,10 @@ public class Discount implements Serializable {
 	private String name;
 
 	@Column(name="start_date")
-	private Timestamp startDate;
+	@Temporal(TemporalType.DATE)
+	private Date startDate;
 
-	//bi-directional many-to-one association to Food
+	//bidirectional many-to-one association to Food
 	@ManyToOne
 	private Food food;
 

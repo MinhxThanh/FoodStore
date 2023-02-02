@@ -1,29 +1,30 @@
 package edu.home.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import javax.persistence.*;
+import lombok.Data;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 
 /**
- * The persistent class for the roles database table.
+ * The persistent class for the role database table.
  * 
  */
 @Entity
 @Table(name="roles")
-@NamedQuery(name="Role.findAll", query="SELECT r FROM Role r")
+@Data
 public class Role implements Serializable {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@Column(name="create_by")
-	private long createBy;
-
 	@Column(name="create_date")
-	private Timestamp createDate;
+	@Temporal(TemporalType.DATE)
+	private Date createDate;
 
 	@Column(name="display_name")
 	private String displayName;
@@ -33,12 +34,12 @@ public class Role implements Serializable {
 
 	private String name;
 
-	//bi-directional many-to-one association to RolePermission
-	@JsonIgnore
-	@OneToMany(mappedBy="role")
-	private List<RolePermission> rolePermissions;
+	//bidirectional many-to-one association to User
+	@ManyToOne
+	@JoinColumn(name="create_by")
+	private User user;
 
-	//bi-directional many-to-one association to UserRole
+	//bidirectional many-to-one association to UserRole
 	@JsonIgnore
 	@OneToMany(mappedBy="role")
 	private List<UserRole> userRoles;

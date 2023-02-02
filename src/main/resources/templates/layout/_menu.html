@@ -32,8 +32,11 @@
                         <a class="dropdown-item" href="?lang=vi">Tiếng Việt</a>
                     </div>
                 </li>
-                <li class="nav-item" th:class="${#strings.equals(pageTitle, 'Sign In')} ? 'active nav-item' : 'nav-item'">
+                <li th:unless="${#request.remoteUser}" class="nav-item" th:class="${#strings.equals(pageTitle, 'Sign In')} ? 'active nav-item' : 'nav-item'">
                     <a th:class="nav-link" th:href="@{/security/login/form}">[[#{menu.signin}]]</a>
+                </li>
+                <li th:if="${#request.remoteUser}"i class="nav-item" th:class="${#strings.equals(pageTitle, 'Sign Out')} ? 'active nav-item' : 'nav-item'">
+                    <a th:class="nav-link" th:href="@{/security/logout}">Sign out</a>
                 </li>
             </ul>
         </div>

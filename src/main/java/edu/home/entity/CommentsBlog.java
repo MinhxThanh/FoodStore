@@ -1,10 +1,12 @@
 package edu.home.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import javax.persistence.*;
+import lombok.Data;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 
@@ -14,16 +16,17 @@ import java.util.List;
  */
 @Entity
 @Table(name="comments_blog")
+@Data
 public class CommentsBlog implements Serializable {
-	private static final long serialVersionUID = 1L;
-
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	private String content;
 
 	@Column(name="create_date")
-	private Timestamp createDate;
+	@Temporal(TemporalType.DATE)
+	private Date createDate;
 
 	@Column(name="is_display")
 	private boolean isDisplay;
@@ -33,16 +36,16 @@ public class CommentsBlog implements Serializable {
 	private String title;
 
 	@Column(name="update_date")
-	private Timestamp updateDate;
+	@Temporal(TemporalType.DATE)
+	private Date updateDate;
 
-	//bi-directional many-to-one association to CommentReplyBlog
+	//bidirectional many-to-one association to CommentReplyBlog
 	@JsonIgnore
 	@OneToMany(mappedBy="commentsBlog")
 	private List<CommentReplyBlog> commentReplyBlogs;
 
 	//bi-directional many-to-one association to Blog
 	@ManyToOne
-	@JoinColumn(name="blog_id")
 	private Blog blog;
 
 	//bi-directional many-to-one association to Customer

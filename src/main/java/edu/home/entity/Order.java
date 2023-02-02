@@ -1,62 +1,60 @@
 package edu.home.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import javax.persistence.*;
+import lombok.Data;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 
 /**
- * The persistent class for the orders database table.
+ * The persistent class for the order database table.
  * 
  */
 @Entity
 @Table(name="orders")
-@NamedQuery(name="Order.findAll", query="SELECT o FROM Order o")
+@Data
 public class Order implements Serializable {
-	private static final long serialVersionUID = 1L;
-
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-
-	private double fee;
 
 	@Column(name="is_display")
 	private boolean isDisplay;
 
-	@Column(name="is_watched")
-	private boolean isWatched;
+	@Column(name="order_address")
+	private String orderAddress;
 
 	@Column(name="order_date")
-	private Timestamp orderDate;
+	@Temporal(TemporalType.DATE)
+	private Date orderDate;
 
-	@Column(name="paid_date")
-	private Timestamp paidDate;
-
-	@Column(name="shipped_address")
-	private String shippedAddress;
+	@Column(name="order_phone")
+	private String orderPhone;
 
 	@Column(name="shipped_date")
-	private Timestamp shippedDate;
-
-	@Column(name="shipped_phone")
-	private String shippedPhone;
+	@Temporal(TemporalType.DATE)
+	private Date shippedDate;
 
 	private long status;
 
-	//bi-directional many-to-one association to OrderDetail
+	//bidirectional many-to-one association to OrderDetail
 	@JsonIgnore
 	@OneToMany(mappedBy="order")
 	private List<OrderDetail> orderDetails;
 
-	//bi-directional many-to-one association to Customer
+	//bidirectional many-to-one association to Customer
 	@ManyToOne
 	private Customer customer;
 
-	//bi-directional many-to-one association to Paymentmethod
+	//bidirectional many-to-one association to Paymentmethod
 	@ManyToOne
-	@JoinColumn(name="payment_id")
 	private Paymentmethod paymentmethod;
+
+	//bidirectional many-to-one association to Shipmethod
+	@ManyToOne
+	private Shipmethod shipmethod;
 }

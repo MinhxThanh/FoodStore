@@ -1,42 +1,37 @@
 package edu.home.entity;
 
-import javax.persistence.*;
+import lombok.Data;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 
 
 /**
- * The persistent class for the notifications database table.
+ * The persistent class for the notification database table.
  * 
  */
 @Entity
 @Table(name="notifications")
-@NamedQuery(name="Notification.findAll", query="SELECT n FROM Notification n")
+@Data
 public class Notification implements Serializable {
-	private static final long serialVersionUID = 1L;
-
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	private String content;
 
-	@Column(name="create_at")
-	private Timestamp createAt;
+	@Column(name="create_date")
+	@Temporal(TemporalType.DATE)
+	private Date createDate;
 
 	@Column(name="is_watched")
-	private long isWatched;
+	private boolean isWatched;
 
-	@Column(name="record_id")
-	private long recordId;
+	private String title;
 
-	@Column(name="table_name")
-	private String tableName;
-
-	//bi-directional many-to-one association to Food
+	//bidirectional many-to-one association to Customer
 	@ManyToOne
-	@JoinColumn(name="customer_id")
-	private Food food;
-
-
+	private Customer customer;
 }

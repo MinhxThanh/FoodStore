@@ -1,12 +1,12 @@
 package edu.home.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
@@ -16,21 +16,22 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name="blog")
+@Table(name="blogs")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor @AllArgsConstructor
 public class Blog implements Serializable {
 	@Id
-	private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 
 	private String content;
 
 	@Column(name="create_date")
+	@Temporal(TemporalType.DATE)
 	private Date createDate;
 
-	@Column(name="image_name")
-	private String imageName;
+	@Column(name="is_display")
+	private boolean isDisplay;
 
 	private long status;
 
@@ -39,18 +40,28 @@ public class Blog implements Serializable {
 	@Column(name="view_count")
 	private long viewCount;
 
-	//bi-directional many-to-one association to User
+	//bidirectional many-to-one association to User
 	@ManyToOne
 	@JoinColumn(name="create_by")
 	private User user;
 
-	//bi-directional many-to-one association to CommentReplyBlog
+	//bidirectional many-to-one association to CategoryBlog
+	@JsonIgnore
+	@OneToMany(mappedBy="blog")
+	private List<CategoryBlog> categoryBlogs;
+
+	//bidirectional many-to-one association to CommentReplyBlog
 	@JsonIgnore
 	@OneToMany(mappedBy="blog")
 	private List<CommentReplyBlog> commentReplyBlogs;
 
-	//bi-directional many-to-one association to CommentsBlog
+	//bidirectional many-to-one association to CommentsBlog
 	@JsonIgnore
 	@OneToMany(mappedBy="blog")
 	private List<CommentsBlog> commentsBlogs;
+
+	//bidirectional many-to-one association to ImageBlog
+	@JsonIgnore
+	@OneToMany(mappedBy="blog")
+	private List<ImageBlog> imageBlogs;
 }

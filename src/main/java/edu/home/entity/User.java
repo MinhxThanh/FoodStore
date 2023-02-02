@@ -1,25 +1,25 @@
 package edu.home.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import javax.persistence.*;
+import lombok.Data;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
 
 /**
- * The persistent class for the users database table.
+ * The persistent class for the user database table.
  * 
  */
 @Entity
 @Table(name="users")
-@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
+@Data
 public class User implements Serializable {
-	private static final long serialVersionUID = 1L;
-
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	private String address;
@@ -29,13 +29,12 @@ public class User implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date birthday;
 
-	private String code;
-
 	@Column(name="create_by")
 	private long createBy;
 
 	@Column(name="create_date")
-	private Timestamp createDate;
+	@Temporal(TemporalType.DATE)
+	private Date createDate;
 
 	private String email;
 
@@ -57,42 +56,42 @@ public class User implements Serializable {
 
 	private String username;
 
-	//bi-directional many-to-one association to Blog
+	//bidirectional many-to-one association to Blog
 	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List<Blog> blogs;
 
-	//bi-directional many-to-one association to Category
+	//bidirectional many-to-one association to Category
 	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List<Category> categories;
 
-	//bi-directional many-to-one association to Coupon
+	//bidirectional many-to-one association to Coupon
 	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List<Coupon> coupons;
 
-	//bi-directional many-to-one association to Discount
+	//bidirectional many-to-one association to Discount
 	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List<Discount> discounts;
 
-	//bi-directional many-to-one association to Food
+	//bidirectional many-to-one association to Food
 	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List<Food> foods;
 
-	//bi-directional many-to-one association to History
+	//bidirectional many-to-one association to Role
 	@JsonIgnore
 	@OneToMany(mappedBy="user")
-	private List<History> histories;
+	private List<Role> roles;
 
-	//bi-directional many-to-one association to UserPermission
+	//bidirectional many-to-one association to Shipmethod
 	@JsonIgnore
 	@OneToMany(mappedBy="user")
-	private List<UserPermission> userPermissions;
+	private List<Shipmethod> shipmethods;
 
-	//bi-directional many-to-one association to UserRole
+	//bidirectional many-to-one association to UserRole
 	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List<UserRole> userRoles;

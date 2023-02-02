@@ -8,4 +8,6 @@ public interface CustomerService {
     void changePasswordByEmail(String email, String password);
 
     Customer create(Customer customer);
+
+    Customer findByEmailKey(String email);
 }

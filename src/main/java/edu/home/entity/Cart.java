@@ -1,11 +1,11 @@
 package edu.home.entity;
 
-import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import javax.persistence.*;
 
 
 /**
@@ -15,11 +15,11 @@ import java.io.Serializable;
 @Entity
 @Table(name="cart")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor @NoArgsConstructor
 public class Cart implements Serializable {
 	@Id
-	private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 
 	private int quantity;
 
