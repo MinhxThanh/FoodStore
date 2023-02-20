@@ -3,13 +3,27 @@ package edu.home.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import edu.home.service.FoodService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Controller
 public class HomeController {
+    @Autowired
+	FoodService foodService;
 
     @RequestMapping({"/", "/home/index"})
     public String home(Model model){
         model.addAttribute("pageTitle", "Home");
+        foodService.listfood(1).stream().forEach(i ->{
+        		System.out.println("list: " + i.getImageName());
+        });
+        model.addAttribute("imageName", foodService.listfood(1));
+        model.addAttribute("imageName2", foodService.listfood(2));
+        model.addAttribute("imageName3", foodService.listfood(3));
+        model.addAttribute("imageName4", foodService.listfood(4));
+        model.addAttribute("imageName5", foodService.listfood(5));
+        model.addAttribute("imageName6", foodService.listfood(6));
+        
         return "home/index";
     }
 
