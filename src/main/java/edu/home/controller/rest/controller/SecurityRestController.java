@@ -38,9 +38,9 @@ public class SecurityRestController {
             System.out.println("Name: " + user.getUsername());
 //            if(!user.getUserRoles().stream().anyMatch(item -> item.getRole().getId() == 1))
 //                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
-            );
+//            Authentication authentication = authenticationManager.authenticate(
+//                    new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
+//            );
             String accessToken = jwtTokenUtil.generateAccessToken(request.getEmail());
             AuthResponse response = new AuthResponse(request.getEmail(), accessToken, user.getUsername(), user.getAvatar());
             return ResponseEntity.ok(response);
