@@ -32,14 +32,24 @@ public class HomeController {
         model.addAttribute("pageTitle", "Menu");
         return "product/list";
     }
+    @RequestMapping(value = "/product/detail")
+    public String productDetailTest(Model model){
+        model.addAttribute("pageTitle", "Menu");
+        return "product/detail";
+    }
     @RequestMapping(value = "/stories")
     public String blog(Model model){
         model.addAttribute("pageTitle", "Stories");
         return "blog/list";
     }
-    @RequestMapping(value = "/reservation")
-    public String reservation(Model model){
-        model.addAttribute("pageTitle", "Reservation");
-        return "reservation/reservation";
+    @RequestMapping(value = "/contact")
+    public String contact(Model model){
+        model.addAttribute("pageTitle", "Contact");
+        return "home/contact";
+    }
+    @RequestMapping(value = "/cart")
+    public String shoppingCart(Model model){
+        model.addAttribute("pageTitle", "Shopping Cart");
+        return "cart/shopping-cart";
     }
 }

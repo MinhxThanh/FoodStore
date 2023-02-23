@@ -1,44 +1,213 @@
 
-<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light ftco-navbar-light-2" id="ftco-navbar"
-     xmlns:th="http://www.thymeleaf.org" th:fragment="navbar">
-    <div class="container">
-        <a class="navbar-brand" href="index.html"><img src="/assets/images/Logo.png" width="100px" alt=""></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="oi oi-menu"></span> Menu
-        </button>
-
-        <div class="collapse navbar-collapse" id="ftco-nav">
-            <ul class="navbar-nav ml-auto">
-                <li th:class="${#strings.equals(pageTitle, 'Home')} ? 'active nav-item' : 'nav-item'">
-                    <a th:class="nav-link" th:href="@{/home/index}">[[#{menu.home}]]</a>
-                </li>
-                <li class="nav-item" th:class="${#strings.equals(pageTitle, 'About')} ? 'active nav-item'  : 'nav-item'">
-                    <a th:class="nav-link" th:href="@{/about}">[[#{menu.about}]]</a>
-                </li>
-                <li class="nav-item active" th:class="${#strings.equals(pageTitle, 'Menu')} ? 'active nav-item' : 'nav-item'">
-                    <a th:class="nav-link" th:href="@{/menu}">[[#{menu.menu}]]</a>
-                </li>
-                <li class="nav-item" th:class="${#strings.equals(pageTitle, 'Reservation')} ? 'active nav-item' : 'nav-item'">
-                    <a th:class="nav-link" th:href="@{/reservation}">[[#{menu.reservation}]]</a>
-                </li>
-                <li class="nav-item" th:class="${#strings.equals(pageTitle, 'Stories')} ? 'active nav-item' : 'nav-item'">
-                    <a th:class="nav-link" th:href="@{/stories}">[[#{menu.stories}]]</a>
-                </li>
-                <li class="nav-item dropdown"><a
-                        class="nav-link dropdown-toggle pl-0 " href="#" id="dropdown01"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">[[#{menu.language}]]</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown01">
-                        <a class="dropdown-item" href="?lang=en">English</a>
-                        <a class="dropdown-item" href="?lang=vi">Tiếng Việt</a>
+<!-- Header Section Begin -->
+<header class="header" xmlns:th="http://www.thymeleaf.org" th:fragment="navbar">
+    <div class="header__top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="header__top__left">
+                        <ul>
+                            <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
+                            <li>Free Shipping for all Order of $99</li>
+                        </ul>
                     </div>
-                </li>
-                <li th:unless="${#request.remoteUser}" class="nav-item" th:class="${#strings.equals(pageTitle, 'Sign In')} ? 'active nav-item' : 'nav-item'">
-                    <a th:class="nav-link" th:href="@{/security/login/form}">[[#{menu.signin}]]</a>
-                </li>
-                <li th:if="${#request.remoteUser}"i class="nav-item" th:class="${#strings.equals(pageTitle, 'Sign Out')} ? 'active nav-item' : 'nav-item'">
-                    <a th:class="nav-link" th:href="@{/security/logout}">Sign out</a>
-                </li>
-            </ul>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="header__top__right">
+                        <div class="header__top__right__social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                            <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                        </div>
+                        <div class="header__top__right__language">
+                            <img src="/assets/images/language.png" alt="">
+                            <div>[[#{menu.language}]]</div>
+                            <span class="arrow_carrot-down"></span>
+                            <ul>
+                                <li><a href="?lang=en">English</a></li>
+                                <li><a href="?lang=vi">Tiếng Việt</a></li>
+                            </ul>
+                        </div>
+                        <div class="header__top__right__auth">
+                            <a th:unless="${#request.remoteUser}" th:href="@{/security/login/form}">
+                                <i class="fa fa-user"></i> [[#{menu.signIn}]]
+                            </a>
+                            <a th:if="${#request.remoteUser}" th:href="@{/security/logout}">
+                                <i class="fa fa-user"></i> [[#{menu.signOut}]]
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="header__logo text-center">
+                    <a th:href="@{/home/index}"><img src="/assets/images/logo.png" class="img-fluid" alt="logo" width="65%"></a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <nav class="header__menu">
+                    <ul>
+                        <li th:class="${#strings.equals(pageTitle, 'Home')} ? 'active' : ''">
+                            <a th:href="@{/home/index}">[[#{menu.home}]]</a>
+                        </li>
+                        <li th:class="${#strings.equals(pageTitle, 'Menu ')} ? 'active' : ''">
+                            <a th:href="@{/menu}">Shop</a>
+                        </li>
+<!--                        <li><a href="#">Pages</a>-->
+<!--                            <ul class="header__menu__dropdown">-->
+<!--                                <li><a href="./shop-details.html">Shop Details</a></li>-->
+<!--                                <li><a href="./shoping-cart.html">Shoping Cart</a></li>-->
+<!--                                <li><a href="./checkout.html">Check Out</a></li>-->
+<!--                                <li><a href="./blog-details.html">Blog Details</a></li>-->
+<!--                            </ul>-->
+<!--                        </li>-->
+                        <li th:class="${#strings.equals(pageTitle, 'Stories ')} ? 'active' : ''">
+                            <a th:href="@{/stories}">[[#{menu.stories}]]</a>
+                        </li>
+                        <li th:class="${#strings.equals(pageTitle, 'Contact ')} ? 'active' : ''">
+                            <a th:href="@{/contact}">[[#{menu.contact}]]</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-lg-3">
+                <div class="header__cart list_cart">
+                    <ul>
+                        <li>
+                            <a th:href="@{/cart}"><i class="fa fa-shopping-bag"></i> <span>3</span></a>
+                            <ul class="header__menu__dropdown">
+                                <li>
+                                    <a class="cart_card d-flex flex-row" href="./shop-details.html">
+                                        <div class="image_cart text-left d-flex flex-row">
+                                            <img src="/assets/images/product/product-1.jpg" class="img-fluid w-25" alt="image product">
+                                            <div class="col-8" style="margin-top: 3px;
+                                                display: block;
+                                                text-overflow: ellipsis;
+                                                word-wrap: break-word;
+                                                overflow: hidden;
+                                                max-height: 3.2em;
+                                                line-height: 1.8em;
+                                                -webkit-box-orient: vertical;">
+                                                name product here and there and this and that
+                                            </div>
+                                        </div>
+                                        <div class="price-food" style="margin-top: 10px;">
+                                            200$
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="cart_card d-flex flex-row" href="./shop-details.html">
+                                        <div class="image_cart text-left d-flex flex-row">
+                                            <img src="/assets/images/product/product-1.jpg" class="img-fluid w-25" alt="image product">
+                                            <div class="col-8" style="margin-top: 3px;
+                                                display: block;
+                                                text-overflow: ellipsis;
+                                                word-wrap: break-word;
+                                                overflow: hidden;
+                                                max-height: 3.2em;
+                                                line-height: 1.8em;
+                                                -webkit-box-orient: vertical;">
+                                                name product here and there and this and that
+                                            </div>
+                                        </div>
+                                        <div class="price-food" style="margin-top: 10px;">
+                                            200$
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="cart_card d-flex flex-row" href="./shop-details.html">
+                                        <div class="image_cart text-left d-flex flex-row">
+                                            <img src="/assets/images/product/product-1.jpg" class="img-fluid w-25" alt="image product">
+                                            <div class="col-8" style="margin-top: 3px;
+                                                display: block;
+                                                text-overflow: ellipsis;
+                                                word-wrap: break-word;
+                                                overflow: hidden;
+                                                max-height: 3.2em;
+                                                line-height: 1.8em;
+                                                -webkit-box-orient: vertical;">
+                                                name product
+                                            </div>
+                                        </div>
+                                        <div class="price-food" style="margin-top: 10px;">
+                                            200$
+                                        </div>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#" class="font-italic " style="text-decoration: underline;">More</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="header__cart__price">item: <span>$150.00</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="humberger__open">
+            <i class="fa fa-bars"></i>
+        </div>
+    </div>
+</header>
+<!-- Header Section End -->
+
+<!-- Hero Section Begin -->
+<section class="hero hero-normal" xmlns:th="http://www.thymeleaf.org" th:fragment="hero-normal-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="hero__categories">
+                    <div class="hero__categories__all">
+                        <i class="fa fa-bars"></i>
+                        <span>All departments</span>
+                    </div>
+                    <ul>
+                        <li><a href="#">Fresh Meat</a></li>
+                        <li><a href="#">Vegetables</a></li>
+                        <li><a href="#">Fruit & Nut Gifts</a></li>
+                        <li><a href="#">Fresh Berries</a></li>
+                        <li><a href="#">Ocean Foods</a></li>
+                        <li><a href="#">Butter & Eggs</a></li>
+                        <li><a href="#">Fastfood</a></li>
+                        <li><a href="#">Fresh Onion</a></li>
+                        <li><a href="#">Papayaya & Crisps</a></li>
+                        <li><a href="#">Oatmeal</a></li>
+                        <li><a href="#">Fresh Bananas</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="hero__search">
+                    <div class="hero__search__form">
+                        <form action="#">
+                            <div class="hero__search__categories">
+                                All Categories
+                                <span class="arrow_carrot-down"></span>
+                            </div>
+                            <input type="text" placeholder="What do yo u need?">
+                            <button type="submit" class="site-btn">SEARCH</button>
+                        </form>
+                    </div>
+                    <div class="hero__search__phone">
+                        <div class="hero__search__phone__icon">
+                            <i class="fa fa-phone"></i>
+                        </div>
+                        <div class="hero__search__phone__text">
+                            <h5>+65 11.188.888</h5>
+                            <span>support 24/7 time</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Hero Section End -->

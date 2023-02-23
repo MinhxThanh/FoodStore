@@ -5,36 +5,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>[[${pageTitle}]]</title>
     <link rel="icon" type="image/x-icon" href="/assets/images/logo.png"/>
-<!--    bootstrap-->
-    <link rel="stylesheet" href="/assets/styles/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/styles/bootstrap-datepicker.css">
-
+<!-- Google Font -->
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap}" rel="stylesheet">
 <!--    font Awesome icons-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<!--    ionicons-->
-    <link rel="stylesheet" href="/assets/styles/ionicons.min.css">
-<!--    font google-->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lovers+Quarrel" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/assets/styles/css/font-awesome.min.css}" type="text/css">
 <!--    angularJS-->
     <script src="/assets/js/angular.min.js"></script>
     <script src="/assets/js/angular-animate.min.js"></script>
     <script src="/assets/js/foodStore-app.js"></script>
-<!--    styles-->
-    <link rel="stylesheet" href="/assets/styles/owl.carousel.min.css">
-    <link rel="stylesheet" href="/assets/styles/owl.theme.default.min.css">
-    <link rel="stylesheet" href="/assets/styles/magnific-popup.css">
-    <link rel="stylesheet" href="/assets/styles/flaticon.css">
-    <link rel="stylesheet" href="/assets/styles/icomoon.css">
-    <link rel="stylesheet" href="/assets/styles/style.css">
-    <link rel="stylesheet" href="/assets/styles/scroll.css">
-<!--    animation aos-->
-    <link rel="stylesheet" href="/assets/styles/aos.css">
-    <link rel="stylesheet" href="/assets/styles/animate.css">
-<!--    jquery-->
-    <link rel="stylesheet" href="/assets/styles/jquery.timepicker.css">
+<!-- Css Styles -->
+    <!--bootStrap -->
+    <link rel="stylesheet" href="/assets/styles/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/assets/styles/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="/assets/styles/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="/assets/styles/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="/assets/styles/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="/assets/styles/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="/assets/styles/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/assets/styles/scroll.css" type="text/css">
 </head>
 <body ng-app="foodStore-app" ng-controller="foodStore-controller">
+<!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+<!-- Humberger Begin -->
+    <div class="humberger__menu__overlay"></div>
+    <div class="humberger__menu__wrapper">
+        <div class="humberger__menu__logo">
+            <a href="#"><img src="/assets/images/logo.png" alt=""></a>
+        </div>
+        <div class="humberger__menu__cart">
+            <ul>
+                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+            </ul>
+            <div class="header__cart__price">item: <span>$150.00</span></div>
+        </div>
+        <div class="humberger__menu__widget">
+            <div class="header__top__right__language">
+                <img src="/assets/images/language.png" alt="">
+                <div>English</div>
+                <span class="arrow_carrot-down"></span>
+                <ul>
+                    <li><a href="#">Spanis</a></li>
+                    <li><a href="#">English</a></li>
+                </ul>
+            </div>
+            <div class="header__top__right__auth">
+                <a href="#"><i class="fa fa-user"></i> Login</a>
+            </div>
+        </div>
+        <nav class="humberger__menu__nav mobile-menu">
+            <ul>
+                <li class="active"><a href="./index.html">Home</a></li>
+                <li><a href="./shop-grid.html">Shop</a></li>
+                <li><a href="#">Pages</a>
+                    <ul class="header__menu__dropdown">
+                        <li><a href="./shop-details.html">Shop Details</a></li>
+                        <li><a href="./shoping-cart.html">Shoping Cart</a></li>
+                        <li><a href="./checkout.html">Check Out</a></li>
+                        <li><a href="./blog-details.html">Blog Details</a></li>
+                    </ul>
+                </li>
+                <li><a href="./blog.html">Blog</a></li>
+                <li><a href="./contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div id="mobile-menu-wrap"></div>
+        <div class="header__top__right__social">
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-pinterest-p"></i></a>
+        </div>
+        <div class="humberger__menu__contact">
+            <ul>
+                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
+                <li>Free Shipping for all Order of $99</li>
+            </ul>
+        </div>
+    </div>
+<!-- Humberger End -->
+
 <!--    menu-->
     <div th:replace="~{/layout/_menu::navbar}"></div>
 
@@ -45,27 +98,18 @@
     <div th:replace="~{/layout/_footer::footer}"></div>
 
 <!-- scroll to top -->
-<a href="#" class="scrollToTop" id="scrollToTop">
-    <i class="fa-solid fa-chevron-up"></i>
-</a>
+    <a href="#" class="scrollToTop" id="scrollToTop">
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
 
-<!-- loader -->
-<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
-
-<script src="/assets/js/jquery.min.js"></script>
-<script src="/assets/js/jquery-migrate-3.0.1.min.js"></script>
-<script src="/assets/js/popper.min.js"></script>
+<!-- Js Plugins -->
+<script src="/assets/js/jquery-3.3.1.min.js"></script>
 <script src="/assets/js/bootstrap.min.js"></script>
-<script src="/assets/js/jquery.easing.1.3.js"></script>
-<script src="/assets/js/jquery.waypoints.min.js"></script>
-<script src="/assets/js/jquery.stellar.min.js"></script>
+<script src="/assets/js/jquery.nice-select.min.js"></script>
+<script src="/assets/js/jquery-ui.min.js"></script>
+<script src="/assets/js/jquery.slicknav.js"></script>
+<script src="/assets/js/mixitup.min.js"></script>
 <script src="/assets/js/owl.carousel.min.js"></script>
-<script src="/assets/js/jquery.magnific-popup.min.js"></script>
-<script src="/assets/js/aos.js"></script>
-<script src="/assets/js/jquery.animateNumber.min.js"></script>
-<script src="/assets/js/bootstrap-datepicker.js"></script>
-<script src="/assets/js/jquery.timepicker.min.js"></script>
-<script src="/assets/js/scrollax.min.js"></script>
 <script src="/assets/js/main.js"></script>
 <script src="/assets/js/scroll.js"></script>
 </body>
