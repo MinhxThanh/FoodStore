@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class UserAccountServiceImpl implements UserAccountService {
@@ -22,6 +23,11 @@ public class UserAccountServiceImpl implements UserAccountService {
     @Override
     public User createUserAccount(User user) {
         return dao.save(user);
+    }
+
+    @Override
+    public List<User> findAll() {
+        return dao.findAll();
     }
 
 }

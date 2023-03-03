@@ -42,7 +42,7 @@ public class SecurityRestController {
 //                    new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
 //            );
             String accessToken = jwtTokenUtil.generateAccessToken(request.getEmail());
-            AuthResponse response = new AuthResponse(request.getEmail(), accessToken, user.getUsername(), user.getAvatar());
+            AuthResponse response = new AuthResponse(request.getEmail(), accessToken, user.getUsername(), user.getAvatar(), user);
             return ResponseEntity.ok(response);
         } catch (BadCredentialsException ex){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

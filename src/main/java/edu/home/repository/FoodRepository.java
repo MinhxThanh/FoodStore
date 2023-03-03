@@ -11,4 +11,7 @@ import java.util.List;
 public interface FoodRepository extends JpaRepository<Food, Long> {
   @Query(value="{CALL getBasicFoodByCategoryId(:id)}", nativeQuery = true)
   List<Tuple> procedure_name(@Param("id") Integer id);
+
+  @Query(value="{CALL getListProduct()}", nativeQuery = true)
+    List<Tuple> getListFood();
 }

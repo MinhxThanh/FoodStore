@@ -29,6 +29,7 @@ public class HomeController {
 
     @RequestMapping(value = "/menu")
     public String listProduct(Model model){
+        model.addAttribute("items", foodService.getListFood());
         model.addAttribute("pageTitle", "Menu");
         return "product/list";
     }

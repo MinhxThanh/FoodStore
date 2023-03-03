@@ -7,6 +7,8 @@ import edu.home.service.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserRoleServiceImpl implements UserRoleService {
     @Autowired
@@ -15,5 +17,15 @@ public class UserRoleServiceImpl implements UserRoleService {
     @Override
     public UserRole create(UserRole userRole) {
         return dao.save(userRole);
+    }
+
+    @Override
+    public List<UserRole> findAll() {
+        return dao.findAll();
+    }
+
+    @Override
+    public void delete(Long id) {
+        dao.deleteById(id);
     }
 }

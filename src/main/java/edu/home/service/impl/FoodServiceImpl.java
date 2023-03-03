@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 
 import javax.persistence.Tuple;
 
+import edu.home.common.entity.ListFood;
+import edu.home.entity.Food;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,4 +34,21 @@ public class FoodServiceImpl implements FoodService{
 	 
 	return listItem;
  }
+
+	@Override
+	public Food findById(Long id) {
+		return dao.findById(id).get();
+	}
+
+	@Override
+	public List<ListFood> getListFood() {
+	 List<Tuple> list = dao.getListFood();
+	 List<ListFood> listFoods = list.stream().map(t -> new ListFood(
+			 t.get(0, BigInteger.class),
+			 t.get(1, String.class),
+			 t.get(2, Double.class),
+			 t.get(3, String.class)
+	 )).collect(Collectors.toList());
+		return listFoods;
+	}
 }

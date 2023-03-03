@@ -79,12 +79,12 @@
                 <div class="header__cart list_cart">
                     <ul>
                         <li>
-                            <a th:href="@{/cart}"><i class="fa fa-shopping-bag"></i> <span>3</span></a>
+                            <a th:href="@{/cart}"><i class="fa fa-shopping-bag"></i> <span>{{cart.count}}</span></a>
                             <ul class="header__menu__dropdown">
                                 <li>
-                                    <a class="cart_card d-flex flex-row" href="./shop-details.html">
+                                    <a ng-repeat="item in cart.items" class="cart_card d-flex flex-row" th:href="@{/cart}">
                                         <div class="image_cart text-left d-flex flex-row">
-                                            <img src="/assets/images/product/product-1.jpg" class="img-fluid w-25" alt="image product">
+                                            <img ng-src="/assets/images/product/{{item.image}}" class="img-fluid w-25" alt="image product">
                                             <div class="col-8" style="margin-top: 3px;
                                                 display: block;
                                                 text-overflow: ellipsis;
@@ -93,62 +93,21 @@
                                                 max-height: 3.2em;
                                                 line-height: 1.8em;
                                                 -webkit-box-orient: vertical;">
-                                                name product here and there and this and that
+                                                {{item.name}}
                                             </div>
                                         </div>
                                         <div class="price-food" style="margin-top: 10px;">
-                                            200$
+                                            {{item.price}}
                                         </div>
                                     </a>
                                 </li>
-                                <li>
-                                    <a class="cart_card d-flex flex-row" href="./shop-details.html">
-                                        <div class="image_cart text-left d-flex flex-row">
-                                            <img src="/assets/images/product/product-1.jpg" class="img-fluid w-25" alt="image product">
-                                            <div class="col-8" style="margin-top: 3px;
-                                                display: block;
-                                                text-overflow: ellipsis;
-                                                word-wrap: break-word;
-                                                overflow: hidden;
-                                                max-height: 3.2em;
-                                                line-height: 1.8em;
-                                                -webkit-box-orient: vertical;">
-                                                name product here and there and this and that
-                                            </div>
-                                        </div>
-                                        <div class="price-food" style="margin-top: 10px;">
-                                            200$
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="cart_card d-flex flex-row" href="./shop-details.html">
-                                        <div class="image_cart text-left d-flex flex-row">
-                                            <img src="/assets/images/product/product-1.jpg" class="img-fluid w-25" alt="image product">
-                                            <div class="col-8" style="margin-top: 3px;
-                                                display: block;
-                                                text-overflow: ellipsis;
-                                                word-wrap: break-word;
-                                                overflow: hidden;
-                                                max-height: 3.2em;
-                                                line-height: 1.8em;
-                                                -webkit-box-orient: vertical;">
-                                                name product
-                                            </div>
-                                        </div>
-                                        <div class="price-food" style="margin-top: 10px;">
-                                            200$
-                                        </div>
-                                    </a>
-                                </li>
-
                                 <li>
                                     <a href="#" class="font-italic " style="text-decoration: underline;">More</a>
                                 </li>
                             </ul>
                         </li>
                     </ul>
-                    <div class="header__cart__price">item: <span>$150.00</span></div>
+                    <div class="header__cart__price">item: <span>${{cart.amount}}</span></div>
                 </div>
             </div>
         </div>

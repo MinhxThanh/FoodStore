@@ -1,5 +1,6 @@
 package edu.home.common.entity;
 
+import edu.home.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,4 +15,5 @@ public class AuthResponse {
     private String accessToken;
     private String username;
     private String avatar;
+    private User user;
 }
