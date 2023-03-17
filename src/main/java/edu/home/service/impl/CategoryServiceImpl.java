@@ -8,10 +8,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import edu.home.entity.Category;
+import edu.home.repository.CategoryFoodRepository;
+
 @Service
 public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private CategoryRepository dao;
+	@Autowired
+	CategoryFoodRepository categoryFoodRepository;
 
     @Override
     public List<Category> findAll() {
@@ -37,4 +42,12 @@ public class CategoryServiceImpl implements CategoryService {
     public Category findById(Long id) {
         return dao.findById(id).get();
     }
+    
+    public List<Category> getAllCategory() {
+		return dao.findAll();
+	}
+    @Override
+	    public List<Category> getAllCategoriesByFoodID(Long id) {
+	        return dao.findAllCategoriesByFoodId(id);
+	    }
 }
