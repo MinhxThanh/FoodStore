@@ -14,4 +14,10 @@ public interface CategoryService {
     void delete(Long id);
 
     Category findById(Long id);
+    
+    List<Category> getAllCategory();
+
+    void delete(long id);
+    
+    List<Category> getAllCategoriesByFoodID(Long id);
 }
