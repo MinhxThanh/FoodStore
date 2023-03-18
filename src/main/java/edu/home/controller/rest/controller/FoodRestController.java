@@ -6,7 +6,6 @@ import edu.home.service.ImageFoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-package edu.home.rest;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,10 +32,7 @@ import edu.home.entity.Food;
 import edu.home.repository.ImageFoodRepository;
 import edu.home.service.CategoryFoodService;
 import edu.home.service.CategoryService;
-import edu.home.service.FoodService;
 import edu.home.service.UserAccountService;
-
-import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
