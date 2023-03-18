@@ -1,4 +1,4 @@
-package edu.home.rest;
+package edu.home.controller.rest.controller;
 
 import java.util.List;
 
