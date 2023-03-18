@@ -8,10 +8,6 @@ import org.springframework.data.repository.query.Param;
 import javax.persistence.Tuple;
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-
 public interface FoodRepository extends JpaRepository<Food, Long> {
   @Query(value="{CALL getBasicFoodByCategoryId(:id)}", nativeQuery = true)
   List<Tuple> procedure_name(@Param("id") Integer id);
