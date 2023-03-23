@@ -9,17 +9,24 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.math.BigInteger;
 
-
-@Getter @Setter
+@Entity
+@Getter
+@Setter
 @NoArgsConstructor @AllArgsConstructor
-public class ListFood {
+public class FoodDetail {
     @Id
     private BigInteger id;
     private String name;
     private Double priceOld;
     private Double priceNew;
-    private Double percentDiscount;
+    private BigInteger quantitySell;
+    private BigInteger inventory;
+    private BigInteger viewCount;
+    private String description;
+    private String nameDiscount;
+    private Integer numberDateToStart;
     private Integer numberDateToEnd;
-    private String image;
-    private String category;
+    private String createBy;
+    private String avatar;
+    private BigInteger categoryId;
 }

@@ -33,7 +33,7 @@
                             <a th:unless="${#request.remoteUser}" th:href="@{/security/login/form}">
                                 <i class="fa fa-user"></i> [[#{menu.signIn}]]
                             </a>
-                            <a th:if="${#request.remoteUser}" th:href="@{/security/logout}">
+                            <a th:if="${#request.remoteUser}" th:href="@{/security/logout}" ng-click="cart.clear()">
                                 <i class="fa fa-user"></i> [[#{menu.signOut}]]
                             </a>
                         </div>
@@ -58,14 +58,6 @@
                         <li th:class="${#strings.equals(pageTitle, 'Menu ')} ? 'active' : ''">
                             <a th:href="@{/menu}">Shop</a>
                         </li>
-<!--                        <li><a href="#">Pages</a>-->
-<!--                            <ul class="header__menu__dropdown">-->
-<!--                                <li><a href="./shop-details.html">Shop Details</a></li>-->
-<!--                                <li><a href="./shoping-cart.html">Shoping Cart</a></li>-->
-<!--                                <li><a href="./checkout.html">Check Out</a></li>-->
-<!--                                <li><a href="./blog-details.html">Blog Details</a></li>-->
-<!--                            </ul>-->
-<!--                        </li>-->
                         <li th:class="${#strings.equals(pageTitle, 'Stories ')} ? 'active' : ''">
                             <a th:href="@{/stories}">[[#{menu.stories}]]</a>
                         </li>
@@ -82,7 +74,7 @@
                             <a th:href="@{/cart}"><i class="fa fa-shopping-bag"></i> <span>{{cart.count}}</span></a>
                             <ul class="header__menu__dropdown">
                                 <li>
-                                    <a ng-repeat="item in cart.items" class="cart_card d-flex flex-row" th:href="@{/cart}">
+                                    <a ng-repeat="item in cart.items | limitTo: 5:0" class="cart_card d-flex flex-row" th:href="@{/cart}">
                                         <div class="image_cart text-left d-flex flex-row">
                                             <img ng-src="/assets/images/product/{{item.image}}" class="img-fluid w-25" alt="image product">
                                             <div class="col-8" style="margin-top: 3px;

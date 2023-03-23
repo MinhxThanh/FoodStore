@@ -135,60 +135,35 @@
                                 <h4>Latest Products</h4>
                                 <div class="latest-product__slider owl-carousel">
                                     <div class="latest-prdouct__slider__item">
-                                        <a href="#" class="latest-product__item">
+                                        <a th:each="item, iState : ${listTop}" th:if="${iState.index} < 3" href="#" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img src="/assets/images/latest-product/lp-1.jpg" alt="">
+                                                <img th:src="@{|/assets/images/product/${item.image}|}" alt="">
                                             </div>
                                             <div class="latest-product__item__text">
-                                                <h6>Crab Pool Security</h6>
-                                                <span>$30.00</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="latest-product__item">
-                                            <div class="latest-product__item__pic">
-                                                <img src="/assets/images/latest-product/lp-2.jpg" alt="">
-                                            </div>
-                                            <div class="latest-product__item__text">
-                                                <h6>Crab Pool Security</h6>
-                                                <span>$30.00</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="latest-product__item">
-                                            <div class="latest-product__item__pic">
-                                                <img src="/assets/images/latest-product/lp-3.jpg" alt="">
-                                            </div>
-                                            <div class="latest-product__item__text">
-                                                <h6>Crab Pool Security</h6>
-                                                <span>$30.00</span>
+                                                <h6>[[${item.name}]]</h6>
+                                                <span>đ [[${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}]]</span>
                                             </div>
                                         </a>
                                     </div>
                                     <div class="latest-prdouct__slider__item">
-                                        <a href="#" class="latest-product__item">
+                                        <a th:each="item, iState : ${listTop}" th:unless="${iState.index < 3 or iState.index >= 6}" href="#" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img src="/assets/images/latest-product/lp-1.jpg" alt="">
+                                                <img th:src="@{|/assets/images/product/${item.image}|}" alt="">
                                             </div>
                                             <div class="latest-product__item__text">
-                                                <h6>Crab Pool Security</h6>
-                                                <span>$30.00</span>
+                                                <h6>[[${item.name}]]</h6>
+                                                <span>đ [[${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}]]</span>
                                             </div>
                                         </a>
-                                        <a href="#" class="latest-product__item">
+                                    </div>
+                                    <div class="latest-prdouct__slider__item">
+                                        <a th:each="item, iState : ${listTop}" th:if="${iState.index} >= 6" href="#" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img src="/assets/images/latest-product/lp-2.jpg" alt="">
+                                                <img th:src="@{|/assets/images/product/${item.image}|}" alt="">
                                             </div>
                                             <div class="latest-product__item__text">
-                                                <h6>Crab Pool Security</h6>
-                                                <span>$30.00</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="latest-product__item">
-                                            <div class="latest-product__item__pic">
-                                                <img src="/assets/images/latest-product/lp-3.jpg" alt="">
-                                            </div>
-                                            <div class="latest-product__item__text">
-                                                <h6>Crab Pool Security</h6>
-                                                <span>$30.00</span>
+                                                <h6>[[${item.name}]]</h6>
+                                                <span>đ [[${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}]]</span>
                                             </div>
                                         </a>
                                     </div>
@@ -204,111 +179,27 @@
                         </div>
                         <div class="row">
                             <div class="product__discount__slider owl-carousel">
-                                <div class="col-lg-4">
+                                <div th:each="item : ${listSale}" class="col-lg-4">
                                     <div class="product__discount__item">
                                         <div class="product__discount__item__pic set-bg"
-                                             data-setbg="/assets/images/product/discount/pd-1.jpg">
-                                            <div class="product__discount__percent">-20%</div>
+                                             th:data-setbg="@{|/assets/images/product/${item.image}|}">
+                                            <div class="product__discount__percent">-[[${item.percentDiscount}]]%</div>
                                             <ul class="product__item__pic__hover">
                                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                                <li>
+                                                    <a th:unless="${#request.remoteUser}" th:attr="ng-click=@{|cart.add(${item.id})|}"><i class="fa fa-shopping-cart"></i></a>
+                                                    <a th:if="${#request.remoteUser}" th:attr="ng-click=@{|cart.addToCart(${item.id})|}"><i class="fa fa-shopping-cart"></i></a>
+                                                </li>
                                             </ul>
                                         </div>
                                         <div class="product__discount__item__text">
-                                            <span>Dried Fruit</span>
-                                            <h5><a href="#">Raisin’n’nuts</a></h5>
-                                            <div class="product__item__price">$30.00 <span>$36.00</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="product__discount__item">
-                                        <div class="product__discount__item__pic set-bg"
-                                             data-setbg="/assets/images/product/discount/pd-2.jpg">
-                                            <div class="product__discount__percent">-20%</div>
-                                            <ul class="product__item__pic__hover">
-                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="product__discount__item__text">
-                                            <span>Vegetables</span>
-                                            <h5><a href="#">Vegetables’package</a></h5>
-                                            <div class="product__item__price">$30.00 <span>$36.00</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="product__discount__item">
-                                        <div class="product__discount__item__pic set-bg"
-                                             data-setbg="/assets/images/product/discount/pd-3.jpg">
-                                            <div class="product__discount__percent">-20%</div>
-                                            <ul class="product__item__pic__hover">
-                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="product__discount__item__text">
-                                            <span>Dried Fruit</span>
-                                            <h5><a href="#">Mixed Fruitss</a></h5>
-                                            <div class="product__item__price">$30.00 <span>$36.00</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="product__discount__item">
-                                        <div class="product__discount__item__pic set-bg"
-                                             data-setbg="/assets/images/product/discount/pd-4.jpg">
-                                            <div class="product__discount__percent">-20%</div>
-                                            <ul class="product__item__pic__hover">
-                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="product__discount__item__text">
-                                            <span>Dried Fruit</span>
-                                            <h5><a href="#">Raisin’n’nuts</a></h5>
-                                            <div class="product__item__price">$30.00 <span>$36.00</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="product__discount__item">
-                                        <div class="product__discount__item__pic set-bg"
-                                             data-setbg="/assets/images/product/discount/pd-5.jpg">
-                                            <div class="product__discount__percent">-20%</div>
-                                            <ul class="product__item__pic__hover">
-                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="product__discount__item__text">
-                                            <span>Dried Fruit</span>
-                                            <h5><a href="#">Raisin’n’nuts</a></h5>
-                                            <div class="product__item__price">$30.00 <span>$36.00</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="product__discount__item">
-                                        <div class="product__discount__item__pic set-bg"
-                                             data-setbg="/assets/images/product/discount/pd-6.jpg">
-                                            <div class="product__discount__percent">-20%</div>
-                                            <ul class="product__item__pic__hover">
-                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="product__discount__item__text">
-                                            <span>Dried Fruit</span>
-                                            <h5><a href="#">Raisin’n’nuts</a></h5>
-                                            <div class="product__item__price">$30.00 <span>$36.00</span></div>
+                                            <span>[[${item.category}]]</span>
+                                            <h5><a th:href="@{|/food/detail/${item.id}|}">[[${item.name}]]</a></h5>
+                                            <div class="product__item__price">
+                                                <p class="product__item__price text-danger d-inline">đ [[${#numbers.formatDecimal(item.priceNew, 0, 'COMMA', 2, 'POINT')}]]</p>
+                                                <span>đ [[${#numbers.formatDecimal(item.priceOld, 0, 'COMMA', 2, 'POINT')}]]</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -340,23 +231,30 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div th:each="f: ${items}" class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg">
-                                    <img class="card-img" th:src="@{|/assets/images/product/${f.image}|}" alt="">
+                        <div ng-repeat="item in items" class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="product__discount__item mb-5">
+                                <div class="product__discount__item__pic set-bg">
+                                    <img class="card-img" ng-src="/assets/images/product/{{item.image}}" alt="">
+                                    <div ng-if="item.percentDiscount != null && item.numberDateToEnd > 0" class="product__discount__percent">-{{item.percentDiscount}}%</div>
                                     <ul class="product__item__pic__hover">
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                                         <li>
-                                            <a th:attr="ng-click=@{|cart.add(${f.id})|}" style="cursor: pointer">
+                                            <a th:unless="${#request.remoteUser}" ng-click="cart.add(item.id)" style="cursor: pointer">
+                                                <i class="fa fa-shopping-cart"></i>
+                                            </a>
+                                            <a th:if="${#request.remoteUser}" ng-click="cart.addToCart(item.id)" style="cursor: pointer">
                                                 <i class="fa fa-shopping-cart"></i>
                                             </a>
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="product__item__text">
-                                    <h6><a th:href="@{|/product/detail/${f.id}|}">[[${f.name}]]</a></h6>
-                                    <h5 th:text="${#numbers.formatDecimal(f.price, 0, 'COMMA', 0, 'POINT')}"></h5>
+                                <div class="product__discount__item__text">
+                                    <h5><a href="/food/detail/{{item.id}}">{{item.name}}</a></h5>
+                                    <div class="product__item__price">
+                                        <p class="product__item__price text-danger d-inline">{{item.priceNew | currency:'₫ '}}</p>
+                                        <span ng-if="item.priceNew < item.priceOld">{{item.priceOld | currency:'₫ '}} </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

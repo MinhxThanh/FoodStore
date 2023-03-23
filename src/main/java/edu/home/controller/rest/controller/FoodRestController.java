@@ -28,5 +28,15 @@ public class FoodRestController {
         }
     }
 
+    @GetMapping(value = "getListFood")
+    public ResponseEntity<?> getListFood(){
+        try{
+            return ResponseEntity.ok(foodService.getListFood());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.noContent().build();
+        }
+    }
+
 
 }

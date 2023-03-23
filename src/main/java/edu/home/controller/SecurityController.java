@@ -1,13 +1,18 @@
 package edu.home.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import edu.home.common.create.InfoCustomer;
+import edu.home.common.entity.CartItem;
 import edu.home.common.entity.MailInfoCustomer;
 import edu.home.common.entity.MailInfoWelcome;
 import edu.home.common.entity.RegisterCustomer;
 import edu.home.entity.Customer;
 import edu.home.service.CustomerService;
 import edu.home.service.MailerService;
+import edu.home.service.SessionService;
 import edu.home.service.UserService;
+import net.bytebuddy.description.method.MethodDescription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
@@ -16,6 +21,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "security")
@@ -31,6 +39,8 @@ public class SecurityController {
     private MailerService mailerService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private SessionService sessionService;
 
     @RequestMapping(value = "login/form", method = RequestMethod.GET)
     public String loginForm(Model model){

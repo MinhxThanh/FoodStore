@@ -15,7 +15,6 @@ public class ImageFoodServiceImpl implements ImageFoodService {
 
     @Override
     public List<ImageFood> searchByFoodId(Long foodId) {
-        System.out.println("searchByFoodId image");
         return dao.searchByFoodId(foodId);
     }
 }

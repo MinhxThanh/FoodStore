@@ -5,21 +5,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.math.BigInteger;
 
-
-@Getter @Setter
+@Setter
+@Getter
 @NoArgsConstructor @AllArgsConstructor
-public class ListFood {
+public class ListFoodSale {
     @Id
     private BigInteger id;
     private String name;
     private Double priceOld;
     private Double priceNew;
     private Double percentDiscount;
-    private Integer numberDateToEnd;
     private String image;
     private String category;
 }
