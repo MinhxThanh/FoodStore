@@ -75,6 +75,7 @@ public class CategoryRestController {
     }
     @GetMapping(value = "/categories/getAllCategoriesByFoodID/{id}")
     public List<Category> getAllCategoriesByFoodID(@PathVariable("id") Long id) {
-        return categoryService.getAllCategoriesByFoodID(id);
+//        return categoryService.getAllCategoriesByFoodID(id);
+        return null;
     }
 }

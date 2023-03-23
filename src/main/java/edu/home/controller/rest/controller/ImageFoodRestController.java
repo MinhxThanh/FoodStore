@@ -5,7 +5,6 @@ import edu.home.service.ImageFoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-package edu.home.rest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,15 +35,6 @@ public class ImageFoodRestController {
     private ImageFoodService imageFoodService;
 	@Autowired
 	FoodService foodService;
-
-//    @GetMapping(value = "searchByFoodId/{id}")
-//    public ImageFood searchByFoodId(@PathVariable("id") Long foodId) {
-//        System.out.println("this 1");
-//        List<ImageFood> imageFoods = imageFoodService.searchByFoodId(foodId);
-//        System.out.println("this image rest");
-//        System.out.println("image food" + imageFoods.stream().findFirst().get().getImageName());
-//        return imageFoods.stream().findFirst().get();
-//    }
 
     @GetMapping(value = "searchByFoodId/{id}")
     public ResponseEntity<?> searchByFoodId(@PathVariable("id") Long foodId){
