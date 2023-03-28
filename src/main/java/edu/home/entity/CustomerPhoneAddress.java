@@ -20,6 +20,8 @@ public class CustomerPhoneAddress implements Serializable {
 
 	private String address;
 
+	private String username;
+
 	@Column(name="city_province")
 	private String cityProvince;
 

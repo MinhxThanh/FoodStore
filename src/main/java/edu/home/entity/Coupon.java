@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -22,7 +23,11 @@ public class Coupon implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	private double amount;
+	private Double percentCoupon;
+
+	private  Double amountMoneyCoupon;
+
+	private BigInteger userUsed;
 
 	private String code;
 
@@ -35,9 +40,6 @@ public class Coupon implements Serializable {
 	@Column(name="end_date")
 	@Temporal(TemporalType.DATE)
 	private Date endDate;
-
-	@Column(name="food_limit")
-	private long foodLimit;
 
 	@Column(name="is_display")
 	private boolean isDisplay;
