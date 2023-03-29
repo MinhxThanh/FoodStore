@@ -42,10 +42,10 @@ public class Coupon implements Serializable {
 	private Date endDate;
 
 	@Column(name="is_display")
-	private boolean isDisplay;
+	private Boolean isDisplay;
 
 	@Column(name="is_fixed")
-	private boolean isFixed;
+	private Boolean isFixed;
 
 	private String name;
 
