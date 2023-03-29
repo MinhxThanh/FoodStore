@@ -27,7 +27,7 @@ public class InfoCustomer {
         customer.setRememberToken("null");
         customer.setStatus(1);
         customer.setCreateDate(new Date());
-        customer.setDisplay(true);
+        customer.setIsDisplay(true);
 
         customerService.create(customer);
         return customer;

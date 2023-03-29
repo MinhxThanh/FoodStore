@@ -42,6 +42,7 @@ public class CouponsRestController {
 
 			coupon.setName(couponInfo.getName());
 			coupon.setAmountMoneyCoupon(couponInfo.getAmountMoneyCoupon());
+			coupon.setPercentCoupon(couponInfo.getPercentCoupon());
 			coupon.setCode(couponInfo.getCode());
 			coupon.setCreateDate(couponInfo.getCreateDate());
 			coupon.setDescription(couponInfo.getDescription());
@@ -72,6 +73,7 @@ public class CouponsRestController {
 			
 			coupon.setName(couponInfo.getName());
 			coupon.setAmountMoneyCoupon(couponInfo.getAmountMoneyCoupon());
+			coupon.setPercentCoupon(couponInfo.getPercentCoupon());
 			coupon.setCode(couponInfo.getCode());
 			coupon.setCreateDate(couponInfo.getCreateDate());
 			coupon.setDescription(couponInfo.getDescription());

@@ -3,6 +3,9 @@ package edu.home.service.impl;
 import edu.home.entity.Customer;
 import edu.home.repository.CustomerRepository;
 import edu.home.service.CustomerService;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -32,5 +35,10 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer findByEmailKey(String email) {
         return dao.findByEmail(email);
     }
+
+	@Override
+	public List<Customer> findAll() {
+		return dao.findAll();
+	}
 }
 
