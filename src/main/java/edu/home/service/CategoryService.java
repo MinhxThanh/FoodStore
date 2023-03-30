@@ -1,19 +1,27 @@
 package edu.home.service;
 
-import edu.home.entity.Category;
-
 import java.util.List;
 
+import edu.home.entity.Category;
+import edu.home.repository.CategoryRepository;
+
 public interface CategoryService {
-    List<Category> findAll();
 
-    Category create(Category category);
+	//get
+public Category getCategory(Long categoryId);
 
-    Category update(Category category);
+	//getAll
+List<Category> findAllCategory();
 
-    void delete(Long id);
+List<Category> findAll();
 
-    Category findById(Long id);
+Category create(Category category);
 
-    List<Category> findAllByFoodId(Long foodId);
+Category update(Category category);
+
+void delete(Long id);
+
+Category findById(Long id);
+
+List<Category> findAllByFoodId(Long foodId);
 }

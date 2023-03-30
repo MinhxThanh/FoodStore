@@ -3513,3 +3513,8 @@ ol {
 		font-size: 24px;
 	}
 }
+.content-blog{
+	white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+	}

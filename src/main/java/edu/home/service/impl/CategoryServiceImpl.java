@@ -42,4 +42,16 @@ public class CategoryServiceImpl implements CategoryService {
     public List<Category> findAllByFoodId(Long foodId) {
         return dao.findAllByFoodId(foodId);
     }
+
+	@Override
+	public Category getCategory(Long categoryId) {
+		// TODO Auto-generated method stub
+		return dao.findById(categoryId).get();
+	}
+
+	@Override
+	public List<Category> findAllCategory() {
+		// TODO Auto-generated method stub
+		return dao.findAll();
+	}
 }
