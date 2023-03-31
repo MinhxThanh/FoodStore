@@ -54,4 +54,9 @@ public class CategoryServiceImpl implements CategoryService {
 		// TODO Auto-generated method stub
 		return dao.findAll();
 	}
+
+	@Override
+	public Category getByName(String name) {
+		return dao.findByName(name).orElse(null);
+	}
 }
