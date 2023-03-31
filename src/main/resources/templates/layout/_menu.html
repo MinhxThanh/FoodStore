@@ -1,35 +1,48 @@
 
-<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light ftco-navbar-light-2" id="ftco-navbar"
-     xmlns:th="http://www.thymeleaf.org" th:fragment="navbar">
+<!-- Header Section Begin -->
+<header class="header" xmlns:th="http://www.thymeleaf.org" th:fragment="navbar">
+    <div class="header__top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="header__top__left">
+                        <ul>
+                            <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
+                            <li>Free Shipping for all Order of $99</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="header__top__right">
+                        <div class="header__top__right__social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                            <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                        </div>
+                        <div class="header__top__right__language">
+                            <img src="/assets/images/language.png" alt="">
+                            <div>[[#{menu.language}]]</div>
+                            <span class="arrow_carrot-down"></span>
+                            <ul>
+                                <li><a href="?lang=en">English</a></li>
+                                <li><a href="?lang=vi">Tiếng Việt</a></li>
+                            </ul>
+                        </div>
+                        <div class="header__top__right__auth">
+                            <a th:unless="${#request.remoteUser}" th:href="@{/security/login/form}">
+                                <i class="fa fa-user"></i> [[#{menu.signIn}]]
+                            </a>
+                            <a th:if="${#request.remoteUser}" th:href="@{/security/logout}" ng-click="cart.clear()">
+                                <i class="fa fa-user"></i> [[#{menu.signOut}]]
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container">
-<<<<<<< Updated upstream
-        <a class="navbar-brand" href="index.html"><img src="/assets/images/Logo.png" width="100px" alt=""></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="oi oi-menu"></span> Menu
-        </button>
-
-        <div class="collapse navbar-collapse" id="ftco-nav">
-            <ul class="navbar-nav ml-auto">
-                <li th:class="${#strings.equals(pageTitle, 'Home')} ? 'active nav-item' : 'nav-item'">
-                    <a th:class="nav-link" th:href="@{/home/index}">Home</a>
-                </li>
-                <li class="nav-item" th:class="${#strings.equals(pageTitle, 'About')} ? 'active nav-item'  : 'nav-item'">
-                    <a th:class="nav-link" th:href="@{/about}">About</a>
-                </li>
-                <li class="nav-item active" th:class="${#strings.equals(pageTitle, 'Menu')} ? 'active nav-item' : 'nav-item'">
-                    <a th:class="nav-link" th:href="@{/menu}">Menu</a>
-                </li>
-                <li class="nav-item" th:class="${#strings.equals(pageTitle, 'Reservation')} ? 'active nav-item' : 'nav-item'">
-                    <a th:class="nav-link" th:href="@{/reservation}">Reservation</a>
-                </li>
-                <li class="nav-item" th:class="${#strings.equals(pageTitle, 'Stories')} ? 'active nav-item' : 'nav-item'">
-                    <a th:class="nav-link" th:href="@{/stories}">Stories</a>
-                    </li>
-                <li class="nav-item" th:class="${#strings.equals(pageTitle, 'Sign In')} ? 'active nav-item' : 'nav-item'">
-                    <a th:class="nav-link" th:href="@{/security/login/form}">Sign In</a>
-                </li>
-            </ul>
-=======
         <div class="row">
             <div class="col-lg-3">
                 <div class="header__logo text-center">
@@ -43,7 +56,7 @@
                             <a th:href="@{/home/index}">[[#{menu.home}]]</a>
                         </li>
                         <li th:class="${#strings.equals(pageTitle, 'Menu ')} ? 'active' : ''">
-                            <a th:href="@{/food/all}">Shop</a>
+                            <a th:href="@{/menu}">Shop</a>
                         </li>
                         <li th:class="${#strings.equals(pageTitle, 'Stories ')} ? 'active' : ''">
                             <a th:href="@{/stories}">[[#{menu.stories}]]</a>
@@ -108,20 +121,29 @@
                         <span>All departments</span>
                     </div>
                     <ul>
-                        <li><a href="/food/all" th:style="${cid} ==''?'color:#7fad39;':''">All</a></li>
-                        <li th:each="c:${cates}"><a th:href="@{|/food/${c.name}|}" th:style="${c.name==cid?'color:#7fad39;':''}" th:if="${c.isDisplay}">[[${c.name}]] </a></li>
+                        <li><a href="#">Fresh Meat</a></li>
+                        <li><a href="#">Vegetables</a></li>
+                        <li><a href="#">Fruit & Nut Gifts</a></li>
+                        <li><a href="#">Fresh Berries</a></li>
+                        <li><a href="#">Ocean Foods</a></li>
+                        <li><a href="#">Butter & Eggs</a></li>
+                        <li><a href="#">Fastfood</a></li>
+                        <li><a href="#">Fresh Onion</a></li>
+                        <li><a href="#">Papayaya & Crisps</a></li>
+                        <li><a href="#">Oatmeal</a></li>
+                        <li><a href="#">Fresh Bananas</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-lg-9">
                 <div class="hero__search">
                     <div class="hero__search__form">
-                        <form method="get" th:action="@{|/food/all|}">
+                        <form action="#">
                             <div class="hero__search__categories">
                                 All Categories
                                 <span class="arrow_carrot-down"></span>
                             </div>
-                            <input type="text" placeholder="Bạn muốn tìm gì?" name="keyword" onblur="this.form.submit()">
+                            <input type="text" placeholder="What do yo u need?">
                             <button type="submit" class="site-btn">SEARCH</button>
                         </form>
                     </div>
@@ -136,7 +158,7 @@
                     </div>
                 </div>
             </div>
->>>>>>> Stashed changes
         </div>
     </div>
-</nav>
+</section>
+<!-- Hero Section End -->

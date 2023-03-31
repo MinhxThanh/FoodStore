@@ -3,7 +3,6 @@ package edu.home.service.impl;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.persistence.Tuple;
@@ -11,13 +10,10 @@ import javax.persistence.Tuple;
 import edu.home.common.entity.*;
 import edu.home.entity.Food;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import edu.home.repository.FoodRepository;
 import edu.home.service.FoodService;
-import edu.home.store.Convert;
 
 @Service
 public class FoodServiceImpl implements FoodService{
@@ -108,29 +104,5 @@ public class FoodServiceImpl implements FoodService{
 				item.get(7, String.class)
 		)).collect(Collectors.toList());
 		return listFoods;
-	}
-
-	@Override
-	public Page<Food> getByFilter(String keyword, Optional<Double> priceMin, Optional<Double> priceMax,
-			Optional<Integer> quantity, Optional<Integer> view, Optional<Long> createDate,
-			Optional<Boolean> isDisplay, Optional<Long> category_id, Pageable pageable) {
-		List<Food> list = getByKeywordEng(keyword,pageable);
-		if(priceMin.isPresent() && priceMin.get()>=0) list = list.stream().filter(o-> o.getPrice() >= priceMin.get()).toList();
-		if(priceMax.isPresent() && priceMax.get()>=0 ) list = list.stream().filter(o-> o.getPrice() <= priceMax.get()).toList();
-		if(quantity.isPresent()) list = list.stream().filter(o-> o.getQuantityLimit() >= quantity.get()).toList();
-		if(view.isPresent()) list = list.stream().filter(o-> o.getViewCount() >= view.get()).toList();
-		if(createDate.isPresent()) list = list.stream().filter(o-> o.getCreateDate().getTime() >=  createDate.get()).toList();
-		if(isDisplay.isPresent()) list = list.stream().filter(o-> o.isDisplay() == isDisplay.get()).toList();
-		if(category_id.isPresent()) list = list.stream().filter(o-> o.getCategoryFoods().stream().anyMatch(c -> c.getCategory().getId() == category_id.get()) ).toList();
-		return (Page<Food>) Convert.toPage(list, pageable);
-	}
-	
-	@Override
-	public List<Food> getByKeywordEng(String keyword,Pageable pageable) {
-		List<Food> list = dao.findAll(pageable.getSort());
-		list = list.stream()
-				.filter(o -> Convert.toEngString(o.getName().toLowerCase()).contains(Convert.toEngString(keyword.toLowerCase())) 
-				|| Convert.toEngString(o.getDescription().toLowerCase()).contains(Convert.toEngString(keyword.toLowerCase()))).toList();
-		return list;
 	}
 }

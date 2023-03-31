@@ -24,6 +24,4 @@ void delete(Long id);
 Category findById(Long id);
 
 List<Category> findAllByFoodId(Long foodId);
-
-Category getByName(String name);
 }
