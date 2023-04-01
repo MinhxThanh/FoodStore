@@ -20,11 +20,6 @@ public class CategoryFoodServiceImpl implements CategoryFoodService{
 		return dao.findByCategoryId(id);
 	}
 
-	@Override
-    public CategoryFood save(CategoryFood categoryFood) {
-        return dao.save(categoryFood);
-    }
-
     @Override
     public List<CategoryFood> findAll() {
         return dao.findAll();
@@ -39,13 +34,19 @@ public class CategoryFoodServiceImpl implements CategoryFoodService{
     public Integer deleteCategoryFoodByCateIDAndFoodId(long cid, long pid) {
         return dao.deleteCategoryFoodByCategory_IdAndFood_Id(cid, pid);
     }
-
+    @Override
+	public List<CategoryFood> findByFoodId(Long id) {
+		return dao.findByFoodId(id);
+	}
+    
+//    Giàu
+    @Override
+    public CategoryFood save(CategoryFood categoryFood) {
+        return dao.save(categoryFood);
+    }
+//    Giàu
     @Override
     public CategoryFood findCategoryFoodByFoodIdAndCategoryId(Integer productId, Integer categoryId) {
         return dao.findByFoodIdAndCategoryId(productId, categoryId);
     }
-    @Override
-	public CategoryFood findByFoodId(Long id) {
-		return dao.findByFoodId(id);
-	}
 }

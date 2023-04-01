@@ -27,6 +27,8 @@ public class Coupon implements Serializable {
 
 	private  Double amountMoneyCoupon;
 
+	private BigInteger userUsed;
+
 	private String code;
 
 	@Column(name="create_date")
@@ -40,10 +42,10 @@ public class Coupon implements Serializable {
 	private Date endDate;
 
 	@Column(name="is_display")
-	private Boolean isDisplay;
+	private boolean isDisplay;
 
 	@Column(name="is_fixed")
-	private Boolean isFixed;
+	private boolean isFixed;
 
 	private String name;
 
@@ -70,9 +72,4 @@ public class Coupon implements Serializable {
 	@JsonIgnore
 	@OneToMany(mappedBy="coupon")
 	private List<FoodCoupon> foodCoupons;
-
-	@JsonIgnore
-	@OneToMany(mappedBy="coupon")
-	private List<Order> orders;
-
 }

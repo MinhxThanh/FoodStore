@@ -1,10 +1,8 @@
 package edu.home.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.*;
 
 
@@ -35,8 +33,4 @@ public class CustomerPhoneAddress implements Serializable {
 	//bidirectional many-to-one association to Customer
 	@ManyToOne
 	private Customer customer;
-
-	@JsonIgnore
-	@OneToMany(mappedBy = "customerPhoneAddress")
-	private List<Order> orders;
 }

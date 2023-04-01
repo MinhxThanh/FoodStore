@@ -1,6 +1,5 @@
 package edu.home.service;
 
-import edu.home.common.entity.RegisterUser;
 import edu.home.entity.User;
 
 import java.util.List;
@@ -11,4 +10,7 @@ public interface UserAccountService {
     User createUserAccount(User user);
 
     List<User> findAll();
+    
+//    Giàu
+    User findById(Long id);
 }

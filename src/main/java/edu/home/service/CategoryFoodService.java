@@ -12,8 +12,10 @@ public interface CategoryFoodService {
     List<CategoryFood> findByIdFood(long id);
 
     Integer deleteCategoryFoodByCateIDAndFoodId(long cid, long pid);
-
-    CategoryFood findCategoryFoodByFoodIdAndCategoryId(Integer foodId, Integer categoryId);
-    CategoryFood findByFoodId(Long id);
+    List<CategoryFood> findByFoodId(Long id);
+    
+//    Giàu
     CategoryFood save(CategoryFood categoryFood);
+//    Giàu
+    CategoryFood findCategoryFoodByFoodIdAndCategoryId(Integer foodId, Integer categoryId);
 }

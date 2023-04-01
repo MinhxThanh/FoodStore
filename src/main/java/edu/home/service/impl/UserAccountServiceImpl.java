@@ -1,13 +1,11 @@
 package edu.home.service.impl;
 
-import edu.home.common.entity.RegisterUser;
 import edu.home.entity.User;
 import edu.home.repository.UserRepository;
 import edu.home.service.UserAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -29,5 +27,11 @@ public class UserAccountServiceImpl implements UserAccountService {
     public List<User> findAll() {
         return dao.findAll();
     }
+    
+//    Giàu
+    @Override
+	public User findById(Long id) {
+		return dao.findById(id).get();
+	}
 
 }

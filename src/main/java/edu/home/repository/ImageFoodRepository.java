@@ -10,6 +10,4 @@ public interface ImageFoodRepository extends JpaRepository<ImageFood, Long> {
     @Query("select i from ImageFood i where i.food.id = ?1")
     List<ImageFood> searchByFoodId(Long foodId);
     
-    @Query("select i from ImageFood i where i.food.id =?1")
-	List<ImageFood> findByFoodId(Long id);
 }

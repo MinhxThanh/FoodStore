@@ -30,5 +30,5 @@ public interface CategoryFoodRepository extends JpaRepository<CategoryFood, Long
     Integer deleteCategoryFoodByCategory_IdAndFood_Id(long cateID, long pId);
 
     @Query("select c from CategoryFood c where c.food.id = ?1")
-    CategoryFood findByFoodId(Long id);
+    List<CategoryFood> findByFoodId(Long id);
 }

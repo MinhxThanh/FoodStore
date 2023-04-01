@@ -36,10 +36,10 @@ public class Customer implements Serializable {
 
 	private String fullname;
 
-	private Boolean gender;
+	private boolean gender;
 
 	@Column(name="is_display")
-	private Boolean isDisplay;
+	private boolean isDisplay;
 
 	@Column(name="last_name")
 	private String lastName;

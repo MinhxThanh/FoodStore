@@ -19,11 +19,6 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category create(Category category) {
-        return dao.save(category);
-    }
-
-    @Override
     public Category update(Category category) {
         return dao.save(category);
     }
@@ -42,21 +37,17 @@ public class CategoryServiceImpl implements CategoryService {
     public List<Category> findAllByFoodId(Long foodId) {
         return dao.findAllByFoodId(foodId);
     }
-
-	@Override
-	public Category getCategory(Long categoryId) {
-		// TODO Auto-generated method stub
-		return dao.findById(categoryId).get();
-	}
-
-	@Override
-	public List<Category> findAllCategory() {
-		// TODO Auto-generated method stub
-		return dao.findAll();
-	}
-
-	@Override
-	public Category getByName(String name) {
-		return dao.findByName(name).orElse(null);
-	}
+    
+//    Giàu
+    @Override
+    public List<Category> getAllCategoriesByFoodID(Long id) {
+        return dao.findAllCategoriesByFoodId(id);
+    }
+    
+//    Giàu
+    @Override
+    public Category create(Category category) {
+        return dao.save(category);
+    }
+	
 }

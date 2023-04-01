@@ -1,6 +1,5 @@
 package edu.home.common.entity;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;

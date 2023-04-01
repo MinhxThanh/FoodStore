@@ -6,11 +6,12 @@ import java.util.List;
 
 public interface ImageFoodService {
     List<ImageFood> searchByFoodId(Long foodId);
-    
-    ImageFood save(ImageFood imageFood);
 	ImageFood findById(Long id);
 	ImageFood update(ImageFood imageFood);
-	List<ImageFood> findByFoodId(Long id);
 	List<ImageFood> findAll();
+	
+//	Giàu
+	ImageFood save(ImageFood imageFood);
+//	Giàu
 	void delete(Long id);
 }

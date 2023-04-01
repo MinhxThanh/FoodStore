@@ -8,10 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
-import edu.home.entity.ImageFood;
-
 @Service
 public class ImageFoodServiceImpl implements ImageFoodService {
     @Autowired
@@ -21,12 +17,6 @@ public class ImageFoodServiceImpl implements ImageFoodService {
     public List<ImageFood> searchByFoodId(Long foodId) {
         return dao.searchByFoodId(foodId);
     }
-    
-    @Override
-	public ImageFood save(ImageFood imageFood) {
-		
-		return dao.save(imageFood);
-	}
 
 	@Override
 	public ImageFood findById(Long id) {
@@ -39,15 +29,15 @@ public class ImageFoodServiceImpl implements ImageFoodService {
 	}
 
 	@Override
-	public List<ImageFood> findByFoodId(Long id) {
-		return dao.findByFoodId(id);
-	}
-
-	@Override
 	public List<ImageFood> findAll() {
 		return dao.findAll();
 	}
-
+//	Giàu
+	@Override
+	public ImageFood save(ImageFood imageFood) {
+		return dao.save(imageFood);
+	}
+//	Giàu
 	@Override
 	public void delete(Long id) {
 		dao.deleteById(id);
