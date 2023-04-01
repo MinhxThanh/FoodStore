@@ -18,16 +18,14 @@ public class OrderDetail implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@Column(name="coupon_code")
-	private String couponCode;
-
-	@Column(name="discount_amount")
-	private double discountAmount;
-
 	@Column(name="is_display")
 	private boolean isDisplay;
 
-	private double price;
+	@Column(name = "newPrice")
+	private Double newPrice;
+
+	@Column(name = "oldPrice")
+	private Double oldPrice;
 
 	private long quantity;
 

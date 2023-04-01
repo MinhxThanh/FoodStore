@@ -6,6 +6,7 @@ import lombok.Data;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -22,18 +23,16 @@ public class Order implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
+	private String image;
+
+	private Double price;
+
 	@Column(name="is_display")
 	private boolean isDisplay;
-
-	@Column(name="order_address")
-	private String orderAddress;
 
 	@Column(name="order_date")
 	@Temporal(TemporalType.DATE)
 	private Date orderDate;
-
-	@Column(name="order_phone")
-	private String orderPhone;
 
 	@Column(name="shipped_date")
 	@Temporal(TemporalType.DATE)
@@ -57,4 +56,10 @@ public class Order implements Serializable {
 	//bidirectional many-to-one association to Shipmethod
 	@ManyToOne
 	private Shipmethod shipmethod;
+
+	@ManyToOne
+	private CustomerPhoneAddress customerPhoneAddress;
+
+	@ManyToOne
+	private Coupon coupon;
 }
