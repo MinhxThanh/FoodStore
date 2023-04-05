@@ -38,4 +38,19 @@ public class CouponServiceImpl implements CouponService {
 	public void delete(Long id) {
 		dao.deleteById(id);
 	}
+
+	@Override
+	public List<Coupon> findAllCouponByCustomerByEmail(String remoteUser) {
+		return dao.findAllByCustomerEmail(remoteUser);
+	}
+
+	@Override
+	public Coupon findByCode(String code) {
+		return dao.findCouponByCode(code);
+	}
+
+	@Override
+	public Coupon findById(long id) {
+		return dao.findById(id).get();
+	}
 }

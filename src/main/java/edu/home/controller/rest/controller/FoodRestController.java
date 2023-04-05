@@ -21,7 +21,7 @@ public class FoodRestController {
     @GetMapping(value = "searchById/{id}")
     public ResponseEntity<?> searchById(@PathVariable("id") Long id){
         try {
-            return ResponseEntity.ok(foodService.findById(id));
+            return ResponseEntity.ok(foodService.getInfoDetailByFoodId(id));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.notFound().build();

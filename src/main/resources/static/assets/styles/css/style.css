@@ -448,7 +448,7 @@ ol {
 	display: block;
 }
 
-.header__menu ul li .header__menu__dropdown li:hover>a {
+.header__menu ul li .header__menu__dropdown li>a:hover {
 	color: #7fad39;
 }
 
@@ -499,7 +499,7 @@ ol {
 	padding: 20px;
 	background: #fff;
 	border-radius: 20px;
-	width: 330px;
+	width: 370px;
 	z-index: 9;
 	box-shadow: #8a8a8a -4px 1px 4px;
 	-webkit-transition: all, 0.3s;
@@ -516,7 +516,7 @@ ol {
 	display: block;
 }
 
-.list_cart ul li .header__menu__dropdown li:hover>a {
+.list_cart ul li .header__menu__dropdown li a:hover {
 	opacity: 0.8;
 	color: #898989;
 }

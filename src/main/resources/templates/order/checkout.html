@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index::dynamic(~{::#main})}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <div id="main">
+        <div th:replace="~{/layout/_menu::hero-normal-section}"></div>
+        <!-- Breadcrumb Section Begin -->
+        <section class="container breadcrumb-section set-bg p-3" style="background-color: #9BCA3C;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <div class="breadcrumb__text" style="font-size: 20px;">
+                            <a th:href="@{/home/index}"><i class="fa fa-home" aria-hidden="true"></i> Order</a>
+                            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                            <span>Checkout</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <style>
+
+
+            .shop{
+                font-size: 10px;
+            }
+
+            .space{
+                letter-spacing: 0.8px !important;
+            }
+
+            .second a:hover {
+                color: rgb(92, 92, 92) ;
+            }
+
+            .active-2 {
+                color: rgb(92, 92, 92)
+            }
+
+
+            .breadcrumb>li+li:before {
+                content: "" !important
+            }
+
+            .breadcrumb {
+                padding: 0px;
+                font-size: 10px;
+                color: #aaa !important;
+            }
+
+            .first {
+                background-color: white ;
+            }
+
+            a {
+                text-decoration: none !important;
+                color: #aaa ;
+            }
+
+            .btn-lg,.form-control-sm:focus,
+            .form-control-sm:active,
+            a:focus,a:active {
+                outline: none !important;
+                box-shadow: none !important
+            }
+
+            .form-control-sm:focus{
+                border:1.5px solid #4bb8a9 ;
+            }
+
+            .btn-group-lg>.btn, .btn-lg {
+                padding: .5rem 0.1rem;
+                font-size: 1rem;
+                border-radius: 0;
+                color: white !important;
+                background-color: #4bb8a9;
+                height: 2.8rem !important;
+                border-radius: 0.2rem !important;
+            }
+
+            .btn-group-lg>.btn:hover, .btn-lg:hover {
+                background-color: #26A69A;
+            }
+
+            .btn-outline-primary{
+                background-color: #fff !important;
+                color:#4bb8a9 !important;
+                border-radius: 0.2rem !important;
+                border:1px solid #4bb8a9;
+            }
+
+            .btn-outline-primary:hover{
+                background-color:#4bb8a9  !important;
+                color:#fff !important;
+                border:1px solid #4bb8a9;
+            }
+
+            .card-2{
+                margin-top: 40px !important;
+            }
+
+            .card-header{
+                background-color: #fff;
+                border-bottom:0px solid #aaaa !important;
+            }
+
+            p{
+                font-size: 13px ;
+            }
+
+            .small{
+                font-size: 9px !important;
+            }
+
+            .form-control-sm {
+                height: calc(2.2em + .5rem + 2px);
+                font-size: .875rem;
+                line-height: 1.5;
+                border-radius: 0;
+            }
+
+            .cursor-pointer{
+                cursor: pointer;
+            }
+
+            .boxed {
+                padding: 0px 8px 0 8px ;
+                background-color: #4bb8a9;
+                color: white;
+            }
+
+            .boxed-1{
+                padding: 0px 8px 0 8px ;
+                color: black !important;
+                border: 1px solid #aaaa;
+            }
+
+            .bell{
+                opacity: 0.5;
+                cursor: pointer;
+            }
+
+            @media (max-width: 767px) {
+                .breadcrumb-item+.breadcrumb-item {
+                    padding-left: 0
+                }
+            }
+        </style>
+
+        <div class=" container-fluid my-5 ">
+            <div class="row justify-content-center ">
+                <div class="col-xl-10">
+                    <div class="row justify-content-around">
+                        <div class="col-md-7">
+                            <div class="card border-0">
+                                <h2 class="card-title space "><i class="fa fa-cart-arrow-down" aria-hidden="true"></i> Checkout</h2>
+                                <div class="card-body">
+                                    <div class="row justify-content-between shadow rounded-6 p-5">
+<!--                                        address user-->
+                                        <div class="col-12 pb-0">
+                                            <p class="card-text text-muted space">
+                                                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                SHIPPING DETAILS
+                                            </p>
+                                            <hr class="my-0">
+                                        </div>
+<!--                                        address display from controller-->
+                                        <div ng-if="checkout.address.username == null" class="col-12 mt-4">
+                                            <b class="d-block mt-2">[[${address.username}]]</b>
+                                            <b class="d-block">[[${address.phone}]]</b>
+                                            <p class="my-2">[[${address.address}]]</p>
+                                            <div class="d-flex"></div>
+                                            <p class="d-block">[[${address.cityProvince}]] <sup th:if="${address.default == true}" class="text-danger font-italic" style="text-decoration: underline">Default</sup></p>
+                                            <div class="text-right mt-n5">
+                                                <span ng-click="checkout.getUserInfoAddress()" class="text-success-hover font-italic" style="cursor: pointer" data-toggle="modal" data-target="#listAddress"><i class="fa fa-refresh" aria-hidden="true"></i> Change</span>
+                                            </div>
+
+<!--                                        unit shipping-->
+                                            <p class="card-text text-muted space mt-5">
+                                                UNIT SHIPPING
+                                            </p>
+                                            <hr class="my-0">
+
+                                            <b class="d-block mt-2">International express shipping</b>
+                                            <p class="mb-0">Standard Express</p>
+                                            <p>Receive goods in 10 minutes to 1 hour</p>
+                                        </div>
+<!--                                        address display from rest-->
+                                        <div ng-if="checkout.address.username != null" class="col-12 mt-4">
+                                            <b class="d-block mt-2">{{checkout.address.username}}</b>
+                                            <b class="d-block">{{checkout.address.phone}}</b>
+                                            <p class="my-2">{{checkout.address.address}}</p>
+                                            <div class="d-flex"></div>
+                                            <p class="d-block">{{checkout.address.cityProvince}} <sup ng-if="checkout.address.default == true" class="text-danger font-italic" style="text-decoration: underline">Default</sup></p>
+                                            <div class="text-right mt-n5">
+                                                <span ng-click="checkout.getUserInfoAddress()" class="text-success-hover font-italic" style="cursor: pointer" data-toggle="modal" data-target="#listAddress"><i class="fa fa-refresh" aria-hidden="true"></i> Change</span>
+                                            </div>
+
+                                            <!--                                        unit shipping-->
+                                            <p class="card-text text-muted space mt-5">
+                                                UNIT SHIPPING
+                                            </p>
+                                            <hr class="my-0">
+
+                                            <b class="d-block mt-2">International express shipping</b>
+                                            <p class="mb-0">Standard Express</p>
+                                            <p>Receive goods in 10 minutes to 1 hour</p>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-between shadow rounded-6 p-5 mt-4">
+                                        <div class="col-12 pb-0">
+                                            <p class="card-text text-muted space">
+                                                PAYMENT METHODS
+                                            </p>
+                                            <hr class="my-0">
+                                        </div>
+                                        <div class="col-12 mt-4">
+                                            <style>
+                                                wrapper{display: inline-flex;background: #fff;height: 100px;width: 400px;align-items: center;justify-content: space-evenly;border-radius: 5px;padding: 20px 15px;box-shadow: 5px 5px 30px rgba(0,0,0,0.2)}.wrapper .option{background: #fff;height: 100%;width: 100%;display: flex;align-items: center;justify-content: space-evenly;margin: 0 10px;border-radius: 5px;cursor: pointer;padding: 0 10px;border: 2px solid lightgrey;transition: all 0.3s ease}.wrapper .option .square{height: 20px;width: 20px;background: #d9d9d9;border-radius: 5%;position: relative}.wrapper .option .square::before{position: absolute;content: "";top: 4px;left: 4px;width: 12px;height: 12px;background: #c80e0e;border-radius: 16%;opacity: 0;transform: scale(1.5);transition: all 0.3s ease}input[type="radio"]{display: none}#radio-button-1:checked:checked ~ .radio-button-1, #radio-button-2:checked:checked ~ .radio-button-2{border-color: #c80e0e;background: #c80e0e}#radio-button-1:checked:checked ~ .radio-button-1 .square, #radio-button-2:checked:checked ~ .radio-button-2 .square{background: #fff}#radio-button-1:checked:checked ~ .radio-button-1 .square::before, #radio-button-2:checked:checked ~ .radio-button-2 .square::before{opacity: 1;transform: scale(1)}.wrapper .option span{font-size: 20px;color: #808080}#radio-button-1:checked:checked ~ .radio-button-1 span, #radio-button-2:checked:checked ~ .radio-button-2 span{color: #fff}
+                                            </style>
+                                            <div class="wrapper d-flex">
+                                                <input ng-model="checkout.paymentMethod" ng-value="true" type="radio" name="select" id="radio-button-1" checked>
+                                                <input ng-model="checkout.paymentMethod" ng-value="false" type="radio" name="select" id="radio-button-2">
+                                                <label for="radio-button-1" class="option radio-button-1">
+                                                    <div class="square"></div> <span> <i class="fa fa-truck" aria-hidden="true"></i> Payment on Delivery</span>
+                                                </label>
+                                                <label for="radio-button-2" class="option radio-button-2">
+                                                    <div class="square"></div> <span> <i class="fa fa-paypal" aria-hidden="true"></i> Payment on Paypal</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-between shadow rounded-6 p-5 mt-4">
+                                        <div class="col-12 pb-0">
+                                            <p class="card-text text-muted space">
+                                                <i class="fa fa-barcode" aria-hidden="true"></i>
+                                                COUPON
+                                            </p>
+                                            <hr class="my-0">
+                                        </div>
+                                        <div class="col-12 mt-4">
+                                            <div class="form-inline">
+                                                <div class="form-group">
+                                                    <label for="couponCode">Coupon</label>
+                                                    <input ng-model="checkout.couponCode" type="text" id="couponCode" class="form-control mx-sm-3" aria-describedby="couponCode">
+                                                    <button ng-click="checkout.getInfoCoupon()" class="btn btn-outline-info">Apply</button>
+                                                    <button ng-click="checkout.getUserInfoCoupon()" class="btn btn-outline-info mx-2" data-toggle="modal" data-target="#listCoupon"><i class="fa fa-list" aria-hidden="true"></i> List Coupons</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 ">
+                            <div class="card border-0 shadow-lg rounded-6">
+                                <div class="card-header card-2">
+                                    <p class="card-text text-muted mt-md-4  mb-2 space">YOUR ORDER <span class=" small text-muted ml-2 cursor-pointer">EDIT SHOPPING BAG</span> </p>
+                                    <hr class="my-2">
+                                </div>
+                                <div class="card-body pt-0">
+                                    <div ng-repeat="item in checkout.items" class="row justify-content-between py-2 border-bottom">
+                                        <div class="col-auto col-md-7">
+                                            <div class="media flex-column flex-sm-row">
+                                                <img class=" img-fluid" ng-src="/assets/images/product/{{item.image}}" width="62" height="62">
+                                                <div class="media-body  my-auto">
+                                                    <div class="row ">
+                                                        <div class="col-auto">
+                                                            <p class="mb-0"><b>{{item.name}}</b>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class=" pl-0 flex-sm-col col-auto  my-auto"> <p class="boxed-1">{{item.quantity}}</p></div>
+                                        <div class=" pl-0 flex-sm-col col-auto  my-auto ">
+                                            <p>
+                                                <span class="text-muted font-italic mr-2 d-block" style="text-decoration: line-through">
+                                                    {{item.priceOld | currency:'₫ '}}
+                                                </span>
+                                                <b class="text-danger">{{item.priceNew | currency:'₫ '}}</b>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row ">
+                                        <div class="col">
+                                            <div class="row justify-content-between">
+                                                <div class="col-4"><p class="mb-1"><b>Subtotal</b></p></div>
+                                                <div class="flex-sm-col col-auto"><p class="mb-1"><b>{{checkout.amount | currency: '₫ '}}</b></p></div>
+                                            </div>
+                                            <div class="row justify-content-between">
+                                                <div class="col"><p class="mb-1"><b>Shipping</b></p></div>
+                                                <div class="flex-sm-col col-auto"><p class="mb-1"><b>{{checkout.shippingPrice | currency: '₫ '}}</b></p></div>
+                                            </div>
+                                            <div class="row justify-content-between">
+                                                <div class="col"><p class="mb-1"><b>Coupon</b></p></div>
+                                                <div ng-if="checkout.couponItem.amountMoneyCoupon >0" class="flex-sm-col col-auto"><p class="mb-1"><b>{{checkout.couponItem.amountMoneyCoupon | currency: '₫ '}} OF</b></p></div>
+                                                <div ng-if="checkout.couponItem.percentCoupon >0" class="flex-sm-col col-auto">
+                                                    <p class="mb-1"><b>{{checkout.couponItem.percentCoupon}}% OF</b></p>
+                                                </div>
+                                                <div ng-if="checkout.couponItem.name == null" class="flex-sm-col col-auto"><p class="mb-1"><b>0</b></p></div>
+                                            </div>
+                                            <div class="row justify-content-between">
+                                                <div class="col-4"><p ><b>Total</b></p></div>
+                                                <div class="flex-sm-col col-auto"><p  class="mb-1"><b>{{checkout.totalPrice | currency: '₫ '}}</b></p> </div>
+                                            </div><hr class="my-0">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-5 mt-4 ">
+                                        <div class="col-md-7 col-lg-6 mx-auto">
+                                            <button ng-click="order.purchase()" type="button" class="btn btn-block btn-outline-primary btn-lg" data-toggle="modal" data-target="#staticBackdrop">
+                                                <i class="fa fa-credit-card-alt" aria-hidden="true"></i> Checkout
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!--        modal list user address-->
+        <div class="modal fade" id="listCoupon" tabindex="-1" aria-labelledby="listCoupon" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content rounded-5">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Coupons</h5>
+                    </div>
+                    <div class="modal-body">
+                        <style>
+                            coupon{border-radius: 12px;box-shadow: 5px 8px 10px #d6d5d533}body{background: rgb(251, 253, 255)}.code:hover{background: green;color: #fff;cursor: pointer}
+                        </style>
+                        <!--                        item coupon-->
+                        <div ng-repeat="item in checkout.coupons" class="d-flex justify-content-center">
+                            <div class="coupon p-3 bg-white col-12 shadow mb-3 rounded-5">
+                                <div class="row no-gutters">
+                                    <div class="col-md-4 border-right">
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img class="mt-3" src="/assets/images/logo.png">
+                                            <span class="d-block">Limit: {{item.userLimit}}</span>
+                                            <span class="text-black-50">{{item.description}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div>
+                                            <div class="d-flex flex-row justify-content-end off">
+                                                <h1 style="font-size: 60px">{{item.name}}</h1>
+                                            </div>
+                                            <div class="d-flex flex-row justify-content-between off px-3 p-2">
+                                                <span>Promo code:</span>
+                                                <span class="border border-success px-3 rounded code">{{item.code}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--        modal list coupon-->
+        <!-- Modal -->
+        <div class="modal fade" id="listAddress" tabindex="-1" aria-labelledby="listAddress" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content rounded-5">
+                    <div class="modal-header">
+                        <h5 class="modal-title" >List Address</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div ng-repeat="address in checkout.addresses" class="form-check border rounded-4 p-4 mb-3">
+                            <input ng-checked="address.default" class="form-check-input" type="radio" name="exampleRadios" id="field{{$index}}" value="option1" checked style="display: block">
+                            <label class="form-check-label" for="field{{$index}}" ng-click="checkout.changeAddress(address)">
+                                <b class="d-block">{{address.username}}</b>
+                                <b class="d-block">{{address.phone}}</b>
+                                <p class="d-block">{{address.address}}</p>
+                                <p >{{address.cityProvince}} <sup ng-if="address.default == true" class="text-danger font-italic" style="text-decoration: underline">Default</sup></p>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .checkmark__circle {
+                stroke-dasharray: 166;
+                stroke-dashoffset: 166;
+                stroke-width: 2;
+                stroke-miterlimit: 10;
+                stroke: #7ac142;
+                fill: none;
+                animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards
+            }
+
+            .checkmark {
+                width: 56px;
+                height: 56px;
+                border-radius: 50%;
+                display: block;
+                stroke-width: 2;
+                stroke: #fff;
+                stroke-miterlimit: 10;
+                margin: 10% auto;
+                box-shadow: inset 0px 0px 0px #7ac142;
+                animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both
+            }
+
+            .checkmark__check {
+                transform-origin: 50% 50%;
+                stroke-dasharray: 48;
+                stroke-dashoffset: 48;
+                animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards
+            }
+
+            @keyframes stroke {
+                100% {
+                    stroke-dashoffset: 0
+                }
+            }
+
+            @keyframes scale {
+
+                0%,
+                100% {
+                    transform: none
+                }
+
+                50% {
+                    transform: scale3d(1.1, 1.1, 1)
+                }
+            }
+
+            @keyframes fill {
+                100% {
+                    box-shadow: inset 0px 0px 0px 30px #7ac142
+                }
+            }
+
+            @media(max-width:400px) {
+                .main.block {
+                    display: block !important
+                }
+            }
+        </style>
+        <!--  modal success-->
+        <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content rounded-5 shadow p-5" style="background-color: #fff; margin-top: 150px !important; z-index: 1000">
+                    <div class="relative mt-2 text-center">
+                        <b class="text-success fs-4">Success
+                            <i class="fa fa-check" style="font-size: 30px"></i>
+                        </b>
+                        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg">
+                            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                            <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                        </svg>
+                        <p class="text-center text-green-800 mt-4 font-semibold mb-10 ">
+                            Thanks for purchasing, your item has been added to cart and will be delivered shortly, hope you felt good in dealing with us.
+                        </p>
+                    </div>
+                    <div class="mt-4 d-inline">
+                        <a th:href="@{/order/list}" class="btn btn-outline-success py-2 px-5 rounded-6">ORDER LIST</a>
+                        <a th:href="@{/menu}" class="btn btn-outline-warning py-2 px-5 rounded-6">GO TO HOME</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+</body>
+</html>

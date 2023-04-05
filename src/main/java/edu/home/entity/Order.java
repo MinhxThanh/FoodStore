@@ -2,6 +2,7 @@ package edu.home.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -31,11 +32,13 @@ public class Order implements Serializable {
 	private boolean isDisplay;
 
 	@Column(name="order_date")
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreationTimestamp
 	private Date orderDate;
 
 	@Column(name="shipped_date")
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreationTimestamp
 	private Date shippedDate;
 
 	private long status;

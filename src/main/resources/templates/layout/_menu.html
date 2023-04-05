@@ -64,6 +64,9 @@
                         <li th:class="${#strings.equals(pageTitle, 'Contact ')} ? 'active' : ''">
                             <a th:href="@{/contact}">[[#{menu.contact}]]</a>
                         </li>
+                        <li th:if="${#request.remoteUser}" th:class="${#strings.equals(pageTitle, 'Order')} ? 'active' : ''">
+                            <a th:href="@{/order/list}">[[#{menu.order}]]</a>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -88,13 +91,13 @@
                                                 {{item.name}}
                                             </div>
                                         </div>
-                                        <div class="price-food" style="margin-top: 10px;">
-                                            {{item.price}}
+                                        <div class="price-food col-auto" style="margin-top: 10px;">
+                                            {{item.priceNew | currency:'₫ '}}
                                         </div>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="font-italic " style="text-decoration: underline;">More</a>
+                                    <a href="#" class="font-italic" style="text-decoration: underline;">More</a>
                                 </li>
                             </ul>
                         </li>

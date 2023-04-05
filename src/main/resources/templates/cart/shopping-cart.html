@@ -39,6 +39,7 @@
             <table>
               <thead>
               <tr>
+                <th></th>
                 <th class="shoping__product">Products</th>
                 <th>Price</th>
                 <th>Quantity</th>
@@ -48,12 +49,22 @@
               </thead>
               <tbody>
               <tr ng-repeat="item in cart.items">
+                <td>
+                  <div class="form-check">
+                    <input ng-click="checkout.getItems(item)" class="form-check-input" type="checkbox">
+                  </div>
+                </td>
                 <td class="shoping__cart__item">
                   <img ng-src="/assets/images/product/{{item.image}}" alt="image food" class="img-fluid" width="15%">
                   <h5>{{item.name}}</h5>
                 </td>
                 <td class="shoping__cart__price">
-                  ${{item.price | number:1}}
+                  <span class="text-muted font-italic" style="text-decoration: line-through">
+                    {{item.priceOld | currency:'₫ '}}
+                  </span>
+                  <span class="text-danger">
+                    {{item.priceNew | currency:'₫ '}}
+                  </span>
                 </td>
                 <td class="shoping__cart__quantity">
                   <div class="quantity">
@@ -63,7 +74,7 @@
                   </div>
                 </td>
                 <td class="shoping__cart__total">
-                  ${{item.quantity*item.price | number:1}}
+                  {{item.quantity*item.priceNew | currency:'₫ '}}
                 </td>
                 <td class="shoping__cart__item__close">
                   <span th:unless="${#request.remoteUser}" ng-click="cart.delete(item.id)" class="icon_close"></span>
@@ -101,7 +112,7 @@
               <li>Subtotal <span>${{cart.amount | number:2}}</span></li>
               <li>Total <span>${{cart.amount | number:2}}</span></li>
             </ul>
-            <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
+            <a th:href="@{/order/checkout}" class="primary-btn">PROCEED TO CHECKOUT</a>
           </div>
         </div>
       </div>
