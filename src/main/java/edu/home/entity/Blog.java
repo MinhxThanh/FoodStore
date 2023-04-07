@@ -31,7 +31,7 @@ public class Blog implements Serializable {
 	private Date createDate;
 
 	@Column(name="is_display")
-	private boolean isDisplay;
+	private Boolean isDisplay;
 
 	private long status;
 
