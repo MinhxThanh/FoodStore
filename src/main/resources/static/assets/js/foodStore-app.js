@@ -1,4 +1,4 @@
-const app = angular.module("foodStore-app", ['ngAnimate'])
+const app = angular.module("foodStore-app", ['ngAnimate', 'ngSanitize'])
 app.controller("foodStore-controller", function ($scope, $http, $window) {
     $scope.items = []
     $scope.address = {}
@@ -24,6 +24,116 @@ app.controller("foodStore-controller", function ($scope, $http, $window) {
     }
 
     $scope.initialize()
+
+    $scope.commentBlog = {
+        blogId: 'this is content',
+        comments: [],
+        customer: {},
+        commentId: '',
+        commentReply: [],
+        getCommentInfo(blogId){
+            this.blogId = blogId
+            $http.get(`/rest/commentBlog/findByBlogId/${blogId}`).then(resp =>{
+                this.comments = resp.data
+                this.comments.forEach(item => {
+                    let date = new Date(item.createDate)
+                    item.createDate = moment(date).fromNow();
+                })
+            })
+            $http.get(`/rest/commentReplyBlog/findAllByBlogId/${blogId}`).then(resp =>{
+                this.commentReply = resp.data
+                this.commentReply.forEach(item => {
+                    let date = new Date(item.createDate)
+                    item.createDate = moment(date).fromNow();
+                })
+            })
+            $http.get(`/rest/customer/findCustomerIsPresent`).then(resp =>{
+                this.customer = resp.data
+            })
+        },
+        create(){
+            let item = {
+                content : tinymce.get("myTextarea").getContent(),
+                blogId: this.blogId
+            }
+            console.log("item comment: ", item)
+            $http.post(`/rest/commentBlog/create`, item).then(resp =>{
+                resp.data.createDate = moment(new Date(resp.data.createDate)).fromNow();
+                this.comments.push(resp.data)
+                tinymce.get("myTextarea").setContent("<p></p>");
+                $scope.message = "Create comment successfully!"
+                $scope.cart.liveToastBtn()
+            })
+        },
+        delete(id){
+            $http.delete(`/rest/commentBlog/delete/${id}`).then(resp =>{
+                let index = this.comments.findIndex(item => item.id == id)
+                this.comments.splice(index, 1)
+                $scope.message = "Delete comment successfully!"
+                $scope.cart.liveToastBtn()
+            })
+        },
+        createCommentReply(id) {
+            let item = {
+                content : tinymce.get("myTextarea-" + this.commentId).getContent(),
+                blogId: this.blogId,
+                commentId: id
+            }
+            $http.post(`/rest/commentReplyBlog/create`, item).then(resp =>{
+                resp.data.createDate = moment(new Date(resp.data.createDate)).fromNow();
+                this.commentReply.push(resp.data)
+                $scope.message = "Create reply comment successfully!"
+                $scope.cart.liveToastBtn()
+            })
+            console.log("reply: ", item)
+        },
+        delete(id){
+            $http.delete(`/rest/commentReplyBlog/delete/${id}`).then(resp =>{
+                let index = this.commentReply.findIndex(item => item.id == id)
+                this.commentReply.splice(index, 1)
+                $scope.message = "Delete reply comment successfully!"
+                $scope.cart.liveToastBtn()
+            })
+        },
+        displayForm(id) {
+            this.commentId = id
+            tinymce.init({
+                selector: `#myTextarea-${id}`,
+                menubar: false,
+                toolbar_location: "bottom",
+                plugins: "autoresize link lists emoticons image",
+                autoresize_bottom_margin: 50,
+                max_height: 500,
+                placeholder: "Enter message. . .",
+                toolbar:
+                    "bold italic strikethrough link numlist bullist blockquote emoticons image"
+            });
+
+            document.getElementById("form-" + id).style.display = "block";
+        },
+        deleteForm(id) {
+            document.getElementById("form-" + id).style.display = "none";
+        },
+        displayFormReply(id) {
+            this.commentId = id
+            tinymce.init({
+                selector: `#myTextareaReply-${id}`,
+                menubar: false,
+                toolbar_location: "bottom",
+                plugins: "autoresize link lists emoticons image",
+                autoresize_bottom_margin: 50,
+                max_height: 500,
+                placeholder: "Enter message. . .",
+                toolbar:
+                    "bold italic strikethrough link numlist bullist blockquote emoticons image"
+            });
+
+            document.getElementById("formReply-" + id).style.display = "block";
+        },
+        deleteFormReply(id) {
+            document.getElementById("formReply-" + id).style.display = "none";
+        }
+    }
 
 
     $scope.checkout = {

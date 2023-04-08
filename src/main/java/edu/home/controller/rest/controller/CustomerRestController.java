@@ -18,14 +18,26 @@ import edu.home.common.entity.CustomerInfo;
 import edu.home.entity.Customer;
 import edu.home.service.CustomerService;
 
+import javax.servlet.http.HttpServletRequest;
+
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/rest/customer")
 public class CustomerRestController {
 	@Autowired
 	CustomerService customerService;
-//	@Autowired
-//	private UserAccountService userAccountService;
+
+	@GetMapping("findCustomerIsPresent")
+	public ResponseEntity<?> findCustomerIsPresent(HttpServletRequest request) {
+		try {
+			if (request.getRemoteUser() != null)
+				return ResponseEntity.ok(customerService.findByEmailKey(request.getRemoteUser()));
+			else
+				return ResponseEntity.noContent().build();
+		} catch (Exception e) {
+			return ResponseEntity.noContent().build();
+		}
+	}
 
 	@GetMapping(value = "getAll")
 	public List<Customer> getAllcustomer() {

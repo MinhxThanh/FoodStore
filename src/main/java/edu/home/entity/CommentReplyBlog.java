@@ -1,6 +1,7 @@
 package edu.home.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -22,7 +23,8 @@ public class CommentReplyBlog implements Serializable {
 	private String content;
 
 	@Column(name="create_date")
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreationTimestamp
 	private Date createDate;
 
 	@Column(name="is_display")
@@ -33,7 +35,8 @@ public class CommentReplyBlog implements Serializable {
 	private String title;
 
 	@Column(name="update_date")
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreationTimestamp
 	private Date updateDate;
 
 	//bidirectional many-to-one association to Blog

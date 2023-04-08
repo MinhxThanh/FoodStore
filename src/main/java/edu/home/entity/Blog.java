@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -27,7 +28,8 @@ public class Blog implements Serializable {
 	private String content;
 
 	@Column(name="create_date")
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreationTimestamp
 	private Date createDate;
 
 	@Column(name="is_display")
