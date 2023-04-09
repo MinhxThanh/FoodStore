@@ -1,5 +1,6 @@
 package edu.home.controller.rest.controller;
 
+import edu.home.entity.Food;
 import edu.home.entity.ImageFood;
 import edu.home.service.FoodService;
 import edu.home.service.ImageFoodService;
@@ -37,6 +38,10 @@ public class FoodRestController {
             return ResponseEntity.noContent().build();
         }
     }
-
+    //get tong san pham trong thong ke
+    @GetMapping
+    public List<Food> getAll(){
+       return foodService.getAll();
+    }
 
 }

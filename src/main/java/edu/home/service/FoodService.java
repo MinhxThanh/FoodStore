@@ -31,4 +31,6 @@ public interface FoodService {
     Page<Food> getByFilter( String keyword , Optional<Double> priceMin , Optional<Double> priceMax , Optional<Integer> quantity , Optional<Integer> view , Optional<Long> createDate, Optional<Boolean> isDisplay , Optional<Long> category_id ,Pageable pageable);
 
 	List<Food> getByKeywordEng(String keyword, Pageable pageable);
+	
+    List<Food> getAll();
 }

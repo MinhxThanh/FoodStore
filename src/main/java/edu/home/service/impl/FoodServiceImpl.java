@@ -137,4 +137,10 @@ public class FoodServiceImpl implements FoodService{
 //				|| Convert.toEngString(o.getDescription().toLowerCase()).contains(Convert.toEngString(keyword.toLowerCase()))).toList();
 		return list;
 	}
+	
+	@Override
+	public List<Food> getAll() {
+		// TODO Auto-generated method stub
+		return dao.findAll();
+	}
 }
