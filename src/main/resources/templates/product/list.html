@@ -16,9 +16,9 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text" style="font-size: 20px;">
-                        <a th:href="@{/home/index}"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+                        <a th:href="@{/home/index}"><i class="fa fa-home" aria-hidden="true"></i> [[#{productl.home}]]</a>
                         <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                        <span>Shop</span>
+                        <span>[[#{productl.shop}]]</span>
                     </div>
                 </div>
             </div>
@@ -33,22 +33,14 @@
                 <div class="col-lg-3 col-md-5">
                     <div class="sidebar">
                         <div class="sidebar__item">
-                            <h4>Department</h4>
+                            <h4>[[#{productl.cate}]]</h4>
                             <ul>
-                                <li><a href="#">Fresh Meat</a></li>
-                                <li><a href="#">Vegetables</a></li>
-                                <li><a href="#">Fruit & Nut Gifts</a></li>
-                                <li><a href="#">Fresh Berries</a></li>
-                                <li><a href="#">Ocean Foods</a></li>
-                                <li><a href="#">Butter & Eggs</a></li>
-                                <li><a href="#">Fastfood</a></li>
-                                <li><a href="#">Fresh Onion</a></li>
-                                <li><a href="#">Papayaya & Crisps</a></li>
-                                <li><a href="#">Oatmeal</a></li>
+                                <li><a href="/food/all" th:style="${cid} ==''?'color:#7fad39;':''">All</a></li>
+                        		<li th:each="c:${cates}"><a th:href="@{|/food/${c.name}|}" th:style="${c.name==cid?'color:#7fad39;':''}" th:if="${c.isDisplay}">[[${c.name}]] </a></li>
                             </ul>
                         </div>
                         <div class="sidebar__item">
-                            <h4>Price</h4>
+                            <h4>[[#{productl.price}]]</h4>
                             <div class="price-range-wrap">
                                 <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
                                      data-min="10" data-max="540">
@@ -65,74 +57,74 @@
                             </div>
                         </div>
                         <div class="sidebar__item sidebar__item__color--option">
-                            <h4>Colors</h4>
+                            <h4>[[#{productl.colors}]]</h4>
                             <div class="sidebar__item__color sidebar__item__color--white">
                                 <label for="white">
-                                    White
+                                    [[#{productl.white}]]
                                     <input type="radio" id="white">
                                 </label>
                             </div>
                             <div class="sidebar__item__color sidebar__item__color--gray">
                                 <label for="gray">
-                                    Gray
+                                    [[#{productl.gray}]]
                                     <input type="radio" id="gray">
                                 </label>
                             </div>
                             <div class="sidebar__item__color sidebar__item__color--red">
                                 <label for="red">
-                                    Red
+                                    [[#{productl.red}]]
                                     <input type="radio" id="red">
                                 </label>
                             </div>
                             <div class="sidebar__item__color sidebar__item__color--black">
                                 <label for="black">
-                                    Black
+                                    [[#{productl.black}]]
                                     <input type="radio" id="black">
                                 </label>
                             </div>
                             <div class="sidebar__item__color sidebar__item__color--blue">
                                 <label for="blue">
-                                    Blue
+                                    [[#{productl.blue}]]
                                     <input type="radio" id="blue">
                                 </label>
                             </div>
                             <div class="sidebar__item__color sidebar__item__color--green">
                                 <label for="green">
-                                    Green
+                                    [[#{productl.green}]]
                                     <input type="radio" id="green">
                                 </label>
                             </div>
                         </div>
                         <div class="sidebar__item">
-                            <h4>Popular Size</h4>
+                            <h4>[[#{productl.popular}]]</h4>
                             <div class="sidebar__item__size">
                                 <label for="large">
-                                    Large
+                                    [[#{productl.large}]]
                                     <input type="radio" id="large">
                                 </label>
                             </div>
                             <div class="sidebar__item__size">
                                 <label for="medium">
-                                    Medium
+                                    [[#{productl.medium}]]
                                     <input type="radio" id="medium">
                                 </label>
                             </div>
                             <div class="sidebar__item__size">
                                 <label for="small">
-                                    Small
+                                    [[#{productl.small}]]
                                     <input type="radio" id="small">
                                 </label>
                             </div>
                             <div class="sidebar__item__size">
                                 <label for="tiny">
-                                    Tiny
+                                    [[#{productl.tiny}]]
                                     <input type="radio" id="tiny">
                                 </label>
                             </div>
                         </div>
                         <div class="sidebar__item">
                             <div class="latest-product__text">
-                                <h4>Latest Products</h4>
+                                <h4>[[#{productl.lastest}]]</h4>
                                 <div class="latest-product__slider owl-carousel">
                                     <div class="latest-prdouct__slider__item">
                                         <a th:each="item, iState : ${listTop}" th:if="${iState.index} < 3" href="#" class="latest-product__item">
@@ -175,7 +167,7 @@
                 <div class="col-lg-9 col-md-7">
                     <div class="product__discount">
                         <div class="section-title product__discount__title">
-                            <h2>Sale Off</h2>
+                            <h2>[[#{productl.sale}]]</h2>
                         </div>
                         <div class="row">
                             <div class="product__discount__slider owl-carousel">

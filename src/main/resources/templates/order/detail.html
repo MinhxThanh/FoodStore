@@ -17,9 +17,9 @@
         <div class="row">
           <div class="col-lg-12 text-center">
             <div class="breadcrumb__text" style="font-size: 20px;">
-              <a th:href="@{/home/index}"><i class="fa fa-home" aria-hidden="true"></i> Order</a>
+              <a th:href="@{/home/index}"><i class="fa fa-home" aria-hidden="true"></i>[[#{checkoutd.order}]]</a>
               <i class="fa fa-chevron-right" aria-hidden="true"></i>
-              <span>List</span>
+              <span>[[#{checkoutd.list}]]</span>
             </div>
           </div>
         </div>
@@ -36,12 +36,12 @@
           <div class="card">
             <div class="row d-flex justify-content-between px-3 top">
               <div class="info">
-                <h5 class="d-block">ORDER <span class="text-primary font-weight-bold">#[[${order.id}]]</span></h5>
-                <h5 class="d-block">STATUS <span class="text-primary font-weight-bold">@[[${order.status}]]</span></h5>
+                <h5 class="d-block">[[#{checkoutd.orderB}]] <span class="text-primary font-weight-bold">#[[${order.id}]]</span></h5>
+                <h5 class="d-block">[[#{checkoutd.status}]] <span class="text-primary font-weight-bold">@[[${order.status}]]</span></h5>
               </div>
               <div class="d-flex flex-column text-sm-right">
                 <p class="mb-0">
-                  Expected Arrival
+                  [[#{checkoutd.exp}]]
                   <span class="font-italic">
                     <script th:inline="javascript">
                       var date = /*[[${order.shippedDate}]]*/ '${order.shippedDate}';
@@ -50,7 +50,7 @@
                   </span>
                 </p>
                 <p class="mb-0">
-                  Date Order
+                  [[#{checkoutd.date}]]
                   <span class="font-italic">
                     <script th:inline="javascript">
                       var date = /*[[${order.orderDate}]]*/ '${order.orderDate}';
@@ -74,27 +74,27 @@
             <div class="row justify-content-between top">
               <div class="row d-flex icon-content"> <img class="icon" src="https://i.imgur.com/9nnc9Et.png">
                 <div class="d-flex flex-column">
-                  <p class="font-weight-bold">Order<br>Processed</p>
+                  <p class="font-weight-bold">[[#{checkoutd.order}]]<br>[[#{checkoutd.processed}]]</p>
                 </div>
               </div>
               <div class="row d-flex icon-content"> <img class="icon" src="https://i.imgur.com/GiWFtVu.png">
                 <div class="d-flex flex-column">
-                  <p class="font-weight-bold">Order<br>Designing</p>
+                  <p class="font-weight-bold">[[#{checkoutd.order}]]<br>[[#{checkoutd.designing}]]</p>
                 </div>
               </div>
               <div class="row d-flex icon-content"> <img class="icon" src="https://i.imgur.com/u1AzR7w.png">
                 <div class="d-flex flex-column">
-                  <p class="font-weight-bold">Order<br>Shipped</p>
+                  <p class="font-weight-bold">[[#{checkoutd.order}]]<br>[[#{checkoutd.shipped}]]</p>
                 </div>
               </div>
               <div class="row d-flex icon-content"> <img class="icon" src="https://i.imgur.com/TkPm63y.png">
                 <div class="d-flex flex-column">
-                  <p class="font-weight-bold">Order<br>En Route</p>
+                  <p class="font-weight-bold">[[#{checkoutd.order}]]<br>[[#{checkoutd.en}]]</p>
                 </div>
               </div>
               <div class="row d-flex icon-content"> <img class="icon" src="https://i.imgur.com/HdsziHP.png">
                 <div class="d-flex flex-column">
-                  <p class="font-weight-bold">Order<br>Arrived</p>
+                  <p class="font-weight-bold">[[#{checkoutd.order}]]<br>[[#{checkoutd.arrived}]]</p>
                 </div>
               </div>
             </div>
@@ -104,7 +104,7 @@
               <div class="d-flex">
                 <div class="border-right pr-5">
                   <p class="card-text text-muted">
-                    <i class="fa fa-map-marker" aria-hidden="true"></i> ADDRESS
+                    <i class="fa fa-map-marker" aria-hidden="true"></i> [[#{checkoutd.address}]]
                   </p>
                   <hr class="my-0">
                   <b class="d-block mt-2">[[${address.username}]]</b>
@@ -115,13 +115,13 @@
                 </div>
                 <div class="pl-5">
                   <p class="card-text text-muted">
-                    UNIT SHIPPING
+                    [[#{checkoutd.unit}]]
                   </p>
                   <hr class="my-0">
 
-                  <b class="d-block mt-2">International express shipping</b>
-                  <p class="mb-0">Standard Express</p>
-                  <p>Receive goods in 10 minutes to 1 hour</p>
+                  <b class="d-block mt-2">[[#{checkoutd.inter}]]</b>
+                  <p class="mb-0">[[#{checkoutd.standard}]]</p>
+                  <p>[[#{checkoutd.receive}]]</p>
                 </div>
               </div>
             </div>
@@ -145,37 +145,37 @@
                 <table class="table">
                   <tbody>
                   <tr class="text-right">
-                    <td class="w-75">PRICE</td>
+                    <td class="w-75">[[#{checkoutd.price}]]</td>
                     <td class="w-25">đ [[${#numbers.formatDecimal(amount, 0, 'COMMA', 2, 'POINT')}]]</td>
                   </tr>
                   <tr class="text-right" th:if="${amount > 50000}">
-                    <td class="w-75">SHIPPING</td>
+                    <td class="w-75">[[#{checkoutd.shipping}]]</td>
                     <td class="w-25">đ 0</td>
                   </tr>
                   <tr class="text-right" th:if="${amount < 50000}">
-                    <td class="w-75">SHIPPING</td>
+                    <td class="w-75">[[#{checkoutd.shipping}]]</td>
                     <td class="w-25">đ 15000</td>
                   </tr>
                   <tr class="text-right" th:if="${coupon.id != 1}">
-                    <td class="w-75">COUPON</td>
+                    <td class="w-75">[[#{checkoutd.coupon}]]</td>
                     <td class="w-25 text-uppercase" th:text="${coupon.name}"></td>
                   </tr>
                   <tr class="text-right">
-                    <td class="w-75">PRICE</td>
+                    <td class="w-75">[[#{checkoutd.price}]]</td>
                     <td class="w-25"><h4 class="text-danger">đ [[${#numbers.formatDecimal(order.price, 0, 'COMMA', 2, 'POINT')}]]</h4></td>
                   </tr>
                   <tr class="text-right" th:if="${order.paymentmethod.id == 1}">
-                    <td class="w-75"><i class="fa fa-money" aria-hidden="true"></i> PAYMENT METHODS</td>
-                    <td class="w-25">Payment on Delivery</td>
+                    <td class="w-75"><i class="fa fa-money" aria-hidden="true"></i> [[#{checkoutd.pM}]]</td>
+                    <td class="w-25">[[#{checkoutd.pD}]]</td>
                   </tr>
                   <tr class="text-right" th:if="${order.paymentmethod.id == 2}">
-                    <td class="w-75"><i class="fa fa-money" aria-hidden="true"></i> PAYMENT METHODS</td>
-                    <td class="w-25">Payment on Paypal</td>
+                    <td class="w-75"><i class="fa fa-money" aria-hidden="true"></i> [[#{checkoutd.pM}]]</td>
+                    <td class="w-25">[[#{checkoutd.pP}]]</td>
                   </tr>
                   </tbody>
                 </table>
                 <div class="mt-4 text-right">
-                  <button class="btn btn-outline-danger px-4-py-2">Cancel Order</button>
+                  <button class="btn btn-outline-danger px-4-py-2">[[#{checkoutd.cancel}]]</button>
                 </div>
               </div>
             </div>
