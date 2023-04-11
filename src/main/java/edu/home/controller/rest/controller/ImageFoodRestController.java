@@ -52,6 +52,10 @@ public class ImageFoodRestController {
 		return imageFoodService.findByFoodId(id);
 		
 	}
+	@GetMapping("/findAll")
+	public List<ImageFood> findAll(){
+		return imageFoodService.findAll();
+	}
 	
 	@PostMapping("/add")
 	public ImageFood create(@RequestBody ImageFoodDto imageFoodDto) {
@@ -61,6 +65,10 @@ public class ImageFoodRestController {
 		System.out.println("Food Image: ne "+ imageFoodDto.getFoodId());
 		
 		return imageFoodService.save(imageFood);
+	}
+	@DeleteMapping("/delete/{imageName}")
+	public void deleteByImageName(@PathVariable("imageName") String imageName){
+		imageFoodService.deleteByImageName(imageName);
 	}
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable("id") Long id) {

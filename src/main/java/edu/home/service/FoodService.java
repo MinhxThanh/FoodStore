@@ -1,6 +1,7 @@
 package edu.home.service;
 
 import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,7 @@ import edu.home.common.entity.ListFood;
 import edu.home.common.entity.ListFoodByCategory;
 import edu.home.common.entity.ListFoodSale;
 import edu.home.common.entity.ListTopNewFood;
+import edu.home.common.entity.ProcedureFoods;
 import edu.home.entity.Food;
 
 public interface FoodService {
@@ -32,5 +34,11 @@ public interface FoodService {
 
 	List<Food> getByKeywordEng(String keyword, Pageable pageable);
 	
-    List<Food> getAll();
+	List<ProcedureFoods> procedureFoods();
+    Food create(Food food);
+    Food update(Food food);
+    void delete(Long id);
+    void updateIsDisplayById(Boolean display, Long id);
+    List<Food> findAll();
+	List<Food> findByCreateDate(Date createDate);
 }

@@ -73,9 +73,9 @@ public class CategoryRestController {
     public void deleteCategory(@PathVariable("id") Long id){
         categoryService.delete(id);
     }
-    @GetMapping(value = "/categories/getAllCategoriesByFoodID/{id}")
-    public List<Category> getAllCategoriesByFoodID(@PathVariable("id") Long id) {
-//        return categoryService.getAllCategoriesByFoodID(id);
-        return null;
-    }
+//  Giàu
+  @GetMapping(value = "/categories/getAllCategoriesByFoodID/{id}")
+  public List<Category> getAllCategoriesByFoodID(@PathVariable("id") Long id) {
+      return categoryService.getAllCategoriesByFoodID(id);
+  }
 }

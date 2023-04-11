@@ -1,19 +1,22 @@
 package edu.home.service.impl;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.home.common.entity.CartItem;
-import edu.home.entity.Cart;
-import edu.home.repository.CartRepository;
-import edu.home.service.CartService;
-import edu.home.service.CustomerService;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-import java.util.stream.Collectors;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import edu.home.entity.Cart;
+import edu.home.entity.Category;
+import edu.home.repository.CartRepository;
+import edu.home.service.CartService;
+import edu.home.service.CustomerService;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -50,4 +53,5 @@ public class CartServiceImpl implements CartService {
     public void deleteCartByCustomerEmailAndFoodId(String remoteUser, Long foodId) {
         dao.deleteByCustomerEmailAndFoodId(remoteUser, foodId);
     }
+    
 }

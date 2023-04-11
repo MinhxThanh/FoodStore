@@ -13,4 +13,6 @@ public interface ImageFoodService {
 	List<ImageFood> findByFoodId(Long id);
 	List<ImageFood> findAll();
 	void delete(Long id);
+
+	void deleteByImageName(String imageName);
 }

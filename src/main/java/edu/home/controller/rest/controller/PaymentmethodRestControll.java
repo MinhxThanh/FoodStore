@@ -8,21 +8,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.home.entity.Review;
-import edu.home.service.ReviewService;
+import edu.home.entity.Paymentmethod;
+import edu.home.service.PaymentmethodService;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping(value = "/rest/review")
-public class ReviewRestController {
+@RequestMapping(value = "rest/paymentmethod")
+public class PaymentmethodRestControll {
 	@Autowired
-	ReviewService reviewService;
-
-	@GetMapping(value = "getAll")
-	public List<Review> getAllblog() {
-		System.out.println("\n dang chay getall review \n");
-		return reviewService.findAll();
+	private PaymentmethodService paymentmethodService;
+	
+	@GetMapping("/findAll")
+	public List<Paymentmethod> findAll(){
+		return paymentmethodService.findAll();
 	}
-
-
 }

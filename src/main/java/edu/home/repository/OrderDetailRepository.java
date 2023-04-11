@@ -1,28 +1,27 @@
 package edu.home.repository;
 
-import java.util.List;
+import edu.home.entity.OrderDetail;
+import edu.home.entity.Report;
+import edu.home.entity.ReportMonth;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import edu.home.entity.OrderDetail;
-import edu.home.entity.Report;
-import edu.home.entity.ReportMonth;
-
 import java.util.List;
 
 public interface OrderDetailRepository extends JpaRepository<OrderDetail, Long> {
     List<OrderDetail> findOrderDetailsByOrderId(Long id);
+    
 //	 + " WHERE o.order.orderStatus  IN('FINISHED','RATED')"
-    
- // doanh thu theo loai san pham
-  	@Query("SELECT new Report(o.category.name,sum(d.newPrice*d.quantity),sum( d.quantity)) "
-  			+ " FROM CategoryFood o join  o.food.orderDetails d"
-//  			+ " WHERE o.product.category.parentCategory.id =:parentId AND MONTH(o.order.createDate) like '%' || :date || '%' AND o.order.orderStatus  IN('FINISHED','RATED')"
-  			+ " GROUP BY o.category.name" + " ORDER BY sum(d.newPrice*d.quantity) DESC")
-  	List<Report> getInventoryByParentCategory();
-    
+   
+// doanh thu theo loai san pham
+ 	@Query("SELECT new Report(o.category.name,sum(d.newPrice*d.quantity),sum( d.quantity)) "
+ 			+ " FROM CategoryFood o join  o.food.orderDetails d"
+// 			+ " WHERE o.product.category.parentCategory.id =:parentId AND MONTH(o.order.createDate) like '%' || :date || '%' AND o.order.orderStatus  IN('FINISHED','RATED')"
+ 			+ " GROUP BY o.category.name" + " ORDER BY sum(d.newPrice*d.quantity) DESC")
+ 	List<Report> getInventoryByParentCategory();
+   
 	@Query("SELECT new Report(o.category.name,sum(d.newPrice*d.quantity),sum( d.quantity)) "
 			+ " FROM CategoryFood o join  o.food.orderDetails d "
 			
@@ -30,8 +29,8 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail, Long> 
 	+ " GROUP BY  o.category.name")
 	List<Report> getInventoryCategoryByMonthAndByCategoryName(@Param("name") String name, @Param("month") Integer month,
 			@Param("year") Integer year);
-  	
-  	
+ 	
+ 	
 	// doanh thu theo thang
 	@Query("SELECT new ReportMonth" + "(MONTH(o.order.orderDate)," + "YEAR(o.order.orderDate),"
 			+ "sum(o.newPrice*o.quantity)," + "count(o)," + "o.order.image) " + " FROM OrderDetail o "
@@ -64,14 +63,4 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail, Long> 
 	+ " GROUP BY  o.food.name")
 	List<Report> getInventoryProductByMonthAndByProductName(@Param("id") Long id, @Param("month") Integer month,
 			@Param("year") Integer year);
-	
-	
-	
-
-	
-	
-	
-	
-	
-	
 }
