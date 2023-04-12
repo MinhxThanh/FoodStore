@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 import java.time.LocalTime;
+import java.util.Date;
+import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -32,4 +34,34 @@ public class OrderRestController {
             return ResponseEntity.badRequest().build();
         }
     }
+    
+//    Giàu
+    @GetMapping("/findAll")
+	public List<Order> findAll(){
+		return orderService.findAll();
+	}
+	@GetMapping("/findStatusById/{id}")
+	public Long findStatusById(@PathVariable("id") Long id) {
+		return orderService.findStatusById(id);
+	}
+	@GetMapping("/findById/{id}")
+	public Order findById(@PathVariable("id") Long id) {
+		return orderService.findById(id);
+	}
+	@GetMapping("/findByPaymentmethodId/{id}")
+	public List<Order> findByPaymentmethodId(@PathVariable("id") Long id) {
+		return orderService.findByPaymentmethodId(id);
+	}
+	@GetMapping("/findByOrderDate/{orderDate}")
+	public List<Order> findByOrderDate(@PathVariable("orderDate") Date orderDate) {
+		return orderService.findByOrderDate(orderDate);
+	}
+	@GetMapping("/findByShippedDate/{shippedDate}")
+	public List<Order> findByShippedDate(@PathVariable("shippedDate") Date shippedDate) {
+		return orderService.findByShippedDate(shippedDate);
+	}
+	@PutMapping("/status/{status}/{id}")
+	public void updateStatusById(@PathVariable("status") Long status, @PathVariable("id") Long id) {
+		orderService.updateStatusById(status, id);
+	}
 }

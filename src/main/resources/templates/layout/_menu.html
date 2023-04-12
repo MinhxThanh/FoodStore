@@ -8,7 +8,7 @@
                     <div class="header__top__left">
                         <ul>
                             <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                            <li>[[#{menu.free}]]</li>
+                            <li>Free Shipping for all Order of $99</li>
                         </ul>
                     </div>
                 </div>
@@ -21,7 +21,7 @@
                             <a href="#"><i class="fa fa-pinterest-p"></i></a>
                         </div>
                         <div class="header__top__right__language">
-                            <i class="fa fa-language" aria-hidden="true"></i>
+                            <img src="/assets/images/language.png" alt="">
                             <div>[[#{menu.language}]]</div>
                             <span class="arrow_carrot-down"></span>
                             <ul>
@@ -29,42 +29,14 @@
                                 <li><a href="?lang=vi">Tiếng Việt</a></li>
                             </ul>
                         </div>
-                        <div class="header__top__right__language">
-<!--                         <i class="fa fa-user-md" aria-hidden="true"></i> -->
-                            <div th:unless="${#request.remoteUser}">[[#{menu.account}]]</div>
-                            <div th:if="${#request.remoteUser}"><img ng-src="{{customer.avatar}}" class="rounded-circle" style="width:25px"/>[[#{menu.hi}]] {{customer.fullname}}</div>
-                            <span class="arrow_carrot-down"></span>
-                            <ul>
-                                <li>
-	                                <a th:unless="${#request.remoteUser}" th:href="@{/security/login/form}">
-	                                	<i class="fa fa-user"></i> [[#{menu.signIn}]]
-	                            	</a>
-                            	</li>
-                                <li>
-                                	<a th:if="${#request.remoteUser}" th:href="@{/customer/profile/account}" >
-                                		<i class="fa fa-user"></i> [[#{menu.edit}]]
-                            		</a>
-                           		</li>
-		                        <li class="border" th:if="${#request.remoteUser}" th:class="${#strings.equals(pageTitle, 'Order')} ? 'active' : ''">
-		                            <a th:href="@{/order/list}">
-		                            	<i class="fa fa-file-text-o"></i> [[#{menu.order}]]
-		                            </a>
-		                        </li>
-                                <li>
-                                	<a th:if="${#request.remoteUser}" th:href="@{/security/logout}" ng-click="cart.clear()">
-                                		<i class="fa fa-sign-out" aria-hidden="true"></i> [[#{menu.signOut}]]
-                            		</a>
-                           		</li>
-                            </ul>
+                        <div class="header__top__right__auth">
+                            <a th:unless="${#request.remoteUser}" th:href="@{/security/login/form}">
+                                <i class="fa fa-user"></i> [[#{menu.signIn}]]
+                            </a>
+                            <a th:if="${#request.remoteUser}" th:href="@{/security/logout}" ng-click="cart.clear()">
+                                <i class="fa fa-user"></i> [[#{menu.signOut}]]
+                            </a>
                         </div>
-<!--                         <div class="header__top__right__auth"> -->
-<!--                             <a th:unless="${#request.remoteUser}" th:href="@{/security/login/form}"> -->
-<!--                                 <i class="fa fa-user"></i> [[#{menu.signIn}]] -->
-<!--                             </a> -->
-<!--                             <a th:if="${#request.remoteUser}" th:href="@{/security/logout}" ng-click="cart.clear()"> -->
-<!--                                 <i class="fa fa-user"></i> [[#{menu.signOut}]] -->
-<!--                             </a> -->
-<!--                         </div> -->
                     </div>
                 </div>
             </div>
@@ -84,13 +56,16 @@
                             <a th:href="@{/home/index}">[[#{menu.home}]]</a>
                         </li>
                         <li th:class="${#strings.equals(pageTitle, 'Menu ')} ? 'active' : ''">
-                            <a th:href="@{/food/all}">[[#{menu.shop}]]</a>
+                            <a th:href="@{/food/all}">Shop</a>
                         </li>
                         <li th:class="${#strings.equals(pageTitle, 'Stories ')} ? 'active' : ''">
                             <a th:href="@{/stories}">[[#{menu.stories}]]</a>
                         </li>
                         <li th:class="${#strings.equals(pageTitle, 'Contact ')} ? 'active' : ''">
                             <a th:href="@{/contact}">[[#{menu.contact}]]</a>
+                        </li>
+                        <li th:if="${#request.remoteUser}" th:class="${#strings.equals(pageTitle, 'Order')} ? 'active' : ''">
+                            <a th:href="@{/order/list}">[[#{menu.order}]]</a>
                         </li>
                     </ul>
                 </nav>
@@ -122,12 +97,12 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="font-italic" style="text-decoration: underline;">[[#{menu.more}]]</a>
+                                    <a href="#" class="font-italic" style="text-decoration: underline;">More</a>
                                 </li>
                             </ul>
                         </li>
                     </ul>
-                    <div class="header__cart__price">[[#{menu.item}]] <span>${{cart.amount}}</span></div>
+                    <div class="header__cart__price">item: <span>${{cart.amount}}</span></div>
                 </div>
             </div>
         </div>
@@ -146,7 +121,7 @@
                 <div class="hero__categories">
                     <div class="hero__categories__all">
                         <i class="fa fa-bars"></i>
-                        <span>[[#{menu.cate}]]</span>
+                        <span>All departments</span>
                     </div>
                     <ul>
                          <li><a href="/food/all" th:style="${cid} ==''?'color:#7fad39;':''">All</a></li>
@@ -159,11 +134,11 @@
                     <div class="hero__search__form">
                         <form method="get" th:action="@{|/food/all|}">
                             <div class="hero__search__categories">
-                                [[#{menu.cate}]]
+                                All Categories
                                 <span class="arrow_carrot-down"></span>
                             </div>
                             <input type="text" placeholder="Bạn muốn tìm gì?" name="keyword" onblur="this.form.submit()">
-                            <button type="submit" class="site-btn">[[#{menu.search}]]</button>
+                            <button type="submit" class="site-btn">SEARCH</button>
                         </form>
                     </div>
                     <div class="hero__search__phone">
@@ -171,8 +146,8 @@
                             <i class="fa fa-phone"></i>
                         </div>
                         <div class="hero__search__phone__text">
-                            <h5>024 6327 6402</h5>
-                            <span>[[#{menu.sp}]]</span>
+                            <h5>+65 11.188.888</h5>
+                            <span>support 24/7 time</span>
                         </div>
                     </div>
                 </div>

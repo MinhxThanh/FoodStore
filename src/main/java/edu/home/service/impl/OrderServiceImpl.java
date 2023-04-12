@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,4 +58,35 @@ public class OrderServiceImpl implements OrderService {
     public Order findById(Long id) {
         return dao.findById(id).get();
     }
+    
+//    Giàu
+    @Override
+	public List<Order> findAll() {
+		return dao.findAll();
+	}
+
+	@Override
+	public Long findStatusById(Long id) {
+		return dao.findStatusById(id);
+	}
+
+	@Override
+	public void updateStatusById(Long status, Long id) {
+		dao.updateStatusById(status, id);
+	}
+
+	@Override
+	public List<Order> findByPaymentmethodId(Long id) {
+		return dao.findByPaymentmethodId(id);
+	}
+
+	@Override
+	public List<Order> findByOrderDate(Date orderDate) {
+		return dao.findByOrderDate(orderDate);
+	}
+
+	@Override
+	public List<Order> findByShippedDate(Date shippedDate) {
+		return dao.findByShippedDate(shippedDate);
+	}
 }

@@ -15,7 +15,5 @@ public interface CustomerService {
 
     List<Customer> findAll();
 
-    Customer findByCustomerEmail(String remoteUser);
-    
-    Customer update(Customer customer);
+
 }

@@ -52,4 +52,9 @@ public class ImageFoodServiceImpl implements ImageFoodService {
 	public void delete(Long id) {
 		dao.deleteById(id);
 	}
+
+	@Override
+	public void deleteByImageName(String imageName) {
+		dao.deleteByImageName(imageName);
+	}
 }

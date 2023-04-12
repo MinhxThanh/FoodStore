@@ -39,15 +39,5 @@ public class CustomerServiceImpl implements CustomerService {
 	public List<Customer> findAll() {
 		return dao.findAll();
 	}
-
-	@Override
-	public Customer findByCustomerEmail(String remoteUser) {
-		return dao.findByCustomerEmail(remoteUser);
-	}
-
-	@Override
-	public Customer update(Customer customer) {
-		return dao.save(customer);
-	}
 }
 

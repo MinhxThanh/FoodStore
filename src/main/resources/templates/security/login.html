@@ -12,7 +12,7 @@
     <div id="main">
       <div class="py-5" style="margin-bottom: 100px;">
           <div class="col-lg-5 col-sm-11 p-5 m-auto shadow" style="background: rgba(255, 255, 255, 0.708); border-radius: 30px;">
-              <h2 class="text-center my-4 text-uppercase">[[#{login.sign}]]</h2>
+              <h2 class="text-center my-4 text-uppercase">Sign In</h2>
 <!--              message-->
               <div class="alert alert-success" role="alert" th:if="${message}">
                   <i>[[${message}]]</i>
@@ -24,29 +24,29 @@
                   <div class="mb-3">
                       <input name="username" ng-model="username" ng-required="true" class="form-control p-2 px-3 rounded-pill" type="text" placeholder="Enter your Username or Email" style="background: none !important;">
                       <span class="error text-danger" ng-show="formLogin.username.$error.required">
-                            [[#{login.please}]]
+                            Please enter Username or Email!
                       </span>
                   </div>
                   <div class="mb-3">
                       <input name="password" ng-model="password" ng-required="true" class="form-control p-2 px-3 rounded-pill" type="password" placeholder="Enter your Password" style="background: none !important;">
                       <span class="error text-danger" ng-show="formLogin.password.$error.required">
-                            [[#{login.pleaseE}]]
+                            Please enter password!
                       </span>
                   </div>
                   <div class="mb-3" style="background: none;">
                       <input name="remember_me" class="form-check-input" type="checkbox" value="" id="passwordCheck">
                       <label class="form-check-label" for="passwordCheck">
-                          [[#{login.check}]]
+                          Check me out?
                       </label>
                   </div>
                   <div class="text-center">
                       <button ng-disabled="formLogin.$invalid" type="submit" class="btn btn-outline-primary w-100 py-2 rounded-pill fw-bold text-uppercase">
-                          [[#{login.sign}]]
+                          Sign In
                       </button>
-                      <a href="/security/register" class="mt-2 mb-4 text-muted">[[#{login.don}]]</a>
-                      <a class="d-block" href="/security/forgotPassword">[[#{login.forgot}]]</a>
+                      <a href="/security/register" class="mt-2 mb-4 text-muted">Don't have account? Register here!</a>
+                      <a class="d-block" href="/security/forgotPassword">Forgot Your Password?</a>
                       <a th:href="@{/oauth2/authorization/google}" class="btn btn-outline-danger text-uppercase fw-bold w-100 mt-4 rounded-pill py-2" type="submit">
-                          <i class="fa fa-google" aria-hidden="true"></i> [[#{login.signgg}]]
+                          <i class="fa fa-google" aria-hidden="true"></i> Sign in with Google
                       </a>
                   </div>
               </form>

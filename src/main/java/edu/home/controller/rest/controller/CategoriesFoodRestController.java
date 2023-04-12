@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.home.entity.Category;
 import edu.home.entity.CategoryFood;
 import edu.home.service.CategoryFoodService;
+import edu.home.service.CategoryService;
+import edu.home.service.FoodService;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -21,6 +24,10 @@ import edu.home.service.CategoryFoodService;
 public class CategoriesFoodRestController {
     @Autowired
     private CategoryFoodService categoryFoodService;
+    @Autowired
+    private CategoryService categoryService;
+    @Autowired
+    private FoodService foodService;
 
     @GetMapping(value = "")
     public List<CategoryFood> getAll(){
@@ -51,4 +58,18 @@ public class CategoriesFoodRestController {
 //        categoriesInProductService.deleteCategoryInProductByCateIDAndProductId(cid, pid);
         return categoryFoodService.deleteCategoryFoodByCateIDAndFoodId(cid, pid);
     }
+    
+//  Giàu
+	  @PostMapping("/{cid}/{fid}")
+	  public CategoryFood addCategoryFood(@PathVariable("cid") Long cid, @PathVariable("fid") Long fid) {
+	  	CategoryFood categoryFood  = new CategoryFood();
+	  	try {
+	  		categoryFood.setFood(foodService.findById(fid));
+		  	categoryFood.setCategory(categoryService.findById(cid));
+	  	}catch(Exception e) {
+	  		e.printStackTrace();
+	  	}
+	  	
+	  	return categoryFoodService.save(categoryFood);
+	  }
 }

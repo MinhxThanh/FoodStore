@@ -27,19 +27,4 @@ public class CustomerPhoneAddressServiceImpl implements CustomerPhoneAddressServ
     public CustomerPhoneAddress findById(long id) {
         return dao.findById(id).get();
     }
-
-	@Override
-	public CustomerPhoneAddress create(CustomerPhoneAddress CustomerPhoneAddress) {
-		return dao.save(CustomerPhoneAddress);
-	}
-
-	@Override
-	public CustomerPhoneAddress update(CustomerPhoneAddress CustomerPhoneAddress) {
-		return dao.save(CustomerPhoneAddress);
-	}
-
-	@Override
-	public void deleteById(Long id) {
-		dao.deleteById(id);
-	}
 }

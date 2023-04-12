@@ -34,7 +34,7 @@ public class ImageFoodRestController {
     @Autowired
     private ImageFoodService imageFoodService;
 	@Autowired
-	FoodService foodService;
+	private FoodService foodService;
 
     @GetMapping(value = "searchByFoodId/{id}")
     public ResponseEntity<?> searchByFoodId(@PathVariable("id") Long foodId){
@@ -46,23 +46,41 @@ public class ImageFoodRestController {
             return ResponseEntity.notFound().build();
         }
     }
+
+	@GetMapping(value = "findAllByFoodId/{id}")
+	public ResponseEntity<?> findAllByFoodId(@PathVariable("id") Long foodId){
+		try {
+			return ResponseEntity.ok(imageFoodService.searchByFoodId(foodId));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.notFound().build();
+		}
+	}
 	
 	@GetMapping("/{id}")
 	public List<ImageFood> findByFoodId(@PathVariable("id") Long id){
 		return imageFoodService.findByFoodId(id);
 		
 	}
-	
-	@PostMapping("/add")
-	public ImageFood create(@RequestBody ImageFoodDto imageFoodDto) {
-		ImageFood imageFood = new ImageFood();
-		imageFood.setImageName(imageFoodDto.getImageName());
-		imageFood.setFood(foodService.findById(imageFoodDto.getFoodId()));
-		System.out.println("Food Image: ne "+ imageFoodDto.getFoodId());
-		
-		return imageFoodService.save(imageFood);
+	@GetMapping("/findAll")
+	public List<ImageFood> findAll(){
+		return imageFoodService.findAll();
 	}
-	@DeleteMapping("/{id}")
+	
+	@PostMapping("create")
+	public ResponseEntity<?> create(@RequestBody ImageFood imageFood) {
+		try {
+			return ResponseEntity.ok(imageFoodService.save(imageFood));
+		} catch (Exception e){
+			return ResponseEntity.noContent().build();
+		}
+	}
+	@DeleteMapping("/delete/{imageName}")
+	public void deleteByImageName(@PathVariable("imageName") String imageName){
+		imageFoodService.deleteByImageName(imageName);
+	}
+
+	@DeleteMapping("deleteById/{id}")
 	public void delete(@PathVariable("id") Long id) {
 		imageFoodService.delete(id);
 	}

@@ -81,7 +81,7 @@
     <!--    Breadcrumb Section Begin-->
 
     <button th:attr="ng-click=@{|commentBlog.getCommentInfo(${item.id})|}" id="autoClick" class="btn btn-outline-danger"
-            style="display: none">[[#{dblog.click}]]
+            style="display: none">Click
     </button>
 
     <script>
@@ -95,9 +95,9 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text" style="font-size: 20px;">
-                        <a th:href="@{/home/index}"><i class="fa fa-home" aria-hidden="true"></i> [[#{dblog.home}]]</a>
+                        <a th:href="@{/home/index}"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
                         <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                        <span>[[#{dblog.storiesd}]]</span>
+                        <span>Shop</span>
                     </div>
                 </div>
             </div>
@@ -121,11 +121,11 @@
                         </div>
                         <button class="carousel-control-prev" type="button" data-target="#carouselExampleFade" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">[[#{dblog.prev}]]</span>
+                            <span class="sr-only">Previous</span>
                         </button>
                         <button class="carousel-control-next" type="button" data-target="#carouselExampleFade" data-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">[[#{dblog.next}]]</span>
+                            <span class="sr-only">Next</span>
                         </button>
                     </div>
 
@@ -142,7 +142,7 @@
                                     </div>
                                 </div>
                                 <div class="colorred pt-4 text-muted">
-                                    <i class="fa fa-user-o" aria-hidden="true"></i> [[#{dblog.create}]]
+                                    <i class="fa fa-user-o" aria-hidden="true"></i> Create By
                                     <a href="#" class="text-muted"><b>[[${item.user.username}]]</b></a>
                                 </div>
                             </div>
@@ -151,9 +151,9 @@
 
 
                             <div class="blog__details__author__text" th:text:if="*{status=='1'}">
-                                <div th:text:if="*{isDisplay=='true'}">[[#{dblog.status}]]</div>
-                                <div>[[#{dblog.view}]]: [[*{viewCount}]]</div>
-                                <div> [[#{dblog.date}]]:
+                                <div th:text:if="*{isDisplay=='true'}">Status: Public</div>
+                                <div>Views: [[*{viewCount}]]</div>
+                                <div> Date Post:
                                     <script th:inline="javascript">
                                         var date = /*[[*{createDate}]]*/ '*{createDate}';
                                         document.write(moment(date).fromNow());
@@ -162,7 +162,7 @@
                                 <div class="blog__sidebar__item">
                                     <ul>
                                         <li>
-                                            <b>[[#{dblog.cate}]]:</b>
+                                            <b>Categories:</b>
                                             <a th:each="cate : ${categories}" href="#" class="mx-2">
                                                 [[${cate.category.name}]]
                                             </a>
@@ -188,13 +188,13 @@
                             <div class="col-md-12">
                                 <!--comment here-->
                                 <div class="card-body pt-0">
-                                    <h4 class="card-title">[[#{dblog.recent}]]</h4>
-                                    <h6 class="card-subtitle">[[#{dblog.latest}]]</h6></div>
+                                    <h4 class="card-title">Recent Comments</h4>
+                                    <h6 class="card-subtitle">Latest Comments section by users</h6></div>
 
                                     <div ng-if="commentBlog.comments[0].title == null" class="p-5 text-center">
                                         <h3 class="text-muted"><i class="fa fa-comments" aria-hidden="true"></i></h3>
-                                        <h4 class="text-muted"> [[#{dblog.nocmt}]]</h4>
-                                        <h5 class="text-muted">[[#{dblog.bethe}]]</h5>
+                                        <h4 class="text-muted"> No Comments Yet</h4>
+                                        <h5 class="text-muted">Be the first so share what you think!</h5>
                                     </div>
 
                                 <div class="comment-widgets m-b-20">
@@ -223,7 +223,7 @@
                                                          <span ng-click="commentBlog.displayForm($index)"
                                                                ng-dblclick="commentBlog.deleteForm($index)"
                                                                data-abc="true"><i class="fa fa-reply-all"
-                                                                                  aria-hidden="true"></i> [[#{dblog.reply}]]</span>
+                                                                                  aria-hidden="true"></i> Reply</span>
                                                      </span>
                                             </div>
 
@@ -237,10 +237,10 @@
                                                        class="text-danger font-italic"
                                                        th:href="@{/security/login/form}"><i class="fa fa-sign-in"
                                                                                             aria-hidden="true"></i>
-                                                        [[#{dblog.please}]]</a>
+                                                        Please login before comment!</a>
                                                     <button ng-if="commentBlog.customer.email != null"
                                                             ng-click="commentBlog.createCommentReply(item.id)"
-                                                            type="submit" class="btn py-2 px-4 btn-primary">[[#{dblog.post}]]
+                                                            type="submit" class="btn py-2 px-4 btn-primary">Post Comment
                                                     </button>
                                                 </div>
                                             </form>
@@ -272,7 +272,7 @@
                                                          <span ng-click="commentBlog.displayFormReply($index)"
                                                                ng-dblclick="commentBlog.deleteFormReply($index)"
                                                                data-abc="true"><i class="fa fa-reply-all"
-                                                                                  aria-hidden="true"></i> [[#{dblog.reply}]]</span>
+                                                                                  aria-hidden="true"></i> Reply</span>
                                                      </span>
                                                     </div>
 
@@ -285,10 +285,12 @@
                                                             <a ng-if="commentBlog.customer.email == null"
                                                                class="text-danger font-italic"
                                                                th:href="@{/security/login/form}"><i
-                                                                    class="fa fa-sign-in" aria-hidden="true"></i> [[#{dblog.please}]]</a>
+                                                                    class="fa fa-sign-in" aria-hidden="true"></i> Please
+                                                                login before comment!</a>
                                                             <button ng-if="commentBlog.customer.email != null"
                                                                     ng-click="commentBlog.createCommentReply(reply.id)"
-                                                                    type="submit" class="btn py-2 px-4 btn-primary">[[#{dblog.post}]]
+                                                                    type="submit" class="btn py-2 px-4 btn-primary">Post
+                                                                Comment
                                                             </button>
                                                         </div>
                                                     </form>
@@ -317,16 +319,17 @@
                         </script>
 
                         <div class="comment-form-wrap pt-5  mb-5">
-                            <h3 class="mb-2 h4 font-weight-bold p-4 bg-light">[[#{dblog.leave}]]</h3>
+                            <h3 class="mb-2 h4 font-weight-bold p-4 bg-light">Leave a comment</h3>
                             <form class="p-4 p-md-5 bg-light">
                                 <div class="form-group">
                                     <textarea id="myTextarea"></textarea></div>
                                 <div class="form-group text-right">
                                     <a ng-if="commentBlog.customer.email == null" class="text-danger font-italic"
                                        th:href="@{/security/login/form}"><i class="fa fa-sign-in"
-                                                                            aria-hidden="true"></i> [[#{dblog.please}]]</a>
+                                                                            aria-hidden="true"></i> Please login before
+                                        comment!</a>
                                     <button ng-if="commentBlog.customer.email != null" ng-click="commentBlog.create()"
-                                            type="submit" class="btn py-2 px-4 btn-primary">[[#{dblog.post}]]
+                                            type="submit" class="btn py-2 px-4 btn-primary">Post Comment
                                     </button>
                                 </div>
                             </form>
@@ -345,7 +348,7 @@
                             </form>
                         </div>
                         <div class="blog__sidebar__item">
-                            <h4>[[#{dblog.cate}]]</h4>
+                            <h4>Categories</h4>
                             <ul>
                                 <li><a href="#">All</a></li>
                                 <li><a href="#">Beauty (20)</a></li>
@@ -408,7 +411,7 @@
         <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
             <div class="toast-header">
                 <img src="/assets/images/logo.png" class="rounded mr-2" alt="logo" width="30%">
-                <strong class="mr-auto">[[#{noti.notification}]] SUNFOOD</strong>
+                <strong class="mr-auto">Notification SUNFOOD</strong>
                 <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

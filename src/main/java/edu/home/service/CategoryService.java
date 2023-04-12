@@ -3,7 +3,6 @@ package edu.home.service;
 import java.util.List;
 
 import edu.home.entity.Category;
-import edu.home.repository.CategoryRepository;
 
 public interface CategoryService {
 
@@ -26,4 +25,7 @@ Category findById(Long id);
 List<Category> findAllByFoodId(Long foodId);
 
 Category getByName(String name);
+
+//Giàu
+List<Category> getAllCategoriesByFoodID(Long id);
 }

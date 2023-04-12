@@ -17,9 +17,9 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text" style="font-size: 20px;">
-                        <a th:href="@{/home/index}"><i class="fa fa-home" aria-hidden="true"></i> [[#{lblog.home}]]</a>
+                        <a th:href="@{/home/index}"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
                         <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                        <span>[[#{lblog.stories}]]</span>
+                        <span>Shop</span>
                     </div>
                 </div>
             </div>
@@ -36,18 +36,18 @@
 
                         </div>
                         <div class="blog__sidebar__item">
-                            <h4 >[[#{lblog.cate}]]</h4>
+                            <h4 >Categories</h4>
                             <form th:action="@{|/stories/list|}">
                                 <input type="text" th:name="keyword"  th:value = "${keyword}" required placeholder="Search..."/>
                                 <input type="submit" th:value="Search"/> &nbsp; <span class="icon_search"></span>
                             </form>
                             <ul>
-                                <li><a href="#">[[#{lblog.all}]]</a></li>
+                                <li><a href="#">All</a></li>
 
                             </ul>
                         </div>
                         <div class="blog__sidebar__item">
-                            <h4>[[#{lblog.recent}]]</h4>
+                            <h4>Recent News</h4>
 
                             <div th:each="a:${top3}" class="my-2 blog__sidebar__recent">
                                 <a th:href="@{|stories/detail/${a.id}|}" class="blog__sidebar__recent__item">
@@ -66,7 +66,7 @@
                             </div>
                         </div>
                         <div class="blog__sidebar__item">
-                            <h4>[[#{lblog.search}]]</h4>
+                            <h4>Search By</h4>
 
 
                             <div class="blog__sidebar__item__tags"  >
@@ -99,7 +99,7 @@
                                     <h5><a th:href="@{|/stories/detail/${a.id}|}">[[${a.title}]]</a></h5>
                                     <p class="content-blog">[[${a.content}]]</p>
 
-                                    <a th:href="@{|stories/detail/${a.id}|}" class="blog__btn">[[#{lblog.read}]] <span class="arrow_right"></span></a>
+                                    <a th:href="@{|stories/detail/${a.id}|}" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
                                 </div>
                             </div>
                         </div>

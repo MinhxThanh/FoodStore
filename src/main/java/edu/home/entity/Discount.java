@@ -20,12 +20,6 @@ public class Discount implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@Column(name="amount_limit")
-	private double amountLimit;
-
-	@Column(name="amount_used")
-	private double amountUsed;
-
 	@Column(name="create_date")
 	@Temporal(TemporalType.DATE)
 	private Date createDate;
@@ -45,6 +39,9 @@ public class Discount implements Serializable {
 	@Column(name="start_date")
 	@Temporal(TemporalType.DATE)
 	private Date startDate;
+	
+	@Column(name="percent_discount")
+	private float percentDiscount;
 
 	//bidirectional many-to-one association to Food
 	@ManyToOne

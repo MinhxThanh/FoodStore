@@ -16,9 +16,9 @@
       <div class="row">
         <div class="col-lg-12 text-center">
           <div class="breadcrumb__text" style="font-size: 20px;">
-            <a th:href="@{/home/index}"><i class="fa fa-home" aria-hidden="true"></i> [[#{cart.home}]]</a>
+            <a th:href="@{/home/index}"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
             <i class="fa fa-chevron-right" aria-hidden="true"></i>
-            <span>[[#{cart.shop}]]</span>
+            <span>Shopping Cart</span>
           </div>
         </div>
       </div>
@@ -31,7 +31,7 @@
       <div class="row">
         <div th:if="${#request.remoteUser}" class="col-12 btn_synchronize text-right mb-4">
           <button ng-click="cart.synchronize()" class="btn btn-outline-danger px-5 py-2">
-            <i class="fa fa-cloud" aria-hidden="true"></i> [[#{cart.synch}]]
+            <i class="fa fa-cloud" aria-hidden="true"></i> Synchronize
           </button>
         </div>
         <div class="col-lg-12">
@@ -40,10 +40,10 @@
               <thead>
               <tr>
                 <th></th>
-                <th class="shoping__product">[[#{cart.product}]]</th>
-                <th>[[#{cart.price}]]</th>
-                <th>[[#{cart.quantity}]]</th>
-                <th>[[#{cart.total}]]</th>
+                <th class="shoping__product">Products</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
                 <th></th>
               </tr>
               </thead>
@@ -89,30 +89,30 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="shoping__cart__btns">
-            <a href="#" class="primary-btn cart-btn">[[#{cart.continue}]]</a>
+            <a href="#" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
             <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
-              [[#{cart.update}]]</a>
+              Upadate Cart</a>
           </div>
         </div>
         <div class="col-lg-6">
           <div class="shoping__continue">
             <div class="shoping__discount">
-              <h5>[[#{cart.discount}]]</h5>
+              <h5>Discount Codes</h5>
               <form action="#">
                 <input type="text" placeholder="Enter your coupon code">
-                <button type="submit" class="site-btn">[[#{cart.apply}]]</button>
+                <button type="submit" class="site-btn">APPLY COUPON</button>
               </form>
             </div>
           </div>
         </div>
         <div class="col-lg-6">
           <div class="shoping__checkout">
-            <h5>[[#{cart.ctotal}]]</h5>
+            <h5>Cart Total</h5>
             <ul>
-              <li>[[#{cart.subtotal}]] <span>${{cart.amount | number:2}}</span></li>
-              <li>[[#{cart.total}]] <span>${{cart.amount | number:2}}</span></li>
+              <li>Subtotal <span>${{cart.amount | number:2}}</span></li>
+              <li>Total <span>${{cart.amount | number:2}}</span></li>
             </ul>
-            <a th:href="@{/order/checkout}" class="primary-btn">[[#{cart.proceed}]]</a>
+            <a th:href="@{/order/checkout}" class="primary-btn">PROCEED TO CHECKOUT</a>
           </div>
         </div>
       </div>
@@ -123,7 +123,7 @@
       <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
         <div class="toast-header">
           <img src="/assets/images/logo.png" class="rounded mr-2" alt="logo" width="30%">
-          <strong class="mr-auto">[[#{noti.notification}]] SUNFOOD</strong>
+          <strong class="mr-auto">Notification SUNFOOD</strong>
           <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>

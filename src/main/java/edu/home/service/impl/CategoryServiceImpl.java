@@ -59,4 +59,9 @@ public class CategoryServiceImpl implements CategoryService {
 	public Category getByName(String name) {
 		return dao.findByName(name).orElse(null);
 	}
+//  Giàu
+  @Override
+  public List<Category> getAllCategoriesByFoodID(Long id) {
+      return dao.findAllCategoriesByFoodId(id);
+  }
 }

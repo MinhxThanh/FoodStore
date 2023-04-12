@@ -15,4 +15,9 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     
     @Query("SELECT c FROM Category c WHERE c.name = ?1 ")
 	Optional<Category> findByName(String keyword);
+    
+//  Giàu
+  @Query("select c from Category c join CategoryFood cf on cf.category.id = c.id " +
+          "join Food f on f.id = cf.food.id where f.id = ?1")
+  List<Category> findAllCategoriesByFoodId(Long id);
 }
