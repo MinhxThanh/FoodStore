@@ -17,6 +17,6 @@ public class GlobalInterceptor implements HandlerInterceptor{
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		request.setAttribute("cates", cateService.findAll());
+		request.setAttribute("cates", cateService.findTop11());
 	}
 }

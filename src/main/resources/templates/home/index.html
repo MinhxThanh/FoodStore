@@ -20,8 +20,8 @@
                             <span>All departments</span>
                         </div>
                         <ul>
-                             <li><a href="/food/all" th:style="${cid} ==''?'color:#7fad39;':''">All</a></li>
-                   			<li th:each="c:${cates}"><a th:href="@{|/food/${c.name}|}" th:style="${c.name==cid?'color:#7fad39;':''}" th:if="${c.isDisplay}">[[${c.name}]] </a></li>
+                            <li><a href="/food/all" th:style="${cid} ==''?'color:#7fad39;':''">All</a></li>
+                            <li th:each="c:${cates}"><a th:href="@{|/food/${c.name}|}" th:style="${c.name==cid?'color:#7fad39;':''}" th:if="${c.isDisplay}">[[${c.name}]] </a></li>
                         </ul>
                     </div>
                 </div>
@@ -29,13 +29,13 @@
                     <div class="hero__search">
                         <div class="hero__search__form">
                             <form method="get" th:action="@{|/food/all|}">
-	                            <div class="hero__search__categories">
-	                                All Categories
-	                                <span class="arrow_carrot-down"></span>
-	                            </div>
-	                            <input type="text" placeholder="Bạn muốn tìm gì?" name="keyword" onblur="this.form.submit()">
-	                            <button type="submit" class="site-btn">SEARCH</button>
-                        	</form>
+                                <div class="hero__search__categories">
+                                    All Categories
+                                    <span class="arrow_carrot-down"></span>
+                                </div>
+                                <input type="text" placeholder="Bạn muốn tìm gì?" name="keyword" onblur="this.form.submit()">
+                                <button type="submit" class="site-btn">SEARCH</button>
+                            </form>
                         </div>
                         <div class="hero__search__phone">
                             <div class="hero__search__phone__icon">
@@ -66,7 +66,7 @@
         <div class="container">
             <div class="row">
                 <div class="categories__slider owl-carousel">
-                    <div class="col-lg-3" th:each="c:${cates}">
+                    <div class="col-lg-3" th:each="c, iterStat : ${cates}" th:if="${iterStat.index < 11}">
                         <div class="categories__item set-bg" data-setbg="/assets/images/categories/cat-1.jpg">
                             <h5><a th:href="@{|/food/${c.name}|}" th:style="${c.name==cid?'color:#7fad39;':''}" th:if="${c.isDisplay}">[[${c.name}]] </a></h5>
                         </div>
@@ -77,229 +77,119 @@
     </section>
     <!-- Categories Section End -->
 
+    <!-- Categories Section End -->
+
     <!-- Featured Section Begin -->
     <section class="featured spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <h2>Breakfast</h2>
+                        <h2>Featured Product</h2>
                     </div>
                     <div class="featured__controls">
                         <ul>
                             <li class="active" data-filter="*">All</li>
-                            <li data-filter=".oranges">Oranges</li>
-                            <li data-filter=".fresh-meat">Fresh Meat</li>
-                            <li data-filter=".vegetables">Vegetables</li>
-                            <li data-filter=".fastfood">Fastfood</li>
+                            <li data-filter=".oranges">Breakfast</li>
+                            <li data-filter=".fresh-meat">Lunch</li>
+                            <li data-filter=".vegetables">Dinner</li>
+                            <li data-filter=".fastfood">Dessert</li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="row featured__filter">
-                    
-                     <div th:each="p: ${imageName}" class="col-lg-3 col-md-4 col-sm-6 mix fastfood vegetables">
-                    <div class="featured__item">
-                        <div class="featured__item__pic" >
-                            <img alt="" th:src="@{'/assets/images/'+*{p.imageName}}">
-                            <ul class="featured__item__pic__hover">
+                <div th:each="item : ${breakfast}" class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                    <div class="product__discount__item">
+                        <div class="product__discount__item__pic set-bg"
+                             th:data-setbg="@{|${item.image}|}">
+                            <div th:if="${item.numberDateToEnd > 0}" class="product__discount__percent">-[[${item.percentDiscount}]]%</div>
+                            <ul class="product__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                <li>
+                                    <a th:attr="ng-click=@{|cart.add(${item.id})|}"><i class="fa fa-shopping-cart"></i></a>
+                                </li>
                             </ul>
                         </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#" th:text="*{p.name}">Crab Pool Security</a></h6>
-                            <h5 th:text="*{p.price}">$30.00</h5>
+                        <div class="product__discount__item__text">
+                            <h5><a th:href="@{|/food/detail/${item.id}|}">[[${item.name}]]</a></h5>
+                            <div class="product__item__price">
+                                <p class="product__item__price text-danger d-inline">đ [[${#numbers.formatDecimal(item.priceNew, 0, 'COMMA', 2, 'POINT')}]]</p>
+                                <span>đ [[${#numbers.formatDecimal(item.priceOld, 0, 'COMMA', 2, 'POINT')}]]</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                </div>
-                
-                <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <h2>Lunch</h2>
-                    </div>
-                    <div class="featured__controls">
-                        <ul>
-                            <li class="active" data-filter="*">All</li>
-                            <li data-filter=".oranges">Oranges</li>
-                            <li data-filter=".fresh-meat">Fresh Meat</li>
-                            <li data-filter=".vegetables">Vegetables</li>
-                            <li data-filter=".fastfood">Fastfood</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-                <div class="row featured__filter">
-                    
-                     <div th:each="p: ${imageName2}" class="col-lg-3 col-md-4 col-sm-6 mix fastfood vegetables">
-                    <div class="featured__item">
-                        <div class="featured__item__pic" >
-                            <img alt="" th:src="@{'/assets/images/'+*{p.imageName}}">
-                            <ul class="featured__item__pic__hover">
+                <div th:each="item : ${lunch}" class="col-lg-3 col-md-4 col-sm-6 mix fastfood oranges">
+                    <div class="product__discount__item">
+                        <div class="product__discount__item__pic set-bg"
+                             th:data-setbg="@{|${item.image}|}">
+                            <div th:if="${item.numberDateToEnd > 0}" class="product__discount__percent">-[[${item.percentDiscount}]]%</div>
+                            <ul class="product__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                <li>
+                                    <a th:attr="ng-click=@{|cart.add(${item.id})|}"><i class="fa fa-shopping-cart"></i></a>
+                                </li>
                             </ul>
                         </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#" th:text="*{p.name}">Crab Pool Security</a></h6>
-                            <h5 th:text="*{p.price}">$30.00</h5>
+                        <div class="product__discount__item__text">
+                            <h5><a th:href="@{|/food/detail/${item.id}|}">[[${item.name}]]</a></h5>
+                            <div class="product__item__price">
+                                <p class="product__item__price text-danger d-inline">đ [[${#numbers.formatDecimal(item.priceNew, 0, 'COMMA', 2, 'POINT')}]]</p>
+                                <span>đ [[${#numbers.formatDecimal(item.priceOld, 0, 'COMMA', 2, 'POINT')}]]</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                </div>
-                
-                <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <h2>Dinner</h2>
-                    </div>
-                    <div class="featured__controls">
-                        <ul>
-                            <li class="active" data-filter="*">All</li>
-                            <li data-filter=".oranges">Oranges</li>
-                            <li data-filter=".fresh-meat">Fresh Meat</li>
-                            <li data-filter=".vegetables">Vegetables</li>
-                            <li data-filter=".fastfood">Fastfood</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="row featured__filter">
-                    
-                     <div th:each="p: ${imageName3}" class="col-lg-3 col-md-4 col-sm-6 mix fastfood vegetables">
-                    <div class="featured__item">
-                        <div class="featured__item__pic" >
-                            <img alt="" th:src="@{'/assets/images/'+*{p.imageName}}">
-                            <ul class="featured__item__pic__hover">
+                <div th:each="item : ${dinner}" class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
+                    <div class="product__discount__item">
+                        <div class="product__discount__item__pic set-bg"
+                             th:data-setbg="@{|${item.image}|}">
+                            <div th:if="${item.numberDateToEnd > 0}" class="product__discount__percent">-[[${item.percentDiscount}]]%</div>
+                            <ul class="product__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                <li>
+                                    <a th:attr="ng-click=@{|cart.add(${item.id})|}"><i class="fa fa-shopping-cart"></i></a>
+                                </li>
                             </ul>
                         </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#" th:text="*{p.name}">Crab Pool Security</a></h6>
-                            <h5 th:text="*{p.price}">$30.00</h5>
+                        <div class="product__discount__item__text">
+                            <h5><a th:href="@{|/food/detail/${item.id}|}">[[${item.name}]]</a></h5>
+                            <div class="product__item__price">
+                                <p class="product__item__price text-danger d-inline">đ [[${#numbers.formatDecimal(item.priceNew, 0, 'COMMA', 2, 'POINT')}]]</p>
+                                <span>đ [[${#numbers.formatDecimal(item.priceOld, 0, 'COMMA', 2, 'POINT')}]]</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                </div>
-                
-                <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <h2>Dessert</h2>
-                    </div>
-                    <div class="featured__controls">
-                        <ul>
-                            <li class="active" data-filter="*">All</li>
-                            <li data-filter=".oranges">Oranges</li>
-                            <li data-filter=".fresh-meat">Fresh Meat</li>
-                            <li data-filter=".vegetables">Vegetables</li>
-                            <li data-filter=".fastfood">Fastfood</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="row featured__filter">
-                    
-                     <div th:each="p: ${imageName4}" class="col-lg-3 col-md-4 col-sm-6 mix fastfood vegetables">
-                    <div class="featured__item">
-                        <div class="featured__item__pic" >
-                            <img alt="" th:src="@{'/assets/images/'+*{p.imageName}}">
-                            <ul class="featured__item__pic__hover">
+                <div th:each="item : ${dessert}" class="col-lg-3 col-md-4 col-sm-6 mix fastfood vegetables">
+                    <div class="product__discount__item">
+                        <div class="product__discount__item__pic set-bg"
+                             th:data-setbg="@{|${item.image}|}">
+                            <div th:if="${item.numberDateToEnd > 0}" class="product__discount__percent">-[[${item.percentDiscount}]]%</div>
+                            <ul class="product__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                <li>
+                                    <a th:attr="ng-click=@{|cart.add(${item.id})|}"><i class="fa fa-shopping-cart"></i></a>
+                                </li>
                             </ul>
                         </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#" th:text="*{p.name}">Crab Pool Security</a></h6>
-                            <h5 th:text="*{p.price}">$30.00</h5>
+                        <div class="product__discount__item__text">
+                            <h5><a th:href="@{|/food/detail/${item.id}|}">[[${item.name}]]</a></h5>
+                            <div class="product__item__price">
+                                <p class="product__item__price text-danger d-inline">đ [[${#numbers.formatDecimal(item.priceNew, 0, 'COMMA', 2, 'POINT')}]]</p>
+                                <span>đ [[${#numbers.formatDecimal(item.priceOld, 0, 'COMMA', 2, 'POINT')}]]</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                </div>
-                <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <h2>Wine</h2>
-                    </div>
-                    <div class="featured__controls">
-                        <ul>
-                            <li class="active" data-filter="*">All</li>
-                            <li data-filter=".oranges">Oranges</li>
-                            <li data-filter=".fresh-meat">Fresh Meat</li>
-                            <li data-filter=".vegetables">Vegetables</li>
-                            <li data-filter=".fastfood">Fastfood</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="row featured__filter">
-                    
-                     <div th:each="p: ${imageName5}" class="col-lg-3 col-md-4 col-sm-6 mix fastfood vegetables">
-                    <div class="featured__item">
-                        <div class="featured__item__pic" >
-                            <img alt="" th:src="@{'/assets/images/'+*{p.imageName}}">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#" th:text="*{p.name}">Crab Pool Security</a></h6>
-                            <h5 th:text="*{p.price}">$30.00</h5>
-                        </div>
-                    </div>
-                </div>
-                </div>
-                <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <h2>Drink</h2>
-                    </div>
-                    <div class="featured__controls">
-                        <ul>
-                            <li class="active" data-filter="*">All</li>
-                            <li data-filter=".oranges">Oranges</li>
-                            <li data-filter=".fresh-meat">Fresh Meat</li>
-                            <li data-filter=".vegetables">Vegetables</li>
-                            <li data-filter=".fastfood">Fastfood</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="row featured__filter">
-                    
-                     <div th:each="p: ${imageName6}" class="col-lg-3 col-md-4 col-sm-6 mix fastfood vegetables">
-                    <div class="featured__item">
-                        <div class="featured__item__pic" >
-                            <img alt="" th:src="@{'/assets/images/'+*{p.imageName}}">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#" th:text="*{p.name}">Crab Pool Security</a></h6>
-                            <h5 th:text="*{p.price}">$30.00</h5>
-                        </div>
-                    </div>
-                </div>
-                </div>
-                
             </div>
         </div>
-        
-        
     </section>
-    
     <!-- Featured Section End -->
 
     <!-- Banner Begin -->

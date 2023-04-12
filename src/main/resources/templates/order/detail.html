@@ -129,7 +129,7 @@
               <div class="col-lg-12">
                 <div th:each="item : ${orderDetails}" class="row px-2 py-3 border-top my-3">
                   <div class="col-2">
-                    <img th:src="@{|/assets/images/product/${item.food.imageFoods.get(0).imageName}|}" alt="image">
+                    <img th:src="@{|${item.food.imageFoods.get(0).imageName}|}" alt="image">
                   </div>
                   <div class="col-10">
                     <b class="d-block" th:text="${item.food.name}"></b>

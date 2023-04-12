@@ -41,5 +41,7 @@ public interface FoodRepository extends JpaRepository<Food, Long> {
 	
 	@Query("select f from Food f where f.createDate = ?1")
 	List<Food> findByCreateDate(Date createDate);
-	
+
+    @Query(value="{CALL sp_getTop2FoodByCategoryId(:categoryId)}", nativeQuery = true)
+    List<Tuple> getTop2FoodByCategoryId(BigInteger categoryId);
 }

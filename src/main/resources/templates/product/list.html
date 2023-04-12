@@ -137,7 +137,7 @@
                                     <div class="latest-prdouct__slider__item">
                                         <a th:each="item, iState : ${listTop}" th:if="${iState.index} < 3" href="#" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img th:src="@{|/assets/images/product/${item.image}|}" alt="">
+                                                <img th:src="@{|${item.image}|}" alt="">
                                             </div>
                                             <div class="latest-product__item__text">
                                                 <h6>[[${item.name}]]</h6>
@@ -148,7 +148,7 @@
                                     <div class="latest-prdouct__slider__item">
                                         <a th:each="item, iState : ${listTop}" th:unless="${iState.index < 3 or iState.index >= 6}" href="#" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img th:src="@{|/assets/images/product/${item.image}|}" alt="">
+                                                <img th:src="@{|${item.image}|}" alt="">
                                             </div>
                                             <div class="latest-product__item__text">
                                                 <h6>[[${item.name}]]</h6>
@@ -159,7 +159,7 @@
                                     <div class="latest-prdouct__slider__item">
                                         <a th:each="item, iState : ${listTop}" th:if="${iState.index} >= 6" href="#" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img th:src="@{|/assets/images/product/${item.image}|}" alt="">
+                                                <img th:src="@{|${item.image}|}" alt="">
                                             </div>
                                             <div class="latest-product__item__text">
                                                 <h6>[[${item.name}]]</h6>
@@ -182,7 +182,7 @@
                                 <div th:each="item : ${listSale}" class="col-lg-4">
                                     <div class="product__discount__item">
                                         <div class="product__discount__item__pic set-bg"
-                                             th:data-setbg="@{|/assets/images/product/${item.image}|}">
+                                             th:data-setbg="@{|${item.image}|}">
                                             <div class="product__discount__percent">-[[${item.percentDiscount}]]%</div>
                                             <ul class="product__item__pic__hover">
                                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
@@ -234,7 +234,7 @@
                         <div ng-repeat="item in items" class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__discount__item mb-5">
                                 <div class="product__discount__item__pic set-bg">
-                                    <img class="card-img" ng-src="/assets/images/product/{{item.image}}" alt="">
+                                    <img class="card-img" ng-src="{{item.image}}" alt="">
                                     <div ng-if="item.percentDiscount != null && item.numberDateToEnd > 0" class="product__discount__percent">-{{item.percentDiscount}}%</div>
                                     <ul class="product__item__pic__hover">
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>

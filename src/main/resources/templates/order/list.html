@@ -32,7 +32,7 @@
       <div th:each="item : ${items}" class="card mb-3 mx-2 col-sm-10 col-lg-5 rounded-5">
       <div class="row no-gutters">
         <div class="col-md-4">
-          <img th:src="@{|/assets/images/product/${item.image}|}" class="rounded-5" alt="image" style="margin-left: -0.9rem">
+          <img th:src="@{|${item.image}|}" class="rounded-5" alt="image" style="margin-left: -0.9rem">
           <small class="text-muted font-italic">
             Order
             <!-- JavaScript code to further format date using Moment.js -->

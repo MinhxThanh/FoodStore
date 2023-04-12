@@ -79,7 +79,7 @@
                                 <li>
                                     <a ng-repeat="item in cart.items | limitTo: 5:0" class="cart_card d-flex flex-row" th:href="@{/cart}">
                                         <div class="image_cart text-left d-flex flex-row">
-                                            <img ng-src="/assets/images/product/{{item.image}}" class="img-fluid w-25" alt="image product">
+                                            <img ng-src="{{item.image}}" class="img-fluid w-25" alt="image product">
                                             <div class="col-8" style="margin-top: 3px;
                                                 display: block;
                                                 text-overflow: ellipsis;

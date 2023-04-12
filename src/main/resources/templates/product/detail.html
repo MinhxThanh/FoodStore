@@ -35,11 +35,11 @@
           <div class="product__details__pic">
             <div class="product__details__pic__item">
               <img class="product__details__pic__item--large"
-                   th:src="@{|/assets/images/product/${imageFoods.get(0).imageName}|}" alt="">
+                   th:src="@{|${imageFoods.get(0).imageName}|}" alt="">
             </div>
             <div class="product__details__pic__slider owl-carousel">
-              <img th:each="i: ${imageFoods}" th:data-imgbigurl="@{|/assets/images/product/${i.imageName}|}"
-                   th:src="@{|/assets/images/product/${i.imageName}|}" alt="">
+              <img th:each="i: ${imageFoods}" th:data-imgbigurl="@{|${i.imageName}|}"
+                   th:src="@{|${i.imageName}|}" alt="">
             </div>
           </div>
         </div>
@@ -144,9 +144,8 @@
               <div class="tab-pane active" id="tabs-1" role="tabpanel">
                 <div class="product__details__tab__desc">
                   <h6>Products Information</h6>
-                  <pre>
-                    [[${item.description}]]
-                  </pre>
+                  <th:block th:utext="${item.description}"></th:block>
+
                 </div>
               </div>
               <div class="tab-pane" id="tabs-2" role="tabpanel">
@@ -193,7 +192,7 @@
         <div th:each="item : ${relatedFoods}" class="col-lg-3 col-md-4 col-sm-6 mb-5">
           <div class="product__discount__item">
             <div class="product__discount__item__pic set-bg"
-                 th:data-setbg="@{|/assets/images/product/${item.image}|}">
+                 th:data-setbg="@{|${item.image}|}">
               <div th:if="${item.numberDateToEnd > 0}" class="product__discount__percent">-[[${item.percentDiscount}]]%</div>
               <ul class="product__item__pic__hover">
                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
