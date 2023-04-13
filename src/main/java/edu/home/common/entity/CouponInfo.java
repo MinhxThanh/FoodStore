@@ -24,7 +24,6 @@ public class CouponInfo {
     private Date createDate;//
 	private String description;//
 	private Date endDate ;//
-	private Long foodLimit;
 	private Boolean isDisplay;//
 	private Boolean isFixed ;//
 	private String name ;//

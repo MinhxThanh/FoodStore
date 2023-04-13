@@ -1,15 +1,13 @@
 package edu.home.service.impl;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import edu.home.entity.Customer;
 import edu.home.repository.CustomerRepository;
 import edu.home.service.CustomerService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -38,6 +36,12 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public List<Customer> findAll() {
 		return dao.findAll();
+	}
+
+	@Override
+	public void delete(String email) {
+		dao.deleteById(email);
+		
 	}
 }
 

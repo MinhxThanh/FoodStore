@@ -41,7 +41,6 @@ public class CustomerRestController {
 
 	@GetMapping(value = "getAll")
 	public List<Customer> getAllcustomer() {
-		System.out.println("\n dang chay getall customer \n");
 		return customerService.findAll();
 	}
 
@@ -50,16 +49,6 @@ public class CustomerRestController {
 		try {
 
 			Customer customer = new Customer();
-
-////			customer.setId(customerInfo.getId());
-//			customer.setContent(customerInfo.getContent());
-//			customer.setCreateDate(customerInfo.getCreateDate());
-//			customer.setIsDisplay(customerInfo.getIsDisplay());
-//			customer.setStatus(customerInfo.getStatus());
-//			customer.setTitle(customerInfo.getTitle());
-//			customer.setViewCount(customerInfo.getViewCount());
-//			customer.setUser(userAccountService.findByUsernameOrEmail(customerInfo.getCreateBy()));
-			
 			
 			customer.setEmail(customerInfo.getEmail());
 			customer.setCreateDate(customerInfo.getCreateDate());
@@ -68,18 +57,11 @@ public class CustomerRestController {
 			customer.setFirstName(customerInfo.getFirstName());
 			customer.setFullname(customerInfo.getFullname());
 			customer.setLastName(customerInfo.getLastName());
-			customer.setGender(customerInfo.getGender());
-			
+			customer.setGender(customerInfo.getGender());	
 			customer.setIsDisplay(customerInfo.getIsDisplay());
-			
-//			customer.setIsDisplay(false);
-			
 			customer.setPassword(customerInfo.getPassword());
 			customer.setRememberToken(customerInfo.getRememberToken());
 			customer.setStatus(customerInfo.getStatus());
-         
-         
-
 			return ResponseEntity.ok(customerService.create(customer));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -87,29 +69,36 @@ public class CustomerRestController {
 		}
 	}
 
-//	@DeleteMapping(value = "delete/{id}")
-//	public void deletecustomer(@PathVariable("id") Long id) {
-//		System.out.println("\n dang chay delete \n");
-//		customerService.delete(id);
-//	}
+	@DeleteMapping(value = "delete/{id}")
+	public void deletecustomer(@PathVariable("id") String email) {
+		try {
+			customerService.delete(email);
+		} catch (Exception e) {
+			e.printStackTrace();
+			Customer oldcustomer = customerService.findByEmail(email);
+			oldcustomer.setIsDisplay(false);
+			customerService.create(oldcustomer);
+		}
+	}
 
 	@PutMapping(value = "update")
 	public ResponseEntity<?> updateCategory(@RequestBody CustomerInfo customerInfo) {
 		try {
-//			customer oldcustomer = customerService.findById(customerInfo.getId());
+			Customer oldcustomer = customerService.findByEmail(customerInfo.getEmail());
 			Customer customer = new Customer();
-//
-//			customer.setId(customerInfo.getId());
-//			customer.setContent(customerInfo.getContent());
-//			
-//			customer.setCreateDate(oldcustomer.getCreateDate());//?
-//			
-//			customer.setIsDisplay(customerInfo.getIsDisplay());
-//			customer.setStatus(customerInfo.getStatus());
-//			customer.setTitle(customerInfo.getTitle());
-//			customer.setViewCount(customerInfo.getViewCount());
-//			
-//			customer.setUser(userAccountService.findByUsernameOrEmail(customerInfo.getCreateBy()));
+
+			customer.setEmail(oldcustomer.getEmail());
+			customer.setCreateDate(customerInfo.getCreateDate());
+			customer.setAvatar(customerInfo.getAvatar());
+			customer.setBirthday(customerInfo.getBirthday());
+			customer.setFirstName(customerInfo.getFirstName());
+			customer.setFullname(customerInfo.getFullname());
+			customer.setLastName(customerInfo.getLastName());
+			customer.setGender(customerInfo.getGender());	
+			customer.setIsDisplay(customerInfo.getIsDisplay());
+			customer.setPassword(customerInfo.getPassword());
+			customer.setRememberToken(customerInfo.getRememberToken());
+			customer.setStatus(customerInfo.getStatus());
 
 			return ResponseEntity.ok(customerService.create(customer));
 		} catch (Exception e) {
