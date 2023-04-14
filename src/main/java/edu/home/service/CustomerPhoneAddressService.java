@@ -10,4 +10,10 @@ public interface CustomerPhoneAddressService {
     CustomerPhoneAddress findByCustomerEmail(String remoteUser);
 
     CustomerPhoneAddress findById(long id);
+
+	CustomerPhoneAddress update(CustomerPhoneAddress customerPhoneAddress);
+
+	void deleteById(Long id);
+
+	CustomerPhoneAddress create(CustomerPhoneAddress customerPhoneAddress);
 }

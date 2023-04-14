@@ -15,7 +15,7 @@
         <div class="py-5" style="margin-bottom: 100px;">
             <div class="col-lg-5 col-sm-11 p-5 m-auto shadow"
                  style="background: rgba(255, 255, 255, 0.708); border-radius: 30px;">
-                <h2 class="text-center my-4 text-uppercase">Register</h2>
+                <h2 class="text-center my-4 text-uppercase">[[#{register.register}]]</h2>
                 <!-- message-->
                 <div class="alert alert-success" role="alert" th:if="${message}">
                     <i>[[${message}]]</i>
@@ -30,10 +30,10 @@
                                ng-required="true" class="form-control p-2 px-3 rounded-pill" type="text"
                                placeholder="Email.." style="background: none !important;">
                         <span class="error text-danger" ng-show="formRegister.email.$error.required">
-                            Please enter email!
+                            [[#{register.pleaseEe}]]
                         </span>
                         <span class="error text-danger" ng-show="!formRegister.email.$error.required&&formRegister.email.$error.pattern">
-                            Please enter email correctly!
+                            [[#{register.pleaseEE}]]
                         </span>
                     </div>
                     <div class="mb-3 row">
@@ -42,10 +42,10 @@
                                    ng-minlength="2" class="form-control p-2 px-3 rounded-pill" type="text"
                                    placeholder="First Name" style="background: none !important;">
                             <span class="error text-danger" ng-show="formRegister.firstName.$error.required">
-                                Please enter your first name!
+                                [[#{register.pleaseEnterF}]]
                             </span>
                             <span class="error text-danger" ng-show="formRegister.firstName.$error.minlength">
-                                Enter first name has length more than 2!
+                                [[#{register.enterF}]]
                             </span>
                         </div>
                         <div class="col-lg-6 col-sm-12">
@@ -53,10 +53,10 @@
                                    ng-minlength="2" class="form-control p-2 px-3 rounded-pill" type="text"
                                    placeholder="Last Name" style="background: none !important;">
                             <span class="error text-danger" ng-show="formRegister.lastName.$error.required">
-                                Please enter your last name!
+                                [[#{register.please}]]
                             </span>
                             <span class="error text-danger" ng-show="formRegister.lastName.$error.minlength">
-                                Enter last name has length more than 2!
+                                [[#{register.enter}]]
                             </span>
                         </div>
                     </div>
@@ -66,10 +66,10 @@
                                class="form-control p-2 px-3 rounded-pill" type="password" placeholder="Password"
                                style="background: none !important;">
                         <span class="error text-danger" ng-show="formRegister.password.$error.required">
-                            Please enter password!
+                            [[#{register.pleaseE}]]
                         </span>
                         <span class="error text-danger" ng-show="formRegister.password.$error.minlength">
-                            Enter password have length more than 5!
+                            [[#{register.enterP}]]
                         </span>
                     </div>
                     <div class="mb-3">
@@ -78,28 +78,28 @@
                                type="password" placeholder="Password Confirm" style="background: none !important;">
                         <span class="error text-danger"
                               ng-show="formRegister.confirmPassword.$error.required">
-                            Please enter password confirm!
+                            [[#{register.pleaseP}]]
                         </span>
                         <span class="error text-danger d-block" ng-show="formRegister.confirmPassword.$error.compareTo">
-                            Passwords don't match!
+                            [[#{register.passdont}]]
                         </span>
                     </div>
                     <div class="mb-3 px-4" style="background: none;">
                         <input class="form-check-input" name="check" ng-model="check" ng-required="true" type="checkbox"
                                value="1" id="passwordCheck">
                         <label class="form-check-label" for="passwordCheck">
-                            I accept the <a href="#">term service</a>.
+                            [[#{register.i}]] <a href="#">[[#{register.term}]]</a>.
                         </label>
                         <span class="error text-danger" ng-show="formRegister.check.$dirty"></span>
                     </div>
                     <div class="text-center">
                         <button ng-disabled="formRegister.$invalid" type="submit"
                                 class="btn btn-outline-primary w-100 py-2 rounded-pill fw-bold text-uppercase">
-                            Register
+                            [[#{register.register}]]
                         </button>
-                        <a href="#" class="mt-2 mb-4 text-muted">Have account? Sign In Here!</a>
+                        <a href="#" class="mt-2 mb-4 text-muted">[[#{register.have}]]</a>
                         <a th:href="@{/oauth2/authorization/google}" class="btn btn-outline-danger text-uppercase fw-bold w-100 mt-4 rounded-pill py-2" type="submit">
-                            <i class="fa fa-google" aria-hidden="true"></i> Sign in with Google
+                            <i class="fa fa-google" aria-hidden="true"></i> [[#{register.signgg}]]
                         </a>
                     </div>
                 </form>

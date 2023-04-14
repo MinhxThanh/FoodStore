@@ -82,9 +82,9 @@ public class FoodController {
    		model.addAttribute("price_max", price_max.orElse(-1.0));
    		model.addAttribute("size", size.orElse(9));
    		model.addAttribute("sortBy",sort.orElse("idDown"));
-           model.addAttribute("listSale", foodService.getListSaleFood());
-           model.addAttribute("listTop", foodService.getListTopNewFood());
-           model.addAttribute("pageTitle", "Menu");
+       model.addAttribute("listSale", foodService.getListSaleFood());
+       model.addAttribute("listTop", foodService.getListTopNewFood());
+       model.addAttribute("pageTitle", "Menu");
    		return "product/list";
    	}
        

@@ -1,11 +1,19 @@
 const app = angular.module("foodStore-app", ['ngAnimate', 'ngSanitize'])
 app.controller("foodStore-controller", function ($scope, $http, $window) {
     $scope.items = []
+    $scope.address = []
+    $scope.customer = {}
     $scope.address = {}
+    $scope.form = {}
     $scope.message = ''
     $scope.error = ''
 
     $scope.initialize = function (){
+		//get profile customer
+		$http.get(`/rest/customerProfile/findByCustomerEmail`).then(resp => {
+			resp.data.birthday = new Date(resp.data.birthday)
+            $scope.customer = angular.copy(resp.data)
+        })
         //get list food
         $http.get(`/rest/food/getListFood`).then(resp => {
             $scope.items = resp.data
@@ -18,13 +26,118 @@ app.controller("foodStore-controller", function ($scope, $http, $window) {
                 }
         })
         //get info address of customer
-        $http.get(`/rest/customerPhoneAddress/findByCustomerEmail`).then(resp => {
+        $http.get(`/rest/customerPhoneAddress/findAllByCustomerEmail`).then(resp => {
             $scope.address = angular.copy(resp.data)
         })
     }
 
     $scope.initialize()
 
+	$scope.update = function () {
+        var item = angular.copy($scope.customer);
+        $http.put('http://localhost:8080/rest/customerProfile/update/' + item.email, item).then(resp => {
+			$scope.message = "Update profile successfully!"
+			$scope.cart.liveToastBtn()
+        }).catch(error =>{
+			$scope.error = "Error update profile!"
+			$scope.cart.liveToastBtn()
+            console.log("Error", error)
+        })
+    }
+    
+    //them dia chi
+    $scope.addAddress = function () {
+		let item = {
+		id: $scope.form.id,
+		customer: $scope.customer,
+		 username: $scope.form.username,
+		 phone: $scope.form.phone,
+		 cityProvince: $scope.form.cityProvince,
+		 address: $scope.form.address,
+		 default: $scope.form.default
+	 	}
+	 	
+        $http.post(`/rest/customerPhoneAddress/create`, item).then(resp => {
+			$scope.address.push(resp.data)
+		let index = $scope.address.findIndex(item => item.id == resp.data.id)
+        $scope.address[index] = item
+			$scope.message = "Add contact successfully!"
+			$scope.cart.liveToastBtn()
+        }).catch(error =>{
+           $scope.error = "Error create contact!"
+           $scope.cart.liveToastBtn()
+            console.log("Error create", error)
+        })
+    }
+    
+    $scope.addModel = function () {
+        $scope.add = true;
+        $scope.update = false;
+        $('#addressModal').modal('show');
+    }
+    $scope.back = function () {
+        $scope.form = {
+		 customer: null,
+		 username: null,
+		 phone: null,
+		 cityProvince: null,
+		 address: null
+	 }
+    }
+    
+    //do dia chi len form
+     $scope.updateModel2 = function (list){
+		$scope.add = false;
+        $scope.update = true;
+		$scope.form = {
+		 id: list.id,
+		 default: list.default,
+		 customer: list.customer,
+		 username: list.username,
+		 phone: list.phone,
+		 cityProvince: list.cityProvince,
+		 address: list.address
+	 }
+        $('#addressModal').modal('show');
+	}
+	
+	//cap nhat dia chi
+    $scope.updateAddress = function () {
+        var item = angular.copy($scope.form)
+        $http.put(`/rest/customerPhoneAddress/update/${item.id}`, item).then(resp => {
+			let index = $scope.address.findIndex(item => item.id == resp.data.id)
+            $scope.address[index] = item
+            $scope.message = "Update address successfully!"
+			$scope.cart.liveToastBtn()
+        }).catch(err =>{
+           $scope.error = "Error update contact!"
+           $scope.cart.liveToastBtn()
+            console.log("Error updateAddress: ", err)
+        })
+    }
+    
+    //confirm xoa dia chi
+    $scope.confirmRemove = function (list) {
+		 $scope.del=angular.copy(list)
+    	 $('#addressDel').modal('show');
+    }
+    //xoa dia chi
+    $scope.delAddress = function () {
+		let list = $scope.del
+		console.log("list delete: ", list.id)
+		$http.delete(`/rest/customerPhoneAddress/delete/${list.id}`).then(resp => {
+				let index = $scope.address.findIndex(item => item.id == resp.data.id)
+            $scope.address.splice(index, 1)
+            $scope.message = "Delete address successfully!"
+			$scope.cart.liveToastBtn()
+	        }).catch(error =>{
+	            $scope.message = "Error delete address!"
+				$scope.cart.liveToastBtn()
+	            console.log("Error delete", error)
+	        })
+	        list = null
+		}
+		
     $scope.commentBlog = {
         blogId: 'this is content',
         comments: [],
