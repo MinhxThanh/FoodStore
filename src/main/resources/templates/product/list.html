@@ -16,9 +16,9 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text" style="font-size: 20px;">
-                        <a th:href="@{/home/index}"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+                        <a th:href="@{/home/index}"><i class="fa fa-home" aria-hidden="true"></i> [[#{productl.home}]]</a>
                         <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                        <span>Shop</span>
+                        <span>[[#{productl.shop}]]</span>
                     </div>
                 </div>
             </div>
@@ -33,22 +33,17 @@
                 <div class="col-lg-3 col-md-5">
                     <div class="sidebar">
                         <div class="sidebar__item">
-                            <h4>Department</h4>
+                            <h4>[[#{productl.cate}]]</h4>
                             <ul>
-                                <li><a href="#">Fresh Meat</a></li>
-                                <li><a href="#">Vegetables</a></li>
-                                <li><a href="#">Fruit & Nut Gifts</a></li>
-                                <li><a href="#">Fresh Berries</a></li>
-                                <li><a href="#">Ocean Foods</a></li>
-                                <li><a href="#">Butter & Eggs</a></li>
-                                <li><a href="#">Fastfood</a></li>
-                                <li><a href="#">Fresh Onion</a></li>
-                                <li><a href="#">Papayaya & Crisps</a></li>
-                                <li><a href="#">Oatmeal</a></li>
-                            </ul>
+								<li><a href="/food/all"
+									th:style="${cid} ==''?'color:#7fad39;':''">All</a></li>
+								<li th:each="c:${cates}"><a th:href="@{|/food/${c.name}|}"
+									th:style="${c.name==cid?'color:#7fad39;':''}"
+									th:if="${c.isDisplay}">[[${c.name}]] </a></li>
+							</ul>
                         </div>
                         <div class="sidebar__item">
-                            <h4>Price</h4>
+                            <h4>[[#{productl.price}]]</h4>
                             <div class="price-range-wrap">
                                 <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
                                      data-min="10" data-max="540">
@@ -65,74 +60,74 @@
                             </div>
                         </div>
                         <div class="sidebar__item sidebar__item__color--option">
-                            <h4>Colors</h4>
+                            <h4>[[#{productl.colors}]]</h4>
                             <div class="sidebar__item__color sidebar__item__color--white">
                                 <label for="white">
-                                    White
+                                    [[#{productl.white}]]
                                     <input type="radio" id="white">
                                 </label>
                             </div>
                             <div class="sidebar__item__color sidebar__item__color--gray">
                                 <label for="gray">
-                                    Gray
+                                    [[#{productl.gray}]]
                                     <input type="radio" id="gray">
                                 </label>
                             </div>
                             <div class="sidebar__item__color sidebar__item__color--red">
                                 <label for="red">
-                                    Red
+                                    [[#{productl.red}]]
                                     <input type="radio" id="red">
                                 </label>
                             </div>
                             <div class="sidebar__item__color sidebar__item__color--black">
                                 <label for="black">
-                                    Black
+                                    [[#{productl.black}]]
                                     <input type="radio" id="black">
                                 </label>
                             </div>
                             <div class="sidebar__item__color sidebar__item__color--blue">
                                 <label for="blue">
-                                    Blue
+                                    [[#{productl.blue}]]
                                     <input type="radio" id="blue">
                                 </label>
                             </div>
                             <div class="sidebar__item__color sidebar__item__color--green">
                                 <label for="green">
-                                    Green
+                                    [[#{productl.green}]]
                                     <input type="radio" id="green">
                                 </label>
                             </div>
                         </div>
                         <div class="sidebar__item">
-                            <h4>Popular Size</h4>
+                            <h4>[[#{productl.popular}]]</h4>
                             <div class="sidebar__item__size">
                                 <label for="large">
-                                    Large
+                                    [[#{productl.large}]]
                                     <input type="radio" id="large">
                                 </label>
                             </div>
                             <div class="sidebar__item__size">
                                 <label for="medium">
-                                    Medium
+                                    [[#{productl.medium}]]
                                     <input type="radio" id="medium">
                                 </label>
                             </div>
                             <div class="sidebar__item__size">
                                 <label for="small">
-                                    Small
+                                    [[#{productl.small}]]
                                     <input type="radio" id="small">
                                 </label>
                             </div>
                             <div class="sidebar__item__size">
                                 <label for="tiny">
-                                    Tiny
+                                    [[#{productl.tiny}]]
                                     <input type="radio" id="tiny">
                                 </label>
                             </div>
                         </div>
                         <div class="sidebar__item">
                             <div class="latest-product__text">
-                                <h4>Latest Products</h4>
+                                <h4>[[#{productl.lastest}]]</h4>
                                 <div class="latest-product__slider owl-carousel">
                                     <div class="latest-prdouct__slider__item">
                                         <a th:each="item, iState : ${listTop}" th:if="${iState.index} < 3" href="#" class="latest-product__item">
@@ -181,7 +176,7 @@
                 <div class="col-lg-9 col-md-7">
                     <div class="product__discount">
                         <div class="section-title product__discount__title">
-                            <h2>Sale Off</h2>
+                            <h2>[[#{productl.sale}]]</h2>
                         </div>
                         <div class="row">
                             <div class="product__discount__slider owl-carousel">
@@ -216,17 +211,34 @@
                         <div class="row">
                             <div class="col-lg-4 col-md-5">
                                 <div class="filter__sort">
-                                    <span>Sort By</span>
-                                    <select>
-                                        <option value="0">Default</option>
-                                        <option value="0">Default</option>
-                                    </select>
-                                </div>
+									<form method="get" th:action="@{|/food/${cid==''?'all':cid}|}">
+										<span>Sort By</span> <input type="hidden" name="price_min"
+											th:value="${price_min}"> <input type="hidden"
+											name="price_max" th:value="${price_max}"> <input
+											type="hidden" name="size" th:value="${size}"> <select
+											name="sortBy" onchange="this.form.submit()">
+											<option href="#id_name" th:each="sb : ${sortList}" th:value="${sb.value}"
+												th:selected="${sortBy==sb.value}">[[${sb.key}]]</option>
+										</select>
+									</form>
+								</div>
                             </div>
                             <div class="col-lg-4 col-md-4">
-                                <div class="filter__found">
-                                    <h6><span>16</span> Products found</h6>
-                                </div>
+                                <div class="filter__sort">
+									<form method="get" class="colorlib-form-2" th:action="@{|/food/${cid==''?'all':cid}|}">
+										<span>View size</span>
+                                            <input type="hidden" name="price_min" th:value="${price_min}">
+											<input type="hidden" name="price_max" th:value="${price_max}">
+											<input type="hidden" name="sortBy" th:value="${sortBy}">
+                                                <i class="icon icon-arrow-down3"></i>
+	                                                <select name="size" onchange="this.form.submit()" id="people" class="form-control">
+								                        <option th:selected="${size==6}" value="6">6</option>
+								                        <option th:selected="${size==9}" value="9">9</option>
+								                        <option th:selected="${size==12}" value="12">12</option>
+								                        <option th:selected="${size==15}" value="15">15</option>
+								                      </select>
+			                           </form>
+								</div>
                             </div>
                             <div class="col-lg-4 col-md-3">
                                 <div class="filter__option">
@@ -237,10 +249,10 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div ng-repeat="item in items" class="col-lg-4 col-md-6 col-sm-6">
+                        <div th:each="item,state:${items.content}" class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__discount__item mb-5">
                                 <div class="product__discount__item__pic set-bg">
-                                    <img class="card-img" ng-src="{{item.image}}" ng-alt="{{item.name}}" style="height: 300px">
+                                    <img class="card-img" th-src="@{|${item.image}|}" th-alt="{{item.name}}" style="height: 300px">
                                     <div ng-if="item.percentDiscount != null && item.numberDateToEnd > 0" class="product__discount__percent">-{{item.percentDiscount}}%</div>
                                     <ul class="product__item__pic__hover">
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
@@ -256,21 +268,19 @@
                                     </ul>
                                 </div>
                                 <div class="product__discount__item__text">
-                                    <h5><a href="/food/detail/{{item.id}}">{{item.name}}</a></h5>
+                                    <h5><a th:href="@{|/food/detail/${item.id}|}">[[${item.name}]]</a></h5>
                                     <div class="product__item__price">
-                                        <p class="product__item__price text-danger d-inline">{{item.priceNew | currency:'₫ '}}</p>
-                                        <span ng-if="item.priceNew < item.priceOld">{{item.priceOld | currency:'₫ '}} </span>
+                             			<p class="product__item__price text-danger d-inline">[[${item.price}]]</p>
+<!--                                         <p class="product__item__price text-danger d-inline">{{item.priceNew | currency:'₫ '}}</p> -->
+<!--                                         <span ng-if="item.priceNew < item.priceOld">{{item.priceOld | currency:'₫ '}} </span> -->
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="product__pagination">
-                        <a href="#">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#"><i class="fa fa-long-arrow-right"></i></a>
-                    </div>
+                    <div class="product__pagination text-center">
+                        <a th:each="p : ${#numbers.sequence(1, items.totalPages, 1)}" th:style="${items.number+1==p?'background:#7fad39;color:white':''}" th:href="@{|/food/${cid==''?'all':cid}?page=${p}&sortBy=${sortBy}&price_min=${price_min}&price_max=${price_max}|}">[[${p}]]</a>
+					</div>
                 </div>
             </div>
         </div>
