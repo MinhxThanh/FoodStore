@@ -102,23 +102,6 @@ public class FoodServiceImpl implements FoodService{
 	@Override
 	public List<ListFoodByCategory> getListFoodByCategoryId(BigInteger categoryId) {
 		List<Tuple> list = dao.getListFoodByCategoryId(categoryId);
-		List<ListFoodByCategory> listFoods = getListFoodByCategories(list);
-		return listFoods;
-	}
-
-	@Override
-	public List<ListFoodByCategory> getTop2FoodByCategoryId(BigInteger categoryId) {
-		List<Tuple> list = dao.getTop2FoodByCategoryId(categoryId);
-		List<ListFoodByCategory> listFoods = getListFoodByCategories(list);
-		return listFoods;
-	}
-
-	@Override
-	public void updateViewCountById(Long i, Long foodId) {
-		dao.updateViewCountById(i, foodId);
-	}
-
-	private static List<ListFoodByCategory> getListFoodByCategories(List<Tuple> list) {
 		List<ListFoodByCategory> listFoods = list.stream().map(item -> new ListFoodByCategory(
 				item.get(0, BigInteger.class),
 				item.get(1, String.class),
@@ -176,7 +159,6 @@ public class FoodServiceImpl implements FoodService{
 	public void updateIsDisplayById(Boolean display, Long id) {
 		dao.updateIsDisplayById(display, id);
 	}
-
 	@Override
 	public List<Food> findAll() {
 		return dao.findAll();
@@ -208,5 +190,10 @@ public class FoodServiceImpl implements FoodService{
 				
 				)).collect(Collectors.toList());
 		return lsItem;
+	}
+
+	@Override
+	public List<Food> getAll() {
+		return dao.findAll();
 	}
 }

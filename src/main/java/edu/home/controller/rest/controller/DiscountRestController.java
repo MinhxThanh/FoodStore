@@ -130,5 +130,4 @@ public class DiscountRestController {
 	public void deleteByI(@PathVariable("id") Long id) {
 		discountService.deleteById(id);
 	}
-	
 }

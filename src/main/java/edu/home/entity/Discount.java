@@ -19,7 +19,13 @@ public class Discount implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	
+	@Column(name="amount_limit")
+	private double amountLimit;
 
+	@Column(name="amount_used")
+	private double amountUsed;
+	
 	@Column(name="create_date")
 	@Temporal(TemporalType.DATE)
 	private Date createDate;

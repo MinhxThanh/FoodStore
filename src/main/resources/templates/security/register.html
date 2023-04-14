@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index::dynamic(~{::#main})}">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,13 +7,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 </head>
-
 <body>
 <div class="container">
     <div id="main">
         <div class="py-5" style="margin-bottom: 100px;">
             <div class="col-lg-5 col-sm-11 p-5 m-auto shadow"
                  style="background: rgba(255, 255, 255, 0.708); border-radius: 30px;">
+                <h2 class="text-center my-4 text-uppercase">[[#{register.register}]]</h2>
                 <h2 class="text-center my-4 text-uppercase">Register</h2>
                 <!-- message-->
                 <div class="alert alert-success" role="alert" th:if="${message}">
@@ -30,9 +29,11 @@
                                ng-required="true" class="form-control p-2 px-3 rounded-pill" type="text"
                                placeholder="Email.." style="background: none !important;">
                         <span class="error text-danger" ng-show="formRegister.email.$error.required">
+                            [[#{register.pleaseEe}]]
                             Please enter email!
                         </span>
                         <span class="error text-danger" ng-show="!formRegister.email.$error.required&&formRegister.email.$error.pattern">
+                            [[#{register.pleaseEE}]]
                             Please enter email correctly!
                         </span>
                     </div>
@@ -42,9 +43,11 @@
                                    ng-minlength="2" class="form-control p-2 px-3 rounded-pill" type="text"
                                    placeholder="First Name" style="background: none !important;">
                             <span class="error text-danger" ng-show="formRegister.firstName.$error.required">
+                                [[#{register.pleaseEnterF}]]
                                 Please enter your first name!
                             </span>
                             <span class="error text-danger" ng-show="formRegister.firstName.$error.minlength">
+                                [[#{register.enterF}]]
                                 Enter first name has length more than 2!
                             </span>
                         </div>
@@ -53,9 +56,11 @@
                                    ng-minlength="2" class="form-control p-2 px-3 rounded-pill" type="text"
                                    placeholder="Last Name" style="background: none !important;">
                             <span class="error text-danger" ng-show="formRegister.lastName.$error.required">
+                                [[#{register.please}]]
                                 Please enter your last name!
                             </span>
                             <span class="error text-danger" ng-show="formRegister.lastName.$error.minlength">
+                                [[#{register.enter}]]
                                 Enter last name has length more than 2!
                             </span>
                         </div>
@@ -66,9 +71,11 @@
                                class="form-control p-2 px-3 rounded-pill" type="password" placeholder="Password"
                                style="background: none !important;">
                         <span class="error text-danger" ng-show="formRegister.password.$error.required">
+                            [[#{register.pleaseE}]]
                             Please enter password!
                         </span>
                         <span class="error text-danger" ng-show="formRegister.password.$error.minlength">
+                            [[#{register.enterP}]]
                             Enter password have length more than 5!
                         </span>
                     </div>
@@ -78,9 +85,11 @@
                                type="password" placeholder="Password Confirm" style="background: none !important;">
                         <span class="error text-danger"
                               ng-show="formRegister.confirmPassword.$error.required">
+                            [[#{register.pleaseP}]]
                             Please enter password confirm!
                         </span>
                         <span class="error text-danger d-block" ng-show="formRegister.confirmPassword.$error.compareTo">
+                            [[#{register.passdont}]]
                             Passwords don't match!
                         </span>
                     </div>
@@ -88,6 +97,7 @@
                         <input class="form-check-input" name="check" ng-model="check" ng-required="true" type="checkbox"
                                value="1" id="passwordCheck">
                         <label class="form-check-label" for="passwordCheck">
+                            [[#{register.i}]] <a href="#">[[#{register.term}]]</a>.
                             I accept the <a href="#">term service</a>.
                         </label>
                         <span class="error text-danger" ng-show="formRegister.check.$dirty"></span>
@@ -95,10 +105,13 @@
                     <div class="text-center">
                         <button ng-disabled="formRegister.$invalid" type="submit"
                                 class="btn btn-outline-primary w-100 py-2 rounded-pill fw-bold text-uppercase">
+                            [[#{register.register}]]
                             Register
                         </button>
+                        <a href="#" class="mt-2 mb-4 text-muted">[[#{register.have}]]</a>
                         <a href="#" class="mt-2 mb-4 text-muted">Have account? Sign In Here!</a>
                         <a th:href="@{/oauth2/authorization/google}" class="btn btn-outline-danger text-uppercase fw-bold w-100 mt-4 rounded-pill py-2" type="submit">
+                            <i class="fa fa-google" aria-hidden="true"></i> [[#{register.signgg}]]
                             <i class="fa fa-google" aria-hidden="true"></i> Sign in with Google
                         </a>
                     </div>
@@ -107,10 +120,8 @@
         </div>
     </div>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous">
 </script>
 </body>
-
 </html>

@@ -20,7 +20,4 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
   @Query("select c from Category c join CategoryFood cf on cf.category.id = c.id " +
           "join Food f on f.id = cf.food.id where f.id = ?1")
   List<Category> findAllCategoriesByFoodId(Long id);
-
-    @Query("select c from Category c where c.id < 12 order by c.id DESC")
-    List<Category> findTop11();
 }

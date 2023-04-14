@@ -1,4 +1,5 @@
 package edu.home.repository;
+import java.util.List;
 
 import edu.home.entity.OrderDetail;
 import edu.home.entity.Report;
@@ -7,16 +8,16 @@ import edu.home.entity.ReportMonth;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
-import java.util.List;
+import edu.home.entity.OrderDetail;
+import edu.home.entity.Report;
+import edu.home.entity.ReportMonth;
 
 public interface OrderDetailRepository extends JpaRepository<OrderDetail, Long> {
     List<OrderDetail> findOrderDetailsByOrderId(Long id);
     
 //	 + " WHERE o.order.orderStatus  IN('FINISHED','RATED')"
-   
-// doanh thu theo loai san pham
- 	@Query("SELECT new Report(o.category.name,sum(d.newPrice*d.quantity),sum( d.quantity)) "
+    // doanh thu theo loai san pham
+    @Query("SELECT new Report(o.category.name,sum(d.newPrice*d.quantity),sum( d.quantity)) "
  			+ " FROM CategoryFood o join  o.food.orderDetails d"
 // 			+ " WHERE o.product.category.parentCategory.id =:parentId AND MONTH(o.order.createDate) like '%' || :date || '%' AND o.order.orderStatus  IN('FINISHED','RATED')"
  			+ " GROUP BY o.category.name" + " ORDER BY sum(d.newPrice*d.quantity) DESC")
@@ -29,8 +30,6 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail, Long> 
 	+ " GROUP BY  o.category.name")
 	List<Report> getInventoryCategoryByMonthAndByCategoryName(@Param("name") String name, @Param("month") Integer month,
 			@Param("year") Integer year);
- 	
- 	
 	// doanh thu theo thang
 	@Query("SELECT new ReportMonth" + "(MONTH(o.order.orderDate)," + "YEAR(o.order.orderDate),"
 			+ "sum(o.newPrice*o.quantity)," + "count(o)," + "o.order.image) " + " FROM OrderDetail o "

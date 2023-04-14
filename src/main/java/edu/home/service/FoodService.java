@@ -34,6 +34,8 @@ public interface FoodService {
 
 	List<Food> getByKeywordEng(String keyword, Pageable pageable);
 	
+	List<Food> getAll();
+	
 	List<ProcedureFoods> procedureFoods();
     Food create(Food food);
     Food update(Food food);
@@ -41,8 +43,4 @@ public interface FoodService {
     void updateIsDisplayById(Boolean display, Long id);
     List<Food> findAll();
 	List<Food> findByCreateDate(Date createDate);
-
-    List<ListFoodByCategory> getTop2FoodByCategoryId(BigInteger categoryId);
-
-    void updateViewCountById(Long i, Long foodId);
 }

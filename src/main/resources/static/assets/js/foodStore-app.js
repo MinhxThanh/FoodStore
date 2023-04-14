@@ -1,11 +1,18 @@
 const app = angular.module("foodStore-app", ['ngAnimate', 'ngSanitize'])
 app.controller("foodStore-controller", function ($scope, $http, $window) {
     $scope.items = []
+    $scope.address = []
+    $scope.customer = {}
     $scope.address = {}
     $scope.message = ''
     $scope.error = ''
+    $scope.form = {}
 
     $scope.initialize = function (){
+	//get profile customer
+		$http.get(`/rest/customerProfile/findByCustomerEmail`).then(resp => {
+            $scope.customer = resp.data
+        })
         //get list food
         $http.get(`/rest/food/getListFood`).then(resp => {
             $scope.items = resp.data
@@ -18,64 +25,162 @@ app.controller("foodStore-controller", function ($scope, $http, $window) {
                 }
         })
         //get info address of customer
+        $http.get(`/rest/customerPhoneAddress/findAllByCustomerEmail`).then(resp => {
+            $scope.address = resp.data
+         })
         $http.get(`/rest/customerPhoneAddress/findByCustomerEmail`).then(resp => {
             $scope.address = angular.copy(resp.data)
+             })
+    }
+	$scope.addModel = function () {
+        $scope.add = true;
+        $scope.update = false;
+
+        $('#addressModal').modal('show');
+    }
+    $scope.back = function () {
+        $scope.form = {
+		 id: null,
+		 customer: null,
+		 username: null,
+		 phone: null,
+		 cityProvince: null,
+		 address: null
+	 }
+    }
+    $scope.updateModel2 = function (list){
+		$scope.add = false;
+        $scope.update = true;
+		$scope.form = {
+		 id: list.id,
+		 default: list.default,
+		 customer: list.customer,
+		 username: list.username,
+		 phone: list.phone,
+		 cityProvince: list.cityProvince,
+		 address: list.address
+	 }
+        $('#addressModal').modal('show');
+	}
+
+	$scope.imageUpload = function (event) {
+        var files = event.target.files;
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var reader = new FileReader();
+            reader.onload = $scope.imageIsLoaded;
+            reader.readAsDataURL(file);
+        }
+        $scope.imageChanged(files)
+    }
+
+    $scope.imageIsLoaded = function (e) {
+        $scope.$apply(function () {
+            $scope.img = e.target.result;            
+        });
+    }
+
+    $scope.imageChanged = function (files){
+        let dataImage = new FormData()
+        dataImage.append('file', files[0])
+        $http.post('http://localhost:8080/rest/upload/firebase', dataImage, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        }).then(resp =>{
+            $scope.form.image = resp.data.name
+            console.log("name image: ", resp.data.name)
+            console.log("name image: ", $scope.form.image)
+        }).catch(err =>{
+            $scope.error = "The field file exceeds its maximum permitted size of 1048576 bytes!"
+            console.log('Error', err)
+            })
+    }
+    
+    $scope.setdf = function () {
+		var item = angular.copy($scope.address);
+		$http.put(`/rest/customerPhoneAddress/setdf`, item).then(resp => {
+			$scope.message = "Set default successfully!"
+			$scope.cart.liveToastBtn()
+            console.log(resp.data);
+		}).catch(error =>{
+			$scope.error = "Error set default!"
+			$scope.cart.liveToastBtn()
+            console.log("Error", error)
         })
+	}
+    $scope.update = function () {
+        var item = angular.copy($scope.customer);
+        $http.put('http://localhost:8080/rest/customerProfile/update/' + item.email, item).then(resp => {
+			$scope.message = "Update profile successfully!"
+			$scope.cart.liveToastBtn()
+        }).catch(error =>{
+			$scope.error = "Error update profile!"
+			$scope.cart.liveToastBtn()
+            console.log("Error", error)
+        })
+    }
+//    $scope.addAddress = function () {
+//		var item = angular.copy($scope.address);
+//        $http.post(`/rest/customerPhoneAddress/create`, item).then(resp => {
+//			$scope.message = "Add contact successfully!"
+//			$scope.cart.liveToastBtn()
+//            console.log(resp.data);
+//        }).catch(error =>{
+//           $scope.error = "Error create contact!"
+//           $scope.cart.liveToastBtn()
+//            console.log("Error", error)
+//        })
+//    }
+	$scope.delAddress = function (list) {
+		console.log("list delete: ", list.id)
+		$http.delete(`/rest/customerPhoneAddress/delete/${list.id}`, list).then(resp => {
+				let index = $scope.address.findIndex(item => item.id == resp.data.id)
+            $scope.address[index] = list
+		console.log("delet success: ")
+	        }).catch(error =>{
+	            console.log("Error delete", error)
+	        })
+		}
+	$scope.addAddress = function () {
+		let item = {
+		 customer: $scope.customer.email,
+		 username: form.username,
+		 phone: form.phone,
+		 cityProvince: form.cityProvince,
+		 address: form.address
+	 }
+//		var item = angular.copy($scope.form)
+		console.log("createAddress: ",item)
+	        $http.post(`/rest/customerPhoneAddress/create`, item).then(resp => {
+				$scope.message = "Add contact successfully!"
+				$scope.cart.liveToastBtn()
+//	            console.log(resp.data);
+		console.log("1createAddress: ",resp.data)
+	        }).catch(error =>{
+	           $scope.error = "Error create contact!"
+	           $scope.cart.liveToastBtn()
+	            console.log("Error create", error)
+	        })
+	    }
+    $scope.updateAddress = function () {
+        var item = angular.copy($scope.form)
+        $http.put(`/rest/customerPhoneAddress/update/${item.id}`, item).then(resp => {
+			let index = $scope.address.findIndex(item => item.id == resp.data.id)
+            $scope.address[index] = item
+            $scope.message = "Update address successfully!"
+			$scope.cart.liveToastBtn()
+        }).catch(err =>{
+           $scope.error = "Error update contact!"
+           $scope.cart.liveToastBtn()
+            console.log("Error updateAddress: ", err)
+        })
+    }
+    $scope.confirmRemove = function () {
+            $('#addressDel').modal('show');
     }
 
     $scope.initialize()
 
-    // comment in food detail
-    $scope.commentFood = {
-        items: [],
-        review: {},
-        customer: {},
-        getInfo(foodId){
-            $http.get(`/rest/commentFood/getAll`).then(resp =>{
-                this.items = angular.copy(resp.data)
-                this.items.forEach(item => {
-                    let date = new Date(item.createDate)
-                    item.createDate = moment(date).fromNow();
-                })
-            })
-            $http.get(`/rest/customer/findCustomerIsPresent`).then(resp =>{
-                this.customer = resp.data
-                if (this.customer.email != null) {
-                    $http.get(`/rest/commentFood/getInfoReviewOfCustomer/${foodId}/${this.customer.email}`).then(resp =>{
-                        this.review = resp.data
-                    })
-                }
-            })
-
-        },
-        create(){
-            let item = {
-                content : tinymce.get("commentFood").getContent(),
-                review: this.review,
-                createDate: new Date(),
-                isDisplay: true,
-                title: this.customer.lastName + ' ' + this.customer.firstName,
-                updateDate: new Date()
-            }
-            $http.post(`/rest/commentFood/create`, item).then(resp =>{
-                resp.data.createDate = moment(new Date(resp.data.createDate)).fromNow();
-                this.items.push(resp.data)
-                tinymce.get("commentFood").setContent("<p></p>");
-                $scope.message = "Create comment successfully!"
-                $scope.cart.liveToastBtn()
-            })
-        },
-        delete(id){
-            $http.delete(`/rest/commentFood/delete/${id}`).then(resp =>{
-                let index = this.items.findIndex(item => item.id == id)
-                this.items.splice(index, 1)
-                $scope.message = "Delete reply comment successfully!"
-                $scope.cart.liveToastBtn()
-            })
-        }
-    }
-
-    // comment in blog detail
     $scope.commentBlog = {
         blogId: 'this is content',
         comments: [],

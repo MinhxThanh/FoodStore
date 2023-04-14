@@ -2,15 +2,16 @@ package edu.home.service;
 
 import edu.home.entity.Review;
 
-import java.util.Date;
 import java.util.List;
 
 public interface ReviewService {
-    Review findByCustomerEmailAndFoodId(String email, Long foodId);
+    List<Review> findAll();
 
-    void updateRatingByCustomerEmailAndFoodId(Long rateValue, Date date, String email, Long foodId);
+    Review create(Review blog);
 
-    Review create(Review review1);
+    Review update(Review blog);
 
-    List<Review> findAllByFoodId(Long foodId);
+    void delete(Long id);
+
+    Review findById(Long id);
 }

@@ -40,7 +40,8 @@ public interface DiscountRepository extends JpaRepository<Discount, Long> {
 
 	@Query("select d from Discount d where d.endDate = ?1")
 	List<Discount> findByEndDate(Date endDate);
-	
+
 	@Query("select f.id from Food f join Discount d on f.id=d.food.id where d.name like %:discountName%")
 	List<Object> FindAllFoodDiscount(@Param("discountName") String discountName);
+	
 }

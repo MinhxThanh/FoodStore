@@ -1,5 +1,5 @@
 package edu.home.repository;
-
+import edu.home.entity.Food;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
@@ -11,8 +11,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
-import edu.home.entity.Food;
 
 public interface FoodRepository extends JpaRepository<Food, Long> {
   @Query(value="{CALL sp_getListFood()}", nativeQuery = true)
@@ -41,12 +39,5 @@ public interface FoodRepository extends JpaRepository<Food, Long> {
 	
 	@Query("select f from Food f where f.createDate = ?1")
 	List<Food> findByCreateDate(Date createDate);
-
-    @Query(value="{CALL sp_getTop2FoodByCategoryId(:categoryId)}", nativeQuery = true)
-    List<Tuple> getTop2FoodByCategoryId(BigInteger categoryId);
-
-    @Transactional
-    @Modifying
-    @Query("update Food f set f.viewCount = ?1 where f.id =?2")
-    void updateViewCountById(Long i, Long foodId);
+	
 }

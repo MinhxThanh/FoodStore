@@ -16,8 +16,10 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text" style="font-size: 20px;">
+                        <a th:href="@{/home/index}"><i class="fa fa-home" aria-hidden="true"></i> [[#{productl.home}]]</a>
                         <a th:href="@{/home/index}"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
                         <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                        <span>[[#{productl.shop}]]</span>
                         <span>Shop</span>
                     </div>
                 </div>
@@ -25,7 +27,6 @@
         </div>
     </section>
     <!-- Breadcrumb Section End -->
-
     <!-- Product Section Begin -->
     <section class="product spad">
         <div class="container">
@@ -33,8 +34,11 @@
                 <div class="col-lg-3 col-md-5">
                     <div class="sidebar">
                         <div class="sidebar__item">
+                            <h4>[[#{productl.cate}]]</h4>
                             <h4>Department</h4>
                             <ul>
+                                <li><a href="/food/all" th:style="${cid} ==''?'color:#7fad39;':''">All</a></li>
+                        		<li th:each="c:${cates}"><a th:href="@{|/food/${c.name}|}" th:style="${c.name==cid?'color:#7fad39;':''}" th:if="${c.isDisplay}">[[${c.name}]] </a></li>
                                 <li><a href="#">Fresh Meat</a></li>
                                 <li><a href="#">Vegetables</a></li>
                                 <li><a href="#">Fruit & Nut Gifts</a></li>
@@ -48,6 +52,7 @@
                             </ul>
                         </div>
                         <div class="sidebar__item">
+                            <h4>[[#{productl.price}]]</h4>
                             <h4>Price</h4>
                             <div class="price-range-wrap">
                                 <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
@@ -65,66 +70,78 @@
                             </div>
                         </div>
                         <div class="sidebar__item sidebar__item__color--option">
+                            <h4>[[#{productl.colors}]]</h4>
                             <h4>Colors</h4>
                             <div class="sidebar__item__color sidebar__item__color--white">
                                 <label for="white">
+                                    [[#{productl.white}]]
                                     White
                                     <input type="radio" id="white">
                                 </label>
                             </div>
                             <div class="sidebar__item__color sidebar__item__color--gray">
                                 <label for="gray">
+                                    [[#{productl.gray}]]
                                     Gray
                                     <input type="radio" id="gray">
                                 </label>
                             </div>
                             <div class="sidebar__item__color sidebar__item__color--red">
                                 <label for="red">
+                                    [[#{productl.red}]]
                                     Red
                                     <input type="radio" id="red">
                                 </label>
                             </div>
                             <div class="sidebar__item__color sidebar__item__color--black">
                                 <label for="black">
+                                    [[#{productl.black}]]
                                     Black
                                     <input type="radio" id="black">
                                 </label>
                             </div>
                             <div class="sidebar__item__color sidebar__item__color--blue">
                                 <label for="blue">
+                                    [[#{productl.blue}]]
                                     Blue
                                     <input type="radio" id="blue">
                                 </label>
                             </div>
                             <div class="sidebar__item__color sidebar__item__color--green">
                                 <label for="green">
+                                    [[#{productl.green}]]
                                     Green
                                     <input type="radio" id="green">
                                 </label>
                             </div>
                         </div>
                         <div class="sidebar__item">
+                            <h4>[[#{productl.popular}]]</h4>
                             <h4>Popular Size</h4>
                             <div class="sidebar__item__size">
                                 <label for="large">
+                                    [[#{productl.large}]]
                                     Large
                                     <input type="radio" id="large">
                                 </label>
                             </div>
                             <div class="sidebar__item__size">
                                 <label for="medium">
+                                    [[#{productl.medium}]]
                                     Medium
                                     <input type="radio" id="medium">
                                 </label>
                             </div>
                             <div class="sidebar__item__size">
                                 <label for="small">
+                                    [[#{productl.small}]]
                                     Small
                                     <input type="radio" id="small">
                                 </label>
                             </div>
                             <div class="sidebar__item__size">
                                 <label for="tiny">
+                                    [[#{productl.tiny}]]
                                     Tiny
                                     <input type="radio" id="tiny">
                                 </label>
@@ -132,17 +149,16 @@
                         </div>
                         <div class="sidebar__item">
                             <div class="latest-product__text">
+                                <h4>[[#{productl.lastest}]]</h4>
                                 <h4>Latest Products</h4>
                                 <div class="latest-product__slider owl-carousel">
                                     <div class="latest-prdouct__slider__item">
                                         <a th:each="item, iState : ${listTop}" th:if="${iState.index} < 3" href="#" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img th:src="@{|${item.image}|}" th:alt="${item.getName()}" style="width: 120px">
+                                                <img th:src="@{|/assets/images/product/${item.image}|}" alt="">
                                             </div>
                                             <div class="latest-product__item__text">
-                                                <h6 style=" overflow: hidden;display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical;">
-                                                    [[${item.name}]]
-                                                </h6>
+                                                <h6>[[${item.name}]]</h6>
                                                 <span>đ [[${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}]]</span>
                                             </div>
                                         </a>
@@ -150,12 +166,10 @@
                                     <div class="latest-prdouct__slider__item">
                                         <a th:each="item, iState : ${listTop}" th:unless="${iState.index < 3 or iState.index >= 6}" href="#" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img th:src="@{|${item.image}|}" th:alt="${item.getName()}" style="width: 120px">
+                                                <img th:src="@{|/assets/images/product/${item.image}|}" alt="">
                                             </div>
                                             <div class="latest-product__item__text">
-                                                <h6 style=" overflow: hidden;display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical;">
-                                                    [[${item.name}]]
-                                                </h6>
+                                                <h6>[[${item.name}]]</h6>
                                                 <span>đ [[${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}]]</span>
                                             </div>
                                         </a>
@@ -163,12 +177,10 @@
                                     <div class="latest-prdouct__slider__item">
                                         <a th:each="item, iState : ${listTop}" th:if="${iState.index} >= 6" href="#" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img th:src="@{|${item.image}|}" th:alt="${item.getName()}" style="width: 120px">
+                                                <img th:src="@{|/assets/images/product/${item.image}|}" alt="">
                                             </div>
                                             <div class="latest-product__item__text">
-                                                <h6 style=" overflow: hidden;display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical;">
-                                                    [[${item.name}]]
-                                                </h6>
+                                                <h6>[[${item.name}]]</h6>
                                                 <span>đ [[${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}]]</span>
                                             </div>
                                         </a>
@@ -181,6 +193,7 @@
                 <div class="col-lg-9 col-md-7">
                     <div class="product__discount">
                         <div class="section-title product__discount__title">
+                            <h2>[[#{productl.sale}]]</h2>
                             <h2>Sale Off</h2>
                         </div>
                         <div class="row">
@@ -188,7 +201,7 @@
                                 <div th:each="item : ${listSale}" class="col-lg-4">
                                     <div class="product__discount__item">
                                         <div class="product__discount__item__pic set-bg"
-                                             th:data-setbg="@{|${item.image}|}">
+                                             th:data-setbg="@{|/assets/images/product/${item.image}|}">
                                             <div class="product__discount__percent">-[[${item.percentDiscount}]]%</div>
                                             <ul class="product__item__pic__hover">
                                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
@@ -240,7 +253,7 @@
                         <div ng-repeat="item in items" class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__discount__item mb-5">
                                 <div class="product__discount__item__pic set-bg">
-                                    <img class="card-img" ng-src="{{item.image}}" ng-alt="{{item.name}}" style="height: 300px">
+                                    <img class="card-img" ng-src="/assets/images/product/{{item.image}}" alt="">
                                     <div ng-if="item.percentDiscount != null && item.numberDateToEnd > 0" class="product__discount__percent">-{{item.percentDiscount}}%</div>
                                     <ul class="product__item__pic__hover">
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>

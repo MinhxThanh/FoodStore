@@ -1,68 +1,202 @@
 
-<!-- Footer Section Begin -->
-<footer class="footer spad" xmlns:th="http://www.thymeleaf.org" th:fragment="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="footer__about">
-                    <div class="footer__about__logo">
-                        <a href="./index.html"><img src="/assets/images/logo.png" alt=""></a>
-                    </div>
-                    <ul>
-                        <li>Address: 60-49 Road 11378 New York</li>
-                        <li>Phone: +65 11.188.888</li>
-                        <li>Email: hello@colorlib.com</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
-                <div class="footer__widget">
-                    <h6>Useful Links</h6>
-                    <ul>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">About Our Shop</a></li>
-                        <li><a href="#">Secure Shopping</a></li>
-                        <li><a href="#">Delivery infomation</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Our Sitemap</a></li>
-                    </ul>
-                    <ul>
-                        <li><a href="#">Who We Are</a></li>
-                        <li><a href="#">Our Services</a></li>
-                        <li><a href="#">Projects</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Innovation</a></li>
-                        <li><a href="#">Testimonials</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-12">
-                <div class="footer__widget">
-                    <h6>Join Our Newsletter Now</h6>
-                    <p>Get E-mail updates about our latest shop and special offers.</p>
-                    <form action="#">
-                        <input type="text" placeholder="Enter your mail">
-                        <button type="submit" class="site-btn">Subscribe</button>
-                    </form>
-                    <div class="footer__widget__social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-instagram"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-pinterest"></i></a>
+<!-- Header Section Begin -->
+<header class="header" xmlns:th="http://www.thymeleaf.org" th:fragment="navbar">
+    <div class="header__top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="header__top__left">
+                        <ul>
+                            <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
+                            <li>[[#{menu.free}]]</li>
+                            <li>Free Shipping for all Order of $99</li>
+                        </ul>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="footer__copyright">
-                    <div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
-                    <div class="footer__copyright__payment"><img src="/assets/images/payment-item.png" alt=""></div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="header__top__right">
+                        <div class="header__top__right__social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                            <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                        </div>
+                        <div class="header__top__right__language">
+                            <i class="fa fa-language" aria-hidden="true"></i>
+                            <img src="/assets/images/language.png" alt="">
+                            <div>[[#{menu.language}]]</div>
+                            <span class="arrow_carrot-down"></span>
+                            <ul>
+                                <li><a href="?lang=en">English</a></li>
+                                <li><a href="?lang=vi">Tiếng Việt</a></li>
+                            </ul>
+                        </div>
+                        <div class="header__top__right__language">
+<!--                         <i class="fa fa-user-md" aria-hidden="true"></i> -->
+                            <div th:unless="${#request.remoteUser}">[[#{menu.account}]]</div>
+                            <div th:if="${#request.remoteUser}"><img ng-src="{{customer.avatar}}" class="rounded-circle" style="width:25px"/>[[#{menu.hi}]] {{customer.fullname}}</div>
+                            <span class="arrow_carrot-down"></span>
+                            <ul>
+                                <li>
+	                                <a th:unless="${#request.remoteUser}" th:href="@{/security/login/form}">
+	                                	<i class="fa fa-user"></i> [[#{menu.signIn}]]
+	                            	</a>
+                            	</li>
+                                <li>
+                                	<a th:if="${#request.remoteUser}" th:href="@{/customer/profile/account}" >
+                                		<i class="fa fa-user"></i> [[#{menu.edit}]]
+                            		</a>
+                           		</li>
+		                        <li class="border" th:if="${#request.remoteUser}" th:class="${#strings.equals(pageTitle, 'Order')} ? 'active' : ''">
+		                            <a th:href="@{/order/list}">
+		                            	<i class="fa fa-file-text-o"></i> [[#{menu.order}]]
+		                            </a>
+		                        </li>
+                                <li>
+                                	<a th:if="${#request.remoteUser}" th:href="@{/security/logout}" ng-click="cart.clear()">
+                                		<i class="fa fa-sign-out" aria-hidden="true"></i> [[#{menu.signOut}]]
+                            		</a>
+                           		</li>
+                            </ul>
+                        <div class="header__top__right__auth">
+                            <a th:unless="${#request.remoteUser}" th:href="@{/security/login/form}">
+                                <i class="fa fa-user"></i> [[#{menu.signIn}]]
+                            </a>
+                            <a th:if="${#request.remoteUser}" th:href="@{/security/logout}" ng-click="cart.clear()">
+                                <i class="fa fa-user"></i> [[#{menu.signOut}]]
+                            </a>
+                        </div>
+<!--                         <div class="header__top__right__auth"> -->
+<!--                             <a th:unless="${#request.remoteUser}" th:href="@{/security/login/form}"> -->
+<!--                                 <i class="fa fa-user"></i> [[#{menu.signIn}]] -->
+<!--                             </a> -->
+<!--                             <a th:if="${#request.remoteUser}" th:href="@{/security/logout}" ng-click="cart.clear()"> -->
+<!--                                 <i class="fa fa-user"></i> [[#{menu.signOut}]] -->
+<!--                             </a> -->
+<!--                         </div> -->
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</footer>
-<!-- Footer Section End -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="header__logo text-center">
+                    <a th:href="@{/home/index}"><img src="/assets/images/logo.png" class="img-fluid" alt="logo" width="65%"></a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <nav class="header__menu">
+                    <ul>
+                        <li th:class="${#strings.equals(pageTitle, 'Home')} ? 'active' : ''">
+                            <a th:href="@{/home/index}">[[#{menu.home}]]</a>
+                        </li>
+                        <li th:class="${#strings.equals(pageTitle, 'Menu ')} ? 'active' : ''">
+                            <a th:href="@{/food/all}">[[#{menu.shop}]]</a>
+                            <a th:href="@{/food/all}">Shop</a>
+                        </li>
+                        <li th:class="${#strings.equals(pageTitle, 'Stories ')} ? 'active' : ''">
+                            <a th:href="@{/stories}">[[#{menu.stories}]]</a>
+                        </li>
+                        <li th:class="${#strings.equals(pageTitle, 'Contact ')} ? 'active' : ''">
+                            <a th:href="@{/contact}">[[#{menu.contact}]]</a>
+                        </li>
+                        <li th:if="${#request.remoteUser}" th:class="${#strings.equals(pageTitle, 'Order')} ? 'active' : ''">
+                            <a th:href="@{/order/list}">[[#{menu.order}]]</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-lg-3">
+                <div class="header__cart list_cart">
+                    <ul>
+                        <li>
+                            <a th:href="@{/cart}"><i class="fa fa-shopping-bag"></i> <span>{{cart.count}}</span></a>
+                            <ul class="header__menu__dropdown">
+                                <li>
+                                    <a ng-repeat="item in cart.items | limitTo: 5:0" class="cart_card d-flex flex-row" th:href="@{/cart}">
+                                        <div class="image_cart text-left d-flex flex-row">
+                                            <img ng-src="/assets/images/product/{{item.image}}" class="img-fluid w-25" alt="image product">
+                                            <div class="col-8" style="margin-top: 3px;
+                                                display: block;
+                                                text-overflow: ellipsis;
+                                                word-wrap: break-word;
+                                                overflow: hidden;
+                                                max-height: 3.2em;
+                                                line-height: 1.8em;
+                                                -webkit-box-orient: vertical;">
+                                                {{item.name}}
+                                            </div>
+                                        </div>
+                                        <div class="price-food col-auto" style="margin-top: 10px;">
+                                            {{item.priceNew | currency:'₫ '}}
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="font-italic" style="text-decoration: underline;">[[#{menu.more}]]</a>
+                                    <a href="#" class="font-italic" style="text-decoration: underline;">More</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="header__cart__price">[[#{menu.item}]] <span>${{cart.amount}}</span></div>
+                    <div class="header__cart__price">item: <span>${{cart.amount}}</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="humberger__open">
+            <i class="fa fa-bars"></i>
+        </div>
+    </div>
+</header>
+<!-- Header Section End -->
+<!-- Hero Section Begin -->
+<section class="hero hero-normal" xmlns:th="http://www.thymeleaf.org" th:fragment="hero-normal-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="hero__categories">
+                    <div class="hero__categories__all">
+                        <i class="fa fa-bars"></i>
+                        <span>[[#{menu.cate}]]</span>
+                        <span>All departments</span>
+                    </div>
+                    <ul>
+                         <li><a href="/food/all" th:style="${cid} ==''?'color:#7fad39;':''">All</a></li>
+                        <li th:each="c:${cates}"><a th:href="@{|/food/${c.name}|}" th:style="${c.name==cid?'color:#7fad39;':''}" th:if="${c.isDisplay}">[[${c.name}]] </a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="hero__search">
+                    <div class="hero__search__form">
+                        <form method="get" th:action="@{|/food/all|}">
+                            <div class="hero__search__categories">
+                                [[#{menu.cate}]]
+                                All Categories
+                                <span class="arrow_carrot-down"></span>
+                            </div>
+                            <input type="text" placeholder="Bạn muốn tìm gì?" name="keyword" onblur="this.form.submit()">
+                            <button type="submit" class="site-btn">[[#{menu.search}]]</button>
+                            <button type="submit" class="site-btn">SEARCH</button>
+                        </form>
+                    </div>
+                    <div class="hero__search__phone">
+                        <div class="hero__search__phone__icon">
+                            <i class="fa fa-phone"></i>
+                        </div>
+                        <div class="hero__search__phone__text">
+                            <h5>024 6327 6402</h5>
+                            <span>[[#{menu.sp}]]</span>
+                            <h5>+65 11.188.888</h5>
+                            <span>support 24/7 time</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Hero Section End -->

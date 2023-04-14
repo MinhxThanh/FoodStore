@@ -54,12 +54,10 @@ public class FoodRestController {
             return ResponseEntity.noContent().build();
         }
     }
-
     @GetMapping("/findAll")
     public List<Food> getAll(){
     	return foodService.findAll();
     }
-    
     @GetMapping("/findById/{id}")
     public Food findById(@PathVariable("id") Long id) {
     	return foodService.findById(id);
@@ -68,49 +66,47 @@ public class FoodRestController {
     public List<Food> findByCreateDate(@PathVariable("createDate") Date createDate){
     	return foodService.findByCreateDate(createDate);
     }
-    @PostMapping("create")
-    public ResponseEntity<?> create(@RequestBody FoodDto foodDto) {
-
+    @PostMapping("/create")
+    public Food create(@RequestBody FoodDto foodDto) {
+    	Food food = new Food();
     	try {
-            Food food = new Food();
-//            here is data enter
+    		
     		food.setName(foodDto.getName());
     		food.setPrice(foodDto.getPrice());
     		food.setQuantityLimit(foodDto.getQuantityLimit());
-            food.setDescription(foodDto.getDescription());
-            food.setDisplay(foodDto.isDisplay());
-            food.setUser(userAccountService.findByUsernameOrEmail(foodDto.getCreateBy()));
-//            here is data default
-    		food.setQuantitySell(0);
+    		food.setQuantitySell(foodDto.getQuantitySell());
     		food.setViewCount(0);
-    		food.setCreateDate(new Date());
-
-            return ResponseEntity.ok(foodService.create(food));
+    		food.setDescription(foodDto.getDescription());
+    		food.setCreateDate(foodDto.getCreateDate());
+    		food.setDisplay(foodDto.isDisplay());
+    		
+    		food.setUser(userAccountService.findByUsernameOrEmail(foodDto.getCreateBy()));
+    		
     	}catch(Exception e) {
 			e.printStackTrace();
-            return ResponseEntity.noContent().build();
     	}
-
+    	return foodService.create(food);
     }
 //    Giàu
-    @PutMapping(value = "update")
-    public ResponseEntity<?> updateFood(@RequestBody FoodDto foodDto){
+    @PutMapping(value = "/update/{id}")
+    public ResponseEntity<?> updateFood(@RequestBody FoodDto foodDto,@PathVariable("id") Integer id){
         try {
             Food oldFood = foodService.findById(foodDto.getId());
+            
             Food food = new Food();
             food.setId(foodDto.getId());
-//            here is update
-            food.setName(foodDto.getName());
-            food.setPrice(foodDto.getPrice());
-            food.setQuantityLimit(foodDto.getQuantityLimit());
-            food.setDescription(foodDto.getDescription());
-            food.setDisplay(foodDto.isDisplay());
-//            here is old
-            food.setQuantitySell(oldFood.getQuantitySell());
-            food.setViewCount(oldFood.getViewCount());
-            food.setCreateDate(oldFood.getCreateDate());
-            food.setUser(oldFood.getUser());
-            
+//          here is update
+          food.setName(foodDto.getName());
+          food.setPrice(foodDto.getPrice());
+          food.setQuantityLimit(foodDto.getQuantityLimit());
+          food.setDescription(foodDto.getDescription());
+          food.setDisplay(foodDto.isDisplay());
+//          here is old
+          food.setQuantitySell(oldFood.getQuantitySell());
+          food.setViewCount(oldFood.getViewCount());
+          food.setCreateDate(oldFood.getCreateDate());
+          food.setUser(oldFood.getUser());
+
             return ResponseEntity.ok(foodService.update(food));
         } catch (Exception e) {
             e.printStackTrace();

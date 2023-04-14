@@ -64,9 +64,4 @@ public class CategoryServiceImpl implements CategoryService {
   public List<Category> getAllCategoriesByFoodID(Long id) {
       return dao.findAllCategoriesByFoodId(id);
   }
-
-    @Override
-    public List<Category> findTop11() {
-        return dao.findTop11();
-    }
 }

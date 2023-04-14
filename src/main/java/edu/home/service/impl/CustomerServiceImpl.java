@@ -39,5 +39,9 @@ public class CustomerServiceImpl implements CustomerService {
 	public List<Customer> findAll() {
 		return dao.findAll();
 	}
+	@Override
+	public void delete(String email) {
+		dao.deleteById(email);
+	}
 }
 
