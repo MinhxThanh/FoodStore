@@ -43,4 +43,6 @@ public interface FoodService {
 	List<Food> findByCreateDate(Date createDate);
 
     List<ListFoodByCategory> getTop2FoodByCategoryId(BigInteger categoryId);
+
+    void updateViewCountById(Long i, Long foodId);
 }

@@ -9,212 +9,445 @@
 </head>
 <body>
 <div id="main">
-  <div th:replace="~{/layout/_menu::hero-normal-section}"></div>
-  <!-- Breadcrumb Section Begin -->
-  <section class="container breadcrumb-section set-bg p-3" style="background-color: #9BCA3C;">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 text-center">
-          <div class="breadcrumb__text" style="font-size: 20px;">
-            <a th:href="@{/home/index}"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
-            <i class="fa fa-chevron-right mx-2" aria-hidden="true"></i>
-            <a th:href="@{/menu}"><i class="fa fa-home" aria-hidden="true"></i> Shop</a>
-            <i class="fa fa-chevron-right mx-2" aria-hidden="true"></i>
-            <span th:text="${item.name}"></span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- Breadcrumb Section End -->
-  <!-- Product Details Section Begin -->
-  <section class="product-details spad">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 col-md-6">
-          <div class="product__details__pic">
-            <div class="product__details__pic__item">
-              <img class="product__details__pic__item--large"
-                   th:src="@{|${imageFoods.get(0).imageName}|}" alt="">
+    <div th:replace="~{/layout/_menu::hero-normal-section}"></div>
+    <style>
+        .rate_product {
+            position: relative;
+        }
+
+        .rating {
+            position: absolute;
+            left: 0;
+            display: flex;
+            flex-direction: row-reverse;
+            opacity: 0;
+        }
+
+        .rating > input {
+            display: none;
+        }
+
+        .rating > label {
+            position: relative;
+            width: 1em;
+            font-size: 30px;
+            font-weight: 300;
+            color: #ffd600;
+            cursor: pointer;
+        }
+
+        .rating > label::before {
+            content: "\2605";
+            position: absolute;
+            opacity: 0;
+        }
+
+        .rating > label:hover:before,
+        .rating > label:hover ~ label:before {
+            opacity: 1 !important;
+        }
+
+        .rating > input:checked ~ label:before {
+            opacity: 1;
+        }
+
+        .rating:hover > input:checked ~ label:before {
+            opacity: 0.4;
+        }
+
+        .rating > .checked ~ label:before {
+            opacity: 1;
+        }
+
+        .rating:hover > .checked ~ label:before {
+            opacity: 0.4;
+        }
+
+
+        .rate_result {
+            display: flex;
+            flex-direction: row-reverse;
+        }
+
+        .rate_result > input {
+            display: none;
+        }
+
+        .rate_result > label {
+            position: relative;
+            width: 1em;
+            font-size: 30px;
+            font-weight: 300;
+            color: #ffd600;
+            cursor: pointer;
+        }
+
+        .rate_result > label::before {
+            content: "\2605";
+            position: absolute;
+            opacity: 0;
+        }
+
+        .rate_result > .checked ~ label:before {
+            opacity: 1;
+        }
+
+
+        .rate_product:hover .rating {
+            opacity: 1;
+            transition: .2s;
+        }
+
+        .rate_product:hover .rate_result {
+            transition: .2s;
+            opacity: 0;
+        }
+    </style>
+    <!-- Breadcrumb Section Begin -->
+    <section class="container breadcrumb-section set-bg p-3" style="background-color: #9BCA3C;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text" style="font-size: 20px;">
+                        <a th:href="@{/home/index}"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+                        <i class="fa fa-chevron-right mx-2" aria-hidden="true"></i>
+                        <a th:href="@{/menu}"><i class="fa fa-home" aria-hidden="true"></i> Shop</a>
+                        <i class="fa fa-chevron-right mx-2" aria-hidden="true"></i>
+                        <span th:text="${item.name}"></span>
+                    </div>
+                </div>
             </div>
-            <div class="product__details__pic__slider owl-carousel">
-              <img th:each="i: ${imageFoods}" th:data-imgbigurl="@{|${i.imageName}|}"
-                   th:src="@{|${i.imageName}|}" alt="">
-            </div>
-          </div>
         </div>
-        <div class="col-lg-6 col-md-6">
-          <div class="sale-info">
+    </section>
+    <!-- Breadcrumb Section End -->
+    <!-- Product Details Section Begin -->
+    <section class="product-details spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="product__details__pic">
+                        <div class="product__details__pic__item">
+                            <img class="product__details__pic__item--large"
+                                 th:src="@{|${imageFoods.get(0).imageName}|}" alt="main image" style="height: 350px">
+                        </div>
+                        <div class="product__details__pic__slider owl-carousel">
+                            <img th:each="i: ${imageFoods}" th:data-imgbigurl="@{|${i.imageName}|}"
+                                 th:src="@{|${i.imageName}|}" th:alt="${i.getId()}" style="height: 90px; width: 120px">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="sale-info">
             <span th:if="${item.numberDateToStart >= 1}" class="badge badge-pill badge-danger" style="font-size: 16px">
               SALE STAR APTER [[${item.numberDateToStart}]] DAY!
             </span>
-            <span th:if="${item.numberDateToEnd >= 1}" class="badge badge-pill badge-danger" style="font-size: 16px">
+                        <span th:if="${item.numberDateToEnd >= 1}" class="badge badge-pill badge-danger"
+                              style="font-size: 16px">
               SALE END AFTER [[${item.numberDateToEnd}]] DAY!
             </span>
-            <span th:if="${item.numberDateToEnd == 0}" class="badge badge-pill badge-danger" style="font-size: 16px">
+                        <span th:if="${item.numberDateToEnd == 0}" class="badge badge-pill badge-danger"
+                              style="font-size: 16px">
               [[${item.nameDiscount}]]
             </span>
-          </div>
-          <div class="product__details__text">
-            <h3 class="mb-0" th:text="${item.name}"></h3>
-            <div class="mt-0 mb-3">
+                    </div>
+                    <div class="product__details__text">
+                        <h3 class="mb-0" th:text="${item.name}"></h3>
+                        <div class="mt-0 mb-3">
                <span class="text-muted mr-2">
                  <i class="fa fa-eye" aria-hidden="true"></i>
                 [[${item.viewCount}]]
               </span>|
-              <span class="text-muted mx-2">
+                            <span class="text-muted mx-2">
                 [[${item.quantitySell}]] Sold
               </span>|
-              <span class="text-muted mx-2">
+                            <span class="text-muted mx-2">
                 [[${item.inventory}]] Inventory
               </span>
-            </div>
-            <div class="product__details__rating">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star-half-o"></i>
-              <span>(18 reviews)</span>
-            </div>
-            <div >
+                        </div>
+                        <div class="product__details__rating rate_product d-flex mt-n3">
+                            <div class="rate_result justify-content-end">
+                                <input th:class="${totalValueRate >= 4.7} ? checked : ''" type="radio" name="rating"
+                                       value="5" id="5"/>
+                                <label for="5">☆</label>
+
+                                <input th:class="${totalValueRate >= 4} ? checked : ''" type="radio" name="rating"
+                                       value="4" id="4"/>
+                                <label for="4">☆</label>
+
+                                <input th:class="${totalValueRate >= 3} ? checked : ''" type="radio" name="rating"
+                                       value="3" id="3"/>
+                                <label for="3">☆</label>
+
+                                <input th:class="${totalValueRate >= 2} ? checked : ''" type="radio" name="rating"
+                                       value="2" id="2"/>
+                                <label for="2">☆</label>
+
+                                <input th:class="${totalValueRate >= 0.5} ? checked : ''" type="radio" name="rating"
+                                       value="1" id="1"/>
+                                <label for="1">☆</label>
+                            </div>
+
+                            <form th:action="@{/rate/create}" method="post">
+                                <div class="rating justify-content-end">
+                                    <input type="radio" name="rating" value="5" id="r5" onclick="this.form.submit()"/>
+                                    <label for="r5">☆</label>
+
+                                    <input type="radio" name="rating" value="4" id="r4" onclick="this.form.submit()"/>
+                                    <label for="r4">☆</label>
+
+                                    <input type="radio" name="rating" value="3" id="r3" onclick="this.form.submit()"/>
+                                    <label for="r3">☆</label>
+
+                                    <input type="radio" name="rating" value="2" id="r2" onclick="this.form.submit()"/>
+                                    <label for="r2">☆</label>
+
+                                    <input type="radio" name="rating" value="1" id="r1" onclick="this.form.submit()"/>
+                                    <label for="r1">☆</label>
+                                    <input type="text" name="usernameId" th:value="${#request.remoteUser}"
+                                           style="display: none">
+                                    <input type="text" name="productId" th:value="${item.id}" style="display: none">
+                                </div>
+                            </form>
+                            <span class="Mark_Rate mx-3 h4" style="margin-top: 12px">([[${#numbers.formatDecimal(totalRate == 0 ? 0 : totalValueRate/totalRate, 0, 0)}]] / [[${totalRate}]])</span>
+                        </div>
+                        <div>
               <span class="text-muted font-italic" style="text-decoration: line-through">
                 [[${#numbers.formatDecimal(item.priceOld, 0, 'POINT', 1, 'COMMA')}]] VND
               </span>
-              <span class="badge badge-pill badge-danger mx-2" style="font-size: 16px">[[${item.nameDiscount}]]</span>
-            </div>
-            <div class="product__details__price">[[${#numbers.formatDecimal(item.priceNew, 0, 'POINT', 1, 'COMMA')}]] VDN</div>
-            <div class="product__details__quantity">
-              <div class="quantity">
-                <div class="pro-qty">
-                  <input type="text" value="1">
-                </div>
-              </div>
-            </div>
-            <a href="#" class="primary-btn">ADD TO CARD</a>
-            <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
-            <div class="sold_by mt-5 border-top">
-              <div class="cart row mt-4">
-                <div class="image col-2">
-                  <img class="border w-100 img-fluid rounded-circle" th:src="@{|/assets/images/person/${item.avatar}|}" alt="logo">
-                </div>
-                <div class="info col-10">
-                  <div class="name">
-                    [[${item.createBy}]]
-                  </div>
-                  <a href="#" class="btn btn-outline-secondary py-1 px-3 mt-2"><i class="fa fa-university" aria-hidden="true"></i> View Shop</a>
-                </div>
-              </div>
-            </div>
-            <ul class="mt-4">
-              <li class="row ">
-                <b class="col-4">Categories</b>
-                <span class="col-8">
+                            <span class="badge badge-pill badge-danger mx-2" style="font-size: 16px">[[${item.nameDiscount}]]</span>
+                        </div>
+                        <div class="product__details__price">[[${#numbers.formatDecimal(item.priceNew, 0, 'POINT', 1,
+                            'COMMA')}]] VDN
+                        </div>
+                        <div class="product__details__quantity">
+                            <div class="quantity">
+                                <div class="pro-qty">
+                                    <input type="text" value="1">
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="primary-btn">ADD TO CARD</a>
+                        <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                        <div class="sold_by mt-5 border-top">
+                            <div class="cart row mt-4">
+                                <div class="image col-2">
+                                    <img class="border w-100 img-fluid rounded-circle"
+                                         th:src="@{|/assets/images/person/${item.avatar}|}" alt="logo">
+                                </div>
+                                <div class="info col-10">
+                                    <div class="name">
+                                        [[${item.createBy}]]
+                                    </div>
+                                    <a href="#" class="btn btn-outline-secondary py-1 px-3 mt-2"><i
+                                            class="fa fa-university" aria-hidden="true"></i> View Shop</a>
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="mt-4">
+                            <li class="row ">
+                                <b class="col-4">Categories</b>
+                                <span class="col-8">
                   <span th:each="item : ${categories}" class="badge badge-success mr-2 px-3" style="font-size: 14px">
                     <a class="text-white" href="#">[[${item.name}]]</a>
                   </span>
                 </span>
-              </li>
-              <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
-              <li><b>SunFood Guarantee</b> <span>Get the items you ordered or get your money back.</span></li>
-              <li><b>Share on</b>
-                <div class="share">
-                  <a href="#"><i class="fa fa-facebook"></i></a>
-                  <a href="#"><i class="fa fa-twitter"></i></a>
-                  <a href="#"><i class="fa fa-instagram"></i></a>
-                  <a href="#"><i class="fa fa-pinterest"></i></a>
+                            </li>
+                            <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
+                            <li><b>SunFood Guarantee</b> <span>Get the items you ordered or get your money back.</span>
+                            </li>
+                            <li><b>Share on</b>
+                                <div class="share">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-lg-12">
-          <div class="product__details__tab">
-            <ul class="nav nav-tabs" role="tablist">
-              <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
-                   aria-selected="true">Description</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
-                   aria-selected="false">Reviews <span>(1)</span></a>
-              </li>
-            </ul>
-            <div class="tab-content">
-              <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                <div class="product__details__tab__desc">
-                  <h6>Products Information</h6>
-                  <th:block th:utext="${item.description}"></th:block>
+                <div class="col-lg-12">
+                    <div class="product__details__tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
+                                   aria-selected="true">Description</a>
+                            </li>
+                            <li class="nav-item">
+                                <a th:attr="ng-click=@{|commentFood.getInfo(${item.id})|}" class="nav-link"
+                                   data-toggle="tab"
+                                   href="#tabs-2" role="tab" aria-selected="false">
+                                    Comments <span class="badge badge-success">[[${totalComment}]]</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                                <div class="product__details__tab__desc">
+                                    <h6>Products Information</h6>
+                                    <th:block th:utext="${item.description}"></th:block>
 
-                </div>
-              </div>
-              <div class="tab-pane" id="tabs-2" role="tabpanel">
-                <div class="product__details__tab__desc">
-                  <h6>Products Infomation</h6>
-                  <p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
-                    Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus.
-                    Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam
-                    sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo
-                    eget malesuada. Vivamus suscipit tortor eget felis porttitor volutpat.
-                    Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Praesent
-                    sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ac
-                    diam sit amet quam vehicula elementum sed sit amet dui. Vestibulum ante
-                    ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
-                    Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.
-                    Proin eget tortor risus.</p>
-                  <p>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Lorem
-                    ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit aliquet
-                    elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictum
-                    porta. Cras ultricies ligula sed magna dictum porta. Sed porttitor lectus
-                    nibh. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.</p>
-                </div>
-              </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tabs-2" role="tabpanel">
+                                <div class="product__details__tab__desc">
+                                    <!--                  display when none comment-->
+                                    <div ng-if="commentFood.items[0].title == null" class="p-5 text-center">
+                                        <h3 class="text-muted"><i class="fa fa-comments" aria-hidden="true"></i></h3>
+                                        <h4 class="text-muted"> No Comments Yet</h4>
+                                        <h5 class="text-muted">Be the first so share what you think!</h5>
+                                    </div>
+                                    <!--                  item comment here-->
+                                    <div ng-repeat="item in commentFood.items" class="d-flex flex-row comment-row w-75 container-fluid border-bottom mb-4 p-3">
+                                        <div class="p-2"><span class="round">
+                                            <img ng-src="{{item.review.customer.avatar}}" class="rounded-circle"
+                                                alt="user" width="50"></span>
+                                        </div>
+                                        <div class="comment-text w-100 pl-3">
+                                            <div class="comment-footer justify-content-between mb-2 d-flex">
+                                                <div class="d-flex">
+                                                    <h5 class="mr-2">{{item.title}}</h5>
+                                                    <span ng-if="item.review.rating >= 0.5" class="text-warning h5 mt-n1">★</span>
+                                                    <span ng-if="item.review.rating >= 1.5" class="text-warning h5 mt-n1">★</span>
+                                                    <span ng-if="item.review.rating >= 2.5" class="text-warning h5 mt-n1">★</span>
+                                                    <span ng-if="item.review.rating >= 3.5" class="text-warning h5 mt-n1">★</span>
+                                                    <span ng-if="item.review.rating >= 4.5" class="text-warning h5 mt-n1">★</span>
+                                                </div>
+                                                <span class="action-icons">
+                                                         <span ng-if="item.review.customer.email == commentFood.customer.email"
+                                                               data-abc="true"><i class="fa fa-pencil"></i></span>
+                                                         <span ng-if="item.review.customer.email == commentFood.customer.email"
+                                                               ng-click="commentFood.delete(item.id)" data-abc="true"
+                                                               class="mx-2"><i class="fa fa-trash-o"
+                                                                               aria-hidden="true"></i></span>
+                                                        <span class="date ml-3">{{item.createDate}}</span>
+                                                    </span>
+                                            </div>
+                                            <div class="m-b-5 mt-n1" ng-bind-html="item.content"></div>
 
+                                            <div class="comment-footer text-right">
+                                                     <span class="action-icons">
+                                                         <span class="like"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span>
+                                                         <span class="mx-2 like"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></span>
+                                                     </span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <!--                                  form comment here-->
+                                    <script>
+                                        tinymce.init({
+                                            selector: "#commentFood",
+                                            menubar: false,
+                                            toolbar_location: "bottom",
+                                            plugins: "autoresize link lists emoticons image",
+                                            autoresize_bottom_margin: 50,
+                                            max_height: 500,
+                                            placeholder: "Enter message . . .",
+                                            toolbar:
+                                                "bold italic strikethrough link numlist bullist blockquote emoticons image"
+                                        });
+                                    </script>
+                                    <div class="container-fluid w-75 pt-5">
+                                        <form class="p-4 p-md-5">
+                                            <h3 class="my-2">Leave a comment</h3>
+                                            <div class="form-group">
+                                                <textarea id="commentFood"></textarea></div>
+                                            <div class="form-group text-right d-flex">
+                                                <div class="notification w-75">
+                                              <span ng-if="commentFood.review.rating == null"
+                                                    class="text-danger font-italic mx-3 d-block">
+                                                  <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                                  Please rating food before comment!
+                                              </span>
+                                                    <a ng-if="commentFood.customer.email == null"
+                                                       class="text-danger font-italic mx-3"
+                                                       th:href="@{/security/login/form}">
+                                                        <i class="fa fa-sign-in" aria-hidden="true"></i>
+                                                        Please login before comment!
+                                                    </a>
+                                                </div>
+                                                <button ng-disabled="commentFood.review.rating == null || commentFood.customer.email == null"
+                                                        ng-click="commentFood.create()"
+                                                        type="submit" class="btn py-2 px-4 btn-primary">
+                                                    <i class="fa fa-commenting-o" aria-hidden="true"></i> Post Comment
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+    </section>
+    <!-- Product Details Section End -->
+
+    <!-- Related Product Section Begin -->
+    <section class="related-product">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title related__product__title">
+                        <h2>Related Product</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div th:each="item : ${relatedFoods}" class="col-lg-3 col-md-4 col-sm-6 mb-5">
+                    <div class="product__discount__item">
+                        <div class="product__discount__item__pic set-bg"
+                             th:data-setbg="@{|${item.image}|}">
+                            <div th:if="${item.numberDateToEnd > 0}" class="product__discount__percent">
+                                -[[${item.percentDiscount}]]%
+                            </div>
+                            <ul class="product__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li>
+                                    <a th:attr="ng-click=@{|cart.add(${item.id})|}"><i class="fa fa-shopping-cart"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="product__discount__item__text">
+                            <h5><a th:href="@{|/food/detail/${item.id}|}">[[${item.name}]]</a></h5>
+                            <div class="product__item__price">
+                                <p class="product__item__price text-danger d-inline">đ
+                                    [[${#numbers.formatDecimal(item.priceNew, 0, 'COMMA', 2, 'POINT')}]]</p>
+                                <span>đ [[${#numbers.formatDecimal(item.priceOld, 0, 'COMMA', 2, 'POINT')}]]</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Related Product Section End -->
+<!--    notification-->
+    <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">
+        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+            <div class="toast-header">
+                <img src="/assets/images/logo.png" class="rounded mr-2" alt="logo" width="30%">
+                <strong class="mr-auto">Notification SUNFOOD</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                <div class="alert alert-success" role="alert" ng-if="message != ''">
+                    {{message}}
+                </div>
+                <div class="alert alert-danger" role="alert" ng-if="error != ''">
+                    {{error}}
+                </div>
+            </div>
+        </div>
     </div>
-  </section>
-  <!-- Product Details Section End -->
 
-  <!-- Related Product Section Begin -->
-  <section class="related-product">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="section-title related__product__title">
-            <h2>Related Product</h2>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div th:each="item : ${relatedFoods}" class="col-lg-3 col-md-4 col-sm-6 mb-5">
-          <div class="product__discount__item">
-            <div class="product__discount__item__pic set-bg"
-                 th:data-setbg="@{|${item.image}|}">
-              <div th:if="${item.numberDateToEnd > 0}" class="product__discount__percent">-[[${item.percentDiscount}]]%</div>
-              <ul class="product__item__pic__hover">
-                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                <li>
-                  <a th:attr="ng-click=@{|cart.add(${item.id})|}"><i class="fa fa-shopping-cart"></i></a>
-                </li>
-              </ul>
-            </div>
-            <div class="product__discount__item__text">
-              <h5><a th:href="@{|/food/detail/${item.id}|}">[[${item.name}]]</a></h5>
-              <div class="product__item__price">
-                <p class="product__item__price text-danger d-inline">đ [[${#numbers.formatDecimal(item.priceNew, 0, 'COMMA', 2, 'POINT')}]]</p>
-                <span>đ [[${#numbers.formatDecimal(item.priceOld, 0, 'COMMA', 2, 'POINT')}]]</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- Related Product Section End -->
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"

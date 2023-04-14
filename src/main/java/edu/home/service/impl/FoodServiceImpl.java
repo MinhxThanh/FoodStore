@@ -113,6 +113,11 @@ public class FoodServiceImpl implements FoodService{
 		return listFoods;
 	}
 
+	@Override
+	public void updateViewCountById(Long i, Long foodId) {
+		dao.updateViewCountById(i, foodId);
+	}
+
 	private static List<ListFoodByCategory> getListFoodByCategories(List<Tuple> list) {
 		List<ListFoodByCategory> listFoods = list.stream().map(item -> new ListFoodByCategory(
 				item.get(0, BigInteger.class),

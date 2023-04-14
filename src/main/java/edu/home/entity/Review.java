@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -30,9 +31,9 @@ public class Review implements Serializable {
 	private boolean isDisplay;
 
 	@Column(name="is_favorite")
-	private boolean isFavorite;
+	private BigInteger isFavorite;
 
-	private long rating;
+	private Long rating;
 
 	@Column(name="update_date")
 	@Temporal(TemporalType.DATE)

@@ -44,4 +44,9 @@ public interface FoodRepository extends JpaRepository<Food, Long> {
 
     @Query(value="{CALL sp_getTop2FoodByCategoryId(:categoryId)}", nativeQuery = true)
     List<Tuple> getTop2FoodByCategoryId(BigInteger categoryId);
+
+    @Transactional
+    @Modifying
+    @Query("update Food f set f.viewCount = ?1 where f.id =?2")
+    void updateViewCountById(Long i, Long foodId);
 }

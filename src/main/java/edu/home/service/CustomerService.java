@@ -14,8 +14,6 @@ public interface CustomerService {
     Customer findByEmailKey(String email);
 
     List<Customer> findAll();
-    
-    void delete(String email);
 
 
 }

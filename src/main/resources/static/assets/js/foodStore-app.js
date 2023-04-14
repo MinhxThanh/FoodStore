@@ -25,6 +25,57 @@ app.controller("foodStore-controller", function ($scope, $http, $window) {
 
     $scope.initialize()
 
+    // comment in food detail
+    $scope.commentFood = {
+        items: [],
+        review: {},
+        customer: {},
+        getInfo(foodId){
+            $http.get(`/rest/commentFood/getAll`).then(resp =>{
+                this.items = angular.copy(resp.data)
+                this.items.forEach(item => {
+                    let date = new Date(item.createDate)
+                    item.createDate = moment(date).fromNow();
+                })
+            })
+            $http.get(`/rest/customer/findCustomerIsPresent`).then(resp =>{
+                this.customer = resp.data
+                if (this.customer.email != null) {
+                    $http.get(`/rest/commentFood/getInfoReviewOfCustomer/${foodId}/${this.customer.email}`).then(resp =>{
+                        this.review = resp.data
+                    })
+                }
+            })
+
+        },
+        create(){
+            let item = {
+                content : tinymce.get("commentFood").getContent(),
+                review: this.review,
+                createDate: new Date(),
+                isDisplay: true,
+                title: this.customer.lastName + ' ' + this.customer.firstName,
+                updateDate: new Date()
+            }
+            $http.post(`/rest/commentFood/create`, item).then(resp =>{
+                resp.data.createDate = moment(new Date(resp.data.createDate)).fromNow();
+                this.items.push(resp.data)
+                tinymce.get("commentFood").setContent("<p></p>");
+                $scope.message = "Create comment successfully!"
+                $scope.cart.liveToastBtn()
+            })
+        },
+        delete(id){
+            $http.delete(`/rest/commentFood/delete/${id}`).then(resp =>{
+                let index = this.items.findIndex(item => item.id == id)
+                this.items.splice(index, 1)
+                $scope.message = "Delete reply comment successfully!"
+                $scope.cart.liveToastBtn()
+            })
+        }
+    }
+
+    // comment in blog detail
     $scope.commentBlog = {
         blogId: 'this is content',
         comments: [],
