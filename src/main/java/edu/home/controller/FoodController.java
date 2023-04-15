@@ -46,8 +46,8 @@ public class FoodController {
 		List<Review> reviews = reviewService.findAllByFoodId(food_id);
 		Integer totalRate = reviews.size();
 		Double totalValueRate = reviews.stream().mapToDouble(item -> item.getRating()).sum();
-
-		model.addAttribute("totalComment", commentService.findAllByFoodId(food_id).size());
+		Integer total = commentService.findAllByFoodId(food_id).size();
+		model.addAttribute("totalComment", total);
 		model.addAttribute("totalRate", totalRate);
 		model.addAttribute("totalValueRate", totalValueRate);
         model.addAttribute("categories", categoryService.findAllByFoodId(food_id));
@@ -72,29 +72,29 @@ public class FoodController {
    			@RequestParam(value = "size") Optional<Integer> size,
    			@RequestParam(value = "sortBy") Optional<String> sort) {
    	
-   		boolean up = sort.orElse("").contains("Up");
-   		Sort sortOption = Sort.by(up ? Direction.ASC : Direction.DESC
-   				, sort.orElse("name").replace("Down","").replace("Up", ""));
-   		Optional<Long> cate_id = Optional.ofNullable(null);
-   		if(cid.isPresent()) cate_id = Optional.ofNullable(categoryService.getByName(cid.get()).getId());
-   		
-   		Page<Food> list =  foodService.getByFilter(
-   				keyword.orElse("")
-   				,price_min
-   				,price_max
-   				,quantity
-   				,view
-   				,create_date
-   				,Optional.of(Display.SHOW)
-   				,cate_id
-   				,PageRequest.of(page.isPresent() ? page.get()-1 : 0, size.orElse(9),sortOption));
-   		
-   		model.addAttribute("items", list);
-   		model.addAttribute("cid", cid.orElse(""));
-   		model.addAttribute("price_min", price_min.orElse(-1.0));
-   		model.addAttribute("price_max", price_max.orElse(-1.0));
-   		model.addAttribute("size", size.orElse(9));
-   		model.addAttribute("sortBy",sort.orElse("idDown"));
+//   		boolean up = sort.orElse("").contains("Up");
+//   		Sort sortOption = Sort.by(up ? Direction.ASC : Direction.DESC
+//   				, sort.orElse("name").replace("Down","").replace("Up", ""));
+//   		Optional<Long> cate_id = Optional.ofNullable(null);
+//   		if(cid.isPresent()) cate_id = Optional.ofNullable(categoryService.getByName(cid.get()).getId());
+//
+//   		Page<Food> list =  foodService.getByFilter(
+//   				keyword.orElse("")
+//   				,price_min
+//   				,price_max
+//   				,quantity
+//   				,view
+//   				,create_date
+//   				,Optional.of(Display.SHOW)
+//   				,cate_id
+//   				,PageRequest.of(page.isPresent() ? page.get()-1 : 0, size.orElse(9),sortOption));
+//
+   		model.addAttribute("items", foodService.getListFood());
+//   		model.addAttribute("cid", cid.orElse(""));
+//   		model.addAttribute("price_min", price_min.orElse(-1.0));
+//   		model.addAttribute("price_max", price_max.orElse(-1.0));
+//   		model.addAttribute("size", size.orElse(9));
+//   		model.addAttribute("sortBy",sort.orElse("idDown"));
            model.addAttribute("listSale", foodService.getListSaleFood());
            model.addAttribute("listTop", foodService.getListTopNewFood());
            model.addAttribute("pageTitle", "Menu");
