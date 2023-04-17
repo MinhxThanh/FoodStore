@@ -130,5 +130,9 @@ public class DiscountRestController {
 	public void deleteByI(@PathVariable("id") Long id) {
 		discountService.deleteById(id);
 	}
+	@DeleteMapping("/delete/{name}/{foodId}")
+	public void deleteByNameAndFoodId(@PathVariable("name") String name,@PathVariable("foodId") Long foodId) {
+		discountService.deleteByNameAndFoodId(name,foodId);
+	}
 	
 }
