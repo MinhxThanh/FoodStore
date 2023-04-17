@@ -11,4 +11,6 @@ public interface CustomerCouponService {
 	CustomerCoupon save(CustomerCoupon customerCoupon);
 	List<CustomerCoupon> findAll();
 	void customerCouponService(String emailCustomer, Long idCoupon);
+	
+	void deleteByNameAndFoodId(String name, Long foodId);
 }
