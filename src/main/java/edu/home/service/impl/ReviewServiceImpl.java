@@ -1,12 +1,14 @@
 package edu.home.service.impl;
 
-import edu.home.entity.Review;
-import edu.home.repository.ReviewRepository;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
+import edu.home.common.entity.AvgReview;
+import edu.home.entity.Review;
+import edu.home.repository.ReviewRepository;
 
 @Service
 public class ReviewServiceImpl implements edu.home.service.ReviewService {
@@ -31,4 +33,15 @@ public class ReviewServiceImpl implements edu.home.service.ReviewService {
     public List<Review> findAllByFoodId(Long foodId) {
         return dao.findAllByFoodId(foodId);
     }
+    @Override
+    public List<AvgReview> getAvgReview() {
+        return dao.getAvgReview();
+    }
+
+	@Override
+	public void delete(Long id) {
+		dao.deleteById(id);
+		
+	}
+    
 }
