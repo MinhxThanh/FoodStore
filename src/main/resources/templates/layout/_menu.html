@@ -122,12 +122,12 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="font-italic" style="text-decoration: underline;">[[#{menu.more}]]</a>
+                                    <a th:href="@{/cart}" class="font-italic" style="text-decoration: underline;">[[#{menu.more}]]</a>
                                 </li>
                             </ul>
                         </li>
                     </ul>
-                    <div class="header__cart__price">[[#{menu.item}]] <span>${{cart.amount}}</span></div>
+                    <div class="header__cart__price">[[#{menu.item}]] <span class="m-auto">${{cart.amount}}</span></div>
                 </div>
             </div>
         </div>
@@ -151,8 +151,6 @@
                     <ul>
                          <li><a href="/food/all" th:style="${cid} ==''?'color:#7fad39;':''">All</a></li>
                         <li th:each="c:${cates}"><a th:href="@{|/food/${c.name}|}" th:style="${c.name==cid?'color:#7fad39;':''}" th:if="${c.isDisplay}">[[${c.name}]] </a></li>
-<!-- 							<li ng-value="0" ng-checked="true">Category : ALL</li> -->
-<!-- 							<li ng-repeat="r in categories" ng-value="r.id">{{r.name}}</li> -->
                     </ul>
                 </div>
             </div>
@@ -164,8 +162,8 @@
                                  [[#{menu.cate}]]
                                  <span class="arrow_carrot-down"></span>
                              </div>
-                             <input type="text" placeholder="Bạn muốn tìm gì?" name="keyword" onblur="this.form.submit()">
-                             <button type="submit" class="site-btn">[[#{menu.search}]]</button>
+                             <input type="text" placeholder="Bạn muốn tìm gì?" name="search" ng-model="search.$">
+                             <button type="submit" class="site-btn" disabled>[[#{menu.search}]]</button>
                          </form>
                     </div>
                     <div class="hero__search__phone">

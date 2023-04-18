@@ -15,6 +15,7 @@ import edu.home.common.entity.ListFoodSale;
 import edu.home.common.entity.ListTopNewFood;
 import edu.home.common.entity.ProcedureFoods;
 import edu.home.entity.Food;
+import edu.home.entity.ImageFood;
 
 public interface FoodService {
 
@@ -29,10 +30,6 @@ public interface FoodService {
     List<ListTopNewFood> getListTopNewFood();
 
     List<ListFoodByCategory> getListFoodByCategoryId(BigInteger categoryId);
-    
-    Page<Food> getByFilter( String keyword , Optional<Double> priceMin , Optional<Double> priceMax , Optional<Integer> quantity , Optional<Integer> view , Optional<Long> createDate, Optional<Boolean> isDisplay , Optional<Long> category_id ,Pageable pageable);
-
-	List<Food> getByKeywordEng(String keyword, Pageable pageable);
 	
 	List<ProcedureFoods> procedureFoods();
     Food create(Food food);

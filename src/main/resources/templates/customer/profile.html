@@ -190,33 +190,48 @@
                                     <div class="modal-content ">
                                         <div class="modal-body ">
                                             <div class="container">
-                                                <form>
+                                                <form name="formAddress">
                                                     <div class="row ">
                                                         <div class="form-group col-md-6">
                                                             <label for="lastname"
                                                                 class="font-weight-bold text-dark">[[#{profile.name}]]</label>
                                                             <input type="text" class="form-control" name="fullname"
                                                                 id="fullname" aria-describedby="fullnameHelp"
-                                                                ng-model="form.username" placeholder="Nhập tên">
+                                                                ng-model="form.username" placeholder="Nhập tên" ng-required="true" ng-pattern="/^[a-zA-Z_\\\/.’'-]+(?: +[A-Za-z_\\\/.’'-]+)*$/" ng-trim="false">
+                                                            <span class="error text-danger" ng-show="formAddress.fullname.$error.required">
+									                            Vui lòng nhập tên
+									                        </span>
+									                        <span class="error text-danger" ng-show="!formAddress.fullname.$error.required&&formAddress.fullname.$error.pattern">
+									                            Vui lòng chỉ nhập chữ và không có ký tự đặc biệt
+									                        </span>
                                                         </div>
                                                         <div class="form-group col-md-6 mb-2">
 																	<label for="phone" class="font-weight-bold text-dark">[[#{profile.phone}]]</label> 
 															<input type="text" class="form-control" name="phone"
                                                                 id="phone" aria-describedby="fullnameHelp"
-                                                                ng-model="form.phone" maxlength="10" placeholder="Nhập số điện thoại">
+                                                                ng-model="form.phone" maxlength="10" placeholder="Nhập số điện thoại" ng-required="true" ng-pattern="/^\d{10,15}$/" >
+                                                            <span class="error text-danger" ng-show="formAddress.phone.$error.required">
+									                            Vui lòng nhập số điện thoại
+									                        </span>
+									                        <span class="error text-danger" ng-show="!formAddress.phone.$error.required&&formAddress.phone.$error.pattern">
+									                            Vui lòng chỉ nhập số và phải nhập đủ
+									                        </span>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                     	<div class="form-group col-md-6 mb-2">
-                                                            <label for="phone" class="font-weight-bold text-dark">[[#{profile.province}]]</label>
-                                                            <input type="text" class="form-control" name="phone"
-                                                                id="phone" aria-describedby="fullnameHelp"
-                                                                ng-model="form.cityProvince" maxlength="10" placeholder="Nhập thành phố">
+                                                            <label for="provice" class="font-weight-bold text-dark">[[#{profile.province}]]</label>
+                                                            <input type="text" class="form-control" name="provice"
+                                                                id="provice" aria-describedby="fullnameHelp"
+                                                                ng-model="form.cityProvince" maxlength="10" placeholder="Nhập thành phố" ng-required="true">
+                                                            <span class="error text-danger" ng-show="formAddress.provice.$error.required">
+									                            Vui lòng nhập thành phố
+									                        </span>
                                                         </div>
                                                         <div class="form-group col-md-6 mb-2">
-                                                            <label for="phone" class="font-weight-bold text-dark">Email</label>
-                                                            <input type="text" class="form-control" name="phone"
-                                                                id="phone" aria-describedby="fullnameHelp"
+                                                            <label for="email" class="font-weight-bold text-dark">Email</label>
+                                                            <input type="text" class="form-control" name="email"
+                                                                id="email" aria-describedby="fullnameHelp"
                                                                 ng-model="customer.email" maxlength="10" readonly>
                                                         </div>
                                                     </div>
@@ -224,20 +239,26 @@
                                                         <div class="form-group col-md-12">
                                                             <label class="font-weight-bold text-dark">[[#{profile.addressFocus}]]</label>
                                                             <textarea class="form-control" placeholder="Địa chỉ cụ thể"
-                                                                ng-model="form.address" name="adr" id="adr"></textarea>
+                                                                ng-model="form.address" name="adr" id="adr" ng-required="true"></textarea>
+                                                            <span class="error text-danger" ng-show="formAddress.adr.$error.required">
+									                            Vui lòng nhập địa chỉ cụ thể
+									                        </span>
                                                         </div>
                                                     </div>
-                                                    <div class="row" hidden>
+                                                    <div class="row">
+                                                    	<label class="form-check-label mr-3" for="inlineRadio1">Địa chỉ mặc định</label>
                                                     	<div class="form-group col-md-12">
-											                    <label class="form-check-label mr-3" for="inlineRadio1">Địa chỉ mặc định</label>
 		                                                    <div class="form-check form-check-inline">
-											                    <input ng-model="form.default" ng-value="true" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
+											                    <input ng-model="form.default" ng-value="true" ng-required="true" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
 											                    <label class="form-check-label" for="inlineRadio1">Mặc định</label>
 											                </div>
 											                <div class="form-check form-check-inline">
-											                    <input  ng-model="form.default" ng-value="false" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+											                    <input ng-model="form.default" ng-value="false" ng-required="true" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
 											                    <label class="form-check-label" for="inlineRadio2">Không</label>
 											                </div> 
+											                <span class="error text-danger" ng-show="formAddress.inlineRadioOptions.$error.required">
+									                            Vui lòng chọn kiểu địa chỉ
+									                        </span>
 											                <input hidden ng-model="form.id"> 
                                                     	</div>
                                                     </div>  

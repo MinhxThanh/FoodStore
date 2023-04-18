@@ -28,7 +28,7 @@
   <!-- Shoping Cart Section Begin -->
   <section class="shoping-cart spad" style="padding-top: 50px !important;">
     <div class="container">
-      <div class="row">
+      <div class="row" ng-if="cart.count > 0">
         <div th:if="${#request.remoteUser}" class="col-12 btn_synchronize text-right mb-4">
           <button ng-click="cart.synchronize()" class="btn btn-outline-danger px-5 py-2">
             <i class="fa fa-cloud" aria-hidden="true"></i> [[#{cart.synch}]]
@@ -86,7 +86,7 @@
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="row" ng-if="cart.count > 0">
         <div class="col-lg-12">
           <div class="shoping__cart__btns">
             <a href="#" class="primary-btn cart-btn">[[#{cart.continue}]]</a>
@@ -116,8 +116,17 @@
           </div>
         </div>
       </div>
-    </div>
 
+	<div class="row align-middle" ng-if="cart.count == 0">
+        <div class="col-lg-12">
+           <div class="shoping__cart__btns">
+        	<img src="https://media4.giphy.com/media/L2kr3y97uJauF6T6Lh/giphy.gif?cid=6c09b95273bdfc7565e43ab4b013e25764659e0b1c10dda9&rid=giphy.gif&ct=s" alt="Không có đơn hàng nào">
+        	<a th:href="@{/food/all}" class="btn btn-outline-danger px-5 py-2">
+        	        	<b>Giỏ hàng trống</b><br>Mua ngay</a>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Notification -->
     <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">
       <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">

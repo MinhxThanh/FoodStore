@@ -33,6 +33,37 @@ app.controller("foodStore-controller", function ($scope, $http, $window,$timeout
 
     $scope.initialize()
 	
+	//phan trang san pham
+	$scope.pager = {
+		page:0,
+		size:6,
+		get items(){
+			var start = this.page * this.size;
+			return	$scope.items.slice(start,start+this.size);
+		},
+		get count(){
+			return Math.ceil(1.0*$scope.items.length/this.size);
+		},
+		first(){
+			this.page = 0;
+		},
+		previous(){
+			this.page--;
+			if(this.page<0){
+				this.last();
+			};
+		},
+		next(){
+			this.page++;
+			if(this.page >= this.count){
+				this.first();
+			};
+		},
+		last(){
+			this.page = this.count -1;
+		},
+	}
+	
 	//cap nhat profile customer
 	$scope.update = function () {
         var item = angular.copy($scope.customer);
@@ -379,6 +410,8 @@ app.controller("foodStore-controller", function ($scope, $http, $window,$timeout
         }
     }
 
+    $scope.checkout.loadFromSessionStorage()
+
 
 
     //management order
@@ -594,8 +627,6 @@ app.controller("foodStore-controller", function ($scope, $http, $window,$timeout
         newDate.setMinutes(date.getMinutes() + minutes);
         return newDate;
     }
-
-    $scope.checkout.loadFromSessionStorage()
 
     $scope.cart.loadFromLocalStorage()
 })
