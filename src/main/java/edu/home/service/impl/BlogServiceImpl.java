@@ -96,7 +96,6 @@ public class BlogServiceImpl implements BlogService {
 		return blog;
 	}
 
-
 	@Override
 	public Blog updateBlogs(Blog blog) {
 		// TODO Auto-generated method stub
@@ -116,6 +115,10 @@ public class BlogServiceImpl implements BlogService {
 		return list3;
 	}
 
-	
-	
+	@Override
+	public List<Blog> findAllByUserEmail(String email) {
+		return blogRepo.findAllByUserEmail(email);
+	}
+
+
 }

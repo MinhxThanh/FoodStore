@@ -86,5 +86,15 @@ public class DiscountServiceImpl implements DiscountService{
 	public void deleteById(Long id) {
 		dao.deleteById(id);
 	}
-	
+
+	@Override
+	public void deleteByNameAndFoodId(String name, Long foodId) {
+
+	}
+
+	@Override
+	public List<Discount> findAllByUserEmail(String email) {
+		return dao.findAllByUserEmail(email);
+	}
+
 }

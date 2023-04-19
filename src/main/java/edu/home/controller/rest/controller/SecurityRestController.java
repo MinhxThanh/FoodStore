@@ -36,16 +36,19 @@ public class SecurityRestController {
         try {
             User user = userAccountService.findByUsernameOrEmail(request.getEmail());
             System.out.println("Name: " + user.getUsername());
-//            if(!user.getUserRoles().stream().anyMatch(item -> item.getRole().getId() == 1))
-//                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-//            Authentication authentication = authenticationManager.authenticate(
-//                    new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
-//            );
-            String accessToken = jwtTokenUtil.generateAccessToken(request.getEmail());
-            AuthResponse response = new AuthResponse(request.getEmail(), accessToken, user.getUsername(), user.getAvatar(), user);
-            return ResponseEntity.ok(response);
+            if(user.getUserRoles().stream().anyMatch(item -> item.getRole().getId() == 4)) {
+                System.out.println("this one: ");
+                String accessToken = jwtTokenUtil.generateAccessToken(request.getEmail());
+                AuthResponse response = new AuthResponse(request.getEmail(), accessToken, user.getUsername(), user.getAvatar(), user, true);
+                return ResponseEntity.ok(response);
+            } else {
+                System.out.println("this two: ");
+                String accessToken = jwtTokenUtil.generateAccessToken(request.getEmail());
+                AuthResponse response = new AuthResponse(request.getEmail(), accessToken, user.getUsername(), user.getAvatar(), user, false);
+                return ResponseEntity.ok(response);
+            }
         } catch (BadCredentialsException ex){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 

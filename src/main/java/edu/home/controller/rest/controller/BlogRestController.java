@@ -32,9 +32,21 @@ public class BlogRestController {
 	private UserAccountService userAccountService;
 
 	@GetMapping(value = "getAll")
-	public List<Blog> getAllblog() {
-//		System.out.println("\n dang chay getall blog \n");
-		return blogService.findAllBlog();
+	public ResponseEntity<?> getAllBlog() {
+		try {
+			return ResponseEntity.ok(blogService.findAllBlog());
+		} catch (Exception e) {
+			return ResponseEntity.noContent().build();
+		}
+	}
+
+	@GetMapping(value = "findAllByUserEmail/{email}")
+	public ResponseEntity<?> findAllByUserEmail(@PathVariable("email") String email) {
+		try {
+			return ResponseEntity.ok(blogService.findAllByUserEmail(email));
+		} catch (Exception e) {
+			return ResponseEntity.noContent().build();
+		}
 	}
 
 	@PostMapping(value = "create")

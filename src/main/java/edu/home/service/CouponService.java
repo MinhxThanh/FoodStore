@@ -19,4 +19,6 @@ public interface CouponService {
 	Coupon update(Coupon Coupons);
 
 	void delete(Long id);
+
+	List<Coupon> findAllByUserEmail(String email);
 }

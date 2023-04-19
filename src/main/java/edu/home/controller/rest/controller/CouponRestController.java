@@ -31,4 +31,22 @@ public class CouponRestController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping(value = "findById/{id}")
+    public ResponseEntity<?> findById(@PathVariable("id") Long id) {
+        try {
+            return ResponseEntity.ok(couponService.findById(id));
+        } catch (Exception e) {
+            return ResponseEntity.noContent().build();
+        }
+    }
+
+    @GetMapping(value = "findAllByUserEmail/{email}")
+    public ResponseEntity<?> findAllByUserEmail(@PathVariable("email") String email) {
+        try {
+            return ResponseEntity.ok(couponService.findAllByUserEmail(email));
+        } catch (Exception e) {
+            return ResponseEntity.noContent().build();
+        }
+    }
 }

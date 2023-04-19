@@ -30,9 +30,5 @@ public interface BlogRepository extends JpaRepository<Blog, Long> {
 	List<Blog> topBaBlog();
 
 
-
-
-	
-	
-	
+    List<Blog> findAllByUserEmail(String email);
 }

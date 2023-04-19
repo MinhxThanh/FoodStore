@@ -119,6 +119,11 @@ public class FoodServiceImpl implements FoodService{
 		dao.updateViewCountById(i, foodId);
 	}
 
+	@Override
+	public List<Food> findAllByUserEmail(String email) {
+		return dao.findAllByUserEmail(email);
+	}
+
 	private static List<ListFoodByCategory> getListFoodByCategories(List<Tuple> list) {
 		List<ListFoodByCategory> listFoods = list.stream().map(item -> new ListFoodByCategory(
 				item.get(0, BigInteger.class),

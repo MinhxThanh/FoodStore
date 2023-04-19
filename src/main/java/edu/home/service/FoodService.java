@@ -42,4 +42,6 @@ public interface FoodService {
     List<ListFoodByCategory> getTop2FoodByCategoryId(BigInteger categoryId);
 
     void updateViewCountById(Long i, Long foodId);
+
+    List<Food> findAllByUserEmail(String email);
 }

@@ -37,10 +37,19 @@ public class DiscountRestController {
 	FoodService foodService;
 	@Autowired 
 	UserAccountService userService;
-	
+
 	@GetMapping("")
 	public List<Discount> getAll(){
 		return discountService.findAll();
+	}
+
+	@GetMapping("findAllByUserEmail/{email}")
+	public ResponseEntity<?> findAllByUserEmail(@PathVariable("email") String email){
+		try {
+			return ResponseEntity.ok(discountService.findAllByUserEmail(email));
+		} catch (Exception e) {
+			return ResponseEntity.noContent().build();
+		}
 	}
 	@GetMapping("/findById/{id}")
 	public Discount findById(@PathVariable("id") Long id) {
@@ -130,6 +139,7 @@ public class DiscountRestController {
 	public void deleteByI(@PathVariable("id") Long id) {
 		discountService.deleteById(id);
 	}
+
 	@DeleteMapping("/delete/{name}/{foodId}")
 	public void deleteByNameAndFoodId(@PathVariable("name") String name,@PathVariable("foodId") Long foodId) {
 		discountService.deleteByNameAndFoodId(name,foodId);

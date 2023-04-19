@@ -40,6 +40,11 @@ public class CouponServiceImpl implements CouponService {
 	}
 
 	@Override
+	public List<Coupon> findAllByUserEmail(String email) {
+		return dao.findAllByUserEmail(email);
+	}
+
+	@Override
 	public List<Coupon> findAllCouponByCustomerByEmail(String remoteUser) {
 		return dao.findAllByCustomerEmail(remoteUser);
 	}

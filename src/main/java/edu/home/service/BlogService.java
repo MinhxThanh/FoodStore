@@ -35,7 +35,6 @@ public interface BlogService {
 
 	List<Blog> topBaBlog();
 
-	
 
-	
+	List<Blog> findAllByUserEmail(String email);
 }

@@ -40,6 +40,15 @@ public class OrderRestController {
 	public List<Order> findAll(){
 		return orderService.findAll();
 	}
+
+	@GetMapping("findAllByUserEmail/{email}")
+	public ResponseEntity<?> findAllByUserEmail(@PathVariable("email") String email){
+		try {
+			return ResponseEntity.ok(orderService.findAllByUserEmail(email));
+		} catch (Exception e) {
+			return ResponseEntity.notFound().build();
+		}
+	}
 	@GetMapping("/findStatusById/{id}")
 	public Long findStatusById(@PathVariable("id") Long id) {
 		return orderService.findStatusById(id);

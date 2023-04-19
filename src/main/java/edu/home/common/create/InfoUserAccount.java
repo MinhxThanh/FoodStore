@@ -42,7 +42,7 @@ public class InfoUserAccount {
             Thread.sleep(200);
             UserRole userRole = new UserRole();
             userRole.setUser(user1);
-            userRole.setRole(roleService.findById(Long.valueOf(3)));
+            userRole.setRole(roleService.findById(Long.valueOf(5)));
             userRoleService.create(userRole);
             return user;
         } catch (Exception e) {

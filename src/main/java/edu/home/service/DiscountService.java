@@ -34,4 +34,8 @@ public interface DiscountService {
 	List<Object> FindAllFoodDiscount(String discountName);
 
 	void deleteById(Long id);
+
+    void deleteByNameAndFoodId(String name, Long foodId);
+
+	List<Discount> findAllByUserEmail(String email);
 }

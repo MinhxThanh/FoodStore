@@ -3,6 +3,7 @@ package edu.home.controller.rest.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,6 +24,15 @@ import edu.home.service.CustomerPhoneAddressService;
 public class CustomerPhoneAddressRestController {
     @Autowired
     private CustomerPhoneAddressService addressService;
+
+    @GetMapping(value = "findById/{id}")
+    public ResponseEntity<?> findById(@PathVariable("id") Long id) {
+        try {
+            return ResponseEntity.ok(addressService.findById(id));
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     @GetMapping(value = "findByCustomerEmail")
     public ResponseEntity<?> findByCustomerEmail(HttpServletRequest request){

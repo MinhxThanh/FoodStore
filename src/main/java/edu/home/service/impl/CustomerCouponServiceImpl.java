@@ -38,14 +38,13 @@ public class CustomerCouponServiceImpl implements CustomerCouponService{
 	public void customerCouponService(String emailCustomer, Long idCoupon) {
 		dao.deleteByEmailCustomerAndIdCoupon(emailCustomer,idCoupon);
 	}
-
 	@Override
 	public List<CustomerCoupon> findAll() {
 		return dao.findAll();
 	}
 
 	@Override
-	public void customerCouponService(String emailCustomer, Long idCoupon) {
-		dao.deleteByEmailCustomerAndIdCoupon(emailCustomer,idCoupon);
+	public void deleteByNameAndFoodId(String name, Long foodId) {
+		dao.deleteByEmailCustomerAndIdCoupon(name, foodId);
 	}
 }

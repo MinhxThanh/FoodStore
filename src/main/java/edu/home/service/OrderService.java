@@ -20,4 +20,6 @@ public interface OrderService {
 	List<Order> findByPaymentmethodId(Long id);
 	List<Order> findByOrderDate(Date orderDate);
 	List<Order> findByShippedDate(Date shippedDate);
+
+    List<Order> findAllByUserEmail(String email);
 }

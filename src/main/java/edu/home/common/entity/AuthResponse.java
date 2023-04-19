@@ -16,4 +16,5 @@ public class AuthResponse {
     private String username;
     private String avatar;
     private User user;
+    private Boolean admin;
 }

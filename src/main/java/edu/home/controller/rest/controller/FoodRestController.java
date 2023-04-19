@@ -59,6 +59,15 @@ public class FoodRestController {
     public List<Food> getAll(){
     	return foodService.findAll();
     }
+
+    @GetMapping("findAllByUserEmail/{email}")
+    public ResponseEntity<?> findAllByUserEmail(@PathVariable("email") String email) {
+        try {
+            return ResponseEntity.ok(foodService.findAllByUserEmail(email));
+        } catch (Exception e) {
+            return ResponseEntity.noContent().build();
+        }
+    }
     
     @GetMapping("/findById/{id}")
     public Food findById(@PathVariable("id") Long id) {

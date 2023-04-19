@@ -89,4 +89,9 @@ public class OrderServiceImpl implements OrderService {
 	public List<Order> findByShippedDate(Date shippedDate) {
 		return dao.findByShippedDate(shippedDate);
 	}
+
+    @Override
+    public List<Order> findAllByUserEmail(String email) {
+        return dao.findAllByUserEmail(email);
+    }
 }

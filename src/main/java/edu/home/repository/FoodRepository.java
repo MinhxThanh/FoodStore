@@ -49,4 +49,6 @@ public interface FoodRepository extends JpaRepository<Food, Long> {
     @Modifying
     @Query("update Food f set f.viewCount = ?1 where f.id =?2")
     void updateViewCountById(Long i, Long foodId);
+
+    List<Food> findAllByUserEmail(String email);
 }

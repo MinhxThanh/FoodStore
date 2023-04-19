@@ -1,5 +1,6 @@
 package edu.home.repository;
 
+import edu.home.common.entity.OrderDetailResponse;
 import edu.home.entity.OrderDetail;
 import edu.home.entity.Report;
 import edu.home.entity.ReportMonth;
@@ -8,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import javax.persistence.Tuple;
 import java.util.List;
 
 public interface OrderDetailRepository extends JpaRepository<OrderDetail, Long> {
@@ -63,4 +65,12 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail, Long> 
 	+ " GROUP BY  o.food.name")
 	List<Report> getInventoryProductByMonthAndByProductName(@Param("id") Long id, @Param("month") Integer month,
 			@Param("year") Integer year);
+
+    List<OrderDetail> getAllByOrderId(Long orderId);
+
+	@Query(value="select o.id, f.name, (select top 1 i.image_name from image_food i WHERE i.food_id = o.food_id) as image, \n" +
+			"o.quantity, o.new_price, o.old_price from [order_details] o\n" +
+			"left join foods f on f.id = o.food_id\n" +
+			"WHERE o.order_id = : orderId", nativeQuery = true)
+	List<Tuple> getAllOrderDetailResponseByOrderId(@Param("orderId") Long orderId);
 }

@@ -34,4 +34,8 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
 	@Query("select o from Order o where o.shippedDate =?1")
 	public List<Order> findByShippedDate(Date shippedDate);
+
+//	example doesn't use
+	@Query("select o from Order o")
+    List<Order> findAllByUserEmail(String email);
 }
