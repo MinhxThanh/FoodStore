@@ -30,4 +30,9 @@ public class UserAccountServiceImpl implements UserAccountService {
         return dao.findAll();
     }
 
+    @Override
+    public User updateUser(User user) {
+        return dao.save(user);
+    }
+
 }
