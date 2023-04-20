@@ -11,4 +11,6 @@ public interface UserAccountService {
     User createUserAccount(User user);
 
     List<User> findAll();
+
+    User updateUser(User user);
 }
