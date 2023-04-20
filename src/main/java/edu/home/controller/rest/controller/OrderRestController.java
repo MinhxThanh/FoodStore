@@ -35,7 +35,6 @@ public class OrderRestController {
         }
     }
     
-//    Giàu
     @GetMapping("/findAll")
 	public List<Order> findAll(){
 		return orderService.findAll();
@@ -72,5 +71,14 @@ public class OrderRestController {
 	@PutMapping("/status/{status}/{id}")
 	public void updateStatusById(@PathVariable("status") Long status, @PathVariable("id") Long id) {
 		orderService.updateStatusById(status, id);
+	}
+
+	@DeleteMapping("cancelOrder/{orderId}")
+	public void cancelOrder(@PathVariable("orderId") Long orderId) {
+		try {
+			orderService.cancelOrderByOrderId(orderId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

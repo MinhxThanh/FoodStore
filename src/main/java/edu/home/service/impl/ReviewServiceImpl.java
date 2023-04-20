@@ -43,5 +43,15 @@ public class ReviewServiceImpl implements edu.home.service.ReviewService {
 		dao.deleteById(id);
 		
 	}
-    
+
+    @Override
+    public List<Review> getRatingBetweenByFoodId(Long foodId, double v, double i) {
+        return dao.getRatingBetweenByFoodId(foodId, v, i);
+    }
+
+    @Override
+    public AvgReview findByFoodId(Long foodId) {
+        return dao.findByFoodId(foodId);
+    }
+
 }

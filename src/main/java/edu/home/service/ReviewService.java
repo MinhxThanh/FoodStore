@@ -22,4 +22,7 @@ public interface ReviewService {
 
 	void delete(Long id);
 
+	List<Review> getRatingBetweenByFoodId(Long foodId, double v, double i);
+
+    AvgReview findByFoodId(Long foodId);
 }

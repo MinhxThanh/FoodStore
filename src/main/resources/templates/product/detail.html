@@ -11,6 +11,40 @@
 <div id="main">
     <div th:replace="~{/layout/_menu::hero-normal-section}"></div>
     <style>
+        .rating-label {
+            font-weight: bold;
+        }
+
+        /* Rating bar width */
+        .rating-bar {
+            width: 300px;
+            padding: 8px;
+            border-radius: 5px;
+        }
+
+        /* The bar container */
+
+        .star-active {
+            color: #FBC02D;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .star-active:hover {
+            color: #F9A825;
+            cursor: pointer;
+        }
+
+        .star-inactive {
+            color: #CFD8DC;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .blue-text {
+            color: #0091EA;
+        }
+
         .rate_product {
             position: relative;
         }
@@ -296,6 +330,81 @@
                                         <h3 class="text-muted"><i class="fa fa-comments" aria-hidden="true"></i></h3>
                                         <h4 class="text-muted"> No Comments Yet</h4>
                                         <h5 class="text-muted">Be the first so share what you think!</h5>
+                                    </div>
+
+<!--                                    result rating here-->
+                                    <div class="container-fluid px-1 py-5 mx-auto">
+                                        <div class="row justify-content-center">
+                                            <div class="col-12 text-center mb-5">
+                                                    <div class="row pl-5 justify-content-left d-flex">
+                                                        <div class="col-md-3 pl-5 d-flex flex-column">
+                                                            <div class="rating-box w-75 m-auto">
+                                                                <h1 class="">{{commentFood.reviewFood.average}}</h1>
+                                                            </div>
+                                                            <div class="star">
+                                                                <span class="{{commentFood.reviewFood.average >= 1 ? 'fa fa-star star-active':'fa fa-star star-inactive' }}"></span>
+                                                                <span class="{{commentFood.reviewFood.average >= 2 ? 'fa fa-star star-active':'fa fa-star star-inactive' }}"></span>
+                                                                <span class="{{commentFood.reviewFood.average >= 3 ? 'fa fa-star star-active':'fa fa-star star-inactive' }}"></span>
+                                                                <span class="{{commentFood.reviewFood.average >= 4 ? 'fa fa-star star-active':'fa fa-star star-inactive' }}"></span>
+                                                                <span class="{{commentFood.reviewFood.average >= 4.5 ? 'fa fa-star star-active':'fa fa-star star-inactive' }}"></span>
+                                                            </div>
+                                                            <span class="d-block text-center text-muted">{{commentFood.reviewFood.amount}} reviews</span>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="rating-bar0 justify-content-center">
+                                                                <table class="text-left col-12">
+                                                                    <tr class="border-0">
+                                                                        <td class="rating-label col-2">Excellent</td>
+                                                                        <td class="rating-bar col-9">
+                                                                            <div class="progress" style="height: 10px;">
+                                                                                <div class="progress-bar bg-warning" role="progressbar" aria-label="Warning example" style="width: {{ commentFood.rating.excellentPer }}%" aria-valuenow="{{ commentFood.rating.excellentPer }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-right col-1">{{ commentFood.rating.excellent }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="rating-label col-2">Good</td>
+                                                                        <td class="rating-bar col-9">
+                                                                            <div class="progress" style="height: 10px;">
+                                                                                <div class="progress-bar bg-warning" role="progressbar" aria-label="Warning example" style="width: {{ commentFood.rating.goodPer }}%" aria-valuenow="{{ commentFood.rating.goodPer }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-right col-1">{{ commentFood.rating.good }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="rating-label col-2">Average</td>
+                                                                        <td class="rating-bar col-9">
+                                                                            <div class="progress" style="height: 10px;">
+                                                                                <div class="progress-bar bg-warning" role="progressbar" aria-label="Warning example" style="width: {{ commentFood.rating.averagePer }}%" aria-valuenow="{{ commentFood.rating.averagePer }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-right col-1">{{ commentFood.rating.average }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="rating-label col-2">Poor</td>
+                                                                        <td class="rating-bar col-9">
+                                                                            <div class="progress" style="height: 10px;">
+                                                                                <div class="progress-bar bg-warning" role="progressbar" aria-label="Warning example" style="width: {{ commentFood.rating.poorPer }}%" aria-valuenow="{{ commentFood.rating.poorPer }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-right col-1">{{ commentFood.rating.poor }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="rating-label col-2">Terrible</td>
+                                                                        <td class="rating-bar col-9">
+                                                                            <div class="progress" style="height: 10px;">
+                                                                                <div class="progress-bar bg-warning" role="progressbar" aria-label="Warning example" style="width: {{ commentFood.rating.terriblePer }}%" aria-valuenow="{{ commentFood.rating.terriblePer }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-right col-1">{{ commentFood.rating.terrible }}</td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                            </div>
+                                        </div>
                                     </div>
                                     <!--                  item comment here-->
                                     <div ng-repeat="item in commentFood.items" class="d-flex flex-row comment-row w-75 container-fluid border-bottom mb-4 p-3">

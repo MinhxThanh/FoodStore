@@ -4,6 +4,7 @@ app.controller("foodStore-controller", function ($scope, $http, $window,$timeout
     $scope.address = []
     $scope.customer = {}
     $scope.address = {}
+    $scope.getInfoAddressOfCustomer = {}
     $scope.form = {}
     $scope.message = ''
     $scope.error = ''
@@ -20,16 +21,15 @@ app.controller("foodStore-controller", function ($scope, $http, $window,$timeout
                     $scope.cart.addToSyn(item.food.id, item.quantity)
                 }
         })
+    }
+    $scope.getInfoAddressOfCustomer = function () {
         //get info address of customer
-        $http.get(`/rest/customerPhoneAddress/findAllByCustomerEmail`).then(resp => {
-            $scope.address = angular.copy(resp.data)
-        })
-        //get profile customer
-		$http.get(`/rest/customerProfile/findByCustomerEmail`).then(resp => {
-			resp.data.birthday = new Date(resp.data.birthday)
-            $scope.customer = angular.copy(resp.data)
+        $http.get(`/rest/customerPhoneAddress/findByCustomerEmail`).then(resp => {
+            $scope.getInfoAddressOfCustomer = angular.copy(resp.data)
+            console.log("getInfoAddressOfCustomer: ", $scope.getInfoAddressOfCustomer)
         })
     }
+
 
     $scope.initialize()
 	
@@ -63,7 +63,15 @@ app.controller("foodStore-controller", function ($scope, $http, $window,$timeout
 			this.page = this.count -1;
 		},
 	}
-	
+
+    //get profile customer
+    $scope.getProfileCustomer = function (){
+        $http.get(`/rest/customerProfile/findByCustomerEmail`).then(resp => {
+            resp.data.birthday = new Date(resp.data.birthday)
+            $scope.customer = angular.copy(resp.data)
+        })
+    }
+
 	//cap nhat profile customer
 	$scope.update = function () {
         var item = angular.copy($scope.customer);
@@ -183,6 +191,8 @@ app.controller("foodStore-controller", function ($scope, $http, $window,$timeout
         items: [],
         review: {},
         customer: {},
+        rating: {},
+        reviewFood: {},
         getInfo(foodId){
             $http.get(`/rest/commentFood/getAll`).then(resp =>{
                 this.items = angular.copy(resp.data)
@@ -199,7 +209,12 @@ app.controller("foodStore-controller", function ($scope, $http, $window,$timeout
                     })
                 }
             })
-
+            $http.get(`/rest/review/getRatingByFoodId/${foodId}`).then(resp => {
+                this.rating = resp.data
+            })
+            $http.get(`/rest/review/findOneByFoodId/${foodId}`).then(resp => {
+                this.reviewFood = resp.data
+            })
         },
         create(){
             let item = {
@@ -405,8 +420,8 @@ app.controller("foodStore-controller", function ($scope, $http, $window,$timeout
         async loadFromSessionStorage() {
             let json = sessionStorage.getItem("checkoutItems")
             this.items = json ? JSON.parse(json) : []
-            await $scope.sleep(3000)
-            // sessionStorage.removeItem("checkoutItems");
+            // await $scope.sleep(3000)
+            sessionStorage.removeItem("checkoutItems");
         }
     }
 
@@ -423,7 +438,6 @@ app.controller("foodStore-controller", function ($scope, $http, $window,$timeout
         coupon: {},
         customer: {},
         paymentmethod: {},
-
         image: '',
         price: '',
         display: true,
@@ -437,8 +451,9 @@ app.controller("foodStore-controller", function ($scope, $http, $window,$timeout
             this.shippedDate = $scope.addMinutesToDate(60)
 
             //add customer info here
-            $http.get(`/rest/customer/findCurrentCustomer`).then(resp =>{
+            $http.get(`/rest/customer/findCustomerIsPresent`).then(resp =>{
                 this.customer = angular.copy(resp.data)
+                console.log("this.customer: ", this.customer)
             })
 
             // add payment method here
@@ -454,9 +469,11 @@ app.controller("foodStore-controller", function ($scope, $http, $window,$timeout
             // add address here
             if ( $scope.checkout.address.address == null) {
                 this.customerPhoneAddress = {
-                    id: $scope.address.id
+                    id: $scope.getInfoAddressOfCustomer.id
                 }
+                console.log("customerPhoneAddress @ 122", this.customerPhoneAddress)
             }else {
+                console.log("customerPhoneAddress @ 2")
                 this.customerPhoneAddress = {
                     id: $scope.checkout.address.id
                 }
@@ -599,9 +616,11 @@ app.controller("foodStore-controller", function ($scope, $http, $window,$timeout
                 .reduce((total, quantity) => total += quantity, 0)
         },
         get amount() {
-            return this.items
-                .map(item => item.quantity * item.price)
-                .reduce((total, quantity) => total += quantity, 0)
+            const totalAmount = this.items.reduce((total, item) => {
+                return total + (item.quantity * item.priceNew);
+            }, 0);
+
+            return totalAmount;
         },
         saveToLocalStorage() {
             let json = JSON.stringify(angular.copy(this.items));
@@ -618,9 +637,18 @@ app.controller("foodStore-controller", function ($scope, $http, $window,$timeout
         }
     }
 
+    $scope.cancelOrder =function (orderId)  {
+        $http.delete(`/rest/order/cancelOrder/${orderId}`).then(resp => {
+            $scope.message = "Cancel order successfully!"
+            $scope.cart.liveToastBtn()
+            $scope.sleep(2000).then(r => location.href = "/order/detail/" + orderId)
+        })
+    }
+
     $scope.sleep = function(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
+
     $scope.addMinutesToDate = function (minutes) {
         let date = new Date();
         let newDate = new Date(date);

@@ -10,6 +10,15 @@
 <body>
 <div class="container">
     <div id="main">
+        <button ng-click="getInfoAddressOfCustomer()" id="getInfoAddressOfCustomer" class="btn btn-outline-danger"
+                style="display: none">auto click
+        </button>
+
+        <script>
+            setTimeout(function () {
+                document.getElementById("getInfoAddressOfCustomer").click();
+            }, 1000);
+        </script>
         <div th:replace="~{/layout/_menu::hero-normal-section}"></div>
         <!-- Breadcrumb Section Begin -->
         <section class="container breadcrumb-section set-bg p-3" style="background-color: #9BCA3C;">

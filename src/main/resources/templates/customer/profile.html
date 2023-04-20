@@ -9,6 +9,16 @@
 </head>
 <body>
 <div id="main">
+    <button ng-click="getProfileCustomer()" id="getProfileCustomer" class="btn btn-outline-danger"
+            style="display: none">auto click
+    </button>
+
+    <script>
+        setTimeout(function () {
+            document.getElementById("getProfileCustomer").click();
+        }, 1000);
+    </script>
+
   <div th:replace="~{/layout/_menu::hero-normal-section}"></div>
   <!-- Breadcrumb Section Begin -->
   <section class="breadcrumb-section set-bg p-3" style="background-color: #9BCA3C;">

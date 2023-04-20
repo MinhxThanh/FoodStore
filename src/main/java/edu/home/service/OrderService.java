@@ -22,4 +22,6 @@ public interface OrderService {
 	List<Order> findByShippedDate(Date shippedDate);
 
     List<Order> findAllByUserEmail(String email);
+
+    void cancelOrderByOrderId(Long orderId);
 }

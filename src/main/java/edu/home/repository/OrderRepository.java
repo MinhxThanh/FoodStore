@@ -38,4 +38,9 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 //	example doesn't use
 	@Query("select o from Order o")
     List<Order> findAllByUserEmail(String email);
+
+	@Transactional
+	@Modifying
+	@Query("update Order o set o.status = 0 where o.id = ?1")
+    void cancelOrderByOrderId(Long orderId);
 }

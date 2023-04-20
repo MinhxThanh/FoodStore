@@ -94,4 +94,9 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> findAllByUserEmail(String email) {
         return dao.findAllByUserEmail(email);
     }
+
+    @Override
+    public void cancelOrderByOrderId(Long orderId) {
+        dao.cancelOrderByOrderId(orderId);
+    }
 }

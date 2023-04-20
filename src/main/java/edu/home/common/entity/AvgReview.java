@@ -1,5 +1,6 @@
 package edu.home.common.entity;
 
+import edu.home.entity.ImageFood;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,8 +16,7 @@ import edu.home.entity.Food;
 @AllArgsConstructor
 public class AvgReview {
     @Id
-//    String nameCustomer;
-    Double average;
-    Food food;
-
+    private Long amount;
+    private Double average;
+    private Food food;
 }

@@ -127,7 +127,7 @@
                             </ul>
                         </li>
                     </ul>
-                    <div class="header__cart__price">[[#{menu.item}]] <span class="m-auto">${{cart.amount}}</span></div>
+                    <div class="header__cart__price">[[#{menu.item}]] <span class="m-auto">{{cart.amount | currency:'₫ '}}</span></div>
                 </div>
             </div>
         </div>
@@ -149,8 +149,8 @@
                         <span>[[#{menu.cate}]]</span>
                     </div>
                     <ul>
-                         <li><a href="/food/all" th:style="${cid} ==''?'color:#7fad39;':''">All</a></li>
-                        <li th:each="c:${cates}"><a th:href="@{|/food/${c.name}|}" th:style="${c.name==cid?'color:#7fad39;':''}" th:if="${c.isDisplay}">[[${c.name}]] </a></li>
+                         <li><a class="text-uppercase" href="/food/all" th:style="${cid} ==''?'color:#7fad39;':''">All</a></li>
+                        <li th:each="c:${cates}"><a class="text-uppercase" th:href="@{|/food/${c.name}|}" th:style="${c.name==cid?'color:#7fad39;':''}" th:if="${c.isDisplay}">[[${c.name}]] </a></li>
                     </ul>
                 </div>
             </div>
