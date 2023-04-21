@@ -30,7 +30,7 @@ public class InfoUserAccount {
             user.setGender(true);
             user.setPhone("00");
             user.setBirthday(new Date());
-            user.setAvatar("undraw_profile.svg");
+            user.setAvatar("https://firebasestorage.googleapis.com/v0/b/upload-images-e2189.appspot.com/o/8b3047e6-5c5e-4a02-b524-9ff9f0ca15b8.svg?alt=media");
             user.setAddress("Your address");
             user.setRememberToken("token");
             user.setStatus(1);

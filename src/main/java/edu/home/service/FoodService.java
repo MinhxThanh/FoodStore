@@ -44,4 +44,6 @@ public interface FoodService {
     void updateViewCountById(Long i, Long foodId);
 
     List<Food> findAllByUserEmail(String email);
+
+    List<ListFood> getListFoodByUserId(long id);
 }

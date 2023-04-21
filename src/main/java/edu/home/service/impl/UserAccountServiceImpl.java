@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserAccountServiceImpl implements UserAccountService {
@@ -33,6 +34,16 @@ public class UserAccountServiceImpl implements UserAccountService {
     @Override
     public User updateUser(User user) {
         return dao.save(user);
+    }
+
+    @Override
+    public List<User> getAllUserHaveFood() {
+        return dao.getAllUserHaveFood();
+    }
+
+    @Override
+    public User findByUsername(Optional<String> nameShop) {
+        return dao.findByUsername(nameShop);
     }
 
 }

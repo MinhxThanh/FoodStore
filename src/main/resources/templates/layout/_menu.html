@@ -84,7 +84,7 @@
                             <a th:href="@{/home/index}">[[#{menu.home}]]</a>
                         </li>
                         <li th:class="${#strings.equals(pageTitle, 'Menu ')} ? 'active' : ''">
-                            <a th:href="@{/food/all}">[[#{menu.shop}]]</a>
+                            <a th:href="@{/food/shop}">[[#{menu.shop}]]</a>
                         </li>
                         <li th:class="${#strings.equals(pageTitle, 'Stories ')} ? 'active' : ''">
                             <a th:href="@{/stories}">[[#{menu.stories}]]</a>
@@ -149,7 +149,7 @@
                         <span>[[#{menu.cate}]]</span>
                     </div>
                     <ul>
-                         <li><a class="text-uppercase" href="/food/all" th:style="${cid} ==''?'color:#7fad39;':''">All</a></li>
+                         <li><a class="text-uppercase" href="/food/shop" th:style="${cid} ==''?'color:#7fad39;':''">All</a></li>
                         <li th:each="c:${cates}"><a class="text-uppercase" th:href="@{|/food/${c.name}|}" th:style="${c.name==cid?'color:#7fad39;':''}" th:if="${c.isDisplay}">[[${c.name}]] </a></li>
                     </ul>
                 </div>
@@ -157,7 +157,7 @@
             <div class="col-lg-9">
                 <div class="hero__search">
                     <div class="hero__search__form">
-                        <form method="get" th:action="@{|/food/all|}">
+                        <form method="get" th:action="@{|/food/shop|}">
                              <div class="hero__search__categories">
                                  [[#{menu.cate}]]
                                  <span class="arrow_carrot-down"></span>

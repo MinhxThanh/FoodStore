@@ -51,4 +51,7 @@ public interface FoodRepository extends JpaRepository<Food, Long> {
     void updateViewCountById(Long i, Long foodId);
 
     List<Food> findAllByUserEmail(String email);
+
+    @Query(value="{CALL sp_getListFoodByUserId(:userId)}", nativeQuery = true)
+    List<Tuple> getListFoodByUserId(long userId);
 }

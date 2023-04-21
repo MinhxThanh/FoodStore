@@ -11,9 +11,9 @@ app.controller("foodStore-controller", function ($scope, $http, $window,$timeout
 
     $scope.initialize = function (){
         //get list food
-        $http.get(`/rest/food/getListFood`).then(resp => {
-            $scope.items = resp.data
-        })
+        // $http.get(`/rest/food/getListFood`).then(resp => {
+        //     $scope.items = resp.data
+        // })
         //get all items  in cart by customer
         $http.get(`/rest/cart/getAll`).then(resp => {
             if (resp.data != null)

@@ -38,16 +38,7 @@ public class FoodServiceImpl implements FoodService{
 	@Override
 	public List<ListFood> getListFood() {
 	 List<Tuple> list = dao.getListFood();
-	 List<ListFood> listFoods = list.stream().map(item -> new ListFood(
-			 item.get(0, BigInteger.class),
-			 item.get(1, String.class),
-			 item.get(2, Double.class),
-			 item.get(3, Double.class),
-			 item.get(4, Double.class),
-			 item.get(5, Integer.class),
-			 item.get(6, String.class),
-			 item.get(7, String.class)
-	 )).collect(Collectors.toList());
+	 List<ListFood> listFoods = getListFoods(list);
 		return listFoods;
 	}
 
@@ -124,17 +115,10 @@ public class FoodServiceImpl implements FoodService{
 		return dao.findAllByUserEmail(email);
 	}
 
-	private static List<ListFoodByCategory> getListFoodByCategories(List<Tuple> list) {
-		List<ListFoodByCategory> listFoods = list.stream().map(item -> new ListFoodByCategory(
-				item.get(0, BigInteger.class),
-				item.get(1, String.class),
-				item.get(2, Double.class),
-				item.get(3, Double.class),
-				item.get(4, Double.class),
-				item.get(5, Integer.class),
-				item.get(6, String.class),
-				item.get(7, String.class)
-		)).collect(Collectors.toList());
+	@Override
+	public List<ListFood> getListFoodByUserId(long id) {
+		List<Tuple> list = dao.getListFoodByUserId(id);
+		List<ListFood> listFoods = getListFoods(list);
 		return listFoods;
 	}
 	
@@ -192,8 +176,30 @@ public class FoodServiceImpl implements FoodService{
 		return lsItem;
 	}
 
-//	@Override
-//	public List<ImageFood> getImageLink(Long id) {
-//		return dao.getImageLink(id);
-//	}
+	private static List<ListFoodByCategory> getListFoodByCategories(List<Tuple> list) {
+		List<ListFoodByCategory> listFoods = list.stream().map(item -> new ListFoodByCategory(
+				item.get(0, BigInteger.class),
+				item.get(1, String.class),
+				item.get(2, Double.class),
+				item.get(3, Double.class),
+				item.get(4, Double.class),
+				item.get(5, Integer.class),
+				item.get(6, String.class),
+				item.get(7, String.class)
+		)).collect(Collectors.toList());
+		return listFoods;
+	}
+	private static List<ListFood> getListFoods(List<Tuple> list) {
+		List<ListFood> listFoods = list.stream().map(item -> new ListFood(
+				item.get(0, BigInteger.class),
+				item.get(1, String.class),
+				item.get(2, Double.class),
+				item.get(3, Double.class),
+				item.get(4, Double.class),
+				item.get(5, Integer.class),
+				item.get(6, String.class),
+				item.get(7, String.class)
+		)).collect(Collectors.toList());
+		return listFoods;
+	}
 }

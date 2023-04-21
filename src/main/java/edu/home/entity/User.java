@@ -26,6 +26,14 @@ public class User implements Serializable {
 
 	private String avatar;
 
+	private String openTime;
+
+	private String cityProvince;
+
+	private  String costRestaurant;
+
+	private String slogan;
+
 	@Temporal(TemporalType.DATE)
 	private Date birthday;
 

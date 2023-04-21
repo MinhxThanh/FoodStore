@@ -54,6 +54,10 @@ public class UserRestController {
             newUser.setEmail(user.getEmail());
             newUser.setDisplay(user.isDisplay());
             // trường thay đổi
+            newUser.setSlogan(requestUser.getSlogan());
+            newUser.setCityProvince(requestUser.getCityProvince());
+            newUser.setOpenTime(requestUser.getOpenTime());
+            newUser.setCostRestaurant(requestUser.getCostRestaurant());
             newUser.setPassword(requestUser.getPassword());
             newUser.setFullname(requestUser.getFullname());
             newUser.setGender(requestUser.isGender());

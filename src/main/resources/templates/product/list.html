@@ -11,6 +11,22 @@
 <div id="main">
     <div th:replace="~{/layout/_menu::hero-normal-section}"></div>
     <!-- Breadcrumb Section Begin -->
+    <section class="container breadcrumb-section set-bg p-3">
+        <div class="container p-3" style="background-color: #9BCA3C;">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text" style="font-size: 20px;">
+                        <a th:href="@{/home/index}" style="font-size: 15px">
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                            [[#{checkoutl.order}]]
+                        </a>
+                        <i class="fa fa-angle-double-right mx-2" aria-hidden="true" style="font-size: 14px"></i>
+                       <span style="font-size: 15px">[[#{productl.shop}]]</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <section class="breadcrumb-section set-bg p-3" style="background-color: #9BCA3C;">
         <div class="container">
             <div class="row">
@@ -37,7 +53,7 @@
                             <ul>
 								<li><a href="/food/all"
 									th:style="${cid} ==''?'color:#7fad39;':''">All</a></li>
-								<li th:each="c:${cates}"><a th:href="@{|/food/${c.name}|}"
+								<li th:each="c:${cates}"><a class="text-uppercase" th:href="@{|/food/${c.name}|}"
 									th:style="${c.name==cid?'color:#7fad39;':''}"
 									th:if="${c.isDisplay}">[[${c.name}]] </a></li>
 							</ul>
@@ -210,17 +226,20 @@
 					 <div class="filter__item">
                         <div class="row">
                             <div class="col-lg-4 col-md-5">
-<!--                                 <div class="filter__sort"> -->
-<!--                                     <span>Sort By</span> -->
-<!--                                     <select> -->
-<!--                                         <option value="0">Default</option> -->
-<!--                                         <option value="0">Default</option> -->
-<!--                                     </select> -->
-<!--                                 </div> -->
+                                 <div class="filter__sort">
+                                     <span>Sort By</span>
+                                     <select>
+                                         <option value="TP Hồ Chí Minh">TP Hồ Chí Minh</option>
+                                         <option value="TP Hà Nội">TP Hà Nội</option>
+                                         <option value="TP Hải Phòng">TP Hải Phòng</option>
+                                         <option value="TP Đà Nẵng">TP Đà Nẵng</option>
+                                         <option value="TP Cần Thơ">TP Cần Thơ</option>
+                                     </select>
+                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4">
                                 <div class="filter__found">
-                                    <h6><span>{{items.length}}</span>[[#{productl.found}]]</h6>
+                                    <h6><span th:text="${items.size()}"></span>SHOP</h6>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-3">
@@ -231,49 +250,83 @@
                             </div>
                         </div>
                     </div>
+                    <style>
+                        .card-user1{
+                            transition-delay: 100ms;
+                        }
+                        .card-user1:hover{
+                            box-shadow: 5px 5px 5px gray;
+                            transform: rotateZ(-1deg);
+                        }
+                        .card-user2{
+                            transition-delay: 100ms;
+                        }
+                        .card-user2:hover{
+                            box-shadow: 5px 5px 5px gray;
+                            transform: rotateZ(1deg);
+                        }
+                    </style>
                     <div class="row">
-                        <div ng-repeat="item in pager.items | filter:search" class="col-lg-4 col-md-4 col-sm-6 mb-5">
-                            <div class="product__discount__item">
-                                <div class="product__discount__item__pic set-bg">
-                                	<img class="card-img" ng-src="{{item.image}}" alt="">
-                                    <div ng-if="${item.numberDateToEnd > 0}" class="product__discount__percent">
-                                        -{{item.percentDiscount}}%
-                                    </div>
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li>
-                                            <a ng-click="cart.add(item.id)"><i class="fa fa-shopping-cart"></i></a>
-                                        </li>
-                                    </ul>
+                        <div th:each="user, iState : ${items}" th:class="${iState.index} % 2 ? 'card card-user1 mb-3 col-10 p-0 container-fluid' : 'card card-user2 mb-3 col-10 p-0 container-fluid'">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <a th:href="@{|/food/shop/${user.username}|}">
+                                        <img class="img-fluid h-100 w-100" th:src="@{|${user.avatar}|}" th:alt="${user.fullname}">
+                                    </a>
                                 </div>
-                                <div class="product__discount__item__text">
-                                    <h5><a href="/food/detail/{{item.id}}">{{item.name}}</a></h5>
-                                    <div class="product__item__price">
-										<p class="product__item__price text-danger d-inline">{{item.priceNew | currency:'₫ '}}</p>
-                                        <span>{{item.priceOld | currency:'₫ '}}</span>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><a th:href="@{|/food/shop/${user.username}|}" class="text-dark">[[${user.fullname}]]</a></h5>
+                                        <p class="card-text">[[${user.address}]]</p>
+                                        <p class="card-text"><i class="fa fa-clock-o" aria-hidden="true"></i> [[${user.openTime}]]</p>
+                                        <p class="card-text"><small class="text-muted"><i class="fa fa-usd" aria-hidden="true"></i> [[${user.costRestaurant}]]</small></p>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+<!--                        <div ng-repeat="item in pager.items | filter:search" class="col-lg-4 col-md-4 col-sm-6 mb-5">-->
+<!--                            <div class="product__discount__item">-->
+<!--                                <div class="product__discount__item__pic set-bg">-->
+<!--                                	<img class="card-img" ng-src="{{item.image}}" alt="">-->
+<!--                                    <div ng-if="${item.numberDateToEnd > 0}" class="product__discount__percent">-->
+<!--                                        -{{item.percentDiscount}}%-->
+<!--                                    </div>-->
+<!--                                    <ul class="product__item__pic__hover">-->
+<!--                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>-->
+<!--                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>-->
+<!--                                        <li>-->
+<!--                                            <a ng-click="cart.add(item.id)"><i class="fa fa-shopping-cart"></i></a>-->
+<!--                                        </li>-->
+<!--                                    </ul>-->
+<!--                                </div>-->
+<!--                                <div class="product__discount__item__text">-->
+<!--                                    <h5><a href="/food/detail/{{item.id}}">{{item.name}}</a></h5>-->
+<!--                                    <div class="product__item__price">-->
+<!--										<p class="product__item__price text-danger d-inline">{{item.priceNew | currency:'₫ '}}</p>-->
+<!--                                        <span>{{item.priceOld | currency:'₫ '}}</span>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
                     </div>
-					<div class="product__pagination text-center">
-					<a ng-click="pager.first()">
-						<i class="fa fa-fast-backward" aria-hidden="true"></i>
-					</a>
-					<a ng-click="pager.previous()">
-						<i class="fa fa-backward" aria-hidden="true"></i>
-					</a>
-					<a class="text-white" style="width: 50px;background: #7fad39;">
-						<i>{{pager.page+1}} of {{pager.count}}</i>
-					</a>
-					<a ng-click="pager.next()">
-						<i class="fa fa-step-forward" aria-hidden="true"></i>
-					</a>
-					<a ng-click="pager.last()">
-						<i class="fa fa-fast-forward" aria-hidden="true"></i>
-					</a>
-				</div>
+<!--					<div class="product__pagination text-center">-->
+<!--					<a ng-click="pager.first()">-->
+<!--						<i class="fa fa-fast-backward" aria-hidden="true"></i>-->
+<!--					</a>-->
+<!--					<a ng-click="pager.previous()">-->
+<!--						<i class="fa fa-backward" aria-hidden="true"></i>-->
+<!--					</a>-->
+<!--					<a class="text-white" style="width: 50px;background: #7fad39;">-->
+<!--						<i>{{pager.page+1}} of {{pager.count}}</i>-->
+<!--					</a>-->
+<!--					<a ng-click="pager.next()">-->
+<!--						<i class="fa fa-step-forward" aria-hidden="true"></i>-->
+<!--					</a>-->
+<!--					<a ng-click="pager.last()">-->
+<!--						<i class="fa fa-fast-forward" aria-hidden="true"></i>-->
+<!--					</a>-->
+<!--				</div>-->
                 </div>
             </div>
         </div>
