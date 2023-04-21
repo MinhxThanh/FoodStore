@@ -33,8 +33,8 @@ public class FoodController {
 	@Autowired
 	private CouponService couponService;
 
-    @RequestMapping(value = "shop/{nameShop}/food-detail/{id}")
-    public String productDetailTest(Model model,@PathVariable("nameShop") String nameShop, @PathVariable("id") Long food_id){
+    @RequestMapping(value = "detail/{id}")
+    public String productDetailTest(Model model, @PathVariable("id") Long food_id){
         FoodDetail foodDetail = foodService.getInfoDetailByFoodId(food_id);
 		Long view = foodDetail.getViewCount().longValue() + 1;
 		foodService.updateViewCountById(view, food_id);
