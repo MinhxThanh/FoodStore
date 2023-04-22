@@ -1,69 +1,495 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index::dynamic(~{::#main})}">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bootstrap demo</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 </head>
 <body>
 <div class="container">
-  <div id="main">
-    <div th:replace="~{/layout/_menu::hero-normal-section}"></div>
-    <!-- Breadcrumb Section Begin -->
-    <section class="container breadcrumb-section set-bg p-3" style="background-color: #9BCA3C;">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12 text-center">
-            <div class="breadcrumb__text" style="font-size: 20px;">
-              <a th:href="@{/home/index}"><i class="fa fa-home" aria-hidden="true"></i> [[#{checkoutl.order}]]</a>
-              <i class="fa fa-chevron-right" aria-hidden="true"></i>
-              <span>[[#{checkoutl.list}]]</span>
+    <div id="main">
+        <div th:replace="~{/layout/_menu::hero-normal-section}"></div>
+        <!-- Breadcrumb Section Begin -->
+        <section class="container breadcrumb-section set-bg p-3">
+            <div class="container p-3" style="background-color: #9BCA3C;">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <div class="breadcrumb__text" style="font-size: 20px;">
+                            <a th:href="@{/home/index}" style="font-size: 15px">
+                                <i class="fa fa-home" aria-hidden="true"></i>
+                                [[#{productl.home}]]
+                            </a>
+                            <i class="fa fa-angle-double-right mx-2" aria-hidden="true" style="font-size: 14px"></i>
+                            <span style="font-size: 15px">[[#{checkoutl.list}]]</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
+        </section>
+        <!-- Breadcrumb Section End -->
+        <div class=" container-fluid my-5 " th:fragment="order-list-nav">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="all-tab" data-toggle="tab" data-target="#all" type="button"
+                            role="tab" aria-controls="all" aria-selected="true">All
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="processed-tab" data-toggle="tab" data-target="#processed" type="button"
+                            role="tab" aria-controls="processed" aria-selected="false">Processed
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="orderReceived-tab" data-toggle="tab" data-target="#orderReceived"
+                            type="button" role="tab" aria-controls="orderReceived" aria-selected="false">Order Received
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="shipping-tab" data-toggle="tab" data-target="#shipping" type="button"
+                            role="tab" aria-controls="shipping" aria-selected="false">Shipping
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="orderShipped-tab" data-toggle="tab" data-target="#orderShipped"
+                            type="button" role="tab" aria-controls="orderShipped" aria-selected="false">Order Shipped
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="finishedOrder-tab" data-toggle="tab" data-target="#finishedOrder"
+                            type="button" role="tab" aria-controls="finishedOrder" aria-selected="false">Finished Order
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="orderIsCanceled-tab" data-toggle="tab" data-target="#orderIsCanceled"
+                            type="button" role="tab" aria-controls="orderIsCanceled" aria-selected="false">Order is
+                        Canceled
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="waitForPay-tab" data-toggle="tab" data-target="#waitForPay"
+                            type="button" role="tab" aria-controls="waitForPay" aria-selected="false">Wait for pay
+                    </button>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
+                    <!--    list order-->
+                    <div class="justify-content-center ">
+                        <div th:each="item : ${all}" class="mb-3 mx-2 col-12 my-4 bg-light">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <img th:src="@{|${item.image}|}" class="img-fluid w-100 h-100" alt="image"
+                                         style="margin-left: -0.9rem">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <small class="text-muted font-italic d-block">
+                                            [[#{checkoutl.order}]]
+                                            <!-- JavaScript code to further format date using Moment.js -->
+                                            <script th:inline="javascript">
+                                                var date = /*[[${item.orderDate}]]*/ '${item.orderDate}';
+                                                document.write(moment(date).fromNow());
+                                            </script>
+                                        </small>
+                                        <div class="mt-2"></div>
+                                        <div th:each="orderDetail : ${orderDetails}"
+                                             th:if="${orderDetail.order.id == item.id}" class="border-bottom">
+                                            <h5 class="card-title" th:text="${orderDetail.food.name}"></h5>
+                                            <p class="card-text">x[[${orderDetail.quantity}]]</p>
+                                        </div>
+                                        <p class="card-text">
+                                        <h4 class="font-italic text-right">
+                                            <i class="fa fa-money" aria-hidden="true"></i> [[#{checkoutl.total}]]:
+                                            <span class="text-danger">đ [[${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}]]</span>
+                                        </h4>
+                                        <div class="mt-3 mb-0 text-right">
+                                            <a th:href="@{|/order/detail/${item.id}|}"
+                                               class="btn btn-outline-primary"><i class="fa fa-info"
+                                                                                  aria-hidden="true"></i>
+                                                [[#{checkoutl.check}]]</a>
+                                        </div>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-<!--    list order-->
-    <div class=" container-fluid my-5 ">
-      <div class="row justify-content-center ">
-      <div th:each="item : ${items}" class="card mb-3 mx-2 col-sm-10 col-lg-5 rounded-5">
-      <div class="row no-gutters">
-        <div class="col-md-4">
-          <img th:src="@{|${item.image}|}" class="rounded-5" alt="image" style="margin-left: -0.9rem">
-          <small class="text-muted font-italic">
-            [[#{checkoutl.order}]]
-            <!-- JavaScript code to further format date using Moment.js -->
-            <script th:inline="javascript">
-              var date = /*[[${item.orderDate}]]*/ '${item.orderDate}';
-              document.write(moment(date).fromNow());
-            </script>
-          </small>
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <div th:each="orderDetail : ${orderDetails}" th:if="${orderDetail.order.id == item.id}" class="border-bottom">
-              <h5 class="card-title" th:text="${orderDetail.food.name}"></h5>
-              <p class="card-text">x[[${orderDetail.quantity}]]</p>
+                        <div class="row align-middle" th:if="${all.size() == 0}">
+                            <div class="col-lg-12">
+                                <div class="shoping__cart__btns text-center">
+                                    <img th:src="@{/assets/images/cart/empty-cart-illustration.gif}" alt="Không có đơn hàng nào">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="processed" role="tabpanel" aria-labelledby="processed-tab">
+                    <!--    list order-->
+                    <div class="justify-content-center ">
+                        <div th:each="item : ${listProcessed}" class="mb-3 mx-2 col-12 my-4 bg-light">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <img th:src="@{|${item.image}|}" class="img-fluid w-100 h-100" alt="image"
+                                         style="margin-left: -0.9rem">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <small class="text-muted font-italic d-block">
+                                            [[#{checkoutl.order}]]
+                                            <!-- JavaScript code to further format date using Moment.js -->
+                                            <script th:inline="javascript">
+                                                var date = /*[[${item.orderDate}]]*/ '${item.orderDate}';
+                                                document.write(moment(date).fromNow());
+                                            </script>
+                                        </small>
+                                        <div class="mt-2"></div>
+                                        <div th:each="orderDetail : ${orderDetails}"
+                                             th:if="${orderDetail.order.id == item.id}" class="border-bottom">
+                                            <h5 class="card-title" th:text="${orderDetail.food.name}"></h5>
+                                            <p class="card-text">x[[${orderDetail.quantity}]]</p>
+                                        </div>
+                                        <p class="card-text">
+                                        <h4 class="font-italic text-right">
+                                            <i class="fa fa-money" aria-hidden="true"></i> [[#{checkoutl.total}]]:
+                                            <span class="text-danger">đ [[${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}]]</span>
+                                        </h4>
+                                        <div class="mt-3 mb-0 text-right">
+                                            <a th:href="@{|/order/detail/${item.id}|}"
+                                               class="btn btn-outline-primary"><i class="fa fa-info"
+                                                                                  aria-hidden="true"></i>
+                                                [[#{checkoutl.check}]]</a>
+                                        </div>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row align-middle" th:if="${listProcessed.size() == 0}">
+                            <div class="col-lg-12">
+                                <div class="shoping__cart__btns text-center">
+                                    <img th:src="@{/assets/images/cart/empty-cart-illustration.gif}" alt="Không có đơn hàng nào">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="orderReceived" role="tabpanel" aria-labelledby="orderReceived-tab">
+                    <div class="justify-content-center ">
+                        <div th:each="item : ${listOrderReceived}" class="mb-3 mx-2 col-12 my-4 bg-light">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <img th:src="@{|${item.image}|}" class="img-fluid w-100 h-100" alt="image"
+                                         style="margin-left: -0.9rem">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <small class="text-muted font-italic d-block">
+                                            [[#{checkoutl.order}]]
+                                            <!-- JavaScript code to further format date using Moment.js -->
+                                            <script th:inline="javascript">
+                                                var date = /*[[${item.orderDate}]]*/ '${item.orderDate}';
+                                                document.write(moment(date).fromNow());
+                                            </script>
+                                        </small>
+                                        <div class="mt-2"></div>
+                                        <div th:each="orderDetail : ${orderDetails}"
+                                             th:if="${orderDetail.order.id == item.id}" class="border-bottom">
+                                            <h5 class="card-title" th:text="${orderDetail.food.name}"></h5>
+                                            <p class="card-text">x[[${orderDetail.quantity}]]</p>
+                                        </div>
+                                        <p class="card-text">
+                                        <h4 class="font-italic text-right">
+                                            <i class="fa fa-money" aria-hidden="true"></i> [[#{checkoutl.total}]]:
+                                            <span class="text-danger">đ [[${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}]]</span>
+                                        </h4>
+                                        <div class="mt-3 mb-0 text-right">
+                                            <a th:href="@{|/order/detail/${item.id}|}"
+                                               class="btn btn-outline-primary"><i class="fa fa-info"
+                                                                                  aria-hidden="true"></i>
+                                                [[#{checkoutl.check}]]</a>
+                                        </div>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row align-middle" th:if="${listOrderReceived.size() == 0}">
+                            <div class="col-lg-12">
+                                <div class="shoping__cart__btns text-center">
+                                    <img th:src="@{/assets/images/cart/empty-cart-illustration.gif}" alt="Không có đơn hàng nào">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="shipping" role="tabpanel" aria-labelledby="shipping-tab">
+                    <div class="justify-content-center ">
+                        <div th:each="item : ${listShipping}" class="mb-3 mx-2 col-12 my-4 bg-light">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <img th:src="@{|${item.image}|}" class="img-fluid w-100 h-100" alt="image"
+                                         style="margin-left: -0.9rem">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <small class="text-muted font-italic d-block">
+                                            [[#{checkoutl.order}]]
+                                            <!-- JavaScript code to further format date using Moment.js -->
+                                            <script th:inline="javascript">
+                                                var date = /*[[${item.orderDate}]]*/ '${item.orderDate}';
+                                                document.write(moment(date).fromNow());
+                                            </script>
+                                        </small>
+                                        <div class="mt-2"></div>
+                                        <div th:each="orderDetail : ${orderDetails}"
+                                             th:if="${orderDetail.order.id == item.id}" class="border-bottom">
+                                            <h5 class="card-title" th:text="${orderDetail.food.name}"></h5>
+                                            <p class="card-text">x[[${orderDetail.quantity}]]</p>
+                                        </div>
+                                        <p class="card-text">
+                                        <h4 class="font-italic text-right">
+                                            <i class="fa fa-money" aria-hidden="true"></i> [[#{checkoutl.total}]]:
+                                            <span class="text-danger">đ [[${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}]]</span>
+                                        </h4>
+                                        <div class="mt-3 mb-0 text-right">
+                                            <a th:href="@{|/order/detail/${item.id}|}"
+                                               class="btn btn-outline-primary"><i class="fa fa-info"
+                                                                                  aria-hidden="true"></i>
+                                                [[#{checkoutl.check}]]</a>
+                                        </div>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row align-middle" th:if="${listShipping.size() == 0}">
+                            <div class="col-lg-12">
+                                <div class="shoping__cart__btns text-center">
+                                    <img th:src="@{/assets/images/cart/empty-cart-illustration.gif}" alt="Không có đơn hàng nào">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="orderShipped" role="tabpanel" aria-labelledby="orderShipped-tab">
+                    <div class="justify-content-center ">
+                        <div th:each="item : ${listOrderShipped}" class="mb-3 mx-2 col-12 my-4 bg-light">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <img th:src="@{|${item.image}|}" class="img-fluid w-100 h-100" alt="image"
+                                         style="margin-left: -0.9rem">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <small class="text-muted font-italic d-block">
+                                            [[#{checkoutl.order}]]
+                                            <!-- JavaScript code to further format date using Moment.js -->
+                                            <script th:inline="javascript">
+                                                var date = /*[[${item.orderDate}]]*/ '${item.orderDate}';
+                                                document.write(moment(date).fromNow());
+                                            </script>
+                                        </small>
+                                        <div class="mt-2"></div>
+                                        <div th:each="orderDetail : ${orderDetails}"
+                                             th:if="${orderDetail.order.id == item.id}" class="border-bottom">
+                                            <h5 class="card-title" th:text="${orderDetail.food.name}"></h5>
+                                            <p class="card-text">x[[${orderDetail.quantity}]]</p>
+                                        </div>
+                                        <p class="card-text">
+                                        <h4 class="font-italic text-right">
+                                            <i class="fa fa-money" aria-hidden="true"></i> [[#{checkoutl.total}]]:
+                                            <span class="text-danger">đ [[${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}]]</span>
+                                        </h4>
+                                        <div class="mt-3 mb-0 text-right">
+                                            <a th:href="@{|/order/detail/${item.id}|}"
+                                               class="btn btn-outline-primary"><i class="fa fa-info"
+                                                                                  aria-hidden="true"></i>
+                                                [[#{checkoutl.check}]]</a>
+                                        </div>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row align-middle" th:if="${listOrderShipped.size() == 0}">
+                            <div class="col-lg-12">
+                                <div class="shoping__cart__btns text-center">
+                                    <img th:src="@{/assets/images/cart/empty-cart-illustration.gif}" alt="Không có đơn hàng nào">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="finishedOrder" role="tabpanel" aria-labelledby="finishedOrder-tab">
+                    <div class="justify-content-center ">
+                        <div th:each="item : ${listFinishedOrder}" class="mb-3 mx-2 col-12 my-4 bg-light">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <img th:src="@{|${item.image}|}" class="img-fluid w-100 h-100" alt="image"
+                                         style="margin-left: -0.9rem">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <small class="text-muted font-italic d-block">
+                                            [[#{checkoutl.order}]]
+                                            <!-- JavaScript code to further format date using Moment.js -->
+                                            <script th:inline="javascript">
+                                                var date = /*[[${item.orderDate}]]*/ '${item.orderDate}';
+                                                document.write(moment(date).fromNow());
+                                            </script>
+                                        </small>
+                                        <div class="mt-2"></div>
+                                        <div th:each="orderDetail : ${orderDetails}"
+                                             th:if="${orderDetail.order.id == item.id}" class="border-bottom">
+                                            <h5 class="card-title" th:text="${orderDetail.food.name}"></h5>
+                                            <p class="card-text">x[[${orderDetail.quantity}]]</p>
+                                        </div>
+                                        <p class="card-text">
+                                        <h4 class="font-italic text-right">
+                                            <i class="fa fa-money" aria-hidden="true"></i> [[#{checkoutl.total}]]:
+                                            <span class="text-danger">đ [[${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}]]</span>
+                                        </h4>
+                                        <div class="mt-3 mb-0 text-right">
+                                            <a th:href="@{|/order/detail/${item.id}|}"
+                                               class="btn btn-outline-primary"><i class="fa fa-info"
+                                                                                  aria-hidden="true"></i>
+                                                [[#{checkoutl.check}]]</a>
+                                        </div>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row align-middle" th:if="${listFinishedOrder.size() == 0}">
+                            <div class="col-lg-12">
+                                <div class="shoping__cart__btns text-center">
+                                    <img th:src="@{/assets/images/cart/empty-cart-illustration.gif}" alt="Không có đơn hàng nào">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="orderIsCanceled" role="tabpanel" aria-labelledby="orderIsCanceled-tab">
+                    <div class="justify-content-center ">
+                        <div th:each="item : ${listOrderIsCanceled}" class="mb-3 mx-2 col-12 my-4 bg-light">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <img th:src="@{|${item.image}|}" class="img-fluid w-100 h-100" alt="image"
+                                         style="margin-left: -0.9rem">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <small class="text-muted font-italic d-block">
+                                            [[#{checkoutl.order}]]
+                                            <!-- JavaScript code to further format date using Moment.js -->
+                                            <script th:inline="javascript">
+                                                var date = /*[[${item.orderDate}]]*/ '${item.orderDate}';
+                                                document.write(moment(date).fromNow());
+                                            </script>
+                                        </small>
+                                        <div class="mt-2"></div>
+                                        <div th:each="orderDetail : ${orderDetails}"
+                                             th:if="${orderDetail.order.id == item.id}" class="border-bottom">
+                                            <h5 class="card-title" th:text="${orderDetail.food.name}"></h5>
+                                            <p class="card-text">x[[${orderDetail.quantity}]]</p>
+                                        </div>
+                                        <p class="card-text">
+                                        <h4 class="font-italic text-right">
+                                            <i class="fa fa-money" aria-hidden="true"></i> [[#{checkoutl.total}]]:
+                                            <span class="text-danger">đ [[${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}]]</span>
+                                        </h4>
+                                        <div class="mt-3 mb-0 text-right">
+                                            <a th:href="@{|/order/detail/${item.id}|}"
+                                               class="btn btn-outline-primary"><i class="fa fa-info"
+                                                                                  aria-hidden="true"></i>
+                                                [[#{checkoutl.check}]]</a>
+                                        </div>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row align-middle" th:if="${listOrderIsCanceled.size() == 0}">
+                            <div class="col-lg-12">
+                                <div class="shoping__cart__btns text-center">
+                                    <img th:src="@{/assets/images/cart/empty-cart-illustration.gif}" alt="Không có đơn hàng nào">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="waitForPay" role="tabpanel" aria-labelledby="waitForPay-tab">
+                    <div class="justify-content-center ">
+                        <div th:each="item : ${listWaitForPay}" class="mb-3 mx-2 col-12 my-4 bg-light">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <img th:src="@{|${item.image}|}" class="img-fluid w-100 h-100" alt="image"
+                                         style="margin-left: -0.9rem">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <small class="text-muted font-italic d-block">
+                                            [[#{checkoutl.order}]]
+                                            <!-- JavaScript code to further format date using Moment.js -->
+                                            <script th:inline="javascript">
+                                                var date = /*[[${item.orderDate}]]*/ '${item.orderDate}';
+                                                document.write(moment(date).fromNow());
+                                            </script>
+                                        </small>
+                                        <div class="mt-2"></div>
+                                        <div th:each="orderDetail : ${orderDetails}"
+                                             th:if="${orderDetail.order.id == item.id}" class="border-bottom">
+                                            <h5 class="card-title" th:text="${orderDetail.food.name}"></h5>
+                                            <p class="card-text">x[[${orderDetail.quantity}]]</p>
+                                        </div>
+                                        <p class="card-text">
+                                        <h4 class="font-italic text-right">
+                                            <i class="fa fa-money" aria-hidden="true"></i> [[#{checkoutl.total}]]:
+                                            <span class="text-danger">đ [[${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}]]</span>
+                                        </h4>
+                                        <div class="mt-3 mb-0 text-right">
+                                            <a th:href="@{|/order/detail/${item.id}|}"
+                                               class="btn btn-outline-primary"><i class="fa fa-info"
+                                                                                  aria-hidden="true"></i>
+                                                [[#{checkoutl.check}]]</a>
+                                        </div>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row align-middle" th:if="${listWaitForPay.size() == 0}">
+                            <div class="col-lg-12">
+                                <div class="shoping__cart__btns text-center">
+                                    <img th:src="@{/assets/images/cart/empty-cart-illustration.gif}" alt="Không có đơn hàng nào">
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
-            <p class="card-text">
-              <h4 class="font-italic text-right">
-                <i class="fa fa-money" aria-hidden="true"></i> [[#{checkoutl.total}]]:
-                <span class="text-danger">đ [[${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}]]</span>
-              </h4>
-            <div class="mt-3 mb-0 text-right">
-              <a th:href="@{|/order/detail/${item.id}|}" class="btn btn-outline-primary"><i class="fa fa-info" aria-hidden="true"></i> [[#{checkoutl.check}]]</a>
-            </div>
-            </p>
-          </div>
         </div>
-      </div>
+
+
     </div>
-      </div>
-    </div>
-  </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"

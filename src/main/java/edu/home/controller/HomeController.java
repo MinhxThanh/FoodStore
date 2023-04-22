@@ -24,13 +24,13 @@ public class HomeController {
         return "home/index";
     }
 
-    @RequestMapping(value = "/menu")
-    public String listProduct(Model model){
-        model.addAttribute("listSale", foodService.getListSaleFood());
-        model.addAttribute("listTop", foodService.getListTopNewFood());
-        model.addAttribute("pageTitle", "Menu");
-        return "product/list";
-    }
+//    @RequestMapping(value = "/menu")
+//    public String listProduct(Model model){
+//        model.addAttribute("listSale", foodService.getListSaleFood());
+//        model.addAttribute("listTop", foodService.getListTopNewFood());
+//        model.addAttribute("pageTitle", "Menu");
+//        return "product/list";
+//    }
     @RequestMapping(value = "/stories")
     public String blog(Model model){
         model.addAttribute("pageTitle", "Stories");

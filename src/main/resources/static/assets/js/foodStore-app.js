@@ -9,12 +9,13 @@ app.controller("foodStore-controller", function ($scope, $http, $window,$timeout
     $scope.message = ''
     $scope.error = ''
 
-    $scope.initialize = function (){
-        //get list food
-        // $http.get(`/rest/food/getListFood`).then(resp => {
-        //     $scope.items = resp.data
-        // })
-        //get all items  in cart by customer
+    $scope.getListInfoCustomerAddress = function () {
+        $http.get(`/rest/customerPhoneAddress/findAllByCustomerEmail`).then(resp => {
+            $scope.address = resp.data
+        })
+    }
+
+    $scope.getInfoCart = function (){
         $http.get(`/rest/cart/getAll`).then(resp => {
             if (resp.data != null)
                 for (let item of resp.data) {
@@ -30,9 +31,6 @@ app.controller("foodStore-controller", function ($scope, $http, $window,$timeout
         })
     }
 
-
-    $scope.initialize()
-	
 	//phan trang san pham
 	$scope.pager = {
 		page:0,
@@ -71,6 +69,7 @@ app.controller("foodStore-controller", function ($scope, $http, $window,$timeout
             $scope.customer = angular.copy(resp.data)
         })
     }
+    $scope.getProfileCustomer()
 
 	//cap nhat profile customer
 	$scope.update = function () {
@@ -88,8 +87,8 @@ app.controller("foodStore-controller", function ($scope, $http, $window,$timeout
     //them dia chi
     $scope.addAddress = function () {
 		let item = {
-		id: $scope.form.id,
-		customer: $scope.customer,
+        id: $scope.form.id,
+        customer: $scope.customer,
 		 username: $scope.form.username,
 		 phone: $scope.form.phone,
 		 cityProvince: $scope.form.cityProvince,
@@ -194,7 +193,7 @@ app.controller("foodStore-controller", function ($scope, $http, $window,$timeout
         rating: {},
         reviewFood: {},
         getInfo(foodId){
-            $http.get(`/rest/commentFood/getAll`).then(resp =>{
+            $http.get(`/rest/commentFood/getAllByFoodId/${foodId}`).then(resp =>{
                 this.items = angular.copy(resp.data)
                 this.items.forEach(item => {
                     let date = new Date(item.createDate)
@@ -442,6 +441,7 @@ app.controller("foodStore-controller", function ($scope, $http, $window,$timeout
         price: '',
         display: true,
         status: 1,
+        paid: false,
         getUserInfo(){
             // set image
             let firstItem = $scope.checkout.items[0];
@@ -509,6 +509,17 @@ app.controller("foodStore-controller", function ($scope, $http, $window,$timeout
                 console.log('order success: ', resp.data)
                 // $scope.cart.clear()
                 // location.href = "/order/detail/" + resp.data.id
+            }).catch(error =>{
+                console.log("Error", error)
+            })
+        },
+        purchasePaypal(){
+            this.getUserInfo()
+            let order = angular.copy(this)
+            $http.post(`/rest/order/createPaypal`, order).then(resp => {
+                console.log('order success: ', resp.data)
+                // $scope.cart.clear()
+                location.href = resp.data.image
             }).catch(error =>{
                 console.log("Error", error)
             })

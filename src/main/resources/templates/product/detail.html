@@ -277,13 +277,13 @@
                             <div class="cart row mt-4">
                                 <div class="image col-2">
                                     <img class="border w-100 img-fluid rounded-circle"
-                                         th:src="@{|/assets/images/person/${item.avatar}|}" alt="logo">
+                                         th:src="@{|${item.avatar}|}" alt="logo">
                                 </div>
                                 <div class="info col-10">
                                     <div class="name">
                                         [[${item.createBy}]]
                                     </div>
-                                    <a href="#" class="btn btn-outline-secondary py-1 px-3 mt-2"><i
+                                    <a th:href="@{|/food/shop/${item.createBy}|}" class="btn btn-outline-secondary py-1 px-3 mt-2"><i
                                             class="fa fa-university" aria-hidden="true"></i> View Shop</a>
                                 </div>
                             </div>

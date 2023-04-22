@@ -9,6 +9,20 @@
 </head>
 <body>
 <div id="main">
+  <button ng-click="getInfoCart()" id="getInfoCart" class="btn btn-outline-danger"
+          style="display: none">auto click
+  </button>
+  <button ng-click="getListInfoCustomerAddress()" id="getListInfoCustomerAddress" class="btn btn-outline-danger"
+          style="display: none">auto click
+  </button>
+  <script>
+    setTimeout(function () {
+      document.getElementById("getInfoCart").click();
+    }, 1000);
+    setTimeout(function () {
+      document.getElementById("getListInfoCustomerAddress").click();
+    }, 1000);
+  </script>
   <div th:replace="~{/layout/_menu::hero-normal-section}"></div>
   <!-- Breadcrumb Section Begin -->
   <section class="breadcrumb-section set-bg p-3" style="background-color: #9BCA3C;">
@@ -112,15 +126,17 @@
               <li>[[#{cart.subtotal}]] <span>{{checkout.amount | currency: '₫ '}}</span></li>
               <li>[[#{cart.total}]] <span>{{checkout.amount | currency: '₫ '}}</span></li>
             </ul>
-            <a th:href="@{/order/checkout}" class="primary-btn">[[#{cart.proceed}]]</a>
+            <a ng-if="address.length > 0" th:href="@{/order/checkout}" class="primary-btn">[[#{cart.proceed}]]</a>
+            <span ng-if="address.length == 0" class="text-danger">Please Add Your Address First!</span>
+            <a ng-if="address.length == 0" th:href="@{/customer/profile/address}" class="primary-btn"><i class="fa fa-map-marker" aria-hidden="true"></i> Add Address!</a>
           </div>
         </div>
       </div>
 
 	<div class="row align-middle" ng-if="cart.count == 0">
         <div class="col-lg-12">
-           <div class="shoping__cart__btns">
-        	<img src="https://media4.giphy.com/media/L2kr3y97uJauF6T6Lh/giphy.gif?cid=6c09b95273bdfc7565e43ab4b013e25764659e0b1c10dda9&rid=giphy.gif&ct=s" alt="Không có đơn hàng nào">
+           <div class="shoping__cart__btns text-center">
+        	<img th:src="@{/assets/images/cart/empty-cart-illustration.gif}" alt="Không có đơn hàng nào">
         	<a th:href="@{/food/all}" class="btn btn-outline-danger px-5 py-2">
         	        	<b>Giỏ hàng trống</b><br>Mua ngay</a>
           </div>

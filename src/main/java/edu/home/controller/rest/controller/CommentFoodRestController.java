@@ -28,6 +28,15 @@ public class CommentFoodRestController {
         }
     }
 
+    @GetMapping(value = "getAllByFoodId/{foodId}")
+    public ResponseEntity<?> getAllByFoodId(@PathVariable("foodId") Long foodId){
+        try {
+            return ResponseEntity.ok(commentService.getAllByFoodId(foodId));
+        } catch (Exception e){
+            return ResponseEntity.noContent().build();
+        }
+    }
+
     @GetMapping(value = "getInfoReviewOfCustomer/{foodId}/{email}")
     public ResponseEntity<?> getInfoReviewOfCustomer(@PathVariable("foodId") Long foodId, @PathVariable("email") String email){
         try {

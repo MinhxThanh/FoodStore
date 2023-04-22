@@ -24,4 +24,14 @@ public interface OrderService {
     List<Order> findAllByUserEmail(String email);
 
     void cancelOrderByOrderId(Long orderId);
+
+    Order createPaypal(JsonNode orderJsonData);
+
+    void updateIsPaidByOrderId(Long orderId);
+
+    List<Order> findAllByCustomerEmailAndStatus(String remoteUser, long l);
+
+    List<Order> findAllByCustomerEmailAndIsPaidFalse(String remoteUser);
+
+    List<Order> findAllOrderByUserEmail(String email);
 }

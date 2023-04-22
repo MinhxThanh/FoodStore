@@ -36,12 +36,30 @@ public class OrderController {
 
     @RequestMapping(value = "list")
     public String orderList(Model model, HttpServletRequest request) {
-        List<Order> orders = orderService.findAllByCustomerEmail(request.getRemoteUser());
+        List<Order> all = orderService.findAllByCustomerEmail(request.getRemoteUser());
         List<OrderDetail> orderDetails = orderDetailService.findAll();
+//        find list order by status
+        List<Order> listProcessed = orderService.findAllByCustomerEmailAndStatus(request.getRemoteUser(), (long) 1);
+        List<Order> listOrderReceived = orderService.findAllByCustomerEmailAndStatus(request.getRemoteUser(), (long) 2);
+        List<Order> listShipping = orderService.findAllByCustomerEmailAndStatus(request.getRemoteUser(), (long) 3);
+        List<Order> listOrderShipped = orderService.findAllByCustomerEmailAndStatus(request.getRemoteUser(), (long) 4);
+        List<Order> listFinishedOrder = orderService.findAllByCustomerEmailAndStatus(request.getRemoteUser(), (long) 5);
+        List<Order> listOrderIsCanceled = orderService.findAllByCustomerEmailAndStatus(request.getRemoteUser(), (long) 0);
+//        find list order by is paid
+        List<Order> listWaitForPay = orderService.findAllByCustomerEmailAndIsPaidFalse(request.getRemoteUser());
 
         model.addAttribute("orderDetails", orderDetails);
-        model.addAttribute("items", orders);
-        return "order/list";
+        model.addAttribute("all", all);
+        model.addAttribute("listProcessed", listProcessed);
+        model.addAttribute("listOrderReceived", listOrderReceived);
+        model.addAttribute("listShipping", listShipping);
+        model.addAttribute("listOrderShipped", listOrderShipped);
+        model.addAttribute("listFinishedOrder", listFinishedOrder);
+        model.addAttribute("listOrderIsCanceled", listOrderIsCanceled);
+        model.addAttribute("listWaitForPay", listWaitForPay);
+//        return "order/list";
+        model.addAttribute("orderPage", "active");
+        return "customer/profile";
     }
 
     @RequestMapping(value = "detail/{id}")

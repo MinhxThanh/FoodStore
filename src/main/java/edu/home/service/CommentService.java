@@ -12,4 +12,6 @@ public interface CommentService {
     void deleteById(Long id);
 
     List<Comment> findAllByFoodId(Long foodId);
+
+    List<Comment> getAllByFoodId(Long foodId);
 }

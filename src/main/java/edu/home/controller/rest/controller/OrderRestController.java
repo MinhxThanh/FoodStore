@@ -1,13 +1,19 @@
 package edu.home.controller.rest.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import edu.home.common.entity.MailInfoOrder;
+import edu.home.common.entity.OrderDetail;
 import edu.home.entity.Order;
+import edu.home.service.MailerService;
 import edu.home.service.OrderService;
+import edu.home.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
@@ -18,22 +24,65 @@ import java.util.List;
 public class OrderRestController {
     @Autowired
     private OrderService orderService;
+	@Autowired
+	private PaymentService paymentService;
+	@Autowired
+	private MailerService mailerService;
 
     @PostMapping(value = "create")
     public ResponseEntity<?> create(@RequestBody JsonNode orderJsonData) throws MessagingException {
         try {
-            System.out.println("------");
-            System.out.println("orderJsonData: " + orderJsonData);
-            LocalTime currentTime = LocalTime.now();
-            System.out.println("Current local time: " + currentTime);
             Order order = orderService.create(orderJsonData);
-            System.out.println("order: " + order.getId());
+			MailInfoOrder mail = new MailInfoOrder();
+			mail.setTo(order.getCustomer().getEmail());
+			mail.setSubject("SunFood received the order #" + order.getId());
+			mail.setOrder(order);
+			mailerService.sendMailOrder(mail);
+
             return ResponseEntity.ok(order);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().build();
         }
     }
+
+	@PostMapping(value = "createPaypal")
+	public ResponseEntity<?> createPaypal(@RequestBody JsonNode orderJsonData) throws MessagingException {
+		try {
+			Order order = orderService.createPaypal(orderJsonData);
+
+
+
+			OrderDetail orderDetail = new OrderDetail();
+			orderDetail.setProductName("Order Id: #" + order.getId() +
+					"\n Order By: " + order.getCustomer().getLastName() + " " + order.getCustomer().getFirstName() + " Email: " + order.getCustomer().getEmail() +
+					"\n Order Date: " + new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(order.getOrderDate()));
+			String price = String.format("%.3f", order.getPrice() / 23495);
+			System.out.println("Price: " + price);
+			orderDetail.setSubtotal(price);
+			orderDetail.setShipping(String.valueOf(0));
+			orderDetail.setTax(String.valueOf(0));
+			orderDetail.setTotal(price);
+
+			String approvalLink = paymentService.authorizePayment(orderDetail);
+
+			System.out.println("AuthorizePaymentController: " + approvalLink);
+			order.setImage(approvalLink);
+			return ResponseEntity.ok(order);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.badRequest().build();
+		}
+	}
+
+	@GetMapping(value = "findAllOrderByUserEmail/{email}")
+	public ResponseEntity<?> findAllOrderByUserEmail(@PathVariable("email") String email) {
+		try {
+			return ResponseEntity.ok(orderService.findAllOrderByUserEmail(email));
+		} catch (Exception e) {
+			return ResponseEntity.noContent().build();
+		}
+	}
     
     @GetMapping("/findAll")
 	public List<Order> findAll(){

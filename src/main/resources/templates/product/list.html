@@ -133,7 +133,7 @@
                                 <h4>[[#{productl.lastest}]]</h4>
                                 <div class="latest-product__slider owl-carousel">
                                     <div class="latest-prdouct__slider__item">
-                                        <a th:each="item, iState : ${listTop}" th:if="${iState.index} < 3" href="#" class="latest-product__item">
+                                        <a th:each="item, iState : ${listTop}" th:if="${iState.index} < 3" th:href="@{|/food/detail/${item.getId()}|}" class="latest-product__item">
                                             <div class="latest-product__item__pic">
                                                 <img th:src="@{|${item.image}|}" th:alt="${item.getName()}" style="width: 120px">
                                             </div>
@@ -146,7 +146,7 @@
                                         </a>
                                     </div>
                                     <div class="latest-prdouct__slider__item">
-                                        <a th:each="item, iState : ${listTop}" th:unless="${iState.index < 3 or iState.index >= 6}" href="#" class="latest-product__item">
+                                        <a th:each="item, iState : ${listTop}" th:unless="${iState.index < 3 or iState.index >= 6}" th:href="@{|/food/detail/${item.getId()}|}" class="latest-product__item">
                                             <div class="latest-product__item__pic">
                                                 <img th:src="@{|${item.image}|}" th:alt="${item.getName()}" style="width: 120px">
                                             </div>
@@ -159,7 +159,7 @@
                                         </a>
                                     </div>
                                     <div class="latest-prdouct__slider__item">
-                                        <a th:each="item, iState : ${listTop}" th:if="${iState.index} >= 6" href="#" class="latest-product__item">
+                                        <a th:each="item, iState : ${listTop}" th:if="${iState.index} >= 6" th:href="@{|/food/detail/${item.getId()}|}" class="latest-product__item">
                                             <div class="latest-product__item__pic">
                                                 <img th:src="@{|${item.image}|}" th:alt="${item.getName()}" style="width: 120px">
                                             </div>

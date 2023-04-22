@@ -17,5 +17,10 @@ public class PaymentmethodServiceImpl implements PaymentmethodService{
 	public List<Paymentmethod> findAll() {
 		return dao.findAll();
 	}
-	
+
+	@Override
+	public Paymentmethod findById(long id) {
+		return dao.findById(id).get();
+	}
+
 }

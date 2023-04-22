@@ -39,14 +39,7 @@ public class OrderServiceImpl implements OrderService {
 
         Order order = mapper.convertValue(orderJsonData, Order.class);
         order.setCustomer(customerService.findByEmailKey(request.getRemoteUser()));
-        dao.save(order);
-
-        TypeReference<List<OrderDetail>> type = new TypeReference<List<OrderDetail>>(){};
-        List<OrderDetail> details = mapper.convertValue(orderJsonData.get("orderDetails"), type)
-                .stream().peek(data -> data.setOrder(order)).collect(Collectors.toList());
-        detailRepository.saveAll(details);
-
-        return order;
+        return getOrder(orderJsonData, mapper, order);
     }
 
     @Override
@@ -98,5 +91,44 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void cancelOrderByOrderId(Long orderId) {
         dao.cancelOrderByOrderId(orderId);
+    }
+
+    @Override
+    public Order createPaypal(JsonNode orderJsonData) {
+        ObjectMapper mapper = new ObjectMapper();
+
+        Order order = mapper.convertValue(orderJsonData, Order.class);
+        order.setCustomer(customerService.findByEmailKey(request.getRemoteUser()));
+        return getOrder(orderJsonData, mapper, order);
+    }
+
+    @Override
+    public void updateIsPaidByOrderId(Long orderId) {
+        dao.updateIsPaidByOrderId(orderId);
+    }
+
+    @Override
+    public List<Order> findAllByCustomerEmailAndStatus(String remoteUser, long l) {
+        return dao.findAllByCustomerEmailAndStatus(remoteUser, l);
+    }
+
+    @Override
+    public List<Order> findAllByCustomerEmailAndIsPaidFalse(String remoteUser) {
+        return dao.findAllByCustomerEmailAndIsPaidFalse(remoteUser);
+    }
+
+    @Override
+    public List<Order> findAllOrderByUserEmail(String email) {
+        return dao.findAllOrderByUserEmail(email);
+    }
+
+    private Order getOrder(JsonNode orderJsonData, ObjectMapper mapper, Order order) {
+        dao.save(order);
+        TypeReference<List<OrderDetail>> type = new TypeReference<List<OrderDetail>>(){};
+        List<OrderDetail> details = mapper.convertValue(orderJsonData.get("orderDetails"), type)
+                .stream().peek(data -> data.setOrder(order)).collect(Collectors.toList());
+        detailRepository.saveAll(details);
+
+        return order;
     }
 }

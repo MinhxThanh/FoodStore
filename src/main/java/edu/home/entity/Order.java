@@ -31,6 +31,9 @@ public class Order implements Serializable {
 	@Column(name="is_display")
 	private boolean isDisplay;
 
+	@Column(name="is_paid")
+	private boolean isPaid;
+
 	@Column(name="order_date")
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreationTimestamp

@@ -10,6 +10,15 @@
 <body>
 <div class="container">
     <div id="main">
+        <button ng-click="getInfoCart()" id="getInfoCart" class="btn btn-outline-danger"
+                style="display: none">auto click
+        </button>
+
+        <script>
+            setTimeout(function () {
+                document.getElementById("getInfoCart").click();
+            }, 1000);
+        </script>
       <div class="py-5" style="margin-bottom: 100px;">
           <div class="col-lg-5 col-sm-11 p-5 m-auto shadow" style="background: rgba(255, 255, 255, 0.708); border-radius: 30px;">
               <h2 class="text-center my-4 text-uppercase">[[#{login.sign}]]</h2>

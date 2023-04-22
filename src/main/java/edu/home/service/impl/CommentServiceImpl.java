@@ -32,4 +32,9 @@ public class CommentServiceImpl implements CommentService {
     public List<Comment> findAllByFoodId(Long foodId) {
         return dao.findAllByFoodId(foodId);
     }
+
+    @Override
+    public List<Comment> getAllByFoodId(Long foodId) {
+        return dao.getAllByFoodId(foodId);
+    }
 }

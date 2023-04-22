@@ -1,8 +1,10 @@
 package edu.home.service.impl;
 
 import edu.home.common.entity.MailInfoCustomer;
+import edu.home.common.entity.MailInfoOrder;
 import edu.home.common.entity.MailInfoWelcome;
 import edu.home.common.mailHelper.FormMailForgotPassword;
+import edu.home.common.mailHelper.FormMailOrder;
 import edu.home.common.mailHelper.FormMailWelcome;
 import edu.home.service.MailerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,8 @@ public class MailerServiceImp implements MailerService {
     private FormMailForgotPassword formMailForgotPassword;
     @Autowired
     private FormMailWelcome formMailWelcome;
+    @Autowired
+    private FormMailOrder formMailOrder;
 
     @Override
     public void sendMailForgotPassword(MailInfoCustomer mail) throws MessagingException {
@@ -31,6 +35,12 @@ public class MailerServiceImp implements MailerService {
     @Override
     public void sendMailWelcome(MailInfoWelcome mail) throws MessagingException {
         String html = formMailWelcome.content(mail.getFullname(), mail.getTo(), mail.getPassword(), mail.getImage());
+        setSender(mail.getFrom(), mail.getTo(), mail.getSubject(), mail.getFrom(), html);
+    }
+
+    @Override
+    public void sendMailOrder(MailInfoOrder mail) throws MessagingException {
+        String html = formMailOrder.content(mail.getOrder());
         setSender(mail.getFrom(), mail.getTo(), mail.getSubject(), mail.getFrom(), html);
     }
 

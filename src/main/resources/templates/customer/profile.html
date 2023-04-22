@@ -9,35 +9,44 @@
 </head>
 <body>
 <div id="main">
-    <button ng-click="getProfileCustomer()" id="getProfileCustomer" class="btn btn-outline-danger"
+<!--    <button ng-click="getProfileCustomer()" id="getProfileCustomer" class="btn btn-outline-danger"-->
+<!--            style="display: none">auto click-->
+<!--    </button>-->
+    <button ng-click="getListInfoCustomerAddress()" id="getListInfoCustomerAddress" class="btn btn-outline-danger"
             style="display: none">auto click
     </button>
 
     <script>
+        // setTimeout(function () {
+        //     document.getElementById("getProfileCustomer").click();
+        // }, 1000);
         setTimeout(function () {
-            document.getElementById("getProfileCustomer").click();
+            document.getElementById("getListInfoCustomerAddress").click();
         }, 1000);
     </script>
 
   <div th:replace="~{/layout/_menu::hero-normal-section}"></div>
   <!-- Breadcrumb Section Begin -->
-  <section class="breadcrumb-section set-bg p-3" style="background-color: #9BCA3C;">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 text-center">
-          <div class="breadcrumb__text" style="font-size: 20px;">
-            <a th:href="@{/home/index}"><i class="fa fa-home" aria-hidden="true"></i> [[#{profile.home}]]</a>
-            <i class="fa fa-chevron-right" aria-hidden="true"></i>
-            <span>[[#{profile.profile}]]</span>
-          </div>
+    <section class="container breadcrumb-section set-bg p-3">
+        <div class="container p-3" style="background-color: #9BCA3C;">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text" style="font-size: 20px;">
+                        <a th:href="@{/home/index}" style="font-size: 15px">
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                            [[#{productl.home}]]
+                        </a>
+                        <i class="fa fa-angle-double-right mx-2" aria-hidden="true" style="font-size: 14px"></i>
+                        <span style="font-size: 15px">[[#{profile.profile}]]</span>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
   <!-- Breadcrumb Section End -->
 
   <!-- Contact Form Begin -->
-  <div class="contact-form spad">
+  <div class="my-5">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
@@ -49,25 +58,20 @@
       
       <!-- Shop Start -->
         <div class="container-fluid">
-            <div class="row px-xl-5">
-                <div class="col-md-3">
-                    <div class="card mb-4">
-                        <div class="card-body p-0">
-                            <div class="row ">
-                                <div class="col-md-12">
-                                    <div class="list-group list-group-flush account-settings-links">
+            <div class="row">
+                <div class="col-3">
+                    <div class="nav flex-column nav-pills">
+                        <div class="list-group list-group-flush account-settings-links">
                                         <a th:class="|list-group-item list-group-item-action ${accPage}|"
                                             th:href="@{/customer/profile/account}">[[#{profile.info}]]</a>
                                         <a th:class="|list-group-item list-group-item-action ${addressPage}|"
                                             th:href="@{/customer/profile/address}">[[#{profile.setAddress}]]</a>
-                                        </div>
-                                </div>
-                            </div>
+                                        <a th:class="|list-group-item list-group-item-action ${orderPage}|"
+                                           th:href="@{/order/list}">Order List</a>
                         </div>
                     </div>
-
                 </div>
-                <div class="col-md-9">
+                <div class="col-9 p-0 mt-n5">
                     <div class="tab-content position-relative">
                         <div th:class="|tab-pane fade ${accPage} show|" id="account-general">
                             <div class="card">
@@ -150,6 +154,9 @@
                         </div>
                         
                         <div th:class="|tab-pane fade ${addressPage} show|" id="account-address">
+                            <div ng-if="address.length == 0" class="alert alert-danger" role="alert">
+                                Please Add Your Address!!
+                            </div>
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row ">
@@ -283,6 +290,10 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                        <div th:if="${orderPage} == 'active'" th:class="|tab-pane fade ${orderPage} show|" id="account-order">
+                            <div th:replace="~{/order/list::order-list-nav}"></div>
                         </div>
                     </div>
                 </div>

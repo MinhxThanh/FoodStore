@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.Query;
 import edu.home.entity.Order;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
+	@Query("select o from Order o where o.customer.email = :remoteUser order by o.orderDate desc ")
     List<Order> findAllByCustomerEmail(String remoteUser);
     
 //    Giàu
@@ -36,11 +37,25 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 	public List<Order> findByShippedDate(Date shippedDate);
 
 //	example doesn't use
-	@Query("select o from Order o")
+	@Query("select o from Order o order by o.orderDate desc")
     List<Order> findAllByUserEmail(String email);
 
 	@Transactional
 	@Modifying
 	@Query("update Order o set o.status = 0 where o.id = ?1")
     void cancelOrderByOrderId(Long orderId);
+
+	@Transactional
+	@Modifying
+	@Query("update Order o set o.isPaid = true where o.id = :orderId")
+	void updateIsPaidByOrderId(Long orderId);
+
+	@Query("select o from Order o where o.customer.email = ?1 and o.status = ?2 order by o.orderDate desc")
+	List<Order> findAllByCustomerEmailAndStatus(String remoteUser, long l);
+
+	@Query("select o from Order o where o.customer.email = ?1 and o.isPaid = false order by o.orderDate desc")
+	List<Order> findAllByCustomerEmailAndIsPaidFalse(String remoteUser);
+
+	@Query("select o from Order o left join OrderDetail od on od.order.id = o.id where od.food.user.email = ?1")
+	List<Order> findAllOrderByUserEmail(String email);
 }

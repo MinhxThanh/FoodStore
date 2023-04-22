@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index::dynamic(~{::#main})}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link rel="stylesheet" href="/assets/styles/bootstrap.min.css">
+</head>
+<body>
+<div id="main">
+    <div th:replace="~{/layout/_menu::hero-normal-section}"></div>
+    <div class="container-fluid row my-5">
+        <div class="m-auto p-5 rounded-4 shadow my-5 col-6">
+            <h2>Payment Done. Thank you for purchasing our products</h2>
+            <br/>
+            <h4>Receipt Details:</h4>
+            <table class="mt-2">
+                <tr>
+                    <td><b>Merchant:</b></td>
+                    <td>Company ABC Ltd.</td>
+                </tr>
+                <tr>
+                    <td><b>payerInfo:</b></td>
+                    <td>[[${payerInfo.firstName}]] [[${payerInfo.lastName}]]</td>
+                </tr>
+                <tr>
+                    <td><b>Description:</b></td>
+                    <td>[[${transaction.description}]]</td>
+                </tr>
+                <tr>
+                    <td><b>Subtotal:</b></td>
+                    <td>[[${transaction.amount.details.subtotal}]] USD</td>
+                </tr>
+                <tr>
+                    <td><b>Shipping:</b></td>
+                    <td>[[${transaction.amount.details.shipping}]] USD</td>
+                </tr>
+                <tr>
+                    <td><b>Tax:</b></td>
+                    <td>[[${transaction.amount.details.tax}]] USD</td>
+                </tr>
+                <tr>
+                    <td><b>Total:</b></td>
+                    <td>[[${transaction.amount.total}]] USD</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="text-center p-5">
+                        <a th:href="@{/order/list}" class="btn btn-outline-success py-2 px-5 rounded-6">[[#{checkout.oList}]]</a>
+                        <a th:href="@{/food/shop}"
+                           class="btn btn-outline-warning py-2 px-5 rounded-6">[[#{checkout.gohome}]]</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="/assets/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
