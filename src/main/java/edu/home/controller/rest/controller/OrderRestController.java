@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.Date;
@@ -55,7 +57,13 @@ public class OrderRestController {
 			orderDetail.setProductName("Order Id: #" + order.getId() +
 					"\n Order By: " + order.getCustomer().getLastName() + " " + order.getCustomer().getFirstName() + " Email: " + order.getCustomer().getEmail() +
 					"\n Order Date: " + new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(order.getOrderDate()));
-			String price = String.format("%.3f", order.getPrice() / 23495);
+
+			double money = order.getPrice() / 23495.0;
+			DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+			symbols.setDecimalSeparator('.');
+			DecimalFormat df = new DecimalFormat("0.00", symbols);
+			String price = df.format(money);
+
 			System.out.println("Price: " + price);
 			orderDetail.setSubtotal(price);
 			orderDetail.setShipping(String.valueOf(0));
