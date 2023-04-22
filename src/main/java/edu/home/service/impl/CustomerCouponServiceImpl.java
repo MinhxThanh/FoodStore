@@ -47,4 +47,20 @@ public class CustomerCouponServiceImpl implements CustomerCouponService{
 	public void deleteByNameAndFoodId(String name, Long foodId) {
 		dao.deleteByEmailCustomerAndIdCoupon(name, foodId);
 	}
+
+//	Giau
+	@Override
+	public CustomerCoupon findByCustomerEmailAndCouponId(String email, Long id) {
+		return dao.findByCustomerEmailAndCouponId(email, id);
+	}
+
+	@Override
+	public void updateCustomerCouponByCustomerEmailAndCouponId(String email, Long couponId) {
+		dao.updateCustomerCouponByCustomerEmailAndCouponId(email, couponId);
+	}
+
+	@Override
+	public CustomerCoupon create(CustomerCoupon cusCp) {
+		return dao.save(cusCp);
+	}
 }

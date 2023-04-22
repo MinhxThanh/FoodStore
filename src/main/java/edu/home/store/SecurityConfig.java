@@ -39,7 +39,7 @@ public class SecurityConfig {
 
 //        authorize requests
         http.authorizeRequests()
-                .antMatchers("/order/**", "/rate/**").authenticated()
+                .antMatchers("/order/**", "/rate/**","/customerCoupon/create").authenticated()
                 .anyRequest().permitAll();
 //        login form
         http.formLogin()

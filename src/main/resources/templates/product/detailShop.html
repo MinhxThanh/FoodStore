@@ -103,9 +103,16 @@
                                             <div class="d-flex flex-row justify-content-end off">
                                                 <h3 style="font-size: 50px">[[${item.name}]]</h3>
                                             </div>
+                                            
+                                            <form th:action="@{/customerCoupon/create}" method="post">
                                             <div class="text-right mt-4">
+                                            <input type="text" name="usernameId" th:value="${#request.remoteUser}"
+                                           style="display: none">
+                                            <input type="text" name="couponId" th:value="${item.id}" style="display: none">
                                                 <button class="btn btn-outline-info px-4"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Collect</button>
                                             </div>
+                                            </form>
+                                            
                                         </div>
                                     </div>
                                 </div>
