@@ -51,8 +51,6 @@ public class OrderRestController {
 		try {
 			Order order = orderService.createPaypal(orderJsonData);
 
-
-
 			OrderDetail orderDetail = new OrderDetail();
 			orderDetail.setProductName("Order Id: #" + order.getId() +
 					"\n Order By: " + order.getCustomer().getLastName() + " " + order.getCustomer().getFirstName() + " Email: " + order.getCustomer().getEmail() +
@@ -65,6 +63,12 @@ public class OrderRestController {
 			orderDetail.setTotal(price);
 
 			String approvalLink = paymentService.authorizePayment(orderDetail);
+
+			MailInfoOrder mail = new MailInfoOrder();
+			mail.setTo(order.getCustomer().getEmail());
+			mail.setSubject("SunFood received the order #" + order.getId());
+			mail.setOrder(order);
+			mailerService.sendMailOrder(mail);
 
 			System.out.println("AuthorizePaymentController: " + approvalLink);
 			order.setImage(approvalLink);

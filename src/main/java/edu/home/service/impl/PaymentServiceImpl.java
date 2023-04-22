@@ -123,6 +123,7 @@ public class PaymentServiceImpl implements PaymentService {
         payerInfo.setFirstName(customer.getFirstName())
                 .setLastName(customer.getLastName())
                 .setEmail(customer.getEmail());
+
         payer.setPayerInfo(payerInfo);
         return payer;
     }
