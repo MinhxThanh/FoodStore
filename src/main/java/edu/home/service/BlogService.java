@@ -29,7 +29,8 @@ public interface BlogService {
 	Blog findBlogsByUser(Long userId);
 
 	//Search post
-	Page<Blog> searchBlogs(String keyword);
+	Page<Blog> searchBlogs(String keyword, Pageable pageable);
+	Page<Blog> findByCategoryId(Optional<Long> category_id, Pageable pageable);
 //	public List<CommentsBlog> save(User user);
 //	public List<Feature> saveCommentReply(User user);
 

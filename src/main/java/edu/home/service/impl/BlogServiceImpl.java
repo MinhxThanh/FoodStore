@@ -61,15 +61,10 @@ public class BlogServiceImpl implements BlogService {
 	}
 
 	@Override
-	public Page<Blog> searchBlogs(String keyword) {
-
-		// TODO Auto-generated method stub
-		Pageable pageable = PageRequest.of(0, 2, Sort.by("id"));
+	public Page<Blog> searchBlogs(String keyword, Pageable pageable) {
+//		Pageable pageable = PageRequest.of(0, 2, Sort.by("id"));
 		Page<Blog> list = blogRepo.searchBlogs(keyword, pageable);
 			return list;
-		
-		
-	
 	}
 
 	@Override
@@ -120,5 +115,8 @@ public class BlogServiceImpl implements BlogService {
 		return blogRepo.findAllByUserEmail(email);
 	}
 
-
+	@Override
+	public Page<Blog> findByCategoryId(Optional<Long> category_id, Pageable pageable) {
+		return blogRepo.findByCategoryId(category_id, pageable);
+	}
 }

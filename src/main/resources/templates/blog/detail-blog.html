@@ -97,6 +97,8 @@
                     <div class="breadcrumb__text" style="font-size: 20px;">
                         <a th:href="@{/home/index}"><i class="fa fa-home" aria-hidden="true"></i> [[#{dblog.home}]]</a>
                         <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                        <a th:href="@{/stories/all}"><i aria-hidden="true"></i> [[#{lblog.stories}]]</a>
+                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
                         <span>[[#{dblog.storiesd}]]</span>
                     </div>
                 </div>
@@ -112,22 +114,38 @@
                     <h2 class="mb-3 font-weight-bolder" th:text="*{title}"></h2>
 
 <!--                    image blog carousel-->
-
-                    <div id="carouselExampleFade" class="carousel slide carousel-fade my-5" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div th:each="image, iterStat : ${item.imageBlogs}" th:class="${iterStat.first} ? 'carousel-item active' : 'carousel-item'">
-                                <img th:src="@{|${image.imageName}|}" class="d-block w-100" th:alt="${image.id}">
-                            </div>
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-target="#carouselExampleFade" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">[[#{dblog.prev}]]</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-target="#carouselExampleFade" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">[[#{dblog.next}]]</span>
-                        </button>
-                    </div>
+					<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+					  <div class="carousel-inner">
+					    <div th:each="image, iterStat : ${item.imageBlogs}" th:class="${iterStat.first} ? 'carousel-item active' : 'carousel-item'">
+					      <img th:src="@{|${image.imageName}|}" class="d-block w-100" th:alt="${image.id}">
+					    </div>
+					  </div>
+					  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+					    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					    <span class="sr-only">[[#{dblog.prev}]]</span>
+					  </a>
+					  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+					    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+					    <span class="sr-only">[[#{dblog.next}]]</span>
+					  </a>
+					</div>
+					
+					
+<!--                     <div id="carouselExampleFade" class="carousel slide carousel-fade my-5" data-ride="carousel"> -->
+<!--                         <div class="carousel-inner"> -->
+<!--                             <div th:each="image, iterStat : ${item.imageBlogs}" th:class="${iterStat.first} ? 'carousel-item active' : 'carousel-item'"> -->
+<!--                                 <img th:src="@{|${image.imageName}|}" class="d-block w-100" th:alt="${image.id}"> -->
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                         <button class="carousel-control-prev" type="button" data-target="#carouselExampleFade" data-slide="prev"> -->
+<!--                             <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
+<!--                             <span class="sr-only">[[#{dblog.prev}]]</span> -->
+<!--                         </button> -->
+<!--                         <button class="carousel-control-next" type="button" data-target="#carouselExampleFade" data-slide="next"> -->
+<!--                             <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
+<!--                             <span class="sr-only">[[#{dblog.next}]]</span> -->
+<!--                         </button> -->
+<!--                     </div> -->
 
                     <p th:utext="*{content}"></p>
 
@@ -347,41 +365,19 @@
                         <div class="blog__sidebar__item">
                             <h4>[[#{dblog.cate}]]</h4>
                             <ul>
-                                <li><a href="#">All</a></li>
-                                <li><a href="#">Beauty (20)</a></li>
-                                <li><a href="#">Food (5)</a></li>
-                                <li><a href="#">Life Style (9)</a></li>
-                                <li><a href="#">Travel (10)</a></li>
+                                <li th:each="cate : ${categories}"><a>[[${cate.category.name}]]</a></li>
                             </ul>
                         </div>
                         <div class="blog__sidebar__item">
                             <h4>[[#{lblog.recent}]]</h4>
-                            <div class="blog__sidebar__recent">
-                                <a href="#" class="blog__sidebar__recent__item">
+                            <div th:each="a:${top3}" class="blog__sidebar__recent">
+                                <a th:href="@{|${a.id}|}" class="blog__sidebar__recent__item">
                                     <div class="blog__sidebar__recent__item__pic">
-                                        <img src="/assets/images/blog/sidebar/sr-1.jpg" alt="">
+                                        <img th:src="@{|${a.imageBlogs.get(0).imageName}|}" style="width:70px;height:70px;display: block;object-fit:cover;margin:1px;" alt="">
                                     </div>
                                     <div class="blog__sidebar__recent__item__text">
-                                        <h6>09 Kinds Of Vegetables<br/> Protect The Liver</h6>
-                                        <span>MAR 05, 2019</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="blog__sidebar__recent__item">
-                                    <div class="blog__sidebar__recent__item__pic">
-                                        <img src="/assets/images/blog/sidebar/sr-2.jpg" alt="">
-                                    </div>
-                                    <div class="blog__sidebar__recent__item__text">
-                                        <h6>Tips You To Balance<br/> Nutrition Meal Day</h6>
-                                        <span>MAR 05, 2019</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="blog__sidebar__recent__item">
-                                    <div class="blog__sidebar__recent__item__pic">
-                                        <img src="/assets/images/blog/sidebar/sr-3.jpg" alt="">
-                                    </div>
-                                    <div class="blog__sidebar__recent__item__text">
-                                        <h6>4 Principles Help You Lose <br/>Weight With Vegetables</h6>
-                                        <span>MAR 05, 2019</span>
+                                        <h6>[[${a.title}]]<br /></h6>
+                                       <span>[[${a.createDate}]]</span>
                                     </div>
                                 </a>
                             </div>
@@ -389,12 +385,7 @@
                         <div class="blog__sidebar__item">
                             <h4>[[#{lblog.search}]]</h4>
                             <div class="blog__sidebar__item__tags">
-                                <a href="#">Apple</a>
-                                <a href="#">Beauty</a>
-                                <a href="#">Vegetables</a>
-                                <a href="#">Fruit</a>
-                                <a href="#">Healthy Food</a>
-                                <a href="#">Lifestyle</a>
+                                <a th:each="cate : ${categories}" th:href="@{|/stories/${cate.category.name}|}">[[${cate.category.name}]]</a>
                             </div>
                         </div>
                     </div>

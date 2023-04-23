@@ -3,6 +3,8 @@ import org.springframework.data.domain.Pageable;
 import edu.home.entity.Blog;
 import edu.home.entity.CategoryBlog;
 import java.util.List;
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,6 +18,9 @@ public interface BlogRepository extends JpaRepository<Blog, Long> {
 		
 	@Query("select b from Blog b left join CategoryBlog c on c.blog.id = b.id where c.category.id = ?1")
 	List<Blog> findBLogsByCategory(Long categoryId);
+	
+	@Query("select b from Blog b left join CategoryBlog c on c.blog.id = b.id where c.category.id = ?1")
+	Page<Blog> findByCategoryId(Optional<Long> category_id, Pageable pageable);
 	
 	@Query("select b from Blog b where b.title LIKE %?1% ")
 //			+ " OR c.category.id = 1 ", nativeQuery = true)
