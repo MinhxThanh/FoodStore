@@ -21,4 +21,6 @@ public interface CouponService {
 	void delete(Long id);
 
 	List<Coupon> findAllByUserEmail(String email);
+
+	List<Coupon> findAllIsActive();
 }

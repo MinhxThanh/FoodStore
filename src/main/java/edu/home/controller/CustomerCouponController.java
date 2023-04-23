@@ -25,7 +25,6 @@ public class CustomerCouponController {
 	@Autowired
 	CouponService couponService;
 	
-	@PostMapping("/create")
 	public String postCustomerCoupon(Model model, @RequestParam("usernameId") String email,
             @RequestParam("couponId") Long couponId) {
 		if(couponId==null || email.isBlank()) {
@@ -34,7 +33,7 @@ public class CustomerCouponController {
 		
 		CustomerCoupon cusCp = customerCouponService.findByCustomerEmailAndCouponId(email,couponId);
 		if(cusCp != null) {
-			customerCouponService.updateCustomerCouponByCustomerEmailAndCouponId(email,couponId);
+//			customerCouponService.updateCustomerCouponByCustomerEmailAndCouponId(email,couponId);
 		}else {
 			CustomerCoupon customerCp = new CustomerCoupon();
 			customerCp.setCustomer(customerService.findByEmailKey(email));

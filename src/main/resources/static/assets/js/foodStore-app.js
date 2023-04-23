@@ -9,6 +9,29 @@ app.controller("foodStore-controller", function ($scope, $http, $window,$timeout
     $scope.message = ''
     $scope.error = ''
 
+    $scope.coupon = {
+        coupons: [],
+        getListCoupon(){
+          $http.get(`/rest/coupon/findAllIsActive`).then(resp =>{
+              this.coupons = resp.data
+          })
+        },
+        createCustomerCoupon (coupon){
+            let item = {
+                customer: $scope.customer,
+                coupon: coupon,
+                createDate: new Date(),
+                status: 1
+            }
+            $http.post(`/rest/customerCoupon/create`, item).then(resp => {
+                let index = this.coupons.findIndex(item => item.id == coupon.id)
+                this.coupons.splice(index, 1)
+                $scope.message = 'Collect coupon ' + coupon.name + ' successful!'
+                $scope.cart.liveToastBtn()
+            })
+        }
+    }
+
     $scope.getListInfoCustomerAddress = function () {
         $http.get(`/rest/customerPhoneAddress/findAllByCustomerEmail`).then(resp => {
             $scope.address = resp.data
@@ -74,7 +97,7 @@ app.controller("foodStore-controller", function ($scope, $http, $window,$timeout
 	//cap nhat profile customer
 	$scope.update = function () {
         var item = angular.copy($scope.customer);
-        $http.put('http://localhost:8080/rest/customerProfile/update/' + item.email, item).then(resp => {
+        $http.put('/rest/customerProfile/update/' + item.email, item).then(resp => {
 			$scope.message = "Update profile successfully!"
 			$scope.cart.liveToastBtn()
         }).catch(error =>{

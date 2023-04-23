@@ -21,7 +21,7 @@
                         </div>
                         <ul>
                             <li><a href="/food/all" th:style="${cid} ==''?'color:#7fad39;':''">All</a></li>
-                            <li th:each="c:${cates}"><a th:href="@{|/food/${c.name}|}" th:style="${c.name==cid?'color:#7fad39;':''}" th:if="${c.isDisplay}">[[${c.name}]] </a></li>
+                            <li th:each="c:${cates}"><a class="text-uppercase" th:href="@{|/food/${c.name}|}" th:style="${c.name==cid?'color:#7fad39;':''}" th:if="${c.isDisplay}">[[${c.name}]] </a></li>
                         </ul>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                             <span>[[#{banner.title}]]</span>
                             <h2>[[#{banner.name}]] <br />[[#{banner.name1}]]</h2>
                             <p>[[#{banner.content}]]</p>
-                            <a href="#" class="primary-btn">[[#{banner.shopnow}]]</a>
+                            <a th:href="@{/food/shop}" class="primary-btn">[[#{banner.shopnow}]]</a>
                         </div>
                     </div>
                 </div>

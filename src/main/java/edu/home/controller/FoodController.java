@@ -71,7 +71,7 @@ public class FoodController {
 		User user = userAccountService.findByUsernameOrEmail(nameShop.orElse("Admin"));
 		List<ListFood> list = foodService.getListFoodByUserId(user.getId());
 
-		model.addAttribute("coupons", couponService.findAll());
+//		model.addAttribute("coupons", couponService.findAllIsActive());
 		model.addAttribute("shop", user);
 		model.addAttribute("items", list);
 		model.addAttribute("pageTitle", "Menu");

@@ -3,6 +3,7 @@ package edu.home.controller.rest.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +29,7 @@ public class CustomerCouponRestController {
 	private CustomerService customerService;
 	@Autowired
 	private CouponService couponService;
-	
+
 	@GetMapping("/getAll")
 	public List<CustomerCoupon> findAll(){
 		return customerCouponService.findAll();
@@ -55,6 +56,21 @@ public class CustomerCouponRestController {
 		
 		return customerCouponService.save(cus);
 	}
+
+	@PostMapping(value = "create")
+	public ResponseEntity<?> createCustomerCoupon(@RequestBody CustomerCoupon customerCoupon) {
+		try {
+			if (customerCouponService.getByCustomerEmailAndCouponId(customerCoupon.getCustomer().getEmail(), customerCoupon.getCoupon().getId()) == null)
+				return ResponseEntity.ok(customerCouponService.save(customerCoupon));
+			else {
+				customerCouponService.updateCustomerCouponStatusByCustomerEmailAndCouponId(customerCoupon.getStatus() + 1, customerCoupon.getCustomer().getEmail(), customerCoupon.getCoupon().getId());
+				return ResponseEntity.ok(customerCoupon);
+			}
+		} catch (Exception e) {
+			return ResponseEntity.notFound().build();
+		}
+	}
+
 	@DeleteMapping("/delete/{emailCustomer}/{idCoupon}")
 	public void deleteByEmailCustomerAndIdCoupon(@PathVariable("emailCustomer") String emailCustomer, @PathVariable("idCoupon") Long idCoupon) {
 		customerCouponService.customerCouponService(emailCustomer,idCoupon);

@@ -26,7 +26,12 @@ public interface CustomerCouponRepository extends JpaRepository<CustomerCoupon, 
 //	Giau
 	@Query("select c from CustomerCoupon c where c.customer.email=?1 and c.coupon.id=?2")
 	CustomerCoupon findByCustomerEmailAndCouponId(String email, Long id);
-	
-	@Query("update CustomerCoupon c set c.customer.email=?1, c.coupon.id=?2 where c.customer.email=?3 and c.coupon.id=?4")
-	void updateCustomerCouponByCustomerEmailAndCouponId(String email, Long couponId);
+
+	@Transactional
+	@Modifying
+	@Query("update CustomerCoupon c set c.status = :status where c.customer.email = :email and c.coupon.id = :couponId")
+	void updateCustomerCouponStatusByCustomerEmailAndCouponId(long status, String email, long couponId);
+
+	@Query("select c from CustomerCoupon c where c.customer.email = :email and c.coupon.id = :couponId")
+	CustomerCoupon getByCustomerEmailAndCouponId(String email, long couponId);
 }

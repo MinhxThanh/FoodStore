@@ -13,4 +13,7 @@ public interface CouponRepository extends JpaRepository<Coupon, Long> {
     Coupon findCouponByCode(String code);
 
     List<Coupon> findAllByUserEmail(String email);
+
+    @Query("select c from Coupon c where c.isDisplay = true")
+    List<Coupon> findAllIsActive();
 }

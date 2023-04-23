@@ -55,8 +55,13 @@ public class CustomerCouponServiceImpl implements CustomerCouponService{
 	}
 
 	@Override
-	public void updateCustomerCouponByCustomerEmailAndCouponId(String email, Long couponId) {
-		dao.updateCustomerCouponByCustomerEmailAndCouponId(email, couponId);
+	public void updateCustomerCouponStatusByCustomerEmailAndCouponId(long status, String email, long id) {
+		 dao.updateCustomerCouponStatusByCustomerEmailAndCouponId(status, email, id);
+	}
+
+	@Override
+	public CustomerCoupon getByCustomerEmailAndCouponId(String email, long couponId) {
+		return dao.getByCustomerEmailAndCouponId(email, couponId);
 	}
 
 	@Override

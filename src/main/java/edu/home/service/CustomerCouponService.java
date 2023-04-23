@@ -17,6 +17,9 @@ public interface CustomerCouponService {
 	
 //	Giau
 	CustomerCoupon findByCustomerEmailAndCouponId(String email, Long id);
-	void updateCustomerCouponByCustomerEmailAndCouponId(String email,Long couponId);
 	CustomerCoupon create(CustomerCoupon cusCp);
+
+	void updateCustomerCouponStatusByCustomerEmailAndCouponId(long l, String email, long id);
+
+	CustomerCoupon getByCustomerEmailAndCouponId(String email, long couponId);
 }

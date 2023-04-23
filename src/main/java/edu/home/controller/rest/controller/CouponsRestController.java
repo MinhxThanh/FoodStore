@@ -2,6 +2,8 @@ package edu.home.controller.rest.controller;
 
 import java.util.List;
 
+import edu.home.entity.Customer;
+import edu.home.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
@@ -21,14 +23,27 @@ import edu.home.entity.Coupon;
 import edu.home.service.CouponService;
 import edu.home.service.UserAccountService;
 
+import javax.servlet.http.HttpServletRequest;
+
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/rest/coupon")
 public class CouponsRestController {
 	@Autowired
-	CouponService couponService;
+	private CouponService couponService;
 	@Autowired
 	private UserAccountService userAccountService;
+	@Autowired
+	private CustomerService customerService;
+
+	@GetMapping(value = "findAllIsActive")
+	public ResponseEntity<?> findAllIsActive() {
+		try {
+			return ResponseEntity.ok(couponService.findAllIsActive());
+		} catch (Exception e) {
+			return ResponseEntity.noContent().build();
+		}
+	}
 
 	@GetMapping(value = "getAll")
 	public List<Coupon> getAllCoupon() {
