@@ -82,13 +82,7 @@ public class FoodServiceImpl implements FoodService{
 	@Override
 	public List<ListTopNewFood> getListTopNewFood() {
 	 List<Tuple> list = dao.getListTopNewFood();
-	 List<ListTopNewFood> foodList = list.stream().map(item -> new ListTopNewFood(
-			 item.get(0, BigInteger.class),
-			 item.get(1, String.class),
-			 item.get(2, Double.class),
-			 item.get(3, String.class)
-	 )).collect(Collectors.toList());
-		return foodList;
+		return getListTopNewFoods(list);
 	}
 
 	@Override
@@ -121,8 +115,20 @@ public class FoodServiceImpl implements FoodService{
 		List<ListFood> listFoods = getListFoods(list);
 		return listFoods;
 	}
-	
-//	Giàu
+
+	@Override
+	public List<ListTopNewFood> getTopRatedProducts() {
+		List<Tuple> list = dao.getTopRatedProducts();
+		return getListTopNewFoods(list);
+	}
+
+	@Override
+	public List<ListTopNewFood> getReviewProducts() {
+		List<Tuple> list = dao.getReviewProducts();
+		return getListTopNewFoods(list);
+	}
+
+	//	Giàu
 	@Override
 	public Food create(Food food) {
 	    return dao.save(food);
@@ -201,5 +207,15 @@ public class FoodServiceImpl implements FoodService{
 				item.get(7, String.class)
 		)).collect(Collectors.toList());
 		return listFoods;
+	}
+
+	private static List<ListTopNewFood> getListTopNewFoods(List<Tuple> list) {
+		List<ListTopNewFood> foodList = list.stream().map(item -> new ListTopNewFood(
+				item.get(0, BigInteger.class),
+				item.get(1, String.class),
+				item.get(2, Double.class),
+				item.get(3, String.class)
+		)).collect(Collectors.toList());
+		return foodList;
 	}
 }

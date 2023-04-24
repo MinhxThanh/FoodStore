@@ -11,14 +11,17 @@
 <div id="main">
     <div th:replace="~{/layout/_menu::hero-normal-section}"></div>
 <!--    Breadcrumb Section Begin-->
-    <section class="breadcrumb-section set-bg p-3" style="background-color: #9BCA3C;">
-        <div class="container">
+    <section class="container breadcrumb-section set-bg p-3">
+        <div class="container p-3" style="background-color: #9BCA3C;">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text" style="font-size: 20px;">
-                        <a th:href="@{/home/index}"><i class="fa fa-home" aria-hidden="true"></i> [[#{lblog.home}]]</a>
-                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                        <span>[[#{lblog.stories}]]</span>
+                        <a th:href="@{/home/index}" style="font-size: 15px">
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                            [[#{lblog.home}]]
+                        </a>
+                        <i class="fa fa-angle-double-right mx-2" aria-hidden="true" style="font-size: 14px"></i>
+                        <span style="font-size: 15px">[[#{lblog.stories}]]</span>
                     </div>
                 </div>
             </div>
@@ -112,13 +115,19 @@
                                 </div>
                                 <div class="blog__item__text">
                                     <ul>
-                                        <li><i class="fa fa-calendar-o"></i> [[${a.createDate}]]</li>
+                                        <li>
+                                            <i class="fa fa-calendar-o"></i>
+                                            <script th:inline="javascript">
+                                                var date = /*[[${a.createDate}]]*/ '${a.createDate}';
+                                                document.write(moment(date).fromNow());
+                                            </script>
+                                        </li>
 
-                                        <li><i class="fa fa-comment-o"></i>[[${a.viewCount}]]</li>
+                                        <li><i class="fa fa-eye" aria-hidden="true"></i> [[${a.viewCount}]]</li>
                                     </ul>
                                     <h5 style="height: 65px;"><a th:href="@{|/stories/detail/${a.id}|}">[[${a.title}]]</a></h5>
 <!--                                     <p class="content-blog" th:utext="${#strings.abbreviate(a.content,150)}"></p> -->
-                                    <a th:href="@{|stories/detail/${a.id}|}" class="blog__btn">[[#{lblog.read}]]  <span class="arrow_right"></span></a>
+                                    <a th:href="@{|/stories/detail/${a.id}|}" class="blog__btn">[[#{lblog.read}]]  <span class="arrow_right"></span></a>
                                 </div>
                             </div>
                         </div>

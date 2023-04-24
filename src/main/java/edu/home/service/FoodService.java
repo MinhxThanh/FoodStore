@@ -46,4 +46,8 @@ public interface FoodService {
     List<Food> findAllByUserEmail(String email);
 
     List<ListFood> getListFoodByUserId(long id);
+
+    List<ListTopNewFood> getTopRatedProducts();
+
+    List<ListTopNewFood> getReviewProducts();
 }

@@ -220,60 +220,41 @@
                         <h4>Latest Products</h4>
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
-                                <a href="#" class="latest-product__item">
+                                <a th:each="item, iState : ${latestProducts}" th:if="${iState.index} < 3" th:href="@{|/food/detail/${item.getId()}|}" class="latest-product__item">
                                     <div class="latest-product__item__pic">
-                                        <img src="/assets/images/latest-product/lp-1.jpg" alt="">
+                                        <img th:src="@{|${item.image}|}" th:alt="${item.getName()}" style="width: 120px">
                                     </div>
                                     <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="/assets/images/latest-product/lp-2.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="/assets/images/latest-product/lp-3.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
+                                        <h6 style=" overflow: hidden;display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical;">
+                                            [[${item.name}]]
+                                        </h6>
+                                        <span>đ [[${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}]]</span>
                                     </div>
                                 </a>
                             </div>
                             <div class="latest-prdouct__slider__item">
-                                <a href="#" class="latest-product__item">
+                                <a th:each="item, iState : ${latestProducts}" th:unless="${iState.index < 3 or iState.index >= 6}" th:href="@{|/food/detail/${item.getId()}|}" class="latest-product__item">
                                     <div class="latest-product__item__pic">
-                                        <img src="/assets/images/latest-product/lp-1.jpg" alt="">
+                                        <img th:src="@{|${item.image}|}" th:alt="${item.getName()}" style="width: 120px">
                                     </div>
                                     <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
+                                        <h6 style=" overflow: hidden;display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical;">
+                                            [[${item.name}]]
+                                        </h6>
+                                        <span>đ [[${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}]]</span>
                                     </div>
                                 </a>
-                                <a href="#" class="latest-product__item">
+                            </div>
+                            <div class="latest-prdouct__slider__item">
+                                <a th:each="item, iState : ${latestProducts}" th:if="${iState.index} >= 6" th:href="@{|/food/detail/${item.getId()}|}" class="latest-product__item">
                                     <div class="latest-product__item__pic">
-                                        <img src="/assets/images/latest-product/lp-2.jpg" alt="">
+                                        <img th:src="@{|${item.image}|}" th:alt="${item.getName()}" style="width: 120px">
                                     </div>
                                     <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="/assets/images/latest-product/lp-3.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
+                                        <h6 style=" overflow: hidden;display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical;">
+                                            [[${item.name}]]
+                                        </h6>
+                                        <span>đ [[${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}]]</span>
                                     </div>
                                 </a>
                             </div>
@@ -285,60 +266,28 @@
                         <h4>Top Rated Products</h4>
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
-                                <a href="#" class="latest-product__item">
+                                <a th:each="item, iState : ${topRatedProducts}" th:if="${iState.index} < 3" th:href="@{|/food/detail/${item.getId()}|}" class="latest-product__item">
                                     <div class="latest-product__item__pic">
-                                        <img src="/assets/images/latest-product/lp-1.jpg" alt="">
+                                        <img th:src="@{|${item.image}|}" th:alt="${item.getName()}" style="width: 120px">
                                     </div>
                                     <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="/assets/images/latest-product/lp-2.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="/assets/images/latest-product/lp-3.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
+                                        <h6 style=" overflow: hidden;display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical;">
+                                            [[${item.name}]]
+                                        </h6>
+                                        <span>đ [[${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}]]</span>
                                     </div>
                                 </a>
                             </div>
                             <div class="latest-prdouct__slider__item">
-                                <a href="#" class="latest-product__item">
+                                <a th:each="item, iState : ${topRatedProducts}" th:unless="${iState.index < 3 }" th:href="@{|/food/detail/${item.getId()}|}" class="latest-product__item">
                                     <div class="latest-product__item__pic">
-                                        <img src="/assets/images/latest-product/lp-1.jpg" alt="">
+                                        <img th:src="@{|${item.image}|}" th:alt="${item.getName()}" style="width: 120px">
                                     </div>
                                     <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="/assets/images/latest-product/lp-2.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="/assets/images/latest-product/lp-3.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
+                                        <h6 style=" overflow: hidden;display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical;">
+                                            [[${item.name}]]
+                                        </h6>
+                                        <span>đ [[${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}]]</span>
                                     </div>
                                 </a>
                             </div>
@@ -350,60 +299,28 @@
                         <h4>Review Products</h4>
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
-                                <a href="#" class="latest-product__item">
+                                <a th:each="item, iState : ${reviewProducts}" th:if="${iState.index} < 3" th:href="@{|/food/detail/${item.getId()}|}" class="latest-product__item">
                                     <div class="latest-product__item__pic">
-                                        <img src="/assets/images/latest-product/lp-1.jpg" alt="">
+                                        <img th:src="@{|${item.image}|}" th:alt="${item.getName()}" style="width: 120px">
                                     </div>
                                     <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="/assets/images/latest-product/lp-2.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="/assets/images/latest-product/lp-3.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
+                                        <h6 style=" overflow: hidden;display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical;">
+                                            [[${item.name}]]
+                                        </h6>
+                                        <span>đ [[${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}]]</span>
                                     </div>
                                 </a>
                             </div>
                             <div class="latest-prdouct__slider__item">
-                                <a href="#" class="latest-product__item">
+                                <a th:each="item, iState : ${reviewProducts}" th:unless="${iState.index < 3}" th:href="@{|/food/detail/${item.getId()}|}" class="latest-product__item">
                                     <div class="latest-product__item__pic">
-                                        <img src="/assets/images/latest-product/lp-1.jpg" alt="">
+                                        <img th:src="@{|${item.image}|}" th:alt="${item.getName()}" style="width: 120px">
                                     </div>
                                     <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="/assets/images/latest-product/lp-2.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="/assets/images/latest-product/lp-3.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
+                                        <h6 style=" overflow: hidden;display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical;">
+                                            [[${item.name}]]
+                                        </h6>
+                                        <span>đ [[${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}]]</span>
                                     </div>
                                 </a>
                             </div>
@@ -426,48 +343,23 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-6">
+                <div th:each="item : ${top3Blog}" class="col-lg-4 col-md-4 col-sm-6">
                     <div class="blog__item">
                         <div class="blog__item__pic">
-                            <img src="/assets/images/blog/blog-1.jpg" alt="">
+                            <img th:src="@{|${item.getImageBlogs().get(0).getImageName()}|}" th:alt="${item.title}" style="height: 270px !important;">
                         </div>
                         <div class="blog__item__text">
                             <ul>
-                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                <li><i class="fa fa-comment-o"></i> 5</li>
+                                <li><i class="fa fa-calendar-o"></i>
+                                    <script th:inline="javascript">
+                                        var date = /*[[${item.createDate}]]*/ '${item.createDate}';
+                                        document.write(moment(date).fromNow());
+                                    </script>
+                                </li>
+                                <li><i class="fa fa-comment-o"></i> <span th:text="${item.commentsBlogs.size() + item.commentReplyBlogs.size()}"></span></li>
                             </ul>
-                            <h5><a href="#">Cooking tips make cooking simple</a></h5>
-                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic">
-                            <img src="/assets/images/blog/blog-2.jpg" alt="">
-                        </div>
-                        <div class="blog__item__text">
-                            <ul>
-                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                <li><i class="fa fa-comment-o"></i> 5</li>
-                            </ul>
-                            <h5><a href="#">6 ways to prepare breakfast for 30</a></h5>
-                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic">
-                            <img src="/assets/images/blog/blog-3.jpg" alt="">
-                        </div>
-                        <div class="blog__item__text">
-                            <ul>
-                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                <li><i class="fa fa-comment-o"></i> 5</li>
-                            </ul>
-                            <h5><a href="#">Visit the clean farm in the US</a></h5>
-                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
+                            <h5><a th:href="@{|/stories/detail/${item.id}|}" th:text="${item.title}"></a></h5>
+                            <p th:utext="${#strings.abbreviate(item.title,150)}"></p>
                         </div>
                     </div>
                 </div>

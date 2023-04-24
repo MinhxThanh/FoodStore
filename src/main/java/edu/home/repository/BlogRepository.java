@@ -31,7 +31,7 @@ public interface BlogRepository extends JpaRepository<Blog, Long> {
 	@Query("update Blog b SET b.viewCount =?1 where b.id = ?2 ")
 	 void updateViewCount(Long viewCount, Long id);
 	
-	@Query(value="select TOP 3 * from blogs b  ORDER BY b.view_count DESC",nativeQuery = true )
+	@Query(value="select TOP 3 * from blogs b  ORDER BY b.create_date DESC",nativeQuery = true )
 	List<Blog> topBaBlog();
 
 

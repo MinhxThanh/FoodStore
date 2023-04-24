@@ -54,4 +54,10 @@ public interface FoodRepository extends JpaRepository<Food, Long> {
 
     @Query(value="{CALL sp_getListFoodByUserId(:userId)}", nativeQuery = true)
     List<Tuple> getListFoodByUserId(long userId);
+
+    @Query(value="{CALL sp_get6TopRatedProducts()}", nativeQuery = true)
+    List<Tuple> getTopRatedProducts();
+
+    @Query(value="{CALL sp_get6TopReviewProducts()}", nativeQuery = true)
+    List<Tuple> getReviewProducts();
 }
