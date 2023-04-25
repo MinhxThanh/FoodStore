@@ -1,4 +1,4 @@
-package edu.home.entity;
+package edu.home.common.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,12 +11,10 @@ import javax.persistence.Id;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReportMonth {
+public class Report {
     @Id
-    Integer month;
-    Integer year;
+    String name;
     Double sum;
     Long count;
-    String name;
 
 }

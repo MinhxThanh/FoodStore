@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.home.entity.Report;
-import edu.home.entity.ReportMonth;
+import edu.home.common.entity.Report;
+import edu.home.common.entity.ReportMonth2;
 import edu.home.service.ReportService;
 
 @CrossOrigin("*")
@@ -21,55 +21,10 @@ public class ReportRestController {
 //    OrderService orderService;
     @Autowired
     ReportService reportService;
-//
-//    @GetMapping()
-//    public List<Order> getAll() {
-//        return orderService.getAll();
-//    }
 
-//    @GetMapping("{id}")
-//    public Order getOne(@PathVariable("id") Integer id) {
-//        return orderService.findById(id);
-//    }
-//
-//    @GetMapping("/revenue/{date}")
-//    public List<Report> get(@PathVariable("date") String date) {
-//        if (date.equals("Full")) {
-//            return reportService.getInventory("");
-//        } else if (date.equals("1")) {
-//            return reportService.getInventory("01");
-//        } else {
-//            return reportService.getInventory(date);
-//        }
-//
-//    }
-//
-//    @GetMapping("/revenue/parentid/{id}/{date}")
-//    public List<Report> getByParent(@PathVariable("id") Integer id, @PathVariable("date") String date) {
-//        if (date.equals("Full")) {
-//            return reportService.getInventoryByParentCategory(id, "");
-//        } else if (date.equals("1")) {
-//            return reportService.getInventoryByParentCategory(id, "01");
-//        } else {
-//            return reportService.getInventoryByParentCategory(id, date);
-//        }
-//
-//    }
-//
-//    @GetMapping("/revenue/categoryid/{id}/{date}")
-//    public List<Report> getByCategory(@PathVariable("id") Integer id, @PathVariable("date") String date) {
-//        if (date.equals("Full")) {
-//            return reportService.getInventoryByCategory(id, "");
-//        } else if (date.equals("1")) {
-//            return reportService.getInventoryByCategory(id, "01");
-//        } else {
-//            return reportService.getInventoryByCategory(id, date);
-//        }
-//
-//    }
-//
+
     @GetMapping("/revenue/month")
-    public List<ReportMonth> getByMonth() {
+    public List<ReportMonth2> getByMonth() {
         return reportService.getByMonth();
     }
     
@@ -88,25 +43,7 @@ public class ReportRestController {
     public List<Report> getInventoryCategoryByMonthAndByCategoryName(@PathVariable("id") String name, @PathVariable("month") Integer month, @PathVariable("year") Integer year) {
         return reportService.getInventoryCategoryByMonthAndByCategoryName(name, month, year);
     }
-//
-//    @GetMapping("/revenue/brand/{name}")
-//    public List<ReportMonth> getByBrandMonth(@PathVariable("name") String name) {
-//        return reportService.getInventoryBrandByMonth(name);
-//    }
 
-
-  
-
-//    @GetMapping("/revenue/brand")
-//    public List<ReportMonth> getByBrand() {
-//        return reportService.getInventoryBrand();
-//    }
-//
-//    @GetMapping("/revenue/brand/{name}/month/{month}/year/{year}")
-//    public List<ReportMonth> getInventoryBrandByMonthAndByBrandName(@PathVariable("name") String name, @PathVariable("month") Integer month, @PathVariable("year") Integer year) {
-//        return reportService.getInventoryBrandByMonthAndByBrandName(name, month, year);
-//    }
-//
     @GetMapping("/revenue/product")
     public List<Report> getByProduct() {
         return reportService.getInventoryProduct();

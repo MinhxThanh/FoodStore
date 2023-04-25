@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.home.common.entity.AvgReview;
-import edu.home.entity.Report;
+
 import edu.home.entity.Review;
 import edu.home.service.ReviewService;
 @CrossOrigin(origins = "*")
