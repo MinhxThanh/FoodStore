@@ -191,12 +191,12 @@
                                             <div class="d-flex"></div>
                                             <p class="d-block">[[${address.cityProvince}]] <sup
                                                     th:if="${address.default == true}" class="text-danger font-italic"
-                                                    style="text-decoration: underline">Default</sup></p>
+                                                    style="text-decoration: underline">[[#{checkout.df}]]</sup></p>
                                             <div class="text-right mt-n5">
                                                 <span ng-click="checkout.getUserInfoAddress()"
                                                       class="text-success-hover font-italic" style="cursor: pointer"
                                                       data-toggle="modal" data-target="#listAddress"><i
-                                                        class="fa fa-refresh" aria-hidden="true"></i> Change</span>
+                                                        class="fa fa-refresh" aria-hidden="true"></i> [[#{checkout.change}]]</span>
                                             </div>
 
                                             <!--                                        unit shipping-->
@@ -217,13 +217,13 @@
                                             <div class="d-flex"></div>
                                             <p class="d-block">{{checkout.address.cityProvince}} <sup
                                                     ng-if="checkout.address.default == true"
-                                                    class="text-danger font-italic" style="text-decoration: underline">Default</sup>
+                                                    class="text-danger font-italic" style="text-decoration: underline">[[#{checkout.df}]]</sup>
                                             </p>
                                             <div class="text-right mt-n5">
                                                 <span ng-click="checkout.getUserInfoAddress()"
                                                       class="text-success-hover font-italic" style="cursor: pointer"
                                                       data-toggle="modal" data-target="#listAddress"><i
-                                                        class="fa fa-refresh" aria-hidden="true"></i> Change</span>
+                                                        class="fa fa-refresh" aria-hidden="true"></i> [[#{checkout.change}]]</span>
                                             </div>
 
                                             <!--                                        unit shipping-->
@@ -353,7 +353,7 @@
                                                     <input ng-model="checkout.couponCode" type="text" id="couponCode"
                                                            class="form-control mx-sm-3" aria-describedby="couponCode">
                                                     <button ng-click="checkout.getInfoCoupon()"
-                                                            class="btn btn-outline-info">Apply
+                                                            class="btn btn-outline-info">[[#{checkout.apply}]]
                                                     </button>
                                                     <button ng-click="checkout.getUserInfoCoupon()"
                                                             class="btn btn-outline-info mx-2" data-toggle="modal"
@@ -542,12 +542,12 @@
                                 <p class="d-block">{{address.address}}</p>
                                 <p>{{address.cityProvince}} <sup ng-if="address.default == true"
                                                                  class="text-danger font-italic"
-                                                                 style="text-decoration: underline">Default</sup></p>
+                                                                 style="text-decoration: underline">[[#{checkout.df}]]</sup></p>
                             </label>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">[[#{checkout.close}]]</button>
                     </div>
                 </div>
             </div>

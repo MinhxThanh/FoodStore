@@ -1,5 +1,6 @@
 package edu.home.repository;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,4 +24,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 
     @Query("select c from Category c where c.id < 12 order by c.id DESC")
     List<Category> findTop11();
+    
+    @Query("SELECT c FROM Category c WHERE c.id = ?1 ")
+    List<Category> getById(BigInteger cid);
 }

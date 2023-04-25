@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.home.common.entity.FoodDto;
+import edu.home.common.entity.ListFood;
 import edu.home.entity.Food;
+import edu.home.entity.User;
 import edu.home.service.CategoryFoodService;
 import edu.home.service.FoodService;
 import edu.home.service.ImageFoodService;
@@ -64,6 +66,15 @@ public class FoodRestController {
     public ResponseEntity<?> findAllByUserEmail(@PathVariable("email") String email) {
         try {
             return ResponseEntity.ok(foodService.findAllByUserEmail(email));
+        } catch (Exception e) {
+            return ResponseEntity.noContent().build();
+        }
+    }
+
+    @GetMapping("findAllByUserId/{id}")
+    public ResponseEntity<?> findAllByUserId(@PathVariable("id") long id) {
+        try {
+            return ResponseEntity.ok(foodService.getListFoodByUserId(id));
         } catch (Exception e) {
             return ResponseEntity.noContent().build();
         }

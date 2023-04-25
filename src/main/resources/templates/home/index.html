@@ -20,9 +20,8 @@
                             <span>[[#{menu.cate}]]</span>
                         </div>
                         <ul>
-                            <li><a href="/food/all" th:style="${cid} ==''?'color:#7fad39;':''">All</a></li>
-                            <li th:each="c:${cates}"><a class="text-uppercase" th:href="@{|/food/${c.name}|}" th:style="${c.name==cid?'color:#7fad39;':''}" th:if="${c.isDisplay}">[[${c.name}]] </a></li>
-                        </ul>
+	                        <li th:each="c:${cates}"><a class="text-uppercase" th:href="@{|/food/filter/${c.id}/${c.name}|}" th:if="${c.isDisplay}">[[${c.name}]] </a></li>
+	                    </ul>
                     </div>
                 </div>
                 <div class="col-lg-9">
@@ -85,7 +84,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <h2>Featured Product</h2>
+                        <h2>[[#{home.featured}]]</h2>
                     </div>
                     <div class="featured__controls">
                         <ul>
@@ -217,7 +216,7 @@
             <div class="row">
                 <div class="col-lg-4 col-md-6">
                     <div class="latest-product__text">
-                        <h4>Latest Products</h4>
+                        <h4>[[#{home.lastest}]]</h4>
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
                                 <a th:each="item, iState : ${latestProducts}" th:if="${iState.index} < 3" th:href="@{|/food/detail/${item.getId()}|}" class="latest-product__item">
@@ -263,7 +262,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="latest-product__text">
-                        <h4>Top Rated Products</h4>
+                        <h4>[[#{home.topRated}]]</h4>
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
                                 <a th:each="item, iState : ${topRatedProducts}" th:if="${iState.index} < 3" th:href="@{|/food/detail/${item.getId()}|}" class="latest-product__item">
@@ -296,7 +295,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="latest-product__text">
-                        <h4>Review Products</h4>
+                        <h4>[[#{home.reviewP}]]</h4>
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
                                 <a th:each="item, iState : ${reviewProducts}" th:if="${iState.index} < 3" th:href="@{|/food/detail/${item.getId()}|}" class="latest-product__item">
@@ -338,7 +337,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title from-blog__title">
-                        <h2>From The Blog</h2>
+                        <h2>[[#{home.fBlog}]]</h2>
                     </div>
                 </div>
             </div>

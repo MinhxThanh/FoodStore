@@ -11,36 +11,36 @@
     <div th:replace="~{/layout/_menu::hero-normal-section}"></div>
     <div class="container-fluid row my-5">
         <div class="m-auto p-5 rounded-4 shadow my-5 col-6">
-            <h2>Payment Done. Thank you for purchasing our products</h2>
+            <h2>[[#{receipt.paydone}]]</h2>
             <br/>
-            <h4>Receipt Details:</h4>
+            <h4>[[#{receipt.receiptD}]]</h4>
             <table class="mt-2">
                 <tr>
-                    <td><b>Merchant:</b></td>
+                    <td><b>[[#{receipt.mer}]]</b></td>
                     <td>Company ABC Ltd.</td>
                 </tr>
                 <tr>
-                    <td><b>payerInfo:</b></td>
+                    <td><b>[[#{receipt.payInfo}]]</b></td>
                     <td>[[${payerInfo.firstName}]] [[${payerInfo.lastName}]]</td>
                 </tr>
                 <tr>
-                    <td><b>Description:</b></td>
+                    <td><b>[[#{receipt.des}]]</b></td>
                     <td>[[${transaction.description}]]</td>
                 </tr>
                 <tr>
-                    <td><b>Subtotal:</b></td>
+                    <td><b>[[#{receipt.sub}]]</b></td>
                     <td>[[${transaction.amount.details.subtotal}]] USD</td>
                 </tr>
                 <tr>
-                    <td><b>Shipping:</b></td>
+                    <td><b>[[#{receipt.ship}]]</b></td>
                     <td>[[${transaction.amount.details.shipping}]] USD</td>
                 </tr>
                 <tr>
-                    <td><b>Tax:</b></td>
+                    <td><b>[[#{receipt.tax}]]</b></td>
                     <td>[[${transaction.amount.details.tax}]] USD</td>
                 </tr>
                 <tr>
-                    <td><b>Total:</b></td>
+                    <td><b>[[#{receipt.total}]]</b></td>
                     <td>[[${transaction.amount.total}]] USD</td>
                 </tr>
                 <tr>

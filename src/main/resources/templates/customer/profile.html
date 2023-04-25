@@ -67,7 +67,7 @@
                                         <a th:class="|list-group-item list-group-item-action ${addressPage}|"
                                             th:href="@{/customer/profile/address}">[[#{profile.setAddress}]]</a>
                                         <a th:class="|list-group-item list-group-item-action ${orderPage}|"
-                                           th:href="@{/order/list}">Order List</a>
+                                           th:href="@{/order/list}">[[#{profile.odL}]]</a>
                         </div>
                     </div>
                 </div>
@@ -216,10 +216,10 @@
                                                                 id="fullname" aria-describedby="fullnameHelp"
                                                                 ng-model="form.username" placeholder="Nhập tên" ng-required="true" ng-pattern="/^[a-zA-Z_\\\/.’'-]+(?: +[A-Za-z_\\\/.’'-]+)*$/" ng-trim="false">
                                                             <span class="error text-danger" ng-show="formAddress.fullname.$error.required">
-									                            Vui lòng nhập tên
+									                            [[#{profile.pN}]]
 									                        </span>
 									                        <span class="error text-danger" ng-show="!formAddress.fullname.$error.required&&formAddress.fullname.$error.pattern">
-									                            Vui lòng chỉ nhập chữ và không có ký tự đặc biệt
+									                            [[#{profile.pJ}]]
 									                        </span>
                                                         </div>
                                                         <div class="form-group col-md-6 mb-2">
@@ -228,10 +228,10 @@
                                                                 id="phone" aria-describedby="fullnameHelp"
                                                                 ng-model="form.phone" maxlength="10" placeholder="Nhập số điện thoại" ng-required="true" ng-pattern="/^\d{10,15}$/" >
                                                             <span class="error text-danger" ng-show="formAddress.phone.$error.required">
-									                            Vui lòng nhập số điện thoại
+									                            [[#{profile.pP}]]
 									                        </span>
 									                        <span class="error text-danger" ng-show="!formAddress.phone.$error.required&&formAddress.phone.$error.pattern">
-									                            Vui lòng chỉ nhập số và phải nhập đủ
+									                            [[#{profile.pNum}]]
 									                        </span>
                                                         </div>
                                                     </div>
@@ -242,7 +242,7 @@
                                                                 id="provice" aria-describedby="fullnameHelp"
                                                                 ng-model="form.cityProvince" maxlength="10" placeholder="Nhập thành phố" ng-required="true">
                                                             <span class="error text-danger" ng-show="formAddress.provice.$error.required">
-									                            Vui lòng nhập thành phố
+									                            [[#{profile.pCity}]]
 									                        </span>
                                                         </div>
                                                         <div class="form-group col-md-6 mb-2">
@@ -258,7 +258,7 @@
                                                             <textarea class="form-control" placeholder="Địa chỉ cụ thể"
                                                                 ng-model="form.address" name="adr" id="adr" ng-required="true"></textarea>
                                                             <span class="error text-danger" ng-show="formAddress.adr.$error.required">
-									                            Vui lòng nhập địa chỉ cụ thể
+									                            [[#{profile.pAddr}]]
 									                        </span>
                                                         </div>
                                                     </div>
@@ -274,7 +274,7 @@
 											                    <label class="form-check-label" for="inlineRadio2">Không</label>
 											                </div> 
 											                <span class="error text-danger" ng-show="formAddress.inlineRadioOptions.$error.required">
-									                            Vui lòng chọn kiểu địa chỉ
+									                            [[#{profile.pType}]]
 									                        </span>
 											                <input hidden ng-model="form.id"> 
                                                     	</div>

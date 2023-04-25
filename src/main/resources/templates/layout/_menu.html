@@ -57,14 +57,6 @@
                            		</li>
                             </ul>
                         </div>
-<!--                         <div class="header__top__right__auth"> -->
-<!--                             <a th:unless="${#request.remoteUser}" th:href="@{/security/login/form}"> -->
-<!--                                 <i class="fa fa-user"></i> [[#{menu.signIn}]] -->
-<!--                             </a> -->
-<!--                             <a th:if="${#request.remoteUser}" th:href="@{/security/logout}" ng-click="cart.clear()"> -->
-<!--                                 <i class="fa fa-user"></i> [[#{menu.signOut}]] -->
-<!--                             </a> -->
-<!--                         </div> -->
                     </div>
                 </div>
             </div>
@@ -149,8 +141,7 @@
                         <span>[[#{menu.cate}]]</span>
                     </div>
                     <ul>
-                         <li><a class="text-uppercase" href="/food/shop" th:style="${cid} ==''?'color:#7fad39;':''">All</a></li>
-                        <li th:each="c:${cates}"><a class="text-uppercase" th:href="@{|/food/${c.name}|}" th:style="${c.name==cid?'color:#7fad39;':''}" th:if="${c.isDisplay}">[[${c.name}]] </a></li>
+                        <li th:each="c:${cates}"><a class="text-uppercase" th:href="@{|/food/filter/${c.id}/${c.name}|}" th:if="${c.isDisplay}">[[${c.name}]] </a></li>
                     </ul>
                 </div>
             </div>
@@ -162,7 +153,7 @@
                                  [[#{menu.cate}]]
                                  <span class="arrow_carrot-down"></span>
                              </div>
-                             <input type="text" placeholder="Bạn muốn tìm gì?" name="search" ng-model="search.$">
+                             <input type="text" placeholder="Bạn muốn tìm gì?" name="search">
                              <button type="submit" class="site-btn" disabled>[[#{menu.search}]]</button>
                          </form>
                     </div>

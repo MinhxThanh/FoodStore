@@ -184,11 +184,11 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="sale-info">
             <span th:if="${item.numberDateToStart >= 1}" class="badge badge-pill badge-danger" style="font-size: 16px">
-              SALE STAR APTER [[${item.numberDateToStart}]] DAY!
+              [[#{productd.saleS}]] [[${item.numberDateToStart}]] [[#{productd.day}]]
             </span>
                         <span th:if="${item.numberDateToEnd >= 1}" class="badge badge-pill badge-danger"
                               style="font-size: 16px">
-              SALE END AFTER [[${item.numberDateToEnd}]] DAY!
+              [[#{productd.saleE}]] [[${item.numberDateToEnd}]] [[#{productd.day}]]
             </span>
                         <span th:if="${item.numberDateToEnd == 0}" class="badge badge-pill badge-danger"
                               style="font-size: 16px">
@@ -203,10 +203,10 @@
                 [[${item.viewCount}]]
               </span>|
                             <span class="text-muted mx-2">
-                [[${item.quantitySell}]] Sold
+                [[${item.quantitySell}]] [[#{productd.sold}]]
               </span>|
                             <span class="text-muted mx-2">
-                [[${item.inventory}]] Inventory
+                [[${item.inventory}]] [[#{productd.inventory}]]
               </span>
                         </div>
                         <div class="product__details__rating rate_product d-flex mt-n3">
@@ -271,7 +271,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="primary-btn">ADD TO CARD</a>
+                        <a href="#" class="primary-btn">[[#{productd.add}]]</a>
                         <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                         <div class="sold_by mt-5 border-top">
                             <div class="cart row mt-4">
@@ -284,7 +284,7 @@
                                         [[${item.createBy}]]
                                     </div>
                                     <a th:href="@{|/food/shop/${item.createBy}|}" class="btn btn-outline-secondary py-1 px-3 mt-2"><i
-                                            class="fa fa-university" aria-hidden="true"></i> View Shop</a>
+                                            class="fa fa-university" aria-hidden="true"></i> [[#{productd.viewShop}]]</a>
                                 </div>
                             </div>
                         </div>
@@ -297,10 +297,10 @@
                   </span>
                 </span>
                             </li>
-                            <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
-                            <li><b>SunFood Guarantee</b> <span>Get the items you ordered or get your money back.</span>
+                            <li><b>[[#{productd.shipping}]]</b> <span>[[#{productd.1day}]] <samp>[[#{productd.free}]]</samp></span></li>
+                            <li><b>[[#{productd.sunfood}]]</b> <span>[[#{productd.get}]]</span>
                             </li>
-                            <li><b>Share on</b>
+                            <li><b>[[#{productd.share}]]</b>
                                 <div class="share">
                                     <a href="#"><i class="fa fa-facebook"></i></a>
                                     <a href="#"><i class="fa fa-twitter"></i></a>
@@ -316,20 +316,20 @@
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
-                                   aria-selected="true">Description</a>
+                                   aria-selected="true">[[#{productd.des}]]</a>
                             </li>
                             <li class="nav-item">
                                 <a th:attr="ng-click=@{|commentFood.getInfo(${item.id})|}" class="nav-link"
                                    data-toggle="tab"
                                    href="#tabs-2" role="tab" aria-selected="false">
-                                    Comments <span class="badge badge-success">[[${totalComment}]]</span>
+                                    [[#{productd.cmt}]] <span class="badge badge-success">[[${totalComment}]]</span>
                                 </a>
                             </li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="tabs-1" role="tabpanel">
                                 <div class="product__details__tab__desc">
-                                    <h6>Products Information</h6>
+                                    <h6>[[#{productd.pInfo}]]</h6>
                                     <th:block th:utext="${item.description}"></th:block>
 
                                 </div>
@@ -339,8 +339,8 @@
                                     <!--                  display when none comment-->
                                     <div ng-if="commentFood.items[0].title == null" class="p-5 text-center">
                                         <h3 class="text-muted"><i class="fa fa-comments" aria-hidden="true"></i></h3>
-                                        <h4 class="text-muted"> No Comments Yet</h4>
-                                        <h5 class="text-muted">Be the first so share what you think!</h5>
+                                        <h4 class="text-muted"> [[#{productd.noCmt}]]</h4>
+                                        <h5 class="text-muted">[[#{productd.beTheF}]]</h5>
                                     </div>
 
 <!--                                    result rating here-->
@@ -365,7 +365,7 @@
                                                             <div class="rating-bar0 justify-content-center">
                                                                 <table class="text-left col-12">
                                                                     <tr class="border-0">
-                                                                        <td class="rating-label col-2">Excellent</td>
+                                                                        <td class="rating-label col-2">[[#{productd.excellent}]]</td>
                                                                         <td class="rating-bar col-9">
                                                                             <div class="progress" style="height: 10px;">
                                                                                 <div class="progress-bar bg-warning" role="progressbar" aria-label="Warning example" style="width: {{ commentFood.rating.excellentPer }}%" aria-valuenow="{{ commentFood.rating.excellentPer }}" aria-valuemin="0" aria-valuemax="100"></div>
@@ -374,7 +374,7 @@
                                                                         <td class="text-right col-1">{{ commentFood.rating.excellent }}</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td class="rating-label col-2">Good</td>
+                                                                        <td class="rating-label col-2">[[#{productd.good}]]</td>
                                                                         <td class="rating-bar col-9">
                                                                             <div class="progress" style="height: 10px;">
                                                                                 <div class="progress-bar bg-warning" role="progressbar" aria-label="Warning example" style="width: {{ commentFood.rating.goodPer }}%" aria-valuenow="{{ commentFood.rating.goodPer }}" aria-valuemin="0" aria-valuemax="100"></div>
@@ -383,7 +383,7 @@
                                                                         <td class="text-right col-1">{{ commentFood.rating.good }}</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td class="rating-label col-2">Average</td>
+                                                                        <td class="rating-label col-2">[[#{productd.ave}]]</td>
                                                                         <td class="rating-bar col-9">
                                                                             <div class="progress" style="height: 10px;">
                                                                                 <div class="progress-bar bg-warning" role="progressbar" aria-label="Warning example" style="width: {{ commentFood.rating.averagePer }}%" aria-valuenow="{{ commentFood.rating.averagePer }}" aria-valuemin="0" aria-valuemax="100"></div>
@@ -392,7 +392,7 @@
                                                                         <td class="text-right col-1">{{ commentFood.rating.average }}</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td class="rating-label col-2">Poor</td>
+                                                                        <td class="rating-label col-2">[[#{productd.poor}]]</td>
                                                                         <td class="rating-bar col-9">
                                                                             <div class="progress" style="height: 10px;">
                                                                                 <div class="progress-bar bg-warning" role="progressbar" aria-label="Warning example" style="width: {{ commentFood.rating.poorPer }}%" aria-valuenow="{{ commentFood.rating.poorPer }}" aria-valuemin="0" aria-valuemax="100"></div>
@@ -401,7 +401,7 @@
                                                                         <td class="text-right col-1">{{ commentFood.rating.poor }}</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td class="rating-label col-2">Terrible</td>
+                                                                        <td class="rating-label col-2">[[#{productd.ter}]]</td>
                                                                         <td class="rating-bar col-9">
                                                                             <div class="progress" style="height: 10px;">
                                                                                 <div class="progress-bar bg-warning" role="progressbar" aria-label="Warning example" style="width: {{ commentFood.rating.terriblePer }}%" aria-valuenow="{{ commentFood.rating.terriblePer }}" aria-valuemin="0" aria-valuemax="100"></div>
@@ -471,7 +471,7 @@
                                     </script>
                                     <div class="container-fluid w-75 pt-5">
                                         <form class="p-4 p-md-5">
-                                            <h3 class="my-2">Leave a comment</h3>
+                                            <h3 class="my-2">[[#{productd.leaCMmt}]]</h3>
                                             <div class="form-group">
                                                 <textarea id="commentFood"></textarea></div>
                                             <div class="form-group text-right d-flex">
@@ -479,19 +479,19 @@
                                               <span ng-if="commentFood.review.rating == null"
                                                     class="text-danger font-italic mx-3 d-block">
                                                   <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                                                  Please rating food before comment!
+                                                  [[#{productd.pleaseRating}]]
                                               </span>
                                                     <a ng-if="commentFood.customer.email == null"
                                                        class="text-danger font-italic mx-3"
                                                        th:href="@{/security/login/form}">
                                                         <i class="fa fa-sign-in" aria-hidden="true"></i>
-                                                        Please login before comment!
+                                                        [[#{dblog.please}]]
                                                     </a>
                                                 </div>
                                                 <button ng-disabled="commentFood.review.rating == null || commentFood.customer.email == null"
                                                         ng-click="commentFood.create()"
                                                         type="submit" class="btn py-2 px-4 btn-primary">
-                                                    <i class="fa fa-commenting-o" aria-hidden="true"></i> Post Comment
+                                                    <i class="fa fa-commenting-o" aria-hidden="true"></i> [[#{dblog.post}]]
                                                 </button>
                                             </div>
                                         </form>
@@ -513,7 +513,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title related__product__title">
-                        <h2>Related Product</h2>
+                        <h2>[[#{productd.related}]]</h2>
                     </div>
                 </div>
             </div>
@@ -552,7 +552,7 @@
         <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
             <div class="toast-header">
                 <img src="/assets/images/logo.png" class="rounded mr-2" alt="logo" width="30%">
-                <strong class="mr-auto">Notification SUNFOOD</strong>
+                <strong class="mr-auto">[[#{noti.notification}]] SUNFOOD</strong>
                 <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

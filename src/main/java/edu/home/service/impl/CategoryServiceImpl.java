@@ -6,6 +6,7 @@ import edu.home.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @Service
@@ -69,4 +70,9 @@ public class CategoryServiceImpl implements CategoryService {
     public List<Category> findTop11() {
         return dao.findTop11();
     }
+
+	@Override
+	public Category getById(BigInteger cid) {
+		return dao.getById(cid).get(0);
+	}
 }

@@ -1,5 +1,6 @@
 package edu.home.service;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import edu.home.entity.Category;
@@ -23,6 +24,8 @@ public interface CategoryService {
 	List<Category> findAllByFoodId(Long foodId);
 
 	Category getByName(String name);
+	
+	Category getById(BigInteger cid);
 
 	//Giàu
 	List<Category> getAllCategoriesByFoodID(Long id);

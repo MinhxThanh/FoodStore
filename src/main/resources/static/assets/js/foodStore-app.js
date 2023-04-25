@@ -8,7 +8,16 @@ app.controller("foodStore-controller", function ($scope, $http, $window,$timeout
     $scope.form = {}
     $scope.message = ''
     $scope.error = ''
-
+	
+	$scope.list = {
+		lists : [],
+		getListFood(id){
+			$http.get(`/rest/food/findAllByUserId/${id}`).then(resp =>{
+              this.lists = resp.data
+          })
+		}
+	}
+	
     $scope.coupon = {
         coupons: [],
         getListCoupon(){
@@ -46,14 +55,14 @@ app.controller("foodStore-controller", function ($scope, $http, $window,$timeout
                 }
         })
     }
-    $scope.getInfoAddressOfCustomer = function () {
+	
+	$scope.getInfoAddressOfCustomer = function () {
         //get info address of customer
         $http.get(`/rest/customerPhoneAddress/findByCustomerEmail`).then(resp => {
             $scope.getInfoAddressOfCustomer = angular.copy(resp.data)
             console.log("getInfoAddressOfCustomer: ", $scope.getInfoAddressOfCustomer)
         })
     }
-
 	//phan trang san pham
 	$scope.pager = {
 		page:0,

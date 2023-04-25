@@ -64,6 +64,7 @@ public class BlogController {
     		model.addAttribute("listBlog", blogPage1);
             model.addAttribute("listCate", cateService.findAllCategory());
             model.addAttribute("top3", top3);
+	        model.addAttribute("pageTitle", "Blog");
     	}else {
 	        Page<Blog> blogPage = blogRepo.findAll(pageable);
 			model.addAttribute("size", size.orElse(4));
@@ -72,6 +73,7 @@ public class BlogController {
 	        model.addAttribute("listBlog", blogPage);
 	        model.addAttribute("listCate", cateService.findAllCategory());
 	        model.addAttribute("top3", top3);
+	        model.addAttribute("pageTitle", "Blog");
     	}
         return "blog/list";
     }
@@ -88,6 +90,7 @@ public class BlogController {
         model.addAttribute("listBlog", blogSearch);
         model.addAttribute("keyword", keyword);
         model.addAttribute("listCate", cateService.findAllCategory());
+        model.addAttribute("pageTitle", keyword);
         return "blog/list";
     }
 
@@ -105,7 +108,7 @@ public class BlogController {
         model.addAttribute("item", item);
         model.addAttribute("categories", categoryBlog);
         blogService.updateViewCount(id, item.getViewCount() + 1);
-
+        model.addAttribute("pageTitle", item.getTitle());
         return "blog/detail-blog";
     }
     

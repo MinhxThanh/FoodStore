@@ -127,7 +127,7 @@
               <li>[[#{cart.total}]] <span>{{checkout.amount | currency: '₫ '}}</span></li>
             </ul>
             <a ng-if="address.length > 0" th:href="@{/order/checkout}" class="primary-btn">[[#{cart.proceed}]]</a>
-            <span ng-if="address.length == 0" class="text-danger">Please Add Your Address First!</span>
+            <span ng-if="address.length == 0" class="text-danger">[[#{cart.please}]]</span>
             <a ng-if="address.length == 0" th:href="@{/customer/profile/address}" class="primary-btn"><i class="fa fa-map-marker" aria-hidden="true"></i> Add Address!</a>
           </div>
         </div>
@@ -137,8 +137,8 @@
         <div class="col-lg-12">
            <div class="shoping__cart__btns text-center">
         	<img th:src="@{/assets/images/cart/empty-cart-illustration.gif}" alt="Không có đơn hàng nào">
-        	<a th:href="@{/food/all}" class="btn btn-outline-danger px-5 py-2">
-        	        	<b>Giỏ hàng trống</b><br>Mua ngay</a>
+        	<a th:href="@{/food/shop}" class="btn btn-outline-danger px-5 py-2">
+        	        	<b>[[#{cart.emptycart}]]</b><br>[[#{cart.buynow}]]</a>
           </div>
         </div>
       </div>

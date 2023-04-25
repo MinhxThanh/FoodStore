@@ -1,15 +1,16 @@
 package edu.home.service.impl;
 
-import edu.home.common.entity.RegisterUser;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
 import edu.home.entity.User;
 import edu.home.repository.UserRepository;
 import edu.home.service.UserAccountService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserAccountServiceImpl implements UserAccountService {
@@ -46,4 +47,9 @@ public class UserAccountServiceImpl implements UserAccountService {
         return dao.findByUsername(nameShop);
     }
 
+    @Override
+    public Page<User> findListFoodByUser(String key, Pageable pageable) {
+    	System.out.println(key);
+        return dao.findListFoodByUser(key, pageable);
+    }
 }

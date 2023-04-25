@@ -125,37 +125,14 @@
                     </div>
 					 <div class="filter__item">
                         <div class="row">
-                            <div class="col-lg-6 col-md-5">
-								<div class="filter__sort">
-                                     <form method="get" th:action="@{|/food/shop|}" >
-                                     <span>Tìm theo thành phố</span>
-                                     <input type="hidden" name="size" th:value="${size}">
-										 <select name="cityProvince" onchange="this.form.submit()">
-											<option th:each="sb : ${searchList}" th:value="${sb.value}" th:selected="${cityProvince==sb.value}">[[${sb.key}]]</option>
-										</select>
-                                     </form>
-                                 </div>
-                            </div>
                             <div class="col-lg-4 col-md-5">
-                                 <div class="filter__sort">
-									<form method="get" th:action="@{|/food/shop|}">
-										<span>Hiển thị</span> 
-										<input type="hidden" name="cityProvince" th:value="${cityProvince}">
-										 <select name="size" onchange="this.form.submit()">
-										 	<option th:selected="${size==2}" value="2">2</option>
-					                        <option th:selected="${size==4}" value="4">4</option>
-					                        <option th:selected="${size==6}" value="6">6</option>
-					                        <option th:selected="${size==8}" value="8">8</option>
-										</select>
-									</form>
-								</div>
                             </div>
-<!--                             <div class="col-lg-4 col-md-4"> -->
-<!--                                 <div class="filter__found"> -->
-<!--                                     <h6><span th:text="${items.size()}"></span>SHOP</h6> -->
-<!--                                 </div> -->
-<!--                             </div> -->
-                            <div class="col-lg-2 col-md-3">
+                            <div class="col-lg-4 col-md-4">
+                                <div class="filter__found">
+                                    <h6><span th:text="${listC.size()}"></span>Sản phẩm được tìm thấy</h6>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-3">
                                 <div class="filter__option">
                                     <span class="icon_grid-2x2"></span>
                                     <span class="icon_ul"></span>
@@ -180,27 +157,34 @@
                         }
                     </style>
                     <div class="row">
-                        <div th:each="user, iState : ${items}" th:class="${iState.index} % 2 ? 'card card-user1 mb-3 col-10 p-0 container-fluid' : 'card card-user2 mb-3 col-10 p-0 container-fluid'">
-                            <div class="row no-gutters">
-                                <div class="col-md-4">
-                                    <a th:href="@{|/food/shop/${user.username}|}">
-                                        <img class="img-fluid h-100 w-100" th:src="@{|${user.avatar}|}" th:alt="${user.fullname}">
-                                    </a>
+                        <div th:each="item : ${listC}" class="col-6 mix oranges fresh-meat mb-5">
+                        <div class="product__discount__item">
+                            <div class="product__discount__item__pic set-bg object-fit-cover"
+                                 th:data-setbg="@{|${item.image}|}">
+                                <div th:if="${item.numberDateToEnd > 0}" class="product__discount__percent">
+                                    -[[${item.percentDiscount}]]%
                                 </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title"><a th:href="@{|/food/shop/${user.username}|}" class="text-dark">[[${user.fullname}]]</a></h5>
-                                        <p class="card-text">[[${user.address}]]</p>
-                                        <p class="card-text"><i class="fa fa-clock-o" aria-hidden="true"></i> [[${user.openTime}]]</p>
-                                        <p class="card-text"><small class="text-muted"><i class="fa fa-usd" aria-hidden="true"></i> [[${user.costRestaurant}]]</small></p>
-                                    </div>
+                                <ul class="product__item__pic__hover">
+                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                    <li>
+                                        <a th:attr="ng-click=@{|cart.add(${item.id})|}"><i
+                                                class="fa fa-shopping-cart"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="product__discount__item__text">
+                                <h5><a th:href="@{|/food/detail/${item.id}|}">[[${item.name}]]</a></h5>
+                                <div class="product__item__price">
+                                    <p class="product__item__price text-danger d-inline">đ
+                                        [[${#numbers.formatDecimal(item.priceNew,
+                                        0, 'COMMA', 2, 'POINT')}]]</p>
+                                    <span>đ [[${#numbers.formatDecimal(item.priceOld, 0, 'COMMA', 2, 'POINT')}]]</span>
                                 </div>
                             </div>
-                        </div>
+                           </div>
+                       </div>
                     </div>
-                    <div class="product__pagination blog__pagination">
-                         <a th:each="p : ${#numbers.sequence(1, items.totalPages, 1)}" th:href="@{|/food/shop?p=${p}&cityProvince=${cityProvince}&size=${size}|}" th:style="${items.number+1==p?'background:#7fad39;color:white':''}">[[${p}]]</a>
-                     </div>
                 </div>
             </div>
         </div>

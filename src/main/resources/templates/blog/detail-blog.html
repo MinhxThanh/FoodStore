@@ -134,24 +134,6 @@
 					    <span class="sr-only">[[#{dblog.next}]]</span>
 					  </a>
 					</div>
-					
-					
-<!--                     <div id="carouselExampleFade" class="carousel slide carousel-fade my-5" data-ride="carousel"> -->
-<!--                         <div class="carousel-inner"> -->
-<!--                             <div th:each="image, iterStat : ${item.imageBlogs}" th:class="${iterStat.first} ? 'carousel-item active' : 'carousel-item'"> -->
-<!--                                 <img th:src="@{|${image.imageName}|}" class="d-block w-100" th:alt="${image.id}"> -->
-<!--                             </div> -->
-<!--                         </div> -->
-<!--                         <button class="carousel-control-prev" type="button" data-target="#carouselExampleFade" data-slide="prev"> -->
-<!--                             <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
-<!--                             <span class="sr-only">[[#{dblog.prev}]]</span> -->
-<!--                         </button> -->
-<!--                         <button class="carousel-control-next" type="button" data-target="#carouselExampleFade" data-slide="next"> -->
-<!--                             <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
-<!--                             <span class="sr-only">[[#{dblog.next}]]</span> -->
-<!--                         </button> -->
-<!--                     </div> -->
-
                     <p th:utext="*{content}"></p>
 
                     </p>
@@ -171,8 +153,6 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-
-
                             <div class="blog__details__author__text" th:text:if="*{status=='1'}">
                                 <div th:text:if="*{isDisplay=='true'}">[[#{dblog.status}]]</div>
                                 <div>[[#{dblog.view}]]: [[*{viewCount}]]</div>

@@ -1,10 +1,12 @@
 package edu.home.service;
 
-import edu.home.common.entity.RegisterUser;
-import edu.home.entity.User;
-
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import edu.home.entity.User;
 
 public interface UserAccountService {
     User findByUsernameOrEmail(String key);
@@ -18,4 +20,6 @@ public interface UserAccountService {
     List<User> getAllUserHaveFood();
 
     User findByUsername(Optional<String> nameShop);
+    
+    Page<User> findListFoodByUser(String key, Pageable pageable);
 }
