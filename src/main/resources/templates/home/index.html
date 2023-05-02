@@ -67,7 +67,7 @@
                 <div class="categories__slider owl-carousel">
                     <div class="col-lg-3" th:each="c, iterStat : ${cates}" th:if="${iterStat.index < 11}">
                         <div class="categories__item set-bg" th:data-setbg="@{|${c.imageName}|}">
-                            <h5><a th:href="@{|/food/${c.name}|}" th:style="${c.name==cid?'color:#7fad39;':''}" th:if="${c.isDisplay}">[[${c.name}]] </a></h5>
+                            <h5><a th:href="@{|/food/filter/${c.id}/${c.name}|}" th:style="${c.name==cid?'color:#7fad39;':''}" th:if="${c.isDisplay}">[[${c.name}]] </a></h5>
                         </div>
                     </div>
                 </div>
@@ -88,11 +88,11 @@
                     </div>
                     <div class="featured__controls">
                         <ul>
-                            <li class="active" data-filter="*">All</li>
-                            <li data-filter=".oranges">Breakfast</li>
-                            <li data-filter=".fresh-meat">Lunch</li>
-                            <li data-filter=".vegetables">Dinner</li>
-                            <li data-filter=".fastfood">Dessert</li>
+                            <li class="active" data-filter="*">[[#{home.cateAll}]]</li>
+                            <li data-filter=".oranges">[[#{home.cateBreakfast}]]</li>
+                            <li data-filter=".fresh-meat">[[#{home.cateLunch}]]</li>
+                            <li data-filter=".vegetables">[[#{home.cateDinner}]]</li>
+                            <li data-filter=".fastfood">[[#{home.cateDessert}]]</li>
                         </ul>
                     </div>
                 </div>

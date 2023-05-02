@@ -25,4 +25,6 @@ public interface ReviewService {
 	List<Review> getRatingBetweenByFoodId(Long foodId, double v, double i);
 
     AvgReview findByFoodId(Long foodId);
+
+	List<AvgReview> findAllByUserEmail(String email);
 }

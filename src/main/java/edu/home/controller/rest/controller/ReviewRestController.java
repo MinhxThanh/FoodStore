@@ -64,7 +64,17 @@ public class ReviewRestController {
 	public List<Review> findByFoodID(@PathVariable("id") Long id) {
 		return reviewService.findAllByFoodId(id);
 	}
-	
+
+
+	@GetMapping(value = "findAllByUserEmail/{email}")
+	public ResponseEntity<?> findAllByUserEmail(@PathVariable("email") String email) {
+		try {
+			return ResponseEntity.ok(reviewService.findAllByUserEmail(email));
+		} catch (Exception e) {
+			return ResponseEntity.noContent().build();
+		}
+	}
+
 	@DeleteMapping(value = "delete/{id}")
 	public void deleteReview(@PathVariable("id") Long id) {
 		try {

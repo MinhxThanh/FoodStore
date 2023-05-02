@@ -54,4 +54,9 @@ public class ReviewServiceImpl implements edu.home.service.ReviewService {
         return dao.findByFoodId(foodId);
     }
 
+    @Override
+    public List<AvgReview> findAllByUserEmail(String email) {
+        return dao.findAllByUserEmail(email);
+    }
+
 }

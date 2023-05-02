@@ -36,7 +36,6 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
-
 //        authorize requests
         http.authorizeRequests()
                 .antMatchers("/order/**", "/rate/**","/customerCoupon/create").authenticated()

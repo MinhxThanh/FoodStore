@@ -34,4 +34,10 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 
     @Query("select new AvgReview (count (r), avg (r.rating), r.food)from Review r where r.food.id = ?1 group by r.food")
     AvgReview findByFoodId(Long foodId);
+
+    @Query("SELECT new AvgReview (count(r),avg(r.rating),r.food)"
+            + " FROM Review r where r.food.user.email = :email"
+            + " GROUP BY r.food"
+            + " ORDER BY avg(r.rating) desc")
+    List<AvgReview> findAllByUserEmail(String email);
 }

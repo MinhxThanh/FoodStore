@@ -18,28 +18,22 @@ public class I18NConfig implements WebMvcConfigurer{
 	public MessageSource getMessageSource() {
 		ReloadableResourceBundleMessageSource ms = new ReloadableResourceBundleMessageSource();
 		ms.setDefaultEncoding("utf-8");
-		ms.setBasenames("classpath:i18n/menu","classpath:i18n/site","classpath:i18n/part");
+		ms.setBasenames("classpath:i18n/menu","classpath:i18n/site");
 		return ms;
 	}
-	
+
+	@Bean("localeResolver")
+	public LocaleResolver getLocaleResolver() {
+		CookieLocaleResolver resolver = new CookieLocaleResolver();
+		resolver.setDefaultLocale(new Locale("vi"));
+		resolver.setCookieMaxAge(10*24*60*60); // 10 ngày resolver.setCookiePath("/");
+		return resolver;
+	}
+
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		LocaleChangeInterceptor locale = new LocaleChangeInterceptor();
-		locale.setParamName("lang");//tham số làm thay đổi ngôn ngữ
-		//các url sẽ bị chặn
-		registry.addInterceptor(locale).addPathPatterns("/**")
-		//ngoại trừ images
-		.excludePathPatterns("/images/**");
-	}
-	
-	@Bean("localeResolver")
-	public LocaleResolver getLocaleResolver() {
-		CookieLocaleResolver cookie = new CookieLocaleResolver();
-		//Nếu dùng Session=> SessionLocaleResolver
-		cookie.setDefaultLocale(new Locale("vi"));
-		cookie.setCookiePath("/");
-		cookie.setCookieMaxAge(1*60*60);//1 tiếng
-//		cookie.setCookieMaxAge(10*24*60*60);//10 ngày
-		return cookie;
+		locale.setParamName("lang");
+		registry.addInterceptor(locale).addPathPatterns("/**");
 	}
 }
